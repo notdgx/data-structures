@@ -36,14 +36,12 @@ void show_st(int arr[], int *top)
         return;
     }
 
-    printf("Stack elements (top to bottom):\n");
-      for (int i = *top; i >= 0; i--){
-        printf("|-------|\n");
-        printf("|       |\n");
-        printf("|  %3d  |\n", arr[i]);
+    printf("Stack elements :\n\n");
+      for (int i = 0 ; i < *top ; i++){
+        printf("|  %3d  |", arr[i]);
     }
+    printf("|> %3d <|\n", arr[*top]);
 
-    printf("|-------|\n");
 }
 
 int main()
@@ -57,7 +55,7 @@ int main()
 
     while (1)
     {
-        printf("\nEnter the choice for the operation to perform on stack:\n");
+        printf("\nEnter the choice :\n");
         printf("1 : push\n");
         printf("2 : pop\n");
         printf("3 : peek\n");
@@ -65,7 +63,7 @@ int main()
         printf("5 : isempty\n");
         printf("6 : show\n");
         printf("0 : exit\n");
-        printf("Enter choice: ");
+        printf("Enter choice : ");
 
         scanf("%d", &choice);
 
@@ -79,7 +77,7 @@ int main()
             if (out == 1)
                 printf("%d pushed to stack\n", input_val);
             else
-                printf("Stack overflow\n");
+                printf("Stack overflow \n");
             break;
 
         case 2:
@@ -87,7 +85,7 @@ int main()
             if (out == 1)
                 printf("Popped value : %d\n", temp);
             else
-                printf("Stack underflow\n");
+                printf("Stack underflow \n");
             break;
 
         case 3:
@@ -95,7 +93,7 @@ int main()
             if (out == 1)
                 printf("Top value : %d\n", temp);
             else
-                printf("Stack is empty\n");
+                printf("Stack is empty \n");
             break;
 
         case 4:
@@ -104,7 +102,7 @@ int main()
 
         case 5:
             if (isempty(&top))
-                printf("Stack is empty\n");
+                printf("Stack is empty \n");
             else
                 printf("Stack is not empty\n");
             break;
