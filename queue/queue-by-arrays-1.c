@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <cstdlib>
+#include <stdlib.h>
 #define QUEUE_SIZE 10
 
 
@@ -132,7 +132,7 @@ int main(){
             break;
 
         case 2:
-            out = dequeue(queue,&front,&rear);
+            out = dequeue(&front,&rear);
             if (out == 1)
                 printf("Dequeued value\n");
             else if (out == 0)
