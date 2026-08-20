@@ -12,17 +12,17 @@ int enqueue(struct node ** front,struct node ** rear, int data){
     struct node * new_node = (struct node *)malloc(sizeof(struct node));
     if (new_node == NULL){return 0;}
     new_node->data = data;
+    new_node->nxt_ptr = NULL;
 
     if (((*front) == NULL) && ((*rear) == NULL)){
         *front = new_node;
         *rear = *front;
-        (*front)->nxt_ptr = NULL;
         return 1;
     }
     
     if ((*rear)->nxt_ptr == NULL){
         (*rear)->nxt_ptr = new_node;
-        (*rear)->nxt_ptr = NULL;
+        (*rear) = (*rear)->nxt_ptr;
         return 1;
     } 
 
@@ -59,7 +59,7 @@ int fn_rear(struct node * rear){
 
 
 int is_empty(struct node * front,struct node * rear){
-    if ((front->nxt_ptr == NULL) && (rear == front)){
+    if ((front == NULL) && (rear == front)){
         return 1;
     }
     return 0;
@@ -93,9 +93,10 @@ void show(struct node * front,struct node * rear){
 
 
     printf("||f> %3d <|", front->data);
-    front++;
+    front = front->nxt_ptr;
     while(front->nxt_ptr != NULL){
         printf("|> %3d <||\n", front->data);
+        front=front->nxt_ptr;
     }
     printf("|r> %3d <||\n", rear->data);
     return;
