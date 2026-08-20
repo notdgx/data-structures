@@ -1,41 +1,41 @@
 # DATA STRUCTURES 
 
-----
+## Data Structures
 
-## 1. STACKS
+### Stacks 
 
-1. array stack implementation by local variable (pass by address)
-2. bracket matching using local variable array stack (1.)
-3. infix to polish notation conversion and evaluation by local variable array stack
-4. 
+> operations : `push`, `pop`, `peek`,`ismempty`, `size`, `show`
 
+- `Stack` with local var fixed size `array` 
+- `Stack` with `linked list` nodes nxt_ptr
+- `Stack` with `linked list` nodes pre_ptr
 
-## 2. LINKED LISTS 
+### Queues
 
-1. dynamic stack implemetation push fucntion only 
+> operations : `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search`
 
-## 3. QUEUES
+- `Queue` (simple) with local var fixed size `array`
+- `Queue` (circular) with local var fixed size `array`
+- `Queue` (simple) with `linked list` nodes nxt_ptr
+- `Queue` (circular) with `linked list` nodes 
 
-----
+### Linked List 
 
+> operations : `insert_at_beg` ,`insert_at_end`,`insert_at_pos`,`delete_at_pos`,`delete_at_end`,`delete_at_pos`,`search`,`sort`,`show`
 
-# ALGORITHIMS 
+- Simple Singly `Linked List` 
+- Simple Doubly `Linked List`
+- Circular Singly `Linked List`
+- Circular Doubly `Linked List`
 
+## Algorithims
 
-## 1. SEARCHING
+### SEARCHING 
 
-1. linear search implemetaions is seperate fucntions 
-2. binary search implemetaions is seperate fucntions 
+- Linear Search 
+- Binary Search
 
-## 2. SORTING
+### SORTING
 
-1. bubble sort 
-2. insertion sort
-
-
-## UNCATORGRISED QUESTIONS 
-
-1. Enter a array from the user and count the occurrence of each element of it
-2. In calculate difference between the each adjacent element of an array The difference should be in positive
-
-
+- Bubble Sort
+- Insertion Sort

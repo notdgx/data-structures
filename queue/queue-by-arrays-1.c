@@ -93,6 +93,19 @@ void show(int queue[],int front, int rear){
 
 }
 
+int search(int queue[],int front, int rear,int data){
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return -1;
+    }
+
+    for (int i = front ; i < rear + 1 ; i++){
+        if (queue[i] == data){
+            return 1;
+        }
+    }
+    return 0;
+}
+
 
 
 int main(){
@@ -113,6 +126,7 @@ int main(){
         printf("5 : isempty\n");
         printf("6 : show\n");
         printf("7 : size\n");
+        printf("8 : search\n");
         printf("0 : exit\n");
         printf("Enter choice : ");
 
@@ -171,6 +185,18 @@ int main(){
             
         case 7:
             printf("%d is the sixe of Queue ", size(queue,front,rear));
+                break;
+        case 8:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(queue,front,rear,input_val);
+            if (out == 1)
+                printf("Element Found \n");
+            else if (out == 0)
+                printf("Element Not Found\n");
+            else
+                printf("No data  \n");
+
                 break;
 
 

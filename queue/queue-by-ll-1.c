@@ -95,11 +95,27 @@ void show(struct node * front,struct node * rear){
     printf("||f> %3d <|", front->data);
     front = front->nxt_ptr;
     while(front->nxt_ptr != NULL){
-        printf("|> %3d <||\n", front->data);
+        printf("|> %3d <||", front->data);
         front=front->nxt_ptr;
     }
     printf("|r> %3d <||\n", rear->data);
     return;
+
+}
+
+int search(struct node * front,struct node * rear,int data ){
+     if ((front == NULL) && (rear == NULL)){
+        return -1;    
+    }
+
+    while(front != NULL){
+        if (front->data == data){
+            return 1;
+        }
+        front=front->nxt_ptr;
+    }
+
+    return 0;
 
 }
 
@@ -121,6 +137,7 @@ int main(){
         printf("5 : isempty\n");
         printf("6 : show\n");
         printf("7 : size\n");
+        printf("8 : search\n");
         printf("0 : exit\n");
         printf("Enter choice : ");
 
@@ -179,6 +196,19 @@ int main(){
             
         case 7:
             printf("%d is the sixe of Queue ", fn_size(front));
+                break;
+
+        case 8:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(front,rear,input_val);
+            if (out == 1)
+                printf("Element Found \n");
+            else if (out == 0)
+                printf("Element Not Found\n");
+            else
+                printf("No data  \n");
+
                 break;
 
 
