@@ -2,7 +2,9 @@
 
 - stack-local-var.c : Stack implementation with arrays local variable, fixed sized array with operations : `push`, `pop`, `peek`,`ismempty`, `size`, `show`
 
-- bracket-matching.c : bracket matching eg `{{{[]()}}}` impleemted using the local var array based stack, fixed size 21 
+- bracket-matching-1.c : bracket matching eg `{{{[]()}}}` impleemted using the local var array based stack, fixed size 21 
+
+- bracket-matching-2.c : bracket matching eg `{{{[]()}}}` impleemted using the nodes `ll stack` with `pre_node`, no fixed size constraint, using `ll queue` as a internal buffer  
 
 - stack-by-ll-1.c  : The first implementation where the head is pointing to the address of the 1st node, and all the other nodes are like they stores the address of the forward attached node, for push we can store the adderess in a temp variable of the latest node but for the pop we will have to traverse the linked list to get the latest node pointer inefficient at poping only `operatiosn` : `push` node and `show` them 
 
