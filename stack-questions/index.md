@@ -12,6 +12,6 @@
     - Adding workflow like new node at temp and temp->pre-ptr = TOP , and then TOP = temp 
     - Poping workflow like storing the TOP->pre_ptr in temp , then free(TOP) , TOP = temp 
     - It is a better implemetaion of stack as without any extra traversing for top 
-    - operations : `push`, `pop`, `peek`,`ismempty`, `size`, `show`
+    - operations : `push`, `pop`, `peek`,`ismempty`, `size`, `show` , `clear`
 
 

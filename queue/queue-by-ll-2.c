@@ -7,50 +7,59 @@ struct node{
 };
 
 
-int enqueue(struct node ** front,struct node ** rear, int data){
+int enqueue(struct node ** rear, int data){
 
     struct node * new_node = (struct node *)malloc(sizeof(struct node));
     if (new_node == NULL){return 0;}
     new_node->data = data;
     new_node->nxt_ptr = NULL;
 
-    if (((*front) == NULL) && ((*rear) == NULL)){
-        *front = new_node;
-        *rear = *front;
+    if ((*rear) == NULL){
+        *rear = new_node;
+        (*rear)->nxt_ptr = new_node;
         return 1;
     }
     
-    if ((*rear)->nxt_ptr == NULL){
+    // if ((*rear)->nxt_ptr == *rear){
+        struct node * front = (*rear)->nxt_ptr;
         (*rear)->nxt_ptr = new_node;
-        (*rear) = (*rear)->nxt_ptr;
+        (*rear) = new_node;
+        (*rear)->nxt_ptr = front;
         return 1;
-    } 
+    // } 
+    
+    // if ((*rear)->nxt_ptr != *rear){
+    //     struct node * temp = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = new_node;
+    //     (*rear) = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = temp;
+    //     return 1;
+    // } 
 
-    return 0;
+    // return 0;
 }
 
 
-int dequeue(struct node ** front,struct node ** rear){
-    if ((*front) == NULL){
+int dequeue(struct node ** rear){
+    if ((*rear) == NULL){
         return 0;
     }
 
-    if (((*front)->nxt_ptr == NULL) && ((*front) == (*rear))){
-        free(*front);
-        (*front) = NULL;
+    if (((*rear) == (*rear)->nxt_ptr)){
+        free(*rear);
         (*rear) = NULL;
         return -1;
     }
     
-    struct node * temp = (*front)->nxt_ptr;
-    free(*front);
-    (*front)=temp;
+    struct node * front = (*rear)->nxt_ptr;
+    (*rear)->nxt_ptr = front->nxt_ptr;
+    free(front);
     return 1;
 }
 
 
-int fn_front(struct node * front){
-    return front->data;
+int fn_front(struct node * rear){
+    return ((rear)->nxt_ptr)->data;
 }
 
 int fn_rear(struct node * rear){
@@ -58,82 +67,99 @@ int fn_rear(struct node * rear){
 }
 
 
-int is_empty(struct node * front,struct node * rear){
-    if ((front == NULL) && (rear == front)){
+int is_empty(struct node * rear){
+    if (rear == NULL){
         return 1;
     }
     return 0;
 }
 
 
-int fn_size(struct node * front){
+int fn_size(struct node * rear){
+    if (rear == NULL){return 0;}
+
+    struct node * front = rear->nxt_ptr;
     int i = 0;
-    while(front != NULL){
-        i++;
-        front=front->nxt_ptr;
-    }
+
+    do{
+    i++;
+    front=front->nxt_ptr;
+    }while(front != rear->nxt_ptr);
 
     return i;
 }
 
 
+void show(struct node ** rear){
 
-void show(struct node * front,struct node * rear){
 
-
-    if ((front == NULL) && (rear == NULL)){
+    if (((*rear) == NULL)){
         printf("NO DATA\n");
         return;    
     }
 
-    if (front == rear){
-        printf("||f> %3d <r||", front->data);
+    if ((*rear) == (*rear)->nxt_ptr){
+        printf("||f> %3d <r||", (*rear)->data);
         return;
     }
 
-
+    struct node * front = (*rear)->nxt_ptr;
     printf("||f> %3d <|", front->data);
     front = front->nxt_ptr;
-    while(front->nxt_ptr != NULL){
+    
+    // while(front->nxt_ptr != rear->nxt_ptr){
+    //     printf("|> %3d <||", front->data);
+    //     front=front->nxt_ptr;
+    // }
+    
+    while(front != (*rear)){
         printf("|> %3d <||", front->data);
         front=front->nxt_ptr;
     }
-    printf("|r> %3d <||\n", rear->data);
-    return;
 
+    printf("|r> %3d <||\n", (*rear)->data);
+    return;
+    
 }
 
-int search(struct node * front,struct node * rear,int data ){
-     if ((front == NULL) && (rear == NULL)){
+
+
+int search(struct node * rear,int data ){
+    if ((rear == NULL)){
         return -1;    
     }
-
-    while(front != NULL){
+    
+    struct node * front = rear->nxt_ptr;
+    do{
         if (front->data == data){
             return 1;
         }
         front=front->nxt_ptr;
-    }
-
+    }while(front != rear->nxt_ptr);
     return 0;
-
 }
 
 
-void clear_queue(struct node ** front, struct node ** rear){
+int clear_queue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
     struct node * temp;
-    while (*front != NULL){
-        temp = *front;
-        *front = (*front)->nxt_ptr;
+    struct node * front = (*rear)->nxt_ptr;
+
+    while (front != (*rear)){
+        temp = front;
+        front = front->nxt_ptr;
         free(temp);
     }
-    *rear = NULL;   
+    free(*rear);
+    (*rear) = NULL;  
+    return 1; 
 }
 
 
 int main(){
     
-    struct node * front = NULL;
     struct node * rear = NULL;
     int choice,input_val,out;
 
@@ -161,7 +187,7 @@ int main(){
             printf("Enter the number to enqueue : ");
             scanf("%d", &input_val);
 
-            out = enqueue(&front,&rear,input_val);
+            out = enqueue(&rear,input_val);
             if (out == 1)
                 printf("%d enqueued \n", input_val);
             else
@@ -169,7 +195,7 @@ int main(){
             break;
 
         case 2:
-            out = dequeue(&front,&rear);
+            out = dequeue(&rear);
             if (out == 1)
                 printf("Dequeued value\n");
             else if (out == 0)
@@ -179,15 +205,15 @@ int main(){
             break;
 
         case 3:
-            out = is_empty(front,rear);
+            out = is_empty(rear);
             if (out == 0)
-                printf("Front value : %d\n", fn_front(front));
+                printf("Front value : %d\n", fn_front(rear));
             else
                 printf("Queue is empty \n");
             break;
 
         case 4:
-            out = is_empty(front,rear);
+            out = is_empty(rear);
             if (out == 0)
                 printf("rear value : %d\n", fn_rear(rear));
             else
@@ -196,24 +222,24 @@ int main(){
 
 
         case 5:
-            if (is_empty(front,rear))
+            if (is_empty(rear))
                 printf("Queue is empty \n");
             else
                 printf("Queue is not empty\n");
             break;
 
         case 6:
-            show(front,rear);
+            show(&rear);
             break;
             
             case 7:
-            printf("%d is the sixe of Queue ", fn_size(front));
+            printf("%d is the sixe of Queue ", fn_size(rear));
             break;
             
             case 8:
             printf("Enter the element to search : ");
             scanf("%d", &input_val);
-            out = search(front,rear,input_val);
+            out = search(rear,input_val);
             if (out == 1)
             printf("Element Found \n");
             else if (out == 0)
@@ -224,7 +250,7 @@ int main(){
             break;
             
             case 9:
-                clear_queue(&front,&rear);
+                clear_queue(&rear);
                 break;
 
             case 0:
@@ -239,3 +265,10 @@ int main(){
 
     return 0;
 }
+
+
+// | Condition                            | Stop when...                    |             If starting at front |
+// | ------------------------------------ | ------------------------------- | -------------------------------: |
+// | `front != (*rear)->nxt_ptr`          | `front` reaches **front again** |wont work if 1st isnt skipped then it skips 0 iterations |
+// | `front->nxt_ptr != (*rear)->nxt_ptr` | `front` reaches **rear**        |        doest need skipped 1st front    skips rear |
+// | `front != *rear`                     | `front` reaches **rear**        | processes everything before rear |

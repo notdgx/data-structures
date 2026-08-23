@@ -78,6 +78,16 @@ int stack_size(struct node * top){
     return i;
 }
 
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)->pre_ptr;
+        free(temp);
+    }
+}
+
+
 
 int main(){
 
@@ -93,6 +103,7 @@ int main(){
         printf("4 : size\n");
         printf("5 : isempty\n");
         printf("6 : show\n");
+        printf("7 : clear\n");
         printf("0 : exit\n");
         printf("Enter choice : ");
 
@@ -141,6 +152,10 @@ int main(){
 
         case 6:
             show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&top);
             break;
 
         case 0:

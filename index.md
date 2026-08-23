@@ -6,18 +6,22 @@
 
 > operations : `push`, `pop`, `peek`,`ismempty`, `size`, `show`
 
-- `Stack` with local var fixed size `array` 
-- `Stack` with `linked list` nodes nxt_ptr
-- `Stack` with `linked list` nodes pre_ptr
+- `Stack` with local var fixed size `array` ✓
+- `Stack` with `linked list` nodes nxt_ptr ✓
+- `Stack` with `linked list` nodes pre_ptr ✓
+
+- Bracket matching with fixed size stack ✓
+- Bracket matching with node stack and queue ✓
+- Polish notation Convertions and execution 
 
 ### Queues
 
-> operations : `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search`
+> operations : `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search` , `clear`
 
-- `Queue` (simple) with local var fixed size `array`
+- `Queue` (simple) with local var fixed size `array` ✓
 - `Queue` (circular) with local var fixed size `array`
-- `Queue` (simple) with `linked list` nodes nxt_ptr
-- `Queue` (circular) with `linked list` nodes 
+- `Queue` (simple) with `linked list` nodes nxt_ptr ✓
+- `Queue` (circular) with `linked list` nodes ✓
 
 ### Linked List 
 
@@ -37,5 +41,5 @@
 
 ### SORTING
 
-- Bubble Sort
-- Insertion Sort
+- Bubble Sort ✓
+- Insertion Sort ✓
