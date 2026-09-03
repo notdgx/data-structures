@@ -25,7 +25,7 @@
 
 ### Linked List 
 
-> operations : `insert_at_beg` ,`insert_at_end`,`insert_at_pos`,`delete_at_pos`,`delete_at_end`,`delete_at_pos`,`search`,`sort`,`show`
+> operations : `insert_at_beg` ,`insert_at_end`,`insert_at_pos`,`delete_at_pos`,`delete_at_end`,`delete_at_pos`,`search`,`sort`,`show`,`size`,`isempty`,`search`,`clear`,
 
 - Simple Singly `Linked List` 
 - Simple Doubly `Linked List`
@@ -43,3 +43,4 @@
 
 - Bubble Sort ✓
 - Insertion Sort ✓
+- Quick Sort ✓
