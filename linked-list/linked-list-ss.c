@@ -69,18 +69,21 @@ int insert_at_pos(struct node ** end,struct node ** beg,int data,int pos){
     new_node->data = data;
     new_node->nxt_ptr = NULL;
     
+    // if the ll is empty and adding at beg
     if (size == 0){                
         (*beg) = new_node;
         (*end) = new_node;
         return -1;
     }
 
+    //if the insert at beg
     if (pos == 0){
         new_node->nxt_ptr = (*beg);
         (*beg) = new_node;
         return 1;
     }
 
+    // if insert at end
     if (pos == size){
         (*end)->nxt_ptr = new_node;
         (*end) = new_node;
