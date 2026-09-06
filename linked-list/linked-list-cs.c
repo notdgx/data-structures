@@ -68,8 +68,14 @@ int insert_at_pos(struct node ** end,int data,int pos){
 int delete_at_pos(struct node ** end,int pos){
 
     int size = fn_size((*end));
-    if (!((pos>=0) && (pos<=size))){return 0;} // not valid pos
     if (size == 0){return -1;} //if empty
+    if (!((pos>=0) && (pos<size))){return 0;} // not valid pos
+
+    if(size == 1){ //if one eleemnt only reset
+        free((*end));
+        (*end) =NULL;
+        return -4;
+    }
 
     if (pos==0){ //deleted beg
         struct node * temp = (*end)->nxt_ptr; // beg
@@ -78,11 +84,6 @@ int delete_at_pos(struct node ** end,int pos){
         return -2;
     }
 
-    if(size == 1){ //if one eleemnt only reset
-        free((*end));
-        (*end) =NULL;
-        return -4;
-    }
 
     if (pos==size-1){//delete at end
         struct node * temp = (*end)->nxt_ptr; //beg
@@ -163,6 +164,7 @@ int sort(struct node **end){
     int s = fn_size(*end);
     if (s == 0){return 0;}// if size == 0
     int * arr = (int *)(malloc(sizeof(int)*s));
+    if (arr == NULL){return 0;} // if malloc faisl
 
     struct node * temp = (*end)->nxt_ptr;
     for (int i = 0; i<s ; i++){
@@ -221,21 +223,20 @@ int is_empty(struct node * end){
     return 0;
 }
 
-
 int clear_ll(struct node ** end){
     if ((*end) == NULL){return 0;}
-    struct node * beg = (*end)->nxt_ptr;
-    struct node * temp = (*end)->nxt_ptr;
+    struct node * stop = (*end);        
+    struct node * curr = stop->nxt_ptr; 
+    struct node * temp;
 
-    do {
-        temp=beg; 
-        beg=beg->nxt_ptr;
+    while (curr != stop){               
+        temp = curr;
+        curr = curr->nxt_ptr;
         free(temp);
-
-    }while(beg!=(*end)->nxt_ptr);
+    }
+    free(stop);                         
     (*end) = NULL;
     return 1;
-
 }
 
 
