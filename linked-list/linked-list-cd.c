@@ -56,6 +56,7 @@ int search(struct node * end,int data){
 
     // TRAVERSE AND COMPARE
     struct node * temp = end->nxt_ptr;
+    struct node *beg = temp;
     int i = 0;
     do{
         if(temp->data == data){
@@ -63,7 +64,7 @@ int search(struct node * end,int data){
         }
         i++;
         temp = temp->nxt_ptr;
-    }while(temp!=end);
+    }while(temp!=beg);
 
     // not found
     return -2;
@@ -182,11 +183,20 @@ int insert_at_pos(struct node ** end,int data, int pos){
             return -3;
         }
     else if ((s == 1) && (pos == 1)){
-            // add at end of single node
-            (*end)->nxt_ptr = new_node; // current single node
-            new_node->pre_ptr = (*end); // current single node  address ie beg
-            new_node->nxt_ptr = (*end);
-            (*end) = new_node ; // update the new node
+            // // add at end of single node
+            // (*end)->nxt_ptr = new_node; // current single node
+            // new_node->pre_ptr = (*end); // current single node  address ie beg
+            // new_node->nxt_ptr = (*end);
+            // (*end) = new_node ; // update the new node
+            
+            struct node *old_end = *end;
+            
+            old_end->nxt_ptr = new_node;
+            old_end->pre_ptr = new_node;
+            new_node->pre_ptr = old_end;
+            new_node->nxt_ptr = old_end;
+            
+            *end = new_node;
             return -4;
     }
 
@@ -221,7 +231,7 @@ int insert_at_pos(struct node ** end,int data, int pos){
         new_node->pre_ptr = beg;
         return -7;
     }
-    else if (pos > (s/2)){
+    else if (pos >= (s/2)){
         // traverse from end
         struct node * temp = (*end);
         for (int i = 0 ; i < s - pos - 1 ; i++){
@@ -340,3 +350,237 @@ int sort(struct node ** end){
 
 }
 
+
+
+int main (){
+
+    struct node * end = NULL;
+
+    int choice,input_val,out,pos;
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        printf("12 : sort\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+
+        // INSERT AT BEG
+            printf("Enter the number insert at beg : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,0);
+            if (out == -3)
+                printf("%d inserted at beg of the linked lis of size 1 \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -5)
+                printf("%d inserted at beg \n", input_val);
+            else if (out == -2)
+                printf("not valid \n");
+            else // 0 
+                printf("cant insert\n");
+            break;
+
+        case 2:
+
+        // INSERT AT END
+            printf("Enter the number insert at end : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,fn_size(end));
+            if (out == -4)
+                printf("%d inserted at the end of linked list of size 1\n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -6)
+                printf("%d inserted at end \n", input_val);
+            else if (out == -2)
+                printf("not valid \n");
+            else // 0 
+                printf("cant insert\n");
+            break;
+
+        case 3:
+
+        // DELETE AT BEG
+            out = delete_at_pos(&end,0);
+
+            if (out == -3)
+                printf("Deleted value at beg\n");
+            else if (out == -1)
+                printf("No Data \n");
+            else if(out == -2 )
+                printf("Linked List Reset \n");
+            else if (out == -1 )
+                printf("Invalid \n");
+                else // 0 
+                printf("cant delete \n"); 
+            break;
+
+        case 4:
+        // DELTE AT END
+            out = delete_at_pos(&end,fn_size(end)-1);
+
+            if (out == -4)
+                printf("Deleted value at end\n");
+            else if (out == -2 )
+                printf("Linked List Reset \n");
+            else if (out == -1 )
+                printf("Invalid \n");
+            else // 0  
+                printf("cant delete \n");
+            break;
+
+        case 5:
+
+
+        // INSERT AT POS 
+            printf("Enter the number insert : ");
+            scanf("%d", &input_val);
+
+            printf("Enter the position to insert  : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&end,input_val,pos);
+
+            if (out == -7)
+                printf("%d inserted at %d (b->pos) \n", input_val,pos);
+            else if (out == -8)
+                printf("%d inserted at %d (pos<-e) \n", input_val,pos);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -5)
+                printf("%d inserted at beg \n", input_val);
+            else if (out == -6)
+                printf("%d inserted at end \n", input_val);
+            else if (out == -3)
+                printf("%d inserted at beg of sigle node\n", input_val);
+            else if (out == -4)
+                printf("%d inserted at end of sigle node\n", input_val);
+            else if (out == -2) // 
+                printf("not valid \n");
+            else // 0 
+                printf("cant insert\n");
+            break;
+
+            
+        case 6:
+            // DELETE AT POS 
+
+            show(end);
+
+            out = is_empty(end);
+
+            if (out == 1){
+                break;
+            }
+
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &input_val);
+
+            out = delete_at_pos(&end,input_val);
+
+            if (out == -5)
+                printf("%d Deleted (b->pos) \n", input_val);
+            else if (out == -6)
+                printf("%d Deleted (pos<-end) \n", input_val);
+            else if (out == -3)
+                printf("%d deleted the beg \n", input_val);
+            else if (out == -4)
+                printf("deleted the end \n");
+            else if (out == -2)
+                printf("Resseted the ll\n");
+            else if (out == -1 )
+                printf("Invalid \n");
+            else // 0 
+                printf("Empty \n");
+            break;
+
+        case 7:
+            out = is_empty(end);
+
+            if (out == 1)
+                printf("Empty\n");
+            else
+                printf("Not empty \n");
+            break;
+
+        case 8:
+            show(end);
+            break;
+
+        case 9:
+            printf("%d is the size of Linked List ", fn_size(end));
+            break;
+
+        case 10:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+
+            out = search(end,input_val);
+
+            if (out == -1)
+                printf("No data  \n");
+            else if (out == -2)
+                printf("Element Not Found\n");
+            else
+                printf("Element Found at %d \n",out);
+
+            break;
+
+        case 11:
+            out = clear_ll(&end);
+
+            if (out == 1)
+                printf("Cleared \n");
+            else
+                printf("Already empty \n");
+
+            break;
+
+        case 12:
+            if (is_empty(end) != 1){
+                show(end);
+            }
+
+            out = sort(&end);
+
+            if (out == 1){
+                printf("\nSorted\n");
+                show(end);
+            }
+            else
+                printf("Cant Sort \n");
+
+            break;
+
+        case 0:
+            printf("exitting ...\n");
+            clear_ll(&end);
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
