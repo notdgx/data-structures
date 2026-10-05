@@ -114,10 +114,100 @@ int fn_search(struct node * root, int data){
 // - leaf delete
 // - parent node delete habing one child
 // - parent node delete habing two child
-// - delted root (having childs) , reset
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
  
-int fn_delete(struct node ** root){
-    return 0;
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)->left == NULL) && ((*root)->right == NULL) && ((*root)->data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp->data < data){
+            pre = temp;
+            temp=temp->right;
+        }
+        else if (temp->data > data){
+            pre = temp;
+            temp=temp->left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp->left==NULL) && (temp->right==NULL)){
+        if (temp->data < pre->data){
+            pre->left = NULL;
+        }
+        else{
+            pre->right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp->left==NULL) && (temp->right!=NULL)){ //right has value
+        temp->data = temp->right->data;
+        struct node * ryt = temp->right;
+        temp->right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp->left!=NULL) && (temp->right==NULL)){ //left has value
+        temp->data = temp->left->data;
+        struct node * lft = temp->left;
+        temp->left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp->left!=NULL) && (temp->right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp->right; 
+        while (successor->left!=NULL){
+            pre=successor;
+            successor = successor->left;
+        }
+
+        temp->data = successor->data;
+
+        if (pre->left == successor) {
+            pre->left = successor->right;   
+        }
+        else {
+            pre->right = successor->right;
+        }
+
+        free(successor);
+        return -6;
+    }
 }
 
 
@@ -273,10 +363,25 @@ int main(){
 
 
         case 3:
-            out = fn_delete(&root);
+            printf("Enter the number to DELETE in tree : ");
+            scanf("%d", &input_val);
+            
+            out = fn_delete(&root,input_val);
             if (out == 0)
-                printf("NOT IMPLEMETED");
-            else
+                printf("NOT DATA");
+            else if(out == -1) 
+                printf("Tree Reset \n");
+            else if(out == -2) 
+                printf("Not found \n");
+            else if(out == -3) 
+                printf("Leaf node deleted \n");
+            else if(out == -4) 
+                printf("Deleted ryt value\n");
+            else if(out == -5) 
+                printf("Deleted lft value\n");
+            else if(out == -6) 
+                printf("Node deleted \n");
+                else
                 printf(" \n");
             break;
 
