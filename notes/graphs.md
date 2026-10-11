@@ -96,3 +96,24 @@ D → [B] → NULL
 - 
 
 
+| Operation         | Purpose                                                     | Example                          |
+| ----------------- | ----------------------------------------------------------- | -------------------------------- |
+| Create graph      | Create an empty graph with vertices or a specified capacity | Create graph with 4 vertices     |
+| Add vertex        | Add a new vertex and assign it an index                     | Add `Delhi` at index `0`         |
+| Remove vertex     | Delete a vertex and all its incident edges                  | Remove `Delhi`                   |
+| Add edge          | Connect two vertices                                        | Add `Delhi — Mumbai`             |
+| Remove edge       | Delete the connection between two vertices                  | Remove `Delhi — Mumbai`          |
+| Check edge        | Check whether two vertices have a direct connection         | Is Delhi connected to Mumbai?    |
+| Get neighbours    | Find all vertices directly connected to a vertex            | List Delhi's neighbours          |
+| Get degree        | Count the incident edges of a vertex                        | How many edges connect to Delhi? |
+| Get in-degree     | Count incoming directed edges                               | How many edges enter Delhi?      |
+| Get out-degree    | Count outgoing directed edges                               | How many edges leave Delhi?      |
+| Get/update weight | Read or modify an edge's weight                             | Set road distance to 25          |
+| Find vertex index | Convert a vertex label to its integer index                 | `Delhi` → `0`                    |
+| Get vertex label  | Convert an index back to its label                          | `0` → `Delhi`                    |
+| Count vertices    | Find the number of vertices \\(V\\)                         | 4 vertices                       |
+| Count edges       | Find the number of logical edges \\(E\\)                    | 3 edges                          |
+| Display graph     | Print the graph or its representation                       | Display matrix or lists          |
+| BFS               | Explore vertices level by level                             | Visit nearby vertices first      |
+| DFS               | Explore deeply before backtracking                          | Follow one branch first          |
+| Find a path       | Check whether one vertex can reach another                  | Can Delhi reach Punjab?          |
