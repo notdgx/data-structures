@@ -623,4 +623,254 @@ Maximum value is  -> 4344
 <!-- qrun:field-end output id="q-00-08" -->
 <!-- qrun:entry-end id="q-00-08" -->
 
+
+<!-- qrun:entry-start id="q-00-09" -->
+
+<!-- qrun:field-start question id="q-00-09" -->
+
+## Q 09 : Enter an array from the user and find the k-th smallest value.
+
+<!-- qrun:field-end question id="q-00-09" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-09" -->
+
+```c
+// Single-Dimensional Arrays -> Q 09 : Enter an array from the user and find the k-th smallest value.
+
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[10] , k ;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+        
+    }
+
+    for (int i = 0; i < s - 1; i++) {
+        for (int j = i + 1; j < s; j++) {
+            if (arr[i] < arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+
+
+    printf("Enter the k th Position -> ");
+    scanf("%d",&k);
+    printf("The k th Position Element is -> %d ",arr[k-1]);
+
+
+
+
+    return 0;
+}
+
+```
+
+<!-- qrun:field-end code id="q-00-09" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-09" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-09" -->
+
+<!-- qrun:field-start output id="q-00-09" -->
+
+```text
+$ gcc q-00-09.c -o ./bin/q-00-09.out && ./bin/q-00-09.out
+Enter the element 1 -> 1
+Enter the element 2 -> 24
+Enter the element 3 -> 1
+Enter the element 4 -> 434
+Enter the element 5 -> 34
+Enter the element 6 -> 2
+Enter the element 7 -> 3
+Enter the element 8 -> 23
+Enter the element 9 -> 53
+Enter the element 10 -> 43
+Enter the k th Position -> 5
+The k th Position Element is -> 24 
+```
+
+<!-- qrun:field-end output id="q-00-09" -->
+<!-- qrun:entry-end id="q-00-09" -->
+
+
+<!-- qrun:entry-start id="q-00-10" -->
+
+<!-- qrun:field-start question id="q-00-10" -->
+
+## Q 10 : Enter an array from the user and find the sum of all its values.
+
+<!-- qrun:field-end question id="q-00-10" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-10" -->
+
+```c
+// Single-Dimensional Arrays -> Q 10 : Enter an array from the user and find the sum of all its values.
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[5],sum;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    for (int i = 0; i< s ; i++ ){
+        sum = sum + arr[i];
+    }
+    printf("The Sum is -> %d \n",sum);
+
+    return 0;
+}
+
+```
+
+<!-- qrun:field-end code id="q-00-10" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-10" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-10" -->
+
+<!-- qrun:field-start output id="q-00-10" -->
+
+```text
+$ gcc q-00-10.c -o ./bin/q-00-10.out && ./bin/q-00-10.out
+Enter the element 1 -> 1
+Enter the element 2 -> 353
+Enter the element 3 -> 563
+Enter the element 4 -> -90
+Enter the element 5 -> 32
+The Sum is -> 861 
+```
+
+<!-- qrun:field-end output id="q-00-10" -->
+<!-- qrun:entry-end id="q-00-10" -->
+
+
+<!-- qrun:entry-start id="q-00-11" -->
+
+<!-- qrun:field-start question id="q-00-11" -->
+
+## Q 11 : Enter an array from the user and find the duplicate values.
+
+<!-- qrun:field-end question id="q-00-11" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-11" -->
+
+```c
+// Single-Dimensional Arrays -> Q 11 : Enter an array from the user and find the duplicate values.
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[10],map[10][11] = {0},found,x=0;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    for (int i = 0; i< s ; i++ ){
+
+        found = 0;
+        for (int k = 0; k < x; k++){
+            if (arr[i] == map[k][0]){
+                found = 1;
+                break;
+            }
+        }
+        
+        if (found == 0){
+            map[x][0] = arr[i];
+            
+            for (int j = 0; j< s ; j++ ){
+                if (arr[i] == arr[j]){
+                    map[x][j+1] = 1;
+                }
+            }
+            
+            x++;
+
+        }
+
+
+    }
+
+    for(int i = 0;i < x; i++){
+    printf("\nValue %d found at index positoins - > ",map[i][0]);
+        for (int j = 0; j< s ; j++ ){
+            if (map[i][j+1] == 1)
+            printf("%d,",j);
+        }
+
+    }
+
+
+
+    return 0;
+}
+
+```
+
+<!-- qrun:field-end code id="q-00-11" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-11" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-11" -->
+
+<!-- qrun:field-start output id="q-00-11" -->
+
+```text
+$ gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out
+Enter the element 1 -> 1
+Enter the element 2 -> 1
+Enter the element 3 -> 1
+Enter the element 4 -> 1
+Enter the element 5 -> 13
+Enter the element 6 -> 13
+Enter the element 7 -> 13
+Enter the element 8 -> 5
+Enter the element 9 -> 13
+Enter the element 10 -> 1
+
+Value 1 found at index positoins - > 0,1,2,3,9,
+Value 13 found at index positoins - > 4,5,6,8,
+Value 5 found at index positoins - > 7,
+```
+
+<!-- qrun:field-end output id="q-00-11" -->
+<!-- qrun:entry-end id="q-00-11" -->
+
 <!-- qrun:topic-end id="topic-00" -->

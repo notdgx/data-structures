@@ -240,6 +240,168 @@
       "last_run_at": "2026-10-23T12:55:11+05:30",
       "updated_at": "2026-10-23T12:55:11+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-00-09",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T14:51:29+05:30",
+          "command": "gcc q-00-09.c -o ./bin/q-00-09.out && ./bin/q-00-09.out",
+          "mode": "compile-run",
+          "output": "q-00-09.c: In function ‘main’:\nq-00-09.c:18:33: error: ‘n’ undeclared (first use in this function)\n   18 |         for (int j = i + 1; j < n; j++) {\n      |                                 ^\nq-00-09.c:18:33: note: each undeclared identifier is reported only once for each function it appears in\n",
+          "exit_code": 1,
+          "code_sha256": "85108590e5a90e4c83b16f4295a123e5efad7f86354ec5a3a852b6becc9ac9e7"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T14:51:44+05:30",
+          "command": "gcc q-00-09.c -o ./bin/q-00-09.out && ./bin/q-00-09.out",
+          "mode": "compile-run",
+          "output": "q-00-09.c: In function ‘main’:\nq-00-09.c:18:33: error: ‘n’ undeclared (first use in this function)\n   18 |         for (int j = i + 1; j < n; j++) {\n      |                                 ^\nq-00-09.c:18:33: note: each undeclared identifier is reported only once for each function it appears in\n",
+          "exit_code": 1,
+          "code_sha256": "85108590e5a90e4c83b16f4295a123e5efad7f86354ec5a3a852b6becc9ac9e7"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T14:52:01+05:30",
+          "command": "gcc q-00-09.c -o ./bin/q-00-09.out && ./bin/q-00-09.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 24\nEnter the element 3 -> 1\nEnter the element 4 -> 434\nEnter the element 5 -> 34\nEnter the element 6 -> 2\nEnter the element 7 -> 3\nEnter the element 8 -> 23\nEnter the element 9 -> 53\nEnter the element 10 -> 43\nEnter the k th Position -> 5\nThe k th Position Element is -> 24 ",
+          "exit_code": 0,
+          "code_sha256": "ba6de9e2191edd338cd380a72d76edfbd7692a919617ac7cf2064cf1bf0831b3"
+        }
+      ],
+      "run_count": 3,
+      "created_at": "2026-10-23T14:51:29+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 9,
+      "question": "Enter an array from the user and find the k-th smallest value.",
+      "source_file": "q-00-09.c",
+      "code": "// Single-Dimensional Arrays -> Q 09 : Enter an array from the user and find the k-th smallest value.\n\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[10] , k ;\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n        \n    }\n\n    for (int i = 0; i < s - 1; i++) {\n        for (int j = i + 1; j < s; j++) {\n            if (arr[i] < arr[j]) {\n                int temp = arr[i];\n                arr[i] = arr[j];\n                arr[j] = temp;\n            }\n        }\n    }\n\n\n    printf(\"Enter the k th Position -> \");\n    scanf(\"%d\",&k);\n    printf(\"The k th Position Element is -> %d \",arr[k-1]);\n\n\n\n\n    return 0;\n}\n\n",
+      "code_sha256": "ba6de9e2191edd338cd380a72d76edfbd7692a919617ac7cf2064cf1bf0831b3",
+      "code_updated_at": "2026-10-23T14:52:01+05:30",
+      "command": "gcc q-00-09.c -o ./bin/q-00-09.out && ./bin/q-00-09.out",
+      "output": "Enter the element 1 -> 1\nEnter the element 2 -> 24\nEnter the element 3 -> 1\nEnter the element 4 -> 434\nEnter the element 5 -> 34\nEnter the element 6 -> 2\nEnter the element 7 -> 3\nEnter the element 8 -> 23\nEnter the element 9 -> 53\nEnter the element 10 -> 43\nEnter the k th Position -> 5\nThe k th Position Element is -> 24 ",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T14:52:01+05:30",
+      "updated_at": "2026-10-23T14:52:01+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-10",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T15:00:14+05:30",
+          "command": "gcc q-00-10.c -o ./bin/q-00-10.out && ./bin/q-00-10.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 353\nEnter the element 3 -> 563\nEnter the element 4 -> -90\nEnter the element 5 -> 32\nThe Sum is -> 861 \n",
+          "exit_code": 0,
+          "code_sha256": "ccec798aebd15f9485a199c365e3e9a05abc71312bfb3db5593c912f50ceee3b"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-23T15:00:14+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 10,
+      "question": "Enter an array from the user and find the sum of all its values.",
+      "source_file": "q-00-10.c",
+      "code": "// Single-Dimensional Arrays -> Q 10 : Enter an array from the user and find the sum of all its values.\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[5],sum;\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    for (int i = 0; i< s ; i++ ){\n        sum = sum + arr[i];\n    }\n    printf(\"The Sum is -> %d \\n\",sum);\n\n    return 0;\n}\n\n",
+      "code_sha256": "ccec798aebd15f9485a199c365e3e9a05abc71312bfb3db5593c912f50ceee3b",
+      "code_updated_at": "2026-10-23T15:00:14+05:30",
+      "command": "gcc q-00-10.c -o ./bin/q-00-10.out && ./bin/q-00-10.out",
+      "output": "Enter the element 1 -> 1\nEnter the element 2 -> 353\nEnter the element 3 -> 563\nEnter the element 4 -> -90\nEnter the element 5 -> 32\nThe Sum is -> 861 \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T15:00:14+05:30",
+      "updated_at": "2026-10-23T15:00:14+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-11",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T15:11:06+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 2\nEnter the element 3 -> 2\nEnter the element 4 -> 2\nEnter the element 5 -> 4\nEnter the element 6 -> 4\nEnter the element 7 -> 3\nEnter the element 8 -> 3\nEnter the element 9 -> 1\nEnter the element 10 -> 1\nValue 1 found at index positoins - > 0, 8, 9, Value 2 found at index positoins - > 1, 2, 3, Value 4 found at index positoins - > 4, 5, Value 3 found at index positoins - > 6, 7, ",
+          "exit_code": 0,
+          "code_sha256": "580b670efea2ec35b93f506c3b294c691d96197cbd5a1265fce07be17da1f3ab"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T15:11:27+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 2\nEnter the element 3 -> 2\nEnter the element 4 -> 2\nEnter the element 5 -> 3\nEnter the element 6 -> 3\nEnter the element 7 -> 1\nEnter the element 8 -> 3\nEnter the element 9 -> 6\nEnter the element 10 -> 6\n\nValue 1 found at index positoins - > 0, 6, \nValue 2 found at index positoins - > 1, 2, 3, \nValue 3 found at index positoins - > 4, 5, 7, \nValue 6 found at index positoins - > 8, 9, ",
+          "exit_code": 0,
+          "code_sha256": "7f527f4a727eeaafb15789efe893e6d0740a4714cb8fe0af0b992ef6e3fe412a"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T15:22:57+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "q-00-11.c: In function ‘main’:\nq-00-11.c:19:24: warning: comparison between pointer and integer\n   19 |             if (arr[i] == map[k]){\n      |                        ^~\nEnter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "bbbd11eb5ef86ee103addc6d7e40db8fc29207a9fcfe710085b0cb2e66df3fde"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T15:23:25+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 22\nEnter the element 5 -> 22\nEnter the element 6 -> 5\nEnter the element 7 -> 2\nEnter the element 8 -> 22\nEnter the element 9 -> 6\nEnter the element 10 -> 6\n\nValue 1 found at index positoins - > 0,1,3,\nValue 22 found at index positoins - > 2,3,6,\nValue 5 found at index positoins - > 4,\nValue 2 found at index positoins - > 5,\nValue 64 found at index positoins - > \nValue 0 found at index positoins - > 4,\nValue 6 found at index positoins - > \nValue 0 found at index positoins - > 4,6,8,\nValue 1084416064 found at index positoins - > \nValue 257 found at index positoins - > ",
+          "exit_code": 0,
+          "code_sha256": "8c7895d2a9ba12c5f2b7832f22815bfe44017e62dc2dc8af7b54dfe13c8a37c4"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-23T15:25:45+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 122\nEnter the element 5 -> 122\nEnter the element 6 -> 3\nEnter the element 7 -> 3\nEnter the element 8 -> 4\nEnter the element 9 -> 4\nEnter the element 10 -> 6\n\nValue 1 found at index positoins - > 0,1,7,\nValue 122 found at index positoins - > 2,3,\nValue 3 found at index positoins - > 4,5,\nValue 4 found at index positoins - > 6,7,\nValue 6 found at index positoins - > 8,\nValue 0 found at index positoins - > 4,\nValue 0 found at index positoins - > \nValue 0 found at index positoins - > 6,8,\nValue -640585664 found at index positoins - > \nValue 257 found at index positoins - > ",
+          "exit_code": 0,
+          "code_sha256": "5a1524cdfd995b4ddeb13e217277767bd626656d96a3ff512018cd9733282f78"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-23T15:32:26+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 3\nEnter the element 5 -> 3\nEnter the element 6 -> 4\nEnter the element 7 -> 44\nEnter the element 8 -> 44\nEnter the element 9 -> 44\nEnter the element 10 -> 1\n\nValue 1 found at index positoins - > 0,1,2,9,\nValue 3 found at index positoins - > 3,4,\nValue 4 found at index positoins - > 5,\nValue 44 found at index positoins - > 6,7,8,\nValue 0 found at index positoins - > \nValue 0 found at index positoins - > \nValue 0 found at index positoins - > \nValue 0 found at index positoins - > \nValue 0 found at index positoins - > \nValue 0 found at index positoins - > ",
+          "exit_code": 0,
+          "code_sha256": "640e3396974944e43f7564ea1cd2edf072362642b700da0ca84959b98ca72ef7"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-23T15:33:01+05:30",
+          "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 13\nEnter the element 6 -> 13\nEnter the element 7 -> 13\nEnter the element 8 -> 5\nEnter the element 9 -> 13\nEnter the element 10 -> 1\n\nValue 1 found at index positoins - > 0,1,2,3,9,\nValue 13 found at index positoins - > 4,5,6,8,\nValue 5 found at index positoins - > 7,",
+          "exit_code": 0,
+          "code_sha256": "40a9195c42d1159b71a25c5f3af841f4b098bb3630a8395b379b4070c340b6c9"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-23T15:11:06+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 11,
+      "question": "Enter an array from the user and find the duplicate values.",
+      "source_file": "q-00-11.c",
+      "code": "// Single-Dimensional Arrays -> Q 11 : Enter an array from the user and find the duplicate values.\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[10],map[10][11] = {0},found,x=0;\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    for (int i = 0; i< s ; i++ ){\n\n        found = 0;\n        for (int k = 0; k < x; k++){\n            if (arr[i] == map[k][0]){\n                found = 1;\n                break;\n            }\n        }\n        \n        if (found == 0){\n            map[x][0] = arr[i];\n            \n            for (int j = 0; j< s ; j++ ){\n                if (arr[i] == arr[j]){\n                    map[x][j+1] = 1;\n                }\n            }\n            \n            x++;\n\n        }\n\n\n    }\n\n    for(int i = 0;i < x; i++){\n    printf(\"\\nValue %d found at index positoins - > \",map[i][0]);\n        for (int j = 0; j< s ; j++ ){\n            if (map[i][j+1] == 1)\n            printf(\"%d,\",j);\n        }\n\n    }\n\n\n\n    return 0;\n}\n\n",
+      "code_sha256": "40a9195c42d1159b71a25c5f3af841f4b098bb3630a8395b379b4070c340b6c9",
+      "code_updated_at": "2026-10-23T15:33:01+05:30",
+      "command": "gcc q-00-11.c -o ./bin/q-00-11.out && ./bin/q-00-11.out",
+      "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 13\nEnter the element 6 -> 13\nEnter the element 7 -> 13\nEnter the element 8 -> 5\nEnter the element 9 -> 13\nEnter the element 10 -> 1\n\nValue 1 found at index positoins - > 0,1,2,3,9,\nValue 13 found at index positoins - > 4,5,6,8,\nValue 5 found at index positoins - > 7,",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T15:33:01+05:30",
+      "updated_at": "2026-10-23T15:33:01+05:30",
+      "output_stale": false
     }
   ]
 }
