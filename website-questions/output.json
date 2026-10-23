@@ -402,6 +402,90 @@
       "last_run_at": "2026-10-23T15:33:01+05:30",
       "updated_at": "2026-10-23T15:33:01+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-00-12",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T17:52:53+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "q-00-12.c: In function ‘main’:\nq-00-12.c:54:63: warning: format ‘%d’ expects a matching ‘int’ argument [-Wformat=]\n   54 |             printf(\"\\nDuplicated value found -> %d , removed %d duplicates at index positons -> \",map[i][0]);\n      |                                                              ~^\n      |                                                               |\n      |                                                               int\nEnter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "cc576e15206dcf2713fa36ab5aaf2dea389c6c84c83a8d5df4ac69ff84a5fc3f"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T17:53:22+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 2\nEnter the element 4 -> 2\nEnter the element 5 -> 2\nEnter the element 6 -> 3\nEnter the element 7 -> 4\nEnter the element 8 -> 5\nEnter the element 9 -> 5\nEnter the element 10 -> 2\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, \nDuplicated value found -> 2 , removed duplicates at index positons -> 2, 3, 4, 9, \nDuplicated value found -> 3 , removed duplicates at index positons -> 5, \nDuplicated value found -> 4 , removed duplicates at index positons -> 6, \nDuplicated value found -> 5 , removed duplicates at index positons -> 7, 8, ",
+          "exit_code": 0,
+          "code_sha256": "cd672708def614a7afb1e87062d35211ee411199cd67b1e288ca54185f1b44ac"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T17:58:57+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "\nArray After -> [791621423, 791621423, 791621423, 791621423, 3480, 0, 0, 0, 96, 0, ]\nEnter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "3a149165e140f6bce9c16359b5881183f4acadebec701b5e2caecbad1c2aebe8"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T17:59:20+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 3\nEnter the element 8 -> 4\nEnter the element 9 -> 5\nEnter the element 10 -> 5\n\nArray After -> [1, 1, 1, 1, 2, 2, 3, 4, 5, 5, ]\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, 2, 3, \nDuplicated value found -> 2 , removed duplicates at index positons -> 4, 5, \nDuplicated value found -> 3 , removed duplicates at index positons -> 6, \nDuplicated value found -> 4 , removed duplicates at index positons -> 7, \nDuplicated value found -> 5 , removed duplicates at index positons -> 8, 9, \nArray After -> [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]\n",
+          "exit_code": 0,
+          "code_sha256": "659b70afe713d5c76b45b384bfb8cb74e27c60924de07afe812b25e29d5375aa"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-23T18:01:06+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 3\nEnter the element 6 -> 3\nEnter the element 7 -> 3\nEnter the element 8 -> 4\nEnter the element 9 -> 5\nEnter the element 10 -> 4\n\nArray After -> [1, 1, 1, 1, 3, 3, 3, 4, 5, 4, ]\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, 2, 3, \nDuplicated value found -> 3 , removed duplicates at index positons -> 4, 5, 6, \nDuplicated value found -> 4 , removed duplicates at index positons -> 7, 9, \nDuplicated value found -> 5 , removed duplicates at index positons -> 8, \nArray After -> [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, ]\n",
+          "exit_code": 0,
+          "code_sha256": "fe3fb5a28362d2ad1ac7d20b2a5346480ee47ff79653d009c837f80719cb0611"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-23T18:02:40+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 2\nEnter the element 8 -> 3\nEnter the element 9 -> 7\nEnter the element 10 -> 7\n\nArray After -> [1, 1, 1, 1, 2, 2, 2, 3, 7, 7, ]\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, 2, 3, \nDuplicated value found -> 2 , removed duplicates at index positons -> 5, 6, \nDuplicated value found -> 7 , removed duplicates at index positons -> 9, \nArray After -> [1, 0, 0, 0, 2, 0, 0, 3, 7, 0, ]\n",
+          "exit_code": 0,
+          "code_sha256": "fd0da23abceafabc2484878ba21b2c1ac93d96955e8ec8537602bf3e33e86dc6"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-23T18:03:40+05:30",
+          "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 2\nEnter the element 8 -> 4\nEnter the element 9 -> 4\nEnter the element 10 -> 5\n\nArray After -> [1, 1, 1, 1, 2, 2, 2, 4, 4, 5, ]\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, 2, 3, \nDuplicated value found -> 2 , removed duplicates at index positons -> 5, 6, \nDuplicated value found -> 4 , removed duplicates at index positons -> 8, \n\nArray After -> [1, 0, 0, 0, 2, 0, 0, 4, 0, 5, ]\n",
+          "exit_code": 0,
+          "code_sha256": "e18df950b736012737450eb18bc983975af551b5c4e36f003a63af180e8eaab7"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-23T17:52:53+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 12,
+      "question": "Enter an array from the user, remove duplicate values, and replace them with zeros.",
+      "source_file": "q-00-12.c",
+      "code": "// Single-Dimensional Arrays -> Q 12 : Enter an array from the user, remove duplicate values, and replace them with zeros.\n\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[10],map[10][11] = {0},found,x=0;\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray After -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    for (int i = 0; i< s ; i++ ){\n\n        found = 0;\n        for (int k = 0; k < x; k++){\n            if (arr[i] == map[k][0]){\n                found = 1;\n                break;\n            }\n        }\n        \n        if (found == 0){\n            map[x][0] = arr[i];\n            int first = 1;\n            \n            for (int j = 0; j< s ; j++ ){\n\n                if (arr[i] == arr[j]){\n                    if (first) {\n                        map[x][j+1] = 2;\n                        first = 0;\n                        continue;\n                    }\n                    map[x][j+1] = 1;\n                }\n            }\n            \n            x++;\n\n        }\n\n\n    }\n\n    for(int i = 0;i < x; i++){\n        int sum = 0;\n        for (int j = 0; j< s ; j++ ){\n            sum = sum + map[i][j+1];\n        }\n        if (sum != 2){\n            printf(\"\\nDuplicated value found -> %d , removed duplicates at index positons -> \",map[i][0]);\n            for (int k=0 ; k<s; k++){\n                if (map[i][k+1] == 1){\n                    arr[k] = 0;\n                    printf(\"%d, \",k);\n                }\n            }\n        }\n    }\n\n    printf(\"\\n\\nArray After -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n\n\n    return 0;\n}\n\n",
+      "code_sha256": "e18df950b736012737450eb18bc983975af551b5c4e36f003a63af180e8eaab7",
+      "code_updated_at": "2026-10-23T18:03:40+05:30",
+      "command": "gcc q-00-12.c -o ./bin/q-00-12.out && ./bin/q-00-12.out",
+      "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 2\nEnter the element 8 -> 4\nEnter the element 9 -> 4\nEnter the element 10 -> 5\n\nArray After -> [1, 1, 1, 1, 2, 2, 2, 4, 4, 5, ]\n\nDuplicated value found -> 1 , removed duplicates at index positons -> 1, 2, 3, \nDuplicated value found -> 2 , removed duplicates at index positons -> 5, 6, \nDuplicated value found -> 4 , removed duplicates at index positons -> 8, \n\nArray After -> [1, 0, 0, 0, 2, 0, 0, 4, 0, 5, ]\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T18:03:40+05:30",
+      "updated_at": "2026-10-23T18:03:40+05:30",
+      "output_stale": false
     }
   ]
 }
