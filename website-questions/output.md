@@ -1009,4 +1009,744 @@ Array After -> [1, 0, 0, 0, 2, 0, 0, 4, 0, 5, ]
 <!-- qrun:field-end output id="q-00-12" -->
 <!-- qrun:entry-end id="q-00-12" -->
 
+
+<!-- qrun:entry-start id="q-00-13" -->
+
+<!-- qrun:field-start question id="q-00-13" -->
+
+## Q 13 : Enter an array from the user and count the duplicate values.
+
+<!-- qrun:field-end question id="q-00-13" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-13" -->
+
+```c
+// Single-Dimensional Arrays -> Q 13 : Enter an array from the user and count the duplicate values.
+
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[10],map[10][11] = {0},found,x=0;
+    int s = sizeof(arr)/sizeof(arr[0]);
+    int count = 0;
+
+
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray Before -> [");
+    for (int i = 0 ; i <s ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    for (int i = 0; i< s ; i++ ){
+
+        found = 0;
+        for (int k = 0; k < x; k++){
+            if (arr[i] == map[k][0]){
+                found = 1;
+                break;
+            }
+        }
+        
+        if (found == 0){
+            map[x][0] = arr[i];
+            int first = 1;
+            
+            for (int j = 0; j< s ; j++ ){
+
+                if (arr[i] == arr[j]){
+                    if (first) {
+                        map[x][j+1] = 2;
+                        first = 0;
+                        continue;
+                    }
+                    map[x][j+1] = 1;
+                }
+            }
+            
+            x++;
+
+        }
+
+
+    }
+
+    for(int i = 0;i < x; i++){
+        int sum = 0;
+        for (int j = 0; j< s ; j++ ){
+            sum = sum + map[i][j+1];
+        }
+        if (sum != 2){
+            count++;
+        }
+    }
+
+
+    printf("No of duplicated eleemts  is %d ",count);
+
+
+    return 0;
+}
+
+```
+
+<!-- qrun:field-end code id="q-00-13" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-13" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-13" -->
+
+<!-- qrun:field-start output id="q-00-13" -->
+
+```text
+$ gcc q-00-13.c -o ./bin/q-00-13.out && ./bin/q-00-13.out
+Enter the element 1 -> 1
+Enter the element 2 -> 1
+Enter the element 3 -> 1
+Enter the element 4 -> 1
+Enter the element 5 -> 2
+Enter the element 6 -> 2
+Enter the element 7 -> 2
+Enter the element 8 -> 4
+Enter the element 9 -> 4
+Enter the element 10 -> 2
+
+Array Before -> [1, 1, 1, 1, 2, 2, 2, 4, 4, 2, ]
+No of duplicated eleemts  is 3 
+```
+
+<!-- qrun:field-end output id="q-00-13" -->
+<!-- qrun:entry-end id="q-00-13" -->
+
+
+<!-- qrun:entry-start id="q-00-14" -->
+
+<!-- qrun:field-start question id="q-00-14" -->
+
+## Q 14 : Enter an array from the user and print all possible combinations of its elements.
+
+<!-- qrun:field-end question id="q-00-14" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-14" -->
+
+```c
+// Single-Dimensional Arrays -> Q 14 : Enter an array from the user and print all possible combinations of its elements.
+
+#include <stdio.h>
+
+void permute(int arr[], int start, int n) {
+    if (start == n) {
+        for (int i = 0; i < n; i++) {
+            printf("%d ", arr[i]);
+        }
+        printf("\n");
+        return;
+    }
+
+    for (int i = start; i < n; i++) {
+        // swap 
+        int temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+
+        permute(arr, start + 1, n);
+
+        // undo it 
+        temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+int main() {
+    int arr[4];
+    int n =  sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0 ; i < n ; i++) {
+        printf("Enter element %d ->  ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    permute(arr, 0, n);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-00-14" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-14" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-14" -->
+
+<!-- qrun:field-start output id="q-00-14" -->
+
+```text
+$ gcc q-00-14.c -o ./bin/q-00-14.out && ./bin/q-00-14.out
+Enter element 1 ->  1
+Enter element 2 ->  2
+Enter element 3 ->  3
+Enter element 4 ->  0
+1 2 3 0 
+1 2 0 3 
+1 3 2 0 
+1 3 0 2 
+1 0 3 2 
+1 0 2 3 
+2 1 3 0 
+2 1 0 3 
+2 3 1 0 
+2 3 0 1 
+2 0 3 1 
+2 0 1 3 
+3 2 1 0 
+3 2 0 1 
+3 1 2 0 
+3 1 0 2 
+3 0 1 2 
+3 0 2 1 
+0 2 3 1 
+0 2 1 3 
+0 3 2 1 
+0 3 1 2 
+0 1 3 2 
+0 1 2 3 
+```
+
+<!-- qrun:field-end output id="q-00-14" -->
+<!-- qrun:entry-end id="q-00-14" -->
+
+
+<!-- qrun:entry-start id="q-00-15" -->
+
+<!-- qrun:field-start question id="q-00-15" -->
+
+## Q 15 : Enter an array from the user and print all palindrome numbers.
+
+<!-- qrun:field-end question id="q-00-15" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-15" -->
+
+```c
+// Single-Dimensional Arrays -> Q 15 : Enter an array from the user and print all palindrome numbers.
+
+#include <stdio.h>
+
+int palindrome_check(int n){
+
+    int a = n, rev = 0, d;
+
+        while (n > 0) {
+            d = n % 10;
+            rev = rev* 10 + d;
+            n = n/10;
+        }
+
+        return a == rev;
+    }
+
+
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray      -> [");
+    for (int i = 0 ; i <s ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nPlaindrome -> [");
+    for (int i = 0 ; i <s ; i ++){
+        if (palindrome_check(arr[i]) == 1){
+        printf("%d,",arr[i]);
+        continue;
+        }
+        printf(" NO  ,");
+    }
+    printf("]\n");
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-00-15" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-15" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-15" -->
+
+<!-- qrun:field-start output id="q-00-15" -->
+
+```text
+$ gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out
+Enter the element 1 -> 12121
+Enter the element 2 -> 50000
+Enter the element 3 -> 33333
+Enter the element 4 -> 55655
+Enter the element 5 -> 23322
+
+Array      -> [12121,50000,33333,55655,23322,]
+
+Plaindrome -> [12121, NO  ,33333,55655, NO  ,]
+```
+
+<!-- qrun:field-end output id="q-00-15" -->
+<!-- qrun:entry-end id="q-00-15" -->
+
+
+<!-- qrun:entry-start id="q-00-16" -->
+
+<!-- qrun:field-start question id="q-00-16" -->
+
+## Q 16 : Enter two arrays from the user and check whether they are identical.
+
+<!-- qrun:field-end question id="q-00-16" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-16" -->
+
+```c
+// Single-Dimensional Arrays -> Q 16 : Enter two arrays from the user and check whether they are identical.
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[5],arr2[5];
+    int s1 = sizeof(arr)/sizeof(arr[0]);
+    int s2 = sizeof(arr2)/sizeof(arr2[0]);
+
+
+    printf("Enter for the Array 1 ->\n\n");
+    for (int i = 0; i< s1 ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+
+    printf("\nEnter for the Array 2 ->\n\n");
+    for (int i = 0; i< s2 ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr2[i]);
+    }
+
+    printf("\nArray  1   -> [");
+    for (int i = 0 ; i <s1 ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nArray  2   -> [");
+    for (int i = 0 ; i <s2 ; i ++){
+        printf("%d,",arr2[i]);
+    }
+    printf("]\n");
+
+    int same = 1;
+    for (int i = 0 ; i < s1 ; i++){
+        if (arr[i] != arr2[i]){
+            same = 0;
+            break;
+        }
+    }
+
+    if (same){
+        printf("\nArray 1 and 2 have identical elements \n");
+        return 0;
+    }
+    
+    printf("\nArray 1 and 2 Dont have identical elements \n");
+    return 0;
+
+}
+```
+
+<!-- qrun:field-end code id="q-00-16" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-16" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-16" -->
+
+<!-- qrun:field-start output id="q-00-16" -->
+
+```text
+$ gcc q-00-16.c -o ./bin/q-00-16.out && ./bin/q-00-16.out
+Enter for the Array 1 ->
+
+Enter the element 1 -> 12
+Enter the element 2 -> 223
+Enter the element 3 -> 43
+Enter the element 4 -> 64
+Enter the element 5 -> 7
+
+Enter for the Array 2 ->
+
+Enter the element 1 -> 12
+Enter the element 2 -> 223
+Enter the element 3 -> 43
+Enter the element 4 -> 64
+Enter the element 5 -> 7
+
+Array  1   -> [12,223,43,64,7,]
+
+Array  2   -> [12,223,43,64,7,]
+
+Array 1 and 2 have identical elements 
+```
+
+<!-- qrun:field-end output id="q-00-16" -->
+<!-- qrun:entry-end id="q-00-16" -->
+
+
+<!-- qrun:entry-start id="q-00-17" -->
+
+<!-- qrun:field-start question id="q-00-17" -->
+
+## Q 17 : Merge two sorted arrays into a single sorted array.
+
+<!-- qrun:field-end question id="q-00-17" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-17" -->
+
+```c
+// Single-Dimensional Arrays -> Q 17 : Merge two sorted arrays into a single sorted array.
+
+#include <stdio.h>
+#define SIZE 7
+
+void mergearr(int arr[], int u, int l)
+{
+    int mid = (u + l + 1) / 2;
+    int newarr[u - l + 1];
+    int k = 0;
+    int j = mid;
+
+    for (int i = l; i < mid; i++){
+        while (j <= u){
+            if (arr[i] > arr[j]){
+                newarr[k] = arr[j];
+                k++;
+                j++;
+            }
+            else{
+                newarr[k] = arr[i];
+                k++;
+                break;
+            }
+        }
+
+        if (j > u){
+            i++;
+            while (i < mid){
+                newarr[k] = arr[i];
+                k++;
+                i++;
+            }
+            break;
+        }
+    }
+
+    while (j <= u){
+        newarr[k] = arr[j];
+        k++;
+        j++;
+    }
+
+    for (int i = 0; i < u - l + 1; i++){
+        arr[l + i] = newarr[i];
+    }
+}
+
+
+void mergesort(int arr[], int l, int u){
+    if (l >= u){
+        return;
+    }
+
+    int mid = (l + u) / 2;
+
+    mergesort(arr, l, mid);
+    mergesort(arr, mid + 1, u);
+
+    mergearr(arr, u, l);
+}
+
+
+int main(){
+
+    int arr[SIZE],arr2[SIZE], arr3[2 * SIZE];
+    int s1 = sizeof(arr)/sizeof(arr[0]);
+    int s2 = sizeof(arr2)/sizeof(arr2[0]);
+    int s3 = sizeof(arr3)/sizeof(arr3[0]);
+
+
+    printf("Enter for the Array 1 ->\n\n");
+    for (int i = 0; i< s1 ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+
+    printf("\nEnter for the Array 2 ->\n\n");
+    for (int i = 0; i< s2 ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr2[i]);
+    }
+
+    printf("\nArray  1   -> [");
+    for (int i = 0 ; i <s1 ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nArray  2   -> [");
+    for (int i = 0 ; i <s2 ; i ++){
+        printf("%d,",arr2[i]);
+    }
+    printf("]\n");
+
+    for (int i = 0 ; i <s3 ; i++){
+        if (i <s1){
+            arr3[i] = arr[i];
+            continue;
+        }
+        
+        arr3[i] = arr2[i-s2];
+
+    }
+
+    mergesort(arr3,0,s3-1);
+
+    printf("\nSorted Array -> [");
+    for (int i = 0 ; i <s3 ; i ++){
+        printf("%d,",arr3[i]);
+    }
+    printf("]\n");
+
+    return 0;
+
+}
+```
+
+<!-- qrun:field-end code id="q-00-17" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-17" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-17" -->
+
+<!-- qrun:field-start output id="q-00-17" -->
+
+```text
+$ gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out
+Enter for the Array 1 ->
+
+Enter the element 1 -> 1
+Enter the element 2 -> 3
+Enter the element 3 -> 5
+Enter the element 4 -> 7
+Enter the element 5 -> 9
+Enter the element 6 -> 11
+Enter the element 7 -> 13
+
+Enter for the Array 2 ->
+
+Enter the element 1 -> 2
+Enter the element 2 -> 4
+Enter the element 3 -> 6
+Enter the element 4 -> 8
+Enter the element 5 -> 10
+Enter the element 6 -> 12
+Enter the element 7 -> 14
+
+Array  1   -> [1,3,5,7,9,11,13,]
+
+Array  2   -> [2,4,6,8,10,12,14,]
+
+Sorted Array -> [1,2,3,4,5,6,7,8,9,10,11,12,13,14,]
+```
+
+<!-- qrun:field-end output id="q-00-17" -->
+<!-- qrun:entry-end id="q-00-17" -->
+
+
+<!-- qrun:entry-start id="q-00-18" -->
+
+<!-- qrun:field-start question id="q-00-18" -->
+
+## Q 18 : Find the local minima in an array.
+
+<!-- qrun:field-end question id="q-00-18" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-18" -->
+
+```c
+// Single-Dimensional Arrays -> Q 18 : Find the local minima in an array.
+
+#include <stdio.h>
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray      -> [");
+    for (int i = 0 ; i <s ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+    for (int i = 1 ; i <s-1 ; i++){
+        if (arr[i] < arr[i-1] && arr[i] < arr[i+1]){
+            printf("%d is local minima",arr[i]);
+        }
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-00-18" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-18" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-18" -->
+
+<!-- qrun:field-start output id="q-00-18" -->
+
+```text
+$ gcc q-00-18.c -o ./bin/q-00-18.out && ./bin/q-00-18.out
+Enter the element 1 -> ^C
+```
+
+<!-- qrun:field-end output id="q-00-18" -->
+<!-- qrun:entry-end id="q-00-18" -->
+
+
+<!-- qrun:entry-start id="q-00-19" -->
+
+<!-- qrun:field-start question id="q-00-19" -->
+
+## Q 19 : Find the local maxima in an array.
+
+<!-- qrun:field-end question id="q-00-19" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-19" -->
+
+```c
+// Single-Dimensional Arrays -> Q 19 : Find the local maxima in an array.
+
+#include <stdio.h>
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i< s ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray      -> [");
+    for (int i = 0 ; i <s ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+    for (int i = 1 ; i <s-1 ; i++){
+        if (arr[i] > arr[i-1] && arr[i] > arr[i+1]){
+            printf("%d is local Maxima\n",arr[i]);
+        }
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-00-19" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-19" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-19" -->
+
+<!-- qrun:field-start output id="q-00-19" -->
+
+```text
+$ gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out
+Enter the element 1 -> 13
+Enter the element 2 -> 324
+Enter the element 3 -> 42
+Enter the element 4 -> 3232
+Enter the element 5 -> 1
+
+Array      -> [13,324,42,3232,1,]
+324 is local Maxima
+3232 is local Maxima
+```
+
+<!-- qrun:field-end output id="q-00-19" -->
+<!-- qrun:entry-end id="q-00-19" -->
+
 <!-- qrun:topic-end id="topic-00" -->

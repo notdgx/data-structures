@@ -486,6 +486,378 @@
       "last_run_at": "2026-10-23T18:03:40+05:30",
       "updated_at": "2026-10-23T18:03:40+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-00-13",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T18:07:22+05:30",
+          "command": "gcc q-00-13.c -o ./bin/q-00-13.out && ./bin/q-00-13.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 2\nEnter the element 8 -> 4\nEnter the element 9 -> 4\nEnter the element 10 -> 2\n\nArray Before -> [1, 1, 1, 1, 2, 2, 2, 4, 4, 2, ]\nNo of duplicated eleemts  is 3 ",
+          "exit_code": 0,
+          "code_sha256": "f32fb836227efa671275a7245417b8577d1be8d9f2a63e7ebdb4eac29b27fc4a"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-23T18:07:22+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 13,
+      "question": "Enter an array from the user and count the duplicate values.",
+      "source_file": "q-00-13.c",
+      "code": "// Single-Dimensional Arrays -> Q 13 : Enter an array from the user and count the duplicate values.\n\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[10],map[10][11] = {0},found,x=0;\n    int s = sizeof(arr)/sizeof(arr[0]);\n    int count = 0;\n\n\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray Before -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    for (int i = 0; i< s ; i++ ){\n\n        found = 0;\n        for (int k = 0; k < x; k++){\n            if (arr[i] == map[k][0]){\n                found = 1;\n                break;\n            }\n        }\n        \n        if (found == 0){\n            map[x][0] = arr[i];\n            int first = 1;\n            \n            for (int j = 0; j< s ; j++ ){\n\n                if (arr[i] == arr[j]){\n                    if (first) {\n                        map[x][j+1] = 2;\n                        first = 0;\n                        continue;\n                    }\n                    map[x][j+1] = 1;\n                }\n            }\n            \n            x++;\n\n        }\n\n\n    }\n\n    for(int i = 0;i < x; i++){\n        int sum = 0;\n        for (int j = 0; j< s ; j++ ){\n            sum = sum + map[i][j+1];\n        }\n        if (sum != 2){\n            count++;\n        }\n    }\n\n\n    printf(\"No of duplicated eleemts  is %d \",count);\n\n\n    return 0;\n}\n\n",
+      "code_sha256": "f32fb836227efa671275a7245417b8577d1be8d9f2a63e7ebdb4eac29b27fc4a",
+      "code_updated_at": "2026-10-23T18:07:22+05:30",
+      "command": "gcc q-00-13.c -o ./bin/q-00-13.out && ./bin/q-00-13.out",
+      "output": "Enter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 1\nEnter the element 4 -> 1\nEnter the element 5 -> 2\nEnter the element 6 -> 2\nEnter the element 7 -> 2\nEnter the element 8 -> 4\nEnter the element 9 -> 4\nEnter the element 10 -> 2\n\nArray Before -> [1, 1, 1, 1, 2, 2, 2, 4, 4, 2, ]\nNo of duplicated eleemts  is 3 ",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T18:07:22+05:30",
+      "updated_at": "2026-10-23T18:07:22+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-14",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T18:23:20+05:30",
+          "command": "gcc q-00-14.c -o ./bin/q-00-14.out && ./bin/q-00-14.out",
+          "mode": "compile-run",
+          "output": "Enter element 1 ->  1\nEnter element 2 ->  1\nEnter element 3 ->  1\nEnter element 4 ->  1^C",
+          "exit_code": 130,
+          "code_sha256": "82d870d6d8bdd92dadde98069d23982c943fc3ae45da2b2062b3862f95d21fb5"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T18:24:14+05:30",
+          "command": "gcc q-00-14.c -o ./bin/q-00-14.out && ./bin/q-00-14.out",
+          "mode": "compile-run",
+          "output": "Enter element 1 ->  1\nEnter element 2 ->  2\nEnter element 3 ->  3\nEnter element 4 ->  0\n1 2 3 0 \n1 2 0 3 \n1 3 2 0 \n1 3 0 2 \n1 0 3 2 \n1 0 2 3 \n2 1 3 0 \n2 1 0 3 \n2 3 1 0 \n2 3 0 1 \n2 0 3 1 \n2 0 1 3 \n3 2 1 0 \n3 2 0 1 \n3 1 2 0 \n3 1 0 2 \n3 0 1 2 \n3 0 2 1 \n0 2 3 1 \n0 2 1 3 \n0 3 2 1 \n0 3 1 2 \n0 1 3 2 \n0 1 2 3 \n",
+          "exit_code": 0,
+          "code_sha256": "0727ffbace5795e691473e1c68c67533d5185b8694e6738ba5da4ba485fd78cd"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-23T18:23:20+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 14,
+      "question": "Enter an array from the user and print all possible combinations of its elements.",
+      "source_file": "q-00-14.c",
+      "code": "// Single-Dimensional Arrays -> Q 14 : Enter an array from the user and print all possible combinations of its elements.\n\n#include <stdio.h>\n\nvoid permute(int arr[], int start, int n) {\n    if (start == n) {\n        for (int i = 0; i < n; i++) {\n            printf(\"%d \", arr[i]);\n        }\n        printf(\"\\n\");\n        return;\n    }\n\n    for (int i = start; i < n; i++) {\n        // swap \n        int temp = arr[start];\n        arr[start] = arr[i];\n        arr[i] = temp;\n\n        permute(arr, start + 1, n);\n\n        // undo it \n        temp = arr[start];\n        arr[start] = arr[i];\n        arr[i] = temp;\n    }\n}\n\nint main() {\n    int arr[4];\n    int n =  sizeof(arr)/sizeof(arr[0]);\n\n    for (int i = 0 ; i < n ; i++) {\n        printf(\"Enter element %d ->  \", i+1);\n        scanf(\"%d\", &arr[i]);\n    }\n\n    permute(arr, 0, n);\n\n    return 0;\n}",
+      "code_sha256": "0727ffbace5795e691473e1c68c67533d5185b8694e6738ba5da4ba485fd78cd",
+      "code_updated_at": "2026-10-23T18:24:14+05:30",
+      "command": "gcc q-00-14.c -o ./bin/q-00-14.out && ./bin/q-00-14.out",
+      "output": "Enter element 1 ->  1\nEnter element 2 ->  2\nEnter element 3 ->  3\nEnter element 4 ->  0\n1 2 3 0 \n1 2 0 3 \n1 3 2 0 \n1 3 0 2 \n1 0 3 2 \n1 0 2 3 \n2 1 3 0 \n2 1 0 3 \n2 3 1 0 \n2 3 0 1 \n2 0 3 1 \n2 0 1 3 \n3 2 1 0 \n3 2 0 1 \n3 1 2 0 \n3 1 0 2 \n3 0 1 2 \n3 0 2 1 \n0 2 3 1 \n0 2 1 3 \n0 3 2 1 \n0 3 1 2 \n0 1 3 2 \n0 1 2 3 \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T18:24:14+05:30",
+      "updated_at": "2026-10-23T18:24:14+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-15",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T18:34:04+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12345^C",
+          "exit_code": 130,
+          "code_sha256": "3451fcff82e354e8c57545d0abf57e3baae2cd2358959cddeb7473eb14f34822"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T18:34:36+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12345\nEnter the element 2 -> 12121\nEnter the element 3 -> 13331\nEnter the element 4 -> 31313\nEnter the element 5 -> 60600\n\nArray      -> [12345, 12121, 13331, 31313, 60600, ]\n\nPlaindrome -> [12345,   NO  12121,   NO  13331,   NO  31313,   NO  60600,   NO  ]\n",
+          "exit_code": 0,
+          "code_sha256": "6e3f4d93ae1b5ce1810b9f8d3e5fa389ec0f21729a24ffee39b9ba62f7137d8e"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T18:35:09+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12345\nEnter the element 2 -> 12121\nEnter the element 3 -> 33333\nEnter the element 4 -> 13331\nEnter the element 5 -> 60000\n\nArray      -> [12345, 12121, 33333, 13331, 60000, ]\n\nPlaindrome -> [12345,   NO  12121,   NO  33333,   NO  13331,   NO  60000,   NO  ]\n",
+          "exit_code": 0,
+          "code_sha256": "4885cd52ca079b7f5819d8a5fda0a614720ea21947f24a6dd38b2c3f6b313c71"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T18:35:37+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12234\nEnter the element 2 -> 12221\nEnter the element 3 -> 13131\nEnter the element 4 -> 55555\nEnter the element 5 -> 70000\n\nArray      -> [12234, 12221, 13131, 55555, 70000, ]\n\nPlaindrome -> [12234, 12221, 13131, 55555, 70000, ]\n",
+          "exit_code": 0,
+          "code_sha256": "cbd4795b28f8b6fc3b203830716cb8eca7da232f5ea98e1b45aad983fb389ad1"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-23T18:36:23+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12312\nEnter the element 2 -> 11111\nEnter the element 3 -> 11111\nEnter the element 4 -> 34221\nEnter the element 5 -> 44444\n\nArray      -> [12312, 11111, 11111, 34221, 44444, ]\n\nPlaindrome -> [12312, 11111, 11111, 34221, 44444, ]\n",
+          "exit_code": 0,
+          "code_sha256": "72a942c17c134fcbe529e49751684355885c7c61af76b4bc98647b2ef7f19907"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-23T18:36:55+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12221\nEnter the element 2 -> 44444\nEnter the element 3 -> 90000\nEnter the element 4 -> 23232\nEnter the element 5 -> 50005\n\nArray      -> [12221, 44444, 90000, 23232, 50005, ]\n\nPlaindrome -> [12221, 44444,   NO  23232, 50005, ]\n",
+          "exit_code": 0,
+          "code_sha256": "9c06169a205996aa78dce1aae34add8c174f60e932caf0d9a31463cd751bf1d6"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-23T18:37:30+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12122\nEnter the element 2 -> 12122\nEnter the element 3 -> 23332\nEnter the element 4 -> 44444\nEnter the element 5 -> 21211\n\nArray      -> [12122, 12122, 23332, 44444, 21211, ]\n\nPlaindrome -> [ NO  , NO  ,23332, 44444,  NO  ,]\n",
+          "exit_code": 0,
+          "code_sha256": "7b57e64453a512b576dc55ee153a6777a08775b258022bade435d1e15e2042fb"
+        },
+        {
+          "run_number": 8,
+          "timestamp": "2026-10-23T18:38:42+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12121\nEnter the element 2 -> 11111\nEnter the element 3 -> 23332\nEnter the element 4 -> 55655\nEnter the element 5 -> 89932\n\nArray      -> [12121, 11111, 23332, 55655, 89932, ]\n\nPlaindrome -> [12121,11111,23332,55655, NO  ,]\n",
+          "exit_code": 0,
+          "code_sha256": "14f986725e323786b11f436e476c1ff02c789abd8ee395f9ff6c78cd5367627a"
+        },
+        {
+          "run_number": 9,
+          "timestamp": "2026-10-23T18:39:07+05:30",
+          "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 12121\nEnter the element 2 -> 50000\nEnter the element 3 -> 33333\nEnter the element 4 -> 55655\nEnter the element 5 -> 23322\n\nArray      -> [12121,50000,33333,55655,23322,]\n\nPlaindrome -> [12121, NO  ,33333,55655, NO  ,]\n",
+          "exit_code": 0,
+          "code_sha256": "dcb09f3abdae1a9e6fc655b88b748e3cfe24a899a21df87722800c29beee135a"
+        }
+      ],
+      "run_count": 9,
+      "created_at": "2026-10-23T18:34:04+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 15,
+      "question": "Enter an array from the user and print all palindrome numbers.",
+      "source_file": "q-00-15.c",
+      "code": "// Single-Dimensional Arrays -> Q 15 : Enter an array from the user and print all palindrome numbers.\n\n#include <stdio.h>\n\nint palindrome_check(int n){\n\n    int a = n, rev = 0, d;\n\n        while (n > 0) {\n            d = n % 10;\n            rev = rev* 10 + d;\n            n = n/10;\n        }\n\n        return a == rev;\n    }\n\n\nint main(){\n\n    int arr[5];\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray      -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nPlaindrome -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        if (palindrome_check(arr[i]) == 1){\n        printf(\"%d,\",arr[i]);\n        continue;\n        }\n        printf(\" NO  ,\");\n    }\n    printf(\"]\\n\");\n\n\n    return 0;\n}\n",
+      "code_sha256": "dcb09f3abdae1a9e6fc655b88b748e3cfe24a899a21df87722800c29beee135a",
+      "code_updated_at": "2026-10-23T18:39:07+05:30",
+      "command": "gcc q-00-15.c -o ./bin/q-00-15.out && ./bin/q-00-15.out",
+      "output": "Enter the element 1 -> 12121\nEnter the element 2 -> 50000\nEnter the element 3 -> 33333\nEnter the element 4 -> 55655\nEnter the element 5 -> 23322\n\nArray      -> [12121,50000,33333,55655,23322,]\n\nPlaindrome -> [12121, NO  ,33333,55655, NO  ,]\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T18:39:07+05:30",
+      "updated_at": "2026-10-23T18:39:07+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-16",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T18:44:56+05:30",
+          "command": "gcc q-00-16.c -o ./bin/q-00-16.out && ./bin/q-00-16.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 1\nEnter the element 3 -> 12\nEnter the element 4 -> 34\nEnter the element 5 -> 34\n\nArray  1   -> [1,1,12,34,34,]\nEnter for the Array 2 ->\n\nEnter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "6e0b765337b346f701f8274213b9f2e4c1dab53744a089b3a1018f7741784626"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T18:45:38+05:30",
+          "command": "gcc q-00-16.c -o ./bin/q-00-16.out && ./bin/q-00-16.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 212\nEnter the element 3 -> 1\nEnter the element 4 -> 43\nEnter the element 5 -> 23\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 212\nEnter the element 3 -> 1\nEnter the element 4 -> 43\nEnter the element 5 -> 23\n\nArray  1   -> [1,212,1,43,23,]\n\nArray  2   -> [1,212,1,43,23,]\nArray 1 and 2 have identical elements \n",
+          "exit_code": 0,
+          "code_sha256": "a77224e0215c45df6c401d518663c6a2f6684bd5a04851a27f7ba3b899c6670c"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T18:46:05+05:30",
+          "command": "gcc q-00-16.c -o ./bin/q-00-16.out && ./bin/q-00-16.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 12\nEnter the element 2 -> 223\nEnter the element 3 -> 43\nEnter the element 4 -> 64\nEnter the element 5 -> 7\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 12\nEnter the element 2 -> 223\nEnter the element 3 -> 43\nEnter the element 4 -> 64\nEnter the element 5 -> 7\n\nArray  1   -> [12,223,43,64,7,]\n\nArray  2   -> [12,223,43,64,7,]\n\nArray 1 and 2 have identical elements \n",
+          "exit_code": 0,
+          "code_sha256": "2dd88f94d2b61562e033b4f358c9072af3ab444e87ed038e7ec632ec8f7d09e7"
+        }
+      ],
+      "run_count": 3,
+      "created_at": "2026-10-23T18:44:56+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 16,
+      "question": "Enter two arrays from the user and check whether they are identical.",
+      "source_file": "q-00-16.c",
+      "code": "// Single-Dimensional Arrays -> Q 16 : Enter two arrays from the user and check whether they are identical.\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[5],arr2[5];\n    int s1 = sizeof(arr)/sizeof(arr[0]);\n    int s2 = sizeof(arr2)/sizeof(arr2[0]);\n\n\n    printf(\"Enter for the Array 1 ->\\n\\n\");\n    for (int i = 0; i< s1 ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n\n    printf(\"\\nEnter for the Array 2 ->\\n\\n\");\n    for (int i = 0; i< s2 ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr2[i]);\n    }\n\n    printf(\"\\nArray  1   -> [\");\n    for (int i = 0 ; i <s1 ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nArray  2   -> [\");\n    for (int i = 0 ; i <s2 ; i ++){\n        printf(\"%d,\",arr2[i]);\n    }\n    printf(\"]\\n\");\n\n    int same = 1;\n    for (int i = 0 ; i < s1 ; i++){\n        if (arr[i] != arr2[i]){\n            same = 0;\n            break;\n        }\n    }\n\n    if (same){\n        printf(\"\\nArray 1 and 2 have identical elements \\n\");\n        return 0;\n    }\n    \n    printf(\"\\nArray 1 and 2 Dont have identical elements \\n\");\n    return 0;\n\n}",
+      "code_sha256": "2dd88f94d2b61562e033b4f358c9072af3ab444e87ed038e7ec632ec8f7d09e7",
+      "code_updated_at": "2026-10-23T18:46:05+05:30",
+      "command": "gcc q-00-16.c -o ./bin/q-00-16.out && ./bin/q-00-16.out",
+      "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 12\nEnter the element 2 -> 223\nEnter the element 3 -> 43\nEnter the element 4 -> 64\nEnter the element 5 -> 7\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 12\nEnter the element 2 -> 223\nEnter the element 3 -> 43\nEnter the element 4 -> 64\nEnter the element 5 -> 7\n\nArray  1   -> [12,223,43,64,7,]\n\nArray  2   -> [12,223,43,64,7,]\n\nArray 1 and 2 have identical elements \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T18:46:05+05:30",
+      "updated_at": "2026-10-23T18:46:05+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-17",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T19:03:22+05:30",
+          "command": "gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 3\nEnter the element 3 -> 5\nEnter the element 4 -> 7\nEnter the element 5 -> 9\nEnter the element 6 -> 11\nEnter the element 7 -> 13\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 2\nEnter the element 2 -> 4\nEnter the element 3 -> 6\nEnter the element 4 -> 8\nEnter the element 5 -> 10\nEnter the element 6 -> 12\nEnter the element 7 -> 14\n\nArray  1   -> [1,3,5,7,9,11,13,]\n\nArray  2   -> [2,4,6,8,10,12,14,]\n\nSorted Array -> [2,3,4,5,6,7,8,9,10,11,12,13,0,14,]\n",
+          "exit_code": 0,
+          "code_sha256": "258dfe41695884b276fc26f60201ad62e57dc44f383b77632dc3270b89d81379"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T19:04:43+05:30",
+          "command": "gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out",
+          "mode": "compile-run",
+          "output": "q-00-17.c: In function ‘main’:\nq-00-17.c:88:5: warning: implicit declaration of function ‘mergesort’; did you mean ‘mergeSort’? [-Wimplicit-function-declaration]\n   88 |     mergesort(arr3,0,s3-1);\n      |     ^~~~~~~~~\n      |     mergeSort\n/usr/bin/ld: /tmp/cctsovAj.o: in function `main':\nq-00-17.c:(.text+0x569): undefined reference to `mergesort'\ncollect2: error: ld returned 1 exit status\n",
+          "exit_code": 1,
+          "code_sha256": "12263aafff95461fb3ea2e92cf2213e47a14c17c9afcb6f0c822be1c0336b8f5"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T19:05:10+05:30",
+          "command": "gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 3\nEnter the element 3 -> 5\nEnter the element 4 -> 7\nEnter the element 5 -> 9\nEnter the element 6 -> 11\nEnter the element 7 -> 13\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 2\nEnter the element 2 -> 4\nEnter the element 3 -> 6\nEnter the element 4 -> 8\nEnter the element 5 -> 10\nEnter the element 6 -> 12\nEnter the element 7 -> 14\n\nArray  1   -> [1,3,5,7,9,11,13,]\n\nArray  2   -> [2,4,6,8,10,12,14,]\n\nSorted Array -> [0,2,3,4,5,6,7,8,9,10,11,12,13,14,]\n",
+          "exit_code": 0,
+          "code_sha256": "d34fbcbe8aa2c9c143215443705b24d320f04929bfa36b4a3f20ae30226a4521"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T19:07:27+05:30",
+          "command": "gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out",
+          "mode": "compile-run",
+          "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 3\nEnter the element 3 -> 5\nEnter the element 4 -> 7\nEnter the element 5 -> 9\nEnter the element 6 -> 11\nEnter the element 7 -> 13\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 2\nEnter the element 2 -> 4\nEnter the element 3 -> 6\nEnter the element 4 -> 8\nEnter the element 5 -> 10\nEnter the element 6 -> 12\nEnter the element 7 -> 14\n\nArray  1   -> [1,3,5,7,9,11,13,]\n\nArray  2   -> [2,4,6,8,10,12,14,]\n\nSorted Array -> [1,2,3,4,5,6,7,8,9,10,11,12,13,14,]\n",
+          "exit_code": 0,
+          "code_sha256": "1ca53eee399bb189ed47058f88235e765ef2474100723bbdff4aef5fac19b694"
+        }
+      ],
+      "run_count": 4,
+      "created_at": "2026-10-23T19:03:22+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 17,
+      "question": "Merge two sorted arrays into a single sorted array.",
+      "source_file": "q-00-17.c",
+      "code": "// Single-Dimensional Arrays -> Q 17 : Merge two sorted arrays into a single sorted array.\n\n#include <stdio.h>\n#define SIZE 7\n\nvoid mergearr(int arr[], int u, int l)\n{\n    int mid = (u + l + 1) / 2;\n    int newarr[u - l + 1];\n    int k = 0;\n    int j = mid;\n\n    for (int i = l; i < mid; i++){\n        while (j <= u){\n            if (arr[i] > arr[j]){\n                newarr[k] = arr[j];\n                k++;\n                j++;\n            }\n            else{\n                newarr[k] = arr[i];\n                k++;\n                break;\n            }\n        }\n\n        if (j > u){\n            i++;\n            while (i < mid){\n                newarr[k] = arr[i];\n                k++;\n                i++;\n            }\n            break;\n        }\n    }\n\n    while (j <= u){\n        newarr[k] = arr[j];\n        k++;\n        j++;\n    }\n\n    for (int i = 0; i < u - l + 1; i++){\n        arr[l + i] = newarr[i];\n    }\n}\n\n\nvoid mergesort(int arr[], int l, int u){\n    if (l >= u){\n        return;\n    }\n\n    int mid = (l + u) / 2;\n\n    mergesort(arr, l, mid);\n    mergesort(arr, mid + 1, u);\n\n    mergearr(arr, u, l);\n}\n\n\nint main(){\n\n    int arr[SIZE],arr2[SIZE], arr3[2 * SIZE];\n    int s1 = sizeof(arr)/sizeof(arr[0]);\n    int s2 = sizeof(arr2)/sizeof(arr2[0]);\n    int s3 = sizeof(arr3)/sizeof(arr3[0]);\n\n\n    printf(\"Enter for the Array 1 ->\\n\\n\");\n    for (int i = 0; i< s1 ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n\n    printf(\"\\nEnter for the Array 2 ->\\n\\n\");\n    for (int i = 0; i< s2 ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr2[i]);\n    }\n\n    printf(\"\\nArray  1   -> [\");\n    for (int i = 0 ; i <s1 ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nArray  2   -> [\");\n    for (int i = 0 ; i <s2 ; i ++){\n        printf(\"%d,\",arr2[i]);\n    }\n    printf(\"]\\n\");\n\n    for (int i = 0 ; i <s3 ; i++){\n        if (i <s1){\n            arr3[i] = arr[i];\n            continue;\n        }\n        \n        arr3[i] = arr2[i-s2];\n\n    }\n\n    mergesort(arr3,0,s3-1);\n\n    printf(\"\\nSorted Array -> [\");\n    for (int i = 0 ; i <s3 ; i ++){\n        printf(\"%d,\",arr3[i]);\n    }\n    printf(\"]\\n\");\n\n    return 0;\n\n}",
+      "code_sha256": "1ca53eee399bb189ed47058f88235e765ef2474100723bbdff4aef5fac19b694",
+      "code_updated_at": "2026-10-23T19:07:27+05:30",
+      "command": "gcc q-00-17.c -o ./bin/q-00-17.out && ./bin/q-00-17.out",
+      "output": "Enter for the Array 1 ->\n\nEnter the element 1 -> 1\nEnter the element 2 -> 3\nEnter the element 3 -> 5\nEnter the element 4 -> 7\nEnter the element 5 -> 9\nEnter the element 6 -> 11\nEnter the element 7 -> 13\n\nEnter for the Array 2 ->\n\nEnter the element 1 -> 2\nEnter the element 2 -> 4\nEnter the element 3 -> 6\nEnter the element 4 -> 8\nEnter the element 5 -> 10\nEnter the element 6 -> 12\nEnter the element 7 -> 14\n\nArray  1   -> [1,3,5,7,9,11,13,]\n\nArray  2   -> [2,4,6,8,10,12,14,]\n\nSorted Array -> [1,2,3,4,5,6,7,8,9,10,11,12,13,14,]\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T19:07:27+05:30",
+      "updated_at": "2026-10-23T19:07:27+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-18",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T19:21:04+05:30",
+          "command": "gcc q-00-18.c -o ./bin/q-00-18.out && ./bin/q-00-18.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 342\nEnter the element 2 -> 2\nEnter the element 3 -> 134\nEnter the element 4 -> 133\nEnter the element 5 -> 2\n\nArray      -> [342,2,134,133,2,]\n2 is local minima",
+          "exit_code": 0,
+          "code_sha256": "2116082f5cf00053e7a764f17ef52d46b43f73660de73a3bdc9fab99622f231f"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T19:21:35+05:30",
+          "command": "gcc q-00-18.c -o ./bin/q-00-18.out && ./bin/q-00-18.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "2116082f5cf00053e7a764f17ef52d46b43f73660de73a3bdc9fab99622f231f"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-23T19:21:04+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 18,
+      "question": "Find the local minima in an array.",
+      "source_file": "q-00-18.c",
+      "code": "// Single-Dimensional Arrays -> Q 18 : Find the local minima in an array.\n\n#include <stdio.h>\nint main(){\n\n    int arr[5];\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray      -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    for (int i = 1 ; i <s-1 ; i++){\n        if (arr[i] < arr[i-1] && arr[i] < arr[i+1]){\n            printf(\"%d is local minima\",arr[i]);\n        }\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "2116082f5cf00053e7a764f17ef52d46b43f73660de73a3bdc9fab99622f231f",
+      "code_updated_at": "2026-10-23T19:21:04+05:30",
+      "command": "gcc q-00-18.c -o ./bin/q-00-18.out && ./bin/q-00-18.out",
+      "output": "Enter the element 1 -> ^C",
+      "exit_code": 130,
+      "last_run_at": "2026-10-23T19:21:35+05:30",
+      "updated_at": "2026-10-23T19:21:35+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-00-19",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T19:21:38+05:30",
+          "command": "gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out",
+          "mode": "compile-run",
+          "output": "wEnter the element 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "48429260226c70df87fc386cb0d6c1dcec1b0b84c132b76d872d02c5b70113c3"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T19:21:46+05:30",
+          "command": "gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 1\nEnter the element 2 -> 23\nEnter the element 3 -> 22\nEnter the element 4 -> 4\nEnter the element 5 -> 323\n\nArray      -> [1,23,22,4,323,]\n23 is local Maxima",
+          "exit_code": 0,
+          "code_sha256": "48429260226c70df87fc386cb0d6c1dcec1b0b84c132b76d872d02c5b70113c3"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T19:21:55+05:30",
+          "command": "gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 3\nEnter the element 2 -> 23233\nEnter the element 3 -> 3\nEnter the element 4 -> 3232\nEnter the element 5 -> 5\n\nArray      -> [3,23233,3,3232,5,]\n23233 is local Maxima3232 is local Maxima",
+          "exit_code": 0,
+          "code_sha256": "48429260226c70df87fc386cb0d6c1dcec1b0b84c132b76d872d02c5b70113c3"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T19:22:06+05:30",
+          "command": "gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out",
+          "mode": "compile-run",
+          "output": "Enter the element 1 -> 13\nEnter the element 2 -> 324\nEnter the element 3 -> 42\nEnter the element 4 -> 3232\nEnter the element 5 -> 1\n\nArray      -> [13,324,42,3232,1,]\n324 is local Maxima\n3232 is local Maxima\n",
+          "exit_code": 0,
+          "code_sha256": "bea0706f4a1c6e95030f124054dac57a7750cc59f2ce7471da53ab3df8cdecbe"
+        }
+      ],
+      "run_count": 4,
+      "created_at": "2026-10-23T19:21:38+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 19,
+      "question": "Find the local maxima in an array.",
+      "source_file": "q-00-19.c",
+      "code": "// Single-Dimensional Arrays -> Q 19 : Find the local maxima in an array.\n\n#include <stdio.h>\nint main(){\n\n    int arr[5];\n    int s = sizeof(arr)/sizeof(arr[0]);\n\n\n    for (int i = 0; i< s ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray      -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    for (int i = 1 ; i <s-1 ; i++){\n        if (arr[i] > arr[i-1] && arr[i] > arr[i+1]){\n            printf(\"%d is local Maxima\\n\",arr[i]);\n        }\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "bea0706f4a1c6e95030f124054dac57a7750cc59f2ce7471da53ab3df8cdecbe",
+      "code_updated_at": "2026-10-23T19:22:06+05:30",
+      "command": "gcc q-00-19.c -o ./bin/q-00-19.out && ./bin/q-00-19.out",
+      "output": "Enter the element 1 -> 13\nEnter the element 2 -> 324\nEnter the element 3 -> 42\nEnter the element 4 -> 3232\nEnter the element 5 -> 1\n\nArray      -> [13,324,42,3232,1,]\n324 is local Maxima\n3232 is local Maxima\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T19:22:06+05:30",
+      "updated_at": "2026-10-23T19:22:06+05:30",
+      "output_stale": false
     }
   ]
 }
