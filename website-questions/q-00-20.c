@@ -6,6 +6,7 @@ int main(){
 
     int arr[10] = {10,3,5,32,3,3,4,53,42,9} ;
     int s = sizeof(arr)/sizeof(arr[0]);
+    int volume = 0 ;
 
     printf("\nArray      -> [");
     for (int i = 0 ; i <s ; i ++){
@@ -14,36 +15,52 @@ int main(){
     printf("]\n");
 
 
-    int lft = 0;
-    int ryt = s-1;
-    int lmax,volume = 0;
-    int first = 1;
 
-    for (int i = 1 ; i < s-1 ; i++){
-        if (arr[i] > arr[i-1] && arr[i] > arr[i+1]){
-            lmax = i;
-            continue;
-        }
+    /*
+        FORMULA:
 
-        if (lft < lmax){
-            if (first){
-            lft = lmax;
-            first = 0;
-            continue;}
+        water[i] = min(lmax, rmax) - arr[i]
 
-            for (int j = lft + 1 ; j < i ; j++){
-                volume += (arr[lft] -  arr[j] ) * 1 * 1; // for voluume
+        lmax = Maximum height from index 0 to i.
+        rmax = Maximum height from index i to s-1.
+        arr[i] = Height of the current bar.
+
+        We use the smaller maximum because water spills
+        over the shorter boundary.
+
+        Total water = Sum of water[i] for all indices.
+    */
+
+
+    for (int i = 0; i < s; i++) {
+        int lmax = arr[0];
+        int rmax = arr[s - 1];
+
+        // maximum on the left
+        for (int j = 0; j <= i; j++) {
+            if (arr[j] > lmax) {
+                lmax = arr[j];
             }
-            lft = lmax;
+        }
 
-        }
-        else {
-            for (int j = lft + 1 ; j < i ; j++){
-                volume += (arr[lft] -  arr[j] ) * 1 * 1; // for voluume
+        // maximum  on the right
+        for (int j = i; j < s; j++) {
+            if (arr[j] > rmax) {
+                rmax = arr[j];
             }
-            lft = lmax;
         }
+
+        // Water level = minimum of left and right 
+        int water_level = (lmax < rmax) ? lmax : rmax;
+
+        // Water trapped above the current bar
+        int water = water_level - arr[i];
+        volume += water;
+
+        printf("Index %d | Height: %d | Lmax: %d | Rmax: %d | Water: %d\n",i, arr[i], lmax, rmax, water);
     }
+
+    printf("\nTotal trapped water -> %d \n", volume);
 
     return 0;
 }

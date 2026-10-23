@@ -858,6 +858,36 @@
       "last_run_at": "2026-10-23T19:22:06+05:30",
       "updated_at": "2026-10-23T19:22:06+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-00-20",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T21:38:50+05:30",
+          "command": "gcc q-00-20.c -o ./bin/q-00-20.out && ./bin/q-00-20.out",
+          "mode": "compile-run",
+          "output": "\nArray      -> [10,3,5,32,3,3,4,53,42,9,]\nIndex 0 | Height: 10 | Lmax: 10 | Rmax: 53 | Water: 0\nIndex 1 | Height: 3 | Lmax: 10 | Rmax: 53 | Water: 7\nIndex 2 | Height: 5 | Lmax: 10 | Rmax: 53 | Water: 5\nIndex 3 | Height: 32 | Lmax: 32 | Rmax: 53 | Water: 0\nIndex 4 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29\nIndex 5 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29\nIndex 6 | Height: 4 | Lmax: 32 | Rmax: 53 | Water: 28\nIndex 7 | Height: 53 | Lmax: 53 | Rmax: 53 | Water: 0\nIndex 8 | Height: 42 | Lmax: 53 | Rmax: 42 | Water: 0\nIndex 9 | Height: 9 | Lmax: 53 | Rmax: 9 | Water: 0\n\nTotal trapped water -> 98 \n",
+          "exit_code": 0,
+          "code_sha256": "7ae5fb5dbecb7ae76ac0559129732d7bcb7e10872ea74b5d9247bcab8afa53c5"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-23T21:38:50+05:30",
+      "topic": "Single-Dimensional Arrays",
+      "topic_index": 0,
+      "question_number": 20,
+      "question": "**Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.",
+      "source_file": "q-00-20.c",
+      "code": "// Single-Dimensional Arrays -> Q 20 : **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.\n\n#include <stdio.h>\n\nint main(){\n\n    int arr[10] = {10,3,5,32,3,3,4,53,42,9} ;\n    int s = sizeof(arr)/sizeof(arr[0]);\n    int volume = 0 ;\n\n    printf(\"\\nArray      -> [\");\n    for (int i = 0 ; i <s ; i ++){\n        printf(\"%d,\",arr[i]);\n    }\n    printf(\"]\\n\");\n\n\n\n    /*\n        FORMULA:\n\n        water[i] = min(lmax, rmax) - arr[i]\n\n        lmax = Maximum height from index 0 to i.\n        rmax = Maximum height from index i to s-1.\n        arr[i] = Height of the current bar.\n\n        We use the smaller maximum because water spills\n        over the shorter boundary.\n\n        Total water = Sum of water[i] for all indices.\n    */\n\n\n    for (int i = 0; i < s; i++) {\n        int lmax = arr[0];\n        int rmax = arr[s - 1];\n\n        // maximum on the left\n        for (int j = 0; j <= i; j++) {\n            if (arr[j] > lmax) {\n                lmax = arr[j];\n            }\n        }\n\n        // maximum  on the right\n        for (int j = i; j < s; j++) {\n            if (arr[j] > rmax) {\n                rmax = arr[j];\n            }\n        }\n\n        // Water level = minimum of left and right \n        int water_level = (lmax < rmax) ? lmax : rmax;\n\n        // Water trapped above the current bar\n        int water = water_level - arr[i];\n        volume += water;\n\n        printf(\"Index %d | Height: %d | Lmax: %d | Rmax: %d | Water: %d\\n\",i, arr[i], lmax, rmax, water);\n    }\n\n    printf(\"\\nTotal trapped water -> %d \\n\", volume);\n\n    return 0;\n}\n",
+      "code_sha256": "7ae5fb5dbecb7ae76ac0559129732d7bcb7e10872ea74b5d9247bcab8afa53c5",
+      "code_updated_at": "2026-10-23T21:38:50+05:30",
+      "command": "gcc q-00-20.c -o ./bin/q-00-20.out && ./bin/q-00-20.out",
+      "output": "\nArray      -> [10,3,5,32,3,3,4,53,42,9,]\nIndex 0 | Height: 10 | Lmax: 10 | Rmax: 53 | Water: 0\nIndex 1 | Height: 3 | Lmax: 10 | Rmax: 53 | Water: 7\nIndex 2 | Height: 5 | Lmax: 10 | Rmax: 53 | Water: 5\nIndex 3 | Height: 32 | Lmax: 32 | Rmax: 53 | Water: 0\nIndex 4 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29\nIndex 5 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29\nIndex 6 | Height: 4 | Lmax: 32 | Rmax: 53 | Water: 28\nIndex 7 | Height: 53 | Lmax: 53 | Rmax: 53 | Water: 0\nIndex 8 | Height: 42 | Lmax: 53 | Rmax: 42 | Water: 0\nIndex 9 | Height: 9 | Lmax: 53 | Rmax: 9 | Water: 0\n\nTotal trapped water -> 98 \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-23T21:38:50+05:30",
+      "updated_at": "2026-10-23T21:38:50+05:30",
+      "output_stale": false
     }
   ]
 }

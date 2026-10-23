@@ -1749,4 +1749,119 @@ Array      -> [13,324,42,3232,1,]
 <!-- qrun:field-end output id="q-00-19" -->
 <!-- qrun:entry-end id="q-00-19" -->
 
+
+<!-- qrun:entry-start id="q-00-20" -->
+
+<!-- qrun:field-start question id="q-00-20" -->
+
+## Q 20 : **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.
+
+<!-- qrun:field-end question id="q-00-20" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-00-20" -->
+
+```c
+// Single-Dimensional Arrays -> Q 20 : **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.
+
+#include <stdio.h>
+
+int main(){
+
+    int arr[10] = {10,3,5,32,3,3,4,53,42,9} ;
+    int s = sizeof(arr)/sizeof(arr[0]);
+    int volume = 0 ;
+
+    printf("\nArray      -> [");
+    for (int i = 0 ; i <s ; i ++){
+        printf("%d,",arr[i]);
+    }
+    printf("]\n");
+
+
+
+    /*
+        FORMULA:
+
+        water[i] = min(lmax, rmax) - arr[i]
+
+        lmax = Maximum height from index 0 to i.
+        rmax = Maximum height from index i to s-1.
+        arr[i] = Height of the current bar.
+
+        We use the smaller maximum because water spills
+        over the shorter boundary.
+
+        Total water = Sum of water[i] for all indices.
+    */
+
+
+    for (int i = 0; i < s; i++) {
+        int lmax = arr[0];
+        int rmax = arr[s - 1];
+
+        // maximum on the left
+        for (int j = 0; j <= i; j++) {
+            if (arr[j] > lmax) {
+                lmax = arr[j];
+            }
+        }
+
+        // maximum  on the right
+        for (int j = i; j < s; j++) {
+            if (arr[j] > rmax) {
+                rmax = arr[j];
+            }
+        }
+
+        // Water level = minimum of left and right 
+        int water_level = (lmax < rmax) ? lmax : rmax;
+
+        // Water trapped above the current bar
+        int water = water_level - arr[i];
+        volume += water;
+
+        printf("Index %d | Height: %d | Lmax: %d | Rmax: %d | Water: %d\n",i, arr[i], lmax, rmax, water);
+    }
+
+    printf("\nTotal trapped water -> %d \n", volume);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-00-20" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-00-20" -->
+
+
+
+<!-- qrun:field-end freshness id="q-00-20" -->
+
+<!-- qrun:field-start output id="q-00-20" -->
+
+```text
+$ gcc q-00-20.c -o ./bin/q-00-20.out && ./bin/q-00-20.out
+
+Array      -> [10,3,5,32,3,3,4,53,42,9,]
+Index 0 | Height: 10 | Lmax: 10 | Rmax: 53 | Water: 0
+Index 1 | Height: 3 | Lmax: 10 | Rmax: 53 | Water: 7
+Index 2 | Height: 5 | Lmax: 10 | Rmax: 53 | Water: 5
+Index 3 | Height: 32 | Lmax: 32 | Rmax: 53 | Water: 0
+Index 4 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29
+Index 5 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29
+Index 6 | Height: 4 | Lmax: 32 | Rmax: 53 | Water: 28
+Index 7 | Height: 53 | Lmax: 53 | Rmax: 53 | Water: 0
+Index 8 | Height: 42 | Lmax: 53 | Rmax: 42 | Water: 0
+Index 9 | Height: 9 | Lmax: 53 | Rmax: 9 | Water: 0
+
+Total trapped water -> 98 
+```
+
+<!-- qrun:field-end output id="q-00-20" -->
+<!-- qrun:entry-end id="q-00-20" -->
+
 <!-- qrun:topic-end id="topic-00" -->
