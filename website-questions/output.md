@@ -7521,3 +7521,3969 @@ Do you want to continue ? (Y/N)N
 <!-- qrun:entry-end id="q-04-06" -->
 
 <!-- qrun:topic-end id="topic-04" -->
+
+<!-- qrun:topic-start id="topic-06" -->
+
+<!-- qrun:field-start topic id="topic-06" -->
+
+# Linked List
+
+<!-- qrun:field-end topic id="topic-06" -->
+
+<!-- qrun:entry-start id="q-06-01" -->
+
+<!-- qrun:field-start question id="q-06-01" -->
+
+## Q 01 : Implement a singly linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+<!-- qrun:field-end question id="q-06-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-06-01" -->
+
+```c
+// Linked List -> Q 01 : Implement a singly linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+// |b| -> | | -> | | -> | | -> |e|
+//  ^                           ^
+//  |                           |
+// beg                         end
+
+
+int fn_size(struct node * beg,struct node *end);
+
+
+int insert_at_beg(struct node ** beg,struct node ** end,int data){ 
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if ((*beg) == NULL){
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+    // putting a new node nxy ptr to beg and theb beg = new node
+    new_node->nxt_ptr = (*beg);
+    (*beg) = new_node;
+    
+    
+    return 1;
+}
+
+
+int insert_at_end(struct node ** end,struct node ** beg,int data){
+    
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+    
+    if (((*end) == NULL) && ((*beg) == NULL)) {
+    (*beg) = new_node;
+    (*end) = new_node;  
+        return -1;
+    }
+    
+    (*end)->nxt_ptr = new_node;
+    (*end) = new_node;
+    return 1;
+}
+
+
+
+int insert_at_pos(struct node ** end,struct node ** beg,int data,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end)) ;
+    
+    if (!((pos>=0) && (pos<=size))){return 0;}
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+    
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node->nxt_ptr = (*beg);
+        (*beg) = new_node;
+        return 1;
+    }
+
+    // if insert at end
+    if (pos == size){
+        (*end)->nxt_ptr = new_node;
+        (*end) = new_node;
+        return -2;
+    }
+    
+    struct node * temp = (*beg);
+    for (n;n<pos - 1;n++){
+        temp = temp->nxt_ptr;
+    }
+    new_node->nxt_ptr = temp->nxt_ptr;
+    temp->nxt_ptr = new_node;
+    return 1;
+
+}
+
+
+int delete_at_beg(struct node ** beg,struct node ** end){
+    
+    if ((*beg) == NULL){
+        return 0;
+    }
+
+    if (((*beg) == (*end)) && ((*beg)->nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*beg)->nxt_ptr;
+    free((*beg));
+    (*beg) = temp;
+    return 1;
+}
+
+
+
+int delete_at_end(struct node ** end,struct node ** beg){
+    if ((*end) == NULL){
+        return 0;
+    }
+    if (((*beg) == (*end)) && ((*beg)->nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+
+    struct node * pre = (*beg);
+    while(pre->nxt_ptr!=(*end)){
+        // pre = temp;
+        pre = pre->nxt_ptr;
+    }
+
+    pre->nxt_ptr = NULL;
+    free((*end));
+    (*end) = pre;
+    return 1;
+}
+
+//so the thing if if size is 5 the
+// index rtange os 0 - 4 , if i wnart to add at 2 , then i need
+// the temp to hold the ptr of 1st indec becasue it have the next and next ; so i can insert the eleemnt 
+//at that poistion change the address of n-1 index and the new node containing the ttemp->nxt_ptr ; FOR deletion we 
+//also need the temp to has address of n-1 , temp will have to first get temp->nxtptr->nxtprt address and teh copy it to the temp nxtptr 
+
+
+// IMPLEEMTAION
+
+// but in fucntion impleemtion i did something weired insert utpo pre , delete upto the actual value then also trcked the pre 
+
+
+int delete_at_pos(struct node ** end,struct node ** beg,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end));
+    
+    if (!((pos>=0) && (pos<=size))){return 0;}
+    
+    if ((size ==0)){
+        return 0;
+    }
+    
+    if (pos == 0){
+        return (delete_at_beg(beg, end) == -1) ? -1 : 1;
+    }
+    if (pos == size - 1){
+        return (delete_at_end(beg, end) == -1) ? -1 : 1;
+    }
+    
+    struct node * temp = (*beg);
+    struct node * pre = (*beg);
+    for (n;n<pos;n++){
+        pre=temp;
+        temp=temp->nxt_ptr;
+    }
+    pre->nxt_ptr = temp->nxt_ptr;
+    free(temp);
+    return 1;
+}
+
+
+int search(struct node * end,struct node * beg,int data){
+    if ((beg == NULL) && (end == beg)){
+        return -2;
+    }
+    int i = 0;
+    while(beg!=NULL){
+        if (beg->data == data){
+            return i;
+        }
+        i++;
+        beg = beg->nxt_ptr;
+    }
+    return -1;
+}
+
+
+int sort(struct node **beg,struct node **end){
+
+    int s = fn_size(*beg,*end);
+    if (s==0){return 0;}
+    int * arr = (int *)(malloc(sizeof(int)*s));
+
+    struct node * temp = (*beg);
+    for (int i = 0 ; i <s ; i++){
+        arr[i]=temp->data;
+        temp = temp->nxt_ptr;
+    }
+    temp = (*beg);
+    
+    //INSETION SORT 
+    
+    for (int i = 0 ; i < s - 1 ; i ++ ){
+        for (int j = i+1 ; j > 0 ; j--){
+            if (arr[j]<arr[j-1]){
+                arr[j]=arr[j]+arr[j-1];
+				arr[j-1]=arr[j]-arr[j-1];
+				arr[j]=arr[j]-arr[j-1];
+			}
+            else{break;}
+        }
+    }
+    
+    for (int i = 0 ; i <s ; i++){
+        temp->data=arr[i];
+        temp = temp->nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+}
+
+
+void show(struct node * beg,struct node * end){
+    if ((end==NULL) && (end == beg)){
+        printf("NO DATA");
+        return;
+    }
+    
+    if ((end == beg) && (end->nxt_ptr == NULL)){
+        printf("|b>  %3d  <e|",beg->data);
+        return;
+    }
+    
+    int i = 0;
+    
+    printf("|b>   %3d   <%d|",beg->data,i);
+    beg=beg->nxt_ptr;
+    i++;
+    while(beg->nxt_ptr!=NULL){
+        printf("| >   %3d   <%d|", beg->data,i);
+        beg = beg->nxt_ptr;
+        i++;
+    }
+    printf("|e>   %3d   <%d|",beg->data,i);
+    return;
+}
+
+
+int fn_size(struct node * beg,struct node * end){
+    int i = 0;
+    if ((end==NULL) && (end == beg)){
+        return i;
+    }
+    while(beg!=NULL){
+        i++;
+        beg = beg->nxt_ptr;
+    }
+    return i;
+}
+
+
+int is_empty(struct node * beg,struct node * end){
+    if (fn_size(beg,end) == 0){return 1;}
+    return 0;
+}
+
+
+int clear_ll(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) && ((*beg) == (*end))){
+        return 0;
+    }
+
+    struct node * temp ;
+    while((*beg)!= NULL){
+        temp = (*beg);
+        (*beg) = (*beg)->nxt_ptr;
+        free(temp);
+    }
+    (*beg) = NULL;
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * beg = NULL;
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        printf("12 : sort\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number insert at beg : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_beg(&beg,&end,input_val);
+            if (out == 1)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+        case 2:
+            printf("Enter the number insert at end : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_end(&end,&beg,input_val);
+            if (out == 1)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+            
+
+        case 3:
+            out = delete_at_beg(&beg,&end);
+            if (out == 1)
+                printf("Deleted value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Linked List Reset \n");
+            break;
+        case 4:
+            out = delete_at_end(&end,&beg);
+            if (out == 1)
+                printf("Deleted value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Linked List Reset \n");
+            break;
+
+        case 5:
+            printf("Enter the number insert : ");
+            scanf("%d", &input_val);
+            printf("Enter the position to insert  : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&end,&beg,input_val,pos);
+            if (out == 1)
+                printf("%d inserted at %d\n", input_val,pos);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -2)
+                printf("%d inserted at end \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+
+        case 6:
+            show(beg,end);
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &input_val);
+
+            out = delete_at_pos(&end,&beg,input_val);
+            if (out == 1)
+                printf("%d Deleted \n", input_val);
+            else if (out == -1)
+                printf("%d deleted the last position \n", input_val);
+            else if (out == -2)
+                printf("deleted the beg eleement \n");
+            else
+                printf("Empty \n");
+            break;
+
+        case 7:
+            out = is_empty(beg,end);
+            if (out == 1)
+                printf("Empty\n");
+            else
+                printf("Not empty \n");
+            break;
+
+
+
+        case 8:
+            show(beg,end);
+            break;
+            
+            case 9:
+            printf("%d is the size of Linked List ", fn_size(beg,end));
+            break;
+            
+            case 10:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(end,beg,input_val);
+            if (out == -2)
+            printf("No data  \n");
+            else if (out == -1)
+            printf("Element Not Found\n");
+            else
+            printf("Element Found at %d \n",out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&beg,&end);
+            if (out == 1)
+                printf("Cleared \n");
+            else
+                printf("Cant Clear \n");
+            break;
+
+                
+                case 12:
+                if (is_empty(beg,end) != 1){show(beg,end);}
+                    out = sort(&beg,&end);
+                if (out == 1){
+                    printf("Sorted\n");
+                    show(beg,end);}
+                else
+                    printf("Cant Sort \n");
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-06-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-06-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-06-01" -->
+
+<!-- qrun:field-start output id="q-06-01" -->
+
+```text
+$ gcc q-06-01.c -o ./bin/q-06-01.out && ./bin/q-06-01.out
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 12
+12 inserted and new linked list created 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>   12  <e|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 2
+Enter the number insert at end : 244
+244 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    12   <0||e>   244   <1|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 5
+Enter the number insert : 4435
+Enter the position to insert  : 1
+4435 inserted at 1
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    12   <0|| >   4435   <1||e>   244   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 7
+Not empty 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 9
+3 is the size of Linked List 
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 10
+Enter the element to search : 12
+Element Found at 0 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 12
+|b>    12   <0|| >   4435   <1||e>   244   <2|Sorted
+|b>    12   <0|| >   244   <1||e>   4435   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 3
+Deleted value
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>   244   <0||e>   4435   <1|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 4
+Deleted value
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>  244  <e|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 6
+|b>  244  <e|
+Enter the position to delete : 0
+0 deleted the last position 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+NO DATA
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 21313
+21313 inserted and new linked list created 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 34
+34 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 33
+33 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 435
+435 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>   435   <0|| >    33   <1|| >    34   <2||e>   21313   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 11
+Cleared 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+NO DATA
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-06-01" -->
+<!-- qrun:entry-end id="q-06-01" -->
+
+
+<!-- qrun:entry-start id="q-06-02" -->
+
+<!-- qrun:field-start question id="q-06-02" -->
+
+## Q 02 : Implement a singly circular linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+<!-- qrun:field-end question id="q-06-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-06-02" -->
+
+```c
+// Linked List -> Q 02 : Implement a singly circular linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+// CIRCULAR AND SIMPLEY LINEKLD LIST 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+//
+// | | -> | | -> | | -> | | -> |e|
+//  ^                           ^
+//  | <----------------------- |
+// beg                        end
+//
+
+int fn_size(struct node *end);
+
+int insert_at_pos(struct node ** end,int data,int pos){
+
+    int size = fn_size((*end));
+    if (!((pos>=0) && (pos<=size))){return 0;}
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*end) = new_node;
+        (*end)->nxt_ptr = new_node;
+        return -1;    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node->nxt_ptr = (*end)->nxt_ptr;
+        (*end)->nxt_ptr = new_node;
+        return -2;
+    }
+
+    // if insert at end
+    if (pos == size){
+        new_node->nxt_ptr = (*end)->nxt_ptr; // adding the beg to new node
+        (*end)->nxt_ptr = new_node;
+        (*end) = new_node; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)->nxt_ptr;
+    for (int n= 0;n<pos-1;n++){ // we are doing ti because we havin temp hs nxtptr so like if we want to insert at 3 , 
+        // we need to have the the temp ahving the address or 2nd pos 
+        // because 2nd will have the addfress of 3rd pos waht er want to modify ,  
+        // it will run for 0,1 
+        // after 0 the temp = 1 , temp->nxt_ptr = 2
+        // after 0 the temp = 2 , temp->nxt_ptr = 3
+        // so we have to loop it pos -2 times as we are doing by -1 and <
+
+        temp = temp->nxt_ptr;
+    }
+    new_node->nxt_ptr= temp->nxt_ptr; // so we are making new node nxt ptr to the prev3 pos node
+    temp->nxt_ptr = new_node; // and then updating it 
+    return 1;
+}
+
+
+int delete_at_pos(struct node ** end,int pos){
+
+    int size = fn_size((*end));
+    if (size == 0){return -1;} //if empty
+    if (!((pos>=0) && (pos<size))){return 0;} // not valid pos
+
+    if(size == 1){ //if one eleemnt only reset
+        free((*end));
+        (*end) =NULL;
+        return -4;
+    }
+
+    if (pos==0){ //deleted beg
+        struct node * temp = (*end)->nxt_ptr; // beg
+        (*end)->nxt_ptr = temp->nxt_ptr; // updating the new beg
+        free(temp); //delete the beg
+        return -2;
+    }
+
+
+    if (pos==size-1){//delete at end
+        struct node * temp = (*end)->nxt_ptr; //beg
+        while(temp->nxt_ptr!=(*end)){ //traverse upto end - 1 node 
+            temp=temp->nxt_ptr;
+        }
+        temp->nxt_ptr = (*end)->nxt_ptr; // end - 1 node ->nxt_ptr = beg 
+        free((*end)); //free end
+        (*end) = temp; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)->nxt_ptr; // beg
+    for(int i=0;i<pos-1;i++){ // upto pos -2 so  temp has ptr to pos node -1 and its nxtptr has the posptr  
+        temp=temp->nxt_ptr;
+    }
+    // temp->nxt_ptr = temp->nxt_ptr->nxt_ptr ; we cant do this what if we had a while loop because we cant determin whetehr the nxt prt has a valid node or not
+    //but beacuse of the size -1 conndtion it is granteed that temp-nt ptr has a node 
+    struct node * temp2 = temp->nxt_ptr;
+    temp->nxt_ptr = temp->nxt_ptr->nxt_ptr;
+    free(temp2);
+    return 1;
+
+}
+
+
+int fn_size(struct node *end){
+    if (end == NULL){return 0;}
+    int i = 0;
+    struct node * temp = end->nxt_ptr;
+
+    do {
+        i++;
+        temp=temp->nxt_ptr;
+    }
+    while(temp!=end->nxt_ptr);
+    return i;
+}
+
+
+int search(struct node * end,int data){
+    if (end == NULL){
+        return -2;
+    }
+    int i=0;
+    struct node * temp = end->nxt_ptr;
+    // if (temp->data == data){ // we cna have do while here 
+    //         return i;
+    //     }
+    // temp=temp->nxt_ptr;
+    // i++;
+    // while(temp != (end->nxt_ptr)){
+    //     if (temp->data == data){
+    //         return i;
+    //     }
+    //     i++;
+    //     temp=temp->nxt_ptr;
+    // }
+
+
+    do {
+        if (temp->data == data) {
+            return i;
+        }
+
+        temp = temp->nxt_ptr;
+        i++;
+
+    } while (temp != end->nxt_ptr);
+
+    return -1;
+
+}
+
+
+int sort(struct node **end){
+
+    int s = fn_size(*end);
+    if (s == 0){return 0;}// if size == 0
+    int * arr = (int *)(malloc(sizeof(int)*s));
+    if (arr == NULL){return 0;} // if malloc faisl
+
+    struct node * temp = (*end)->nxt_ptr;
+    for (int i = 0; i<s ; i++){
+        arr[i]=temp->data;
+        temp=temp->nxt_ptr;
+    }
+    temp=(*end)->nxt_ptr; //for reenter the sorted values in same ll
+
+    for (int i = 0; i < s - 1; i++) {
+        for (int j = i + 1; j > 0; j--) {   
+            if (arr[j] < arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }}
+
+    for(int i =0;i<s;i++){ //updating sorted value in the same ll
+        temp->data = arr[i];
+        temp=temp->nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+}
+
+void show(struct node * end){
+    if ((end==NULL)){
+        printf("NO DATA");
+        return;
+    }
+    
+    struct node * beg = end->nxt_ptr;
+    if ((end == beg)){
+        printf("|b>  %3d  <e|",beg->data);
+        return;
+    }
+    
+    int i = 0;
+    printf("|b>   %3d   <%d|",beg->data,i); // first node 
+    beg=beg->nxt_ptr;
+    i++;
+    while(beg->nxt_ptr!=end->nxt_ptr){ // will work last node - 1
+        printf("| >   %3d   <%d|", beg->data,i);
+        beg = beg->nxt_ptr;
+        i++;
+    }
+    printf("|e>   %3d   <%d|",beg->data,i); // last node 
+    return;
+}
+
+
+int is_empty(struct node * end){
+    if (fn_size(end) == 0){return 1;}
+    return 0;
+}
+
+int clear_ll(struct node ** end){
+    if ((*end) == NULL){return 0;}
+    struct node * stop = (*end);        
+    struct node * curr = stop->nxt_ptr; 
+    struct node * temp;
+
+    while (curr != stop){               
+        temp = curr;
+        curr = curr->nxt_ptr;
+        free(temp);
+    }
+    free(stop);                         
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        printf("12 : sort\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number insert at beg : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,0); //inser at beg
+            if (out == -2)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+        case 2:
+            printf("Enter the number insert at end : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,fn_size(end)); //insert at end
+            if (out == -3)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+            
+
+        case 3:
+            out = delete_at_pos(&end,0); //deelte at beg
+            if (out == 1) // sucess
+                printf("Deleted value at beg\n");
+            else if (out == -1) // no data
+                printf("No Data \n");
+            else if(out == -4) // reset the ll if one eleemt only
+                printf("Linked List Reset \n");
+            break;
+
+
+        case 4:
+            out = delete_at_pos(&end,fn_size(end));//delete at end
+            if (out == -3) //sucess
+                printf("Deleted value at end\n");
+            else if (out == -1) //no data 
+                printf("No Data \n");
+            else if (out == -4)//reset if only one eleement
+                printf("Linked List Reset \n");
+            break;
+
+        case 5:
+            printf("Enter the number insert : ");
+            scanf("%d", &input_val);
+            printf("Enter the position to insert  : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&end,input_val,pos);
+            if (out == 1)
+                printf("%d inserted at %d\n", input_val,pos);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -2)
+                printf("%d inserted at beg \n", input_val);
+            else if (out == -3)
+                printf("%d inserted at end \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+
+        case 6:
+            show(end);
+            out=is_empty(end);
+            if (out == 1){break;}
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &input_val);
+
+            out = delete_at_pos(&end,input_val);
+            if (out == 1)
+                printf("%d Deleted \n", input_val);
+            else if (out == -1)
+                printf("no data \n");//if no data
+            else if (out == -2)
+                printf("%d deleted the beg \n", input_val);
+            else if (out == -3)
+                printf("deleted the end \n");
+            else if (out == -4)
+                printf("Resseted the ll\n"); // if onlu one eleemt
+            else
+                printf("Empty \n");
+            break;
+
+        case 7:
+            out = is_empty(end);
+            if (out == 1)
+                printf("Empty\n");
+            else
+                printf("Not empty \n");
+            break;
+
+
+        case 8:
+            show(end);
+            break;
+            
+            case 9:
+            printf("%d is the size of Linked List ", fn_size(end));
+            break;
+            
+            case 10:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(end,input_val);
+            if (out == -2)
+            printf("No data  \n");
+            else if (out == -1)
+            printf("Element Not Found\n");
+            else
+            printf("Element Found at %d \n",out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&end);
+            if (out == 1)
+                printf("Cleared \n");
+            else
+                printf("Already empty \n");
+            break;
+
+                
+                case 12:
+                if (is_empty(end) != 1){show(end);}
+
+                out = sort(&end);
+
+                if (out == 1){
+                    printf("\nSorted\n");
+                    show(end);}
+                else
+                    printf("Cant Sort \n");
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-06-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-06-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-06-02" -->
+
+<!-- qrun:field-start output id="q-06-02" -->
+
+```text
+$ gcc q-06-02.c -o ./bin/q-06-02.out && ./bin/q-06-02.out
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 244
+244 inserted and new linked list created 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 2
+Enter the number insert at end : 355
+355 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 12
+12 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    12   <0|| >   244   <1||e>   355   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 5
+Enter the number insert : 1
+Enter the position to insert  : 50
+cant insert
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    12   <0|| >   244   <1||e>   355   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 3
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>   244   <0||e>   355   <1|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 4
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>   244   <0||e>   355   <1|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 7
+Not empty 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 9
+2 is the size of Linked List 
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 10
+Enter the element to search : 244
+Element Found at 0 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 34
+34 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 56
+56 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    56   <0|| >    34   <1|| >   244   <2||e>   355   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 12
+|b>    56   <0|| >    34   <1|| >   244   <2||e>   355   <3|
+Sorted
+|b>    34   <0|| >    56   <1|| >   244   <2||e>   355   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 11
+Cleared 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+NO DATA
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-06-02" -->
+<!-- qrun:entry-end id="q-06-02" -->
+
+
+<!-- qrun:entry-start id="q-06-03" -->
+
+<!-- qrun:field-start question id="q-06-03" -->
+
+## Q 03 : Implement a doubly linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+<!-- qrun:field-end question id="q-06-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-06-03" -->
+
+```c
+// Linked List -> Q 03 : Implement a doubly linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+#include <stdio.h>
+#include<stdlib.h>
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+    struct node * nxt_ptr;
+}; // doubly linked list node 
+
+// |beg | -> | | -> | | -> | | -> |NULL|
+// |NULL| <- | | <- | | <- | | <- |end |
+//  ^                           ^
+//  |                           |
+// beg                         end
+
+
+// size fn 
+
+int fn_size(struct node * beg, struct node * end){
+    if ((beg)==NULL && (end)==NULL){
+        return 0;
+    } // size is zero 
+    int i = 0;
+    while(beg!=NULL){
+        i++;
+        beg=beg->nxt_ptr;
+    }
+    return i;
+}
+
+
+// things to manage : size = 0,1 ; 
+
+// 1. insert at 0,end when size = 0 ; 
+// 2. insert at 0,end ; 
+// 3. insert at pos ; 
+// 4. insert at pos when s = 0; 
+// 5. is malloc working ; 
+// 6. insert at beg and end when size =! 0 , 1
+
+int  insert_at_pos(struct node ** beg,struct node ** end,int data,int pos){
+ 
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+
+    new_node->data = data;
+    new_node->pre_ptr = NULL;
+    new_node->nxt_ptr = NULL;
+
+    int s = fn_size(*beg,*end);
+
+    if(pos>s){return 0;}
+
+    if ((s == 0) && ((pos == 0) || (pos !=0))){  // it will manage the size  = 0 , and if size and pos = 0 and whatever pos when size =0 , abd end ie end will be calacuated by the fn_size while passing argunment 
+        // beg 
+        (*beg)=new_node;
+        (*beg)->pre_ptr = NULL;
+        (*beg)->nxt_ptr = NULL;
+        
+        //end
+        (*end)=new_node;
+        (*end)->pre_ptr = NULL;
+        (*end)->nxt_ptr = NULL;
+
+        return -1;
+    }
+    
+    if (s == 1){ // if hte isze is one both are pointing to a single node with that node nxt and pre = null
+        if (pos == 0){ // if the user want to put bfore the single eleement 
+            (*beg)->pre_ptr = new_node; 
+            new_node->nxt_ptr = (*beg); // size 1 and beg
+            (*beg) = new_node;
+            return -2;
+        }
+
+        if (pos == 1){ // if the user want to put afete the single element
+            (*beg)->nxt_ptr = new_node;
+            (new_node)->pre_ptr = (*beg); // size 1 and beg
+            (*end) = new_node;
+            return -3;
+        }
+    }
+
+    struct node * temp;
+
+    // if the user want to add at beg and end if size not =! 0 , 1
+    if ((s!=0)&&(s!=1)) {
+        if (pos==0){
+            new_node->nxt_ptr = (*beg);
+            (*beg)->pre_ptr = new_node;
+            (*beg) = new_node ;
+            return -4;
+        }
+        else if (pos == s){
+            (new_node)->pre_ptr  = (*end);
+            (*end)->nxt_ptr = (new_node);
+            (*end) = new_node;
+            return -7;
+        }
+    }
+
+
+
+    // INSERT at pos when size != 0 
+
+    if (pos < s/2){ // traverse form the beg
+        temp = (*beg);
+        for (int i = 0; i<pos-1; i++){
+            temp = temp->nxt_ptr;
+        }
+
+        // position:   0       1       2       3
+        //    [10] → [20] → [30] → [40]
+        //              ↑       ↑
+        //            temp     wanted that is why we need -1 
+        new_node->nxt_ptr = temp->nxt_ptr;
+        new_node->pre_ptr = temp;
+        temp->nxt_ptr->pre_ptr = new_node;
+        temp->nxt_ptr = new_node; 
+        return -5;
+
+    }
+    else { //  traverse form the end
+        temp = (*end);
+        for(int i = 0; i<s-1-pos; i++){
+            temp=temp->pre_ptr;
+        }
+        new_node->pre_ptr = temp->pre_ptr;
+        new_node->nxt_ptr = temp;
+        temp->pre_ptr->nxt_ptr = new_node;
+        temp->pre_ptr = new_node; 
+        return -6;
+    }
+
+
+    return 0;
+
+}
+
+
+
+//  DELETE 
+
+// case to handel : empty ; 
+
+// 1. empty & pos 0,end or N ;
+// 2. s = 1 , pos is x , 0 ,end ;  
+// 3. s > 1 , 0 , end ; 
+// 4. s > 1 , pos ;
+
+
+int delete_at_pos(struct node ** beg,struct node ** end,int pos){
+
+    int s = fn_size((*beg),(*end));
+    
+    if ((pos < 0) || (pos >= s && !(s == 1 && pos == 1))){ // 1. size is 0 and size = 1 or pos >1 ( 1. & 2. ) 
+        return 0;
+    }
+
+    if ((s==1) && (((pos == 0) || (pos==1)))){ //  2. if size = 1 ,ans pos is the beg 
+        free((*beg));
+        (*beg)=NULL;
+        (*end)=NULL;
+        return 1;
+    } 
+
+    
+    struct node * temp;
+
+    // 3. size is != 0,1 and pos is 0,end
+
+    if (pos == 0){
+        temp= (*beg)->nxt_ptr;
+        temp->pre_ptr = NULL;
+        free((*beg));
+        (*beg)= temp;
+        return -1;
+    }
+    else if (pos == s-1){
+        temp = (*end)->pre_ptr;
+        temp->nxt_ptr = NULL;
+        free((*end));
+        (*end) = temp;
+        return -5 ;
+    }
+
+
+
+    // 4. if the size != 0,1 and pos n
+
+    if (pos < s/2) { // traverse from beg
+        temp = (*beg);
+        for (int i = 0 ; i < pos ; i++ ){
+            temp=temp->nxt_ptr; 
+        }
+    temp->pre_ptr->nxt_ptr = temp->nxt_ptr;
+    temp->nxt_ptr->pre_ptr = temp->pre_ptr;
+        free(temp);
+        return -2;
+    }
+    else { // traverse from end
+        temp = (*end);
+        for (int i = 0 ; i < s - 1 - pos ; i++ ){
+                temp=temp->pre_ptr; 
+        }
+        temp->pre_ptr->nxt_ptr = temp->nxt_ptr; 
+        temp->nxt_ptr->pre_ptr = temp->pre_ptr;
+        free(temp);
+        return -3;
+    }
+
+    return -4;
+
+}
+
+
+
+
+// SEARCH 
+
+// 1. if empty -> -1
+// 2. if found then index 
+// 3. if not found then -2
+
+
+int search(struct node * beg,int data){ 
+    if (beg ==  NULL){
+        return -1;
+    }
+    int i = 0;
+    while(beg!=NULL){
+        if (beg->data == data){break; return i;}
+        i++;
+        beg = beg->nxt_ptr;
+    }
+    return -2;
+}
+
+// SORT 
+
+// 1. if done then 1
+// 2. if empty then 0 or malloc fail
+
+
+int sort(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) && ((*end) == NULL)){ // EMPTY
+        return 0;
+    }
+
+    int s = fn_size(*beg,*end);
+    int * arr = (int *)(malloc(sizeof(int) *s)); 
+    if (arr == NULL){return 0;}
+
+    // copting form the ll too arr 
+    struct node * temp = (*beg);
+    for (int i = 0; i < s; i++){
+        arr[i] = (temp)->data;
+        (temp) = temp->nxt_ptr;
+    }
+    temp = (*beg); // RESET IT FOr FURTENR SORTED COPY 
+
+    // INSERTION SORT 
+
+        for (int i = 0; i < s - 1; i++) {
+        for (int j = i + 1; j > 0; j--) {   
+            if (arr[j] < arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }}
+
+    // COPY THEM BACK 
+    for(int i =0;i<s;i++){
+        temp->data = arr[i];
+        temp=temp->nxt_ptr;
+    }
+    free(arr);
+    return 1;
+}
+
+// SHOW 
+
+// 1. if no data : no data 
+// if one element : then special prient 
+// if n > 1 ; while loop ; 
+
+void show(struct node * beg,struct node * end){
+    if (beg == NULL){
+        printf("No DATA");
+        return ;
+    }
+
+    if ((end == beg) && (end->pre_ptr == NULL) && (beg->nxt_ptr== NULL)){
+        printf("|b>  %3d  <e|",beg->data);
+        return;
+    }
+    
+    int i = 0;
+    printf("|b>   %3d   <%d|",beg->data,i);
+    beg=beg->nxt_ptr;
+    i++;
+    while(beg->nxt_ptr!=NULL){
+        printf("| >   %3d   <%d|", beg->data,i);
+        beg = beg->nxt_ptr;
+        i++;
+    }
+    printf("|e>   %3d   <%d|",beg->data,i);
+    return;
+}
+
+
+
+int is_empty(struct node * beg,struct node * end){
+    if (fn_size(beg,end) == 0){return 1;}
+    return 0;
+}
+
+// CLEAR THE LL 
+
+int clear_ll(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) && ((*beg) == (*end))){
+        return 0;
+    }
+
+    struct node * temp ;
+    while((*beg)!= NULL){
+        temp = (*beg);
+        (*beg) = (*beg)->nxt_ptr;
+        free(temp);
+    }
+    (*beg) = NULL;
+    (*end) = NULL;
+    return 1;
+}
+
+
+int main(){
+
+    struct node * beg = NULL;
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        printf("12 : sort\n");
+        printf("0 : exit\n");
+
+        printf("Enter choice : ");
+        scanf("%d", &choice);
+
+
+        switch (choice)
+        {
+
+        case 1:
+
+         /// INSERT AT BEG 
+
+            printf("Enter the number insert at beg : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&beg,&end,input_val,0);
+
+            if (out == -1)
+                printf("%d inserted and init a new linked list size is 1 \n",input_val);
+
+            else if (out == -2)
+                printf("inserted %d at beg and size of linked list size is 2\n",input_val);
+            else if (out == -4)
+                printf("inserted %d at beg\n",input_val);
+            else // zero 
+                printf("cant insert\n");
+
+            break;
+
+
+        case 2:
+
+        /// INSERT AT END 
+
+            printf("Enter the number insert at end : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,&beg,input_val,fn_size(beg,end));
+
+            if (out == -1)
+                printf("%d inserted and init a new linked list size is 1 \n",input_val);
+            else if (out == -3)
+                printf("%d inserted at end and linked list size is 2 \n",input_val);
+            else if (out == -7)
+                printf("%d inserted at end \n",input_val);
+            else
+                printf("cant insert\n");
+
+            break;
+
+
+        case 3:
+
+        // DEELTE AT BEG
+
+            out = delete_at_pos(&beg,&end,0);
+
+            if (out == -1)
+                printf("Deleted value\n");
+            else if (out == 1)
+                printf("Linked List Reset \n");
+                
+            else if (out == 0)
+                printf("cant delete \n");
+
+            break;
+
+
+        case 4:
+
+         /// DELETE AT END
+
+            out = delete_at_pos(&end,&beg,fn_size(beg,end));
+
+            if (out == -5)
+                printf("Deleted value\n");
+            else if (out == 1)
+                printf("Linked List Reset \n");
+                
+            else if (out == 0)
+                printf("cant delete \n");
+
+            break;
+
+
+        case 5:
+
+            printf("Enter the number insert : ");
+            scanf("%d", &input_val);
+
+            printf("Enter the position to insert : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&beg,&end,input_val,pos);
+
+            if (out == -1)
+                printf("%d inserted and new linked list created \n",input_val);
+
+            else if (out == -2)
+                printf("%d inserted before the single element \n",input_val);
+
+            else if (out == -3)
+                printf("%d inserted after the single element \n",input_val);
+
+            else if (out == -4)
+                printf("%d inserted at beg \n",input_val);
+            else if (out == -7)
+                printf("%d inserted at end \n",input_val);
+
+            else if (out == -5)
+                printf("%d inserted at position (b->e) %d \n",input_val,pos);
+
+            else if (out == -6)
+                printf("%d inserted at position (b<-e) %d \n",input_val,pos);
+            else
+                printf("cant insert\n");
+
+            break;
+
+
+        case 6:
+
+            show(beg,end);
+
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &pos);
+
+            out = delete_at_pos(&beg,&end,pos);
+
+            if (out == 1)
+                printf("Linked List %d\n",pos);
+
+            else if (out == -1)
+                printf("%d deleted the first position \n",pos);
+            else if (out == -5)
+                printf("%d deleted the last position \n",pos);
+
+            else if (out == -2)
+                printf("deleted the element (b->e)\n");
+            else if (out == -3)
+                printf("deleted the element (b<-e) \n");
+            else
+                printf("Cant Delete\n"); // zero or unvalid pos
+
+            break;
+
+
+        case 7:
+
+            out = is_empty(beg,end);
+
+            if (out == 1)
+                printf("Empty\n");
+
+            else
+                printf("Not empty \n");
+
+            break;
+
+
+        case 8:
+
+            show(beg,end);
+            break;
+
+
+        case 9:
+
+            printf("%d is the size of Linked List ",fn_size(beg,end));
+            break;
+
+
+        case 10:
+
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+
+            out = search(beg,input_val);
+
+            if (out == -1)
+                printf("No data  \n");
+
+            else if (out == -2)
+                printf("Element Not Found\n");
+
+            else
+                printf("Element Found at %d \n",out);
+
+            break;
+
+
+        case 11:
+
+            out = clear_ll(&beg,&end);
+
+            if (out == 1)
+                printf("Cleared \n");
+
+            else
+                printf("Cant Clear \n");
+
+            break;
+
+
+        case 12:
+
+            if (is_empty(beg,end) != 1)
+                show(beg,end);
+
+            out = sort(&beg,&end);
+
+            if (out == 1){
+                printf("\nSorted\n");
+                show(beg,end);
+            }
+            else
+                printf("Cant Sort \n");
+
+            break;
+
+
+        case 0:
+
+            printf("exitting ...\n");
+
+            if (beg != NULL)
+                clear_ll(&beg,&end);
+
+            return 0;
+
+
+        default:
+
+            printf("Invalid choice\n");
+
+        }
+    }
+
+
+    return 0;
+}
+
+```
+
+<!-- qrun:field-end code id="q-06-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-06-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-06-03" -->
+
+<!-- qrun:field-start output id="q-06-03" -->
+
+```text
+$ gcc q-06-03.c -o ./bin/q-06-03.out && ./bin/q-06-03.out
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 212
+212 inserted and init a new linked list size is 1 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 23
+inserted 23 at beg and size of linked list size is 2
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 2
+inserted 2 at beg
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 56
+inserted 56 at beg
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    56   <0|| >     2   <1|| >    23   <2||e>   212   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 2
+Enter the number insert at end : 20
+cant insert
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    56   <0|| >     2   <1|| >    23   <2||e>   212   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 3
+Deleted value
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>     2   <0|| >    23   <1||e>   212   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 4
+cant delete 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>     2   <0|| >    23   <1||e>   212   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 5
+Enter the number insert : 1
+Enter the position to insert : 500
+cant insert
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>     2   <0|| >    23   <1||e>   212   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 7
+Not empty 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 9
+3 is the size of Linked List 
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 10
+Enter the element to search : 2
+Element Not Found
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 12
+|b>     2   <0|| >    23   <1||e>   212   <2|
+Sorted
+|b>     2   <0|| >    23   <1||e>   212   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 11
+Cleared 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+No DATA
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-06-03" -->
+<!-- qrun:entry-end id="q-06-03" -->
+
+
+<!-- qrun:entry-start id="q-06-04" -->
+
+<!-- qrun:field-start question id="q-06-04" -->
+
+## Q 04 : Implement a doubly circular linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+<!-- qrun:field-end question id="q-06-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-06-04" -->
+
+```c
+// Linked List -> Q 04 : Implement a doubly circular linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+// CIRCULAR AND SIMPLEY LINEKLD LIST 
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+//
+// | | -> | | -> | | -> | | -> |e|
+//  ^                           ^
+//  | <----------------------- |
+// beg                        end
+//
+
+int fn_size(struct node *end);
+
+int insert_at_pos(struct node ** end,int data,int pos){
+
+    int size = fn_size((*end));
+    if (!((pos>=0) && (pos<=size))){return 0;}
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*end) = new_node;
+        (*end)->nxt_ptr = new_node;
+        return -1;    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node->nxt_ptr = (*end)->nxt_ptr;
+        (*end)->nxt_ptr = new_node;
+        return -2;
+    }
+
+    // if insert at end
+    if (pos == size){
+        new_node->nxt_ptr = (*end)->nxt_ptr; // adding the beg to new node
+        (*end)->nxt_ptr = new_node;
+        (*end) = new_node; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)->nxt_ptr;
+    for (int n= 0;n<pos-1;n++){ // we are doing ti because we havin temp hs nxtptr so like if we want to insert at 3 , 
+        // we need to have the the temp ahving the address or 2nd pos 
+        // because 2nd will have the addfress of 3rd pos waht er want to modify ,  
+        // it will run for 0,1 
+        // after 0 the temp = 1 , temp->nxt_ptr = 2
+        // after 0 the temp = 2 , temp->nxt_ptr = 3
+        // so we have to loop it pos -2 times as we are doing by -1 and <
+
+        temp = temp->nxt_ptr;
+    }
+    new_node->nxt_ptr= temp->nxt_ptr; // so we are making new node nxt ptr to the prev3 pos node
+    temp->nxt_ptr = new_node; // and then updating it 
+    return 1;
+}
+
+
+int delete_at_pos(struct node ** end,int pos){
+
+    int size = fn_size((*end));
+    if (size == 0){return -1;} //if empty
+    if (!((pos>=0) && (pos<size))){return 0;} // not valid pos
+
+    if(size == 1){ //if one eleemnt only reset
+        free((*end));
+        (*end) =NULL;
+        return -4;
+    }
+
+    if (pos==0){ //deleted beg
+        struct node * temp = (*end)->nxt_ptr; // beg
+        (*end)->nxt_ptr = temp->nxt_ptr; // updating the new beg
+        free(temp); //delete the beg
+        return -2;
+    }
+
+
+    if (pos==size-1){//delete at end
+        struct node * temp = (*end)->nxt_ptr; //beg
+        while(temp->nxt_ptr!=(*end)){ //traverse upto end - 1 node 
+            temp=temp->nxt_ptr;
+        }
+        temp->nxt_ptr = (*end)->nxt_ptr; // end - 1 node ->nxt_ptr = beg 
+        free((*end)); //free end
+        (*end) = temp; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)->nxt_ptr; // beg
+    for(int i=0;i<pos-1;i++){ // upto pos -2 so  temp has ptr to pos node -1 and its nxtptr has the posptr  
+        temp=temp->nxt_ptr;
+    }
+    // temp->nxt_ptr = temp->nxt_ptr->nxt_ptr ; we cant do this what if we had a while loop because we cant determin whetehr the nxt prt has a valid node or not
+    //but beacuse of the size -1 conndtion it is granteed that temp-nt ptr has a node 
+    struct node * temp2 = temp->nxt_ptr;
+    temp->nxt_ptr = temp->nxt_ptr->nxt_ptr;
+    free(temp2);
+    return 1;
+
+}
+
+
+int fn_size(struct node *end){
+    if (end == NULL){return 0;}
+    int i = 0;
+    struct node * temp = end->nxt_ptr;
+
+    do {
+        i++;
+        temp=temp->nxt_ptr;
+    }
+    while(temp!=end->nxt_ptr);
+    return i;
+}
+
+
+int search(struct node * end,int data){
+    if (end == NULL){
+        return -2;
+    }
+    int i=0;
+    struct node * temp = end->nxt_ptr;
+    // if (temp->data == data){ // we cna have do while here 
+    //         return i;
+    //     }
+    // temp=temp->nxt_ptr;
+    // i++;
+    // while(temp != (end->nxt_ptr)){
+    //     if (temp->data == data){
+    //         return i;
+    //     }
+    //     i++;
+    //     temp=temp->nxt_ptr;
+    // }
+
+
+    do {
+        if (temp->data == data) {
+            return i;
+        }
+
+        temp = temp->nxt_ptr;
+        i++;
+
+    } while (temp != end->nxt_ptr);
+
+    return -1;
+
+}
+
+
+int sort(struct node **end){
+
+    int s = fn_size(*end);
+    if (s == 0){return 0;}// if size == 0
+    int * arr = (int *)(malloc(sizeof(int)*s));
+    if (arr == NULL){return 0;} // if malloc faisl
+
+    struct node * temp = (*end)->nxt_ptr;
+    for (int i = 0; i<s ; i++){
+        arr[i]=temp->data;
+        temp=temp->nxt_ptr;
+    }
+    temp=(*end)->nxt_ptr; //for reenter the sorted values in same ll
+
+    for (int i = 0; i < s - 1; i++) {
+        for (int j = i + 1; j > 0; j--) {   
+            if (arr[j] < arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }}
+
+    for(int i =0;i<s;i++){ //updating sorted value in the same ll
+        temp->data = arr[i];
+        temp=temp->nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+}
+
+void show(struct node * end){
+    if ((end==NULL)){
+        printf("NO DATA");
+        return;
+    }
+    
+    struct node * beg = end->nxt_ptr;
+    if ((end == beg)){
+        printf("|b>  %3d  <e|",beg->data);
+        return;
+    }
+    
+    int i = 0;
+    printf("|b>   %3d   <%d|",beg->data,i); // first node 
+    beg=beg->nxt_ptr;
+    i++;
+    while(beg->nxt_ptr!=end->nxt_ptr){ // will work last node - 1
+        printf("| >   %3d   <%d|", beg->data,i);
+        beg = beg->nxt_ptr;
+        i++;
+    }
+    printf("|e>   %3d   <%d|",beg->data,i); // last node 
+    return;
+}
+
+
+int is_empty(struct node * end){
+    if (fn_size(end) == 0){return 1;}
+    return 0;
+}
+
+int clear_ll(struct node ** end){
+    if ((*end) == NULL){return 0;}
+    struct node * stop = (*end);        
+    struct node * curr = stop->nxt_ptr; 
+    struct node * temp;
+
+    while (curr != stop){               
+        temp = curr;
+        curr = curr->nxt_ptr;
+        free(temp);
+    }
+    free(stop);                         
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        printf("12 : sort\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number insert at beg : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,0); //inser at beg
+            if (out == -2)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+        case 2:
+            printf("Enter the number insert at end : ");
+            scanf("%d", &input_val);
+
+            out = insert_at_pos(&end,input_val,fn_size(end)); //insert at end
+            if (out == -3)
+                printf("%d inserted \n", input_val);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+            
+
+        case 3:
+            out = delete_at_pos(&end,0); //deelte at beg
+            if (out == 1) // sucess
+                printf("Deleted value at beg\n");
+            else if (out == -1) // no data
+                printf("No Data \n");
+            else if(out == -4) // reset the ll if one eleemt only
+                printf("Linked List Reset \n");
+            break;
+
+
+        case 4:
+            out = delete_at_pos(&end,fn_size(end));//delete at end
+            if (out == -3) //sucess
+                printf("Deleted value at end\n");
+            else if (out == -1) //no data 
+                printf("No Data \n");
+            else if (out == -4)//reset if only one eleement
+                printf("Linked List Reset \n");
+            break;
+
+        case 5:
+            printf("Enter the number insert : ");
+            scanf("%d", &input_val);
+            printf("Enter the position to insert  : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&end,input_val,pos);
+            if (out == 1)
+                printf("%d inserted at %d\n", input_val,pos);
+            else if (out == -1)
+                printf("%d inserted and new linked list created \n", input_val);
+            else if (out == -2)
+                printf("%d inserted at beg \n", input_val);
+            else if (out == -3)
+                printf("%d inserted at end \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+
+        case 6:
+            show(end);
+            out=is_empty(end);
+            if (out == 1){break;}
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &input_val);
+
+            out = delete_at_pos(&end,input_val);
+            if (out == 1)
+                printf("%d Deleted \n", input_val);
+            else if (out == -1)
+                printf("no data \n");//if no data
+            else if (out == -2)
+                printf("%d deleted the beg \n", input_val);
+            else if (out == -3)
+                printf("deleted the end \n");
+            else if (out == -4)
+                printf("Resseted the ll\n"); // if onlu one eleemt
+            else
+                printf("Empty \n");
+            break;
+
+        case 7:
+            out = is_empty(end);
+            if (out == 1)
+                printf("Empty\n");
+            else
+                printf("Not empty \n");
+            break;
+
+
+        case 8:
+            show(end);
+            break;
+            
+            case 9:
+            printf("%d is the size of Linked List ", fn_size(end));
+            break;
+            
+            case 10:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(end,input_val);
+            if (out == -2)
+            printf("No data  \n");
+            else if (out == -1)
+            printf("Element Not Found\n");
+            else
+            printf("Element Found at %d \n",out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&end);
+            if (out == 1)
+                printf("Cleared \n");
+            else
+                printf("Already empty \n");
+            break;
+
+                
+                case 12:
+                if (is_empty(end) != 1){show(end);}
+
+                out = sort(&end);
+
+                if (out == 1){
+                    printf("\nSorted\n");
+                    show(end);}
+                else
+                    printf("Cant Sort \n");
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-06-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-06-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-06-04" -->
+
+<!-- qrun:field-start output id="q-06-04" -->
+
+```text
+$ gcc q-06-04.c -o ./bin/q-06-04.out && ./bin/q-06-04.out
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 23
+23 inserted and new linked list created 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 20
+20 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 10
+10 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 2
+Enter the number insert at end : 90
+90 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    10   <0|| >    20   <1|| >    23   <2||e>    90   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 3
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    20   <0|| >    23   <1||e>    90   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 4
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    20   <0|| >    23   <1||e>    90   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 5
+Enter the number insert : 1
+Enter the position to insert  : 200
+cant insert
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 7
+Not empty 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 8
+|b>    20   <0|| >    23   <1||e>    90   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 10
+Enter the element to search : 20
+Element Found at 0 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 12
+|b>    20   <0|| >    23   <1||e>    90   <2|
+Sorted
+|b>    20   <0|| >    23   <1||e>    90   <2|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 1
+Enter the number insert at beg : 2
+2 inserted 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 12
+|b>     2   <0|| >    20   <1|| >    23   <2||e>    90   <3|
+Sorted
+|b>     2   <0|| >    20   <1|| >    23   <2||e>    90   <3|
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 11
+Cleared 
+
+Enter the choice :
+1 : insert at beg
+2 : insert at end
+3 : delete at beg
+4 : delete at end
+5 : insert at pos
+6 : delete at pos
+7 : isempty
+8 : show
+9 : size
+10 : search
+11 : clear
+12 : sort
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-06-04" -->
+<!-- qrun:entry-end id="q-06-04" -->
+
+
+<!-- qrun:entry-start id="q-06-05" -->
+
+<!-- qrun:field-start question id="q-06-05" -->
+
+## Q 05 : Implement a singly linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+<!-- qrun:field-end question id="q-06-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-06-05" -->
+
+```c
+// Linked List -> Q 05 : Implement a singly linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    char data;
+    struct node * nxt_ptr;
+};
+
+
+// |b| -> | | -> | | -> | | -> |e|
+//  ^                           ^
+//  |                           |
+// beg                         end
+
+
+int fn_size(struct node * beg,struct node *end);
+
+
+int insert_at_beg(struct node ** beg,struct node ** end,char data){ 
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if ((*beg) == NULL){
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+    // putting a new node nxy ptr to beg and theb beg = new node
+    new_node->nxt_ptr = (*beg);
+    (*beg) = new_node;
+    
+    
+    return 1;
+}
+
+
+int insert_at_end(struct node ** end,struct node ** beg,char data){
+    
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+    
+    if (((*end) == NULL) && ((*beg) == NULL)) {
+    (*beg) = new_node;
+    (*end) = new_node;  
+        return -1;
+    }
+    
+    (*end)->nxt_ptr = new_node;
+    (*end) = new_node;
+    return 1;
+}
+
+
+
+int insert_at_pos(struct node ** end,struct node ** beg,char data,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end)) ;
+    
+    if (!((pos>=0) && (pos<=size))){return 0;}
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+    
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node->nxt_ptr = (*beg);
+        (*beg) = new_node;
+        return 1;
+    }
+
+    // if insert at end
+    if (pos == size){
+        (*end)->nxt_ptr = new_node;
+        (*end) = new_node;
+        return -2;
+    }
+    
+    struct node * temp = (*beg);
+    for (n;n<pos - 1;n++){
+        temp = temp->nxt_ptr;
+    }
+    new_node->nxt_ptr = temp->nxt_ptr;
+    temp->nxt_ptr = new_node;
+    return 1;
+
+}
+
+
+int delete_at_beg(struct node ** beg,struct node ** end){
+    
+    if ((*beg) == NULL){
+        return 0;
+    }
+
+    if (((*beg) == (*end)) && ((*beg)->nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*beg)->nxt_ptr;
+    free((*beg));
+    (*beg) = temp;
+    return 1;
+}
+
+
+
+int delete_at_end(struct node ** end,struct node ** beg){
+    if ((*end) == NULL){
+        return 0;
+    }
+    if (((*beg) == (*end)) && ((*beg)->nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+
+    struct node * pre = (*beg);
+    while(pre->nxt_ptr!=(*end)){
+        // pre = temp;
+        pre = pre->nxt_ptr;
+    }
+
+    pre->nxt_ptr = NULL;
+    free((*end));
+    (*end) = pre;
+    return 1;
+}
+
+//so the thing if if size is 5 the
+// index rtange os 0 - 4 , if i wnart to add at 2 , then i need
+// the temp to hold the ptr of 1st indec becasue it have the next and next ; so i can insert the eleemnt 
+//at that poistion change the address of n-1 index and the new node containing the ttemp->nxt_ptr ; FOR deletion we 
+//also need the temp to has address of n-1 , temp will have to first get temp->nxtptr->nxtprt address and teh copy it to the temp nxtptr 
+
+
+// IMPLEEMTAION
+
+// but in fucntion impleemtion i did something weired insert utpo pre , delete upto the actual value then also trcked the pre 
+
+
+int delete_at_pos(struct node ** end,struct node ** beg,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end));
+    
+    if (!((pos>=0) && (pos<=size))){return 0;}
+    
+    if ((size ==0)){
+        return 0;
+    }
+    
+    if (pos == 0){
+        return (delete_at_beg(beg, end) == -1) ? -1 : 1;
+    }
+    if (pos == size - 1){
+        return (delete_at_end(beg, end) == -1) ? -1 : 1;
+    }
+    
+    struct node * temp = (*beg);
+    struct node * pre = (*beg);
+    for (n;n<pos;n++){
+        pre=temp;
+        temp=temp->nxt_ptr;
+    }
+    pre->nxt_ptr = temp->nxt_ptr;
+    free(temp);
+    return 1;
+}
+
+
+int search(struct node * end,struct node * beg,char data){
+    if ((beg == NULL) && (end == beg)){
+        return -2;
+    }
+    int i = 0;
+    while(beg!=NULL){
+        if (beg->data == data){
+            return i;
+        }
+        i++;
+        beg = beg->nxt_ptr;
+    }
+    return -1;
+}
+
+
+
+
+void show(struct node * beg,struct node * end){
+    if ((end==NULL) && (end == beg)){
+        printf("NO DATA");
+        return;
+    }
+    
+    if ((end == beg) && (end->nxt_ptr == NULL)){
+        printf("|b>  %c  <e|",beg->data);
+        return;
+    }
+    
+    int i = 0;
+    
+    printf("|b>   %c   <%d|",beg->data,i);
+    beg=beg->nxt_ptr;
+    i++;
+    while(beg->nxt_ptr!=NULL){
+        printf("| >   %c   <%d|", beg->data,i);
+        beg = beg->nxt_ptr;
+        i++;
+    }
+    printf("|e>   %c   <%d|",beg->data,i);
+    return;
+}
+
+
+int fn_size(struct node * beg,struct node * end){
+    int i = 0;
+    if ((end==NULL) && (end == beg)){
+        return i;
+    }
+    while(beg!=NULL){
+        i++;
+        beg = beg->nxt_ptr;
+    }
+    return i;
+}
+
+
+int is_empty(struct node * beg,struct node * end){
+    if (fn_size(beg,end) == 0){return 1;}
+    return 0;
+}
+
+
+int clear_ll(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) && ((*beg) == (*end))){
+        return 0;
+    }
+
+    struct node * temp ;
+    while((*beg)!= NULL){
+        temp = (*beg);
+        (*beg) = (*beg)->nxt_ptr;
+        free(temp);
+    }
+    (*beg) = NULL;
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * beg = NULL;
+    struct node * end = NULL;
+    int choice,out,pos;
+    char input_val;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : insert at beg\n");
+        printf("2 : insert at end\n");
+        printf("3 : delete at beg\n");
+        printf("4 : delete at end\n");
+        printf("5 : insert at pos\n");
+        printf("6 : delete at pos\n");
+        printf("7 : isempty\n");
+        printf("8 : show\n");
+        printf("9 : size\n");
+        printf("10 : search\n");
+        printf("11 : clear\n");
+        
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number insert at beg : ");
+            scanf(" %c", &input_val);
+
+            out = insert_at_beg(&beg,&end,input_val);
+            if (out == 1)
+                printf("%c inserted \n", input_val);
+            else if (out == -1)
+                printf("%c inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+        case 2:
+            printf("Enter the number insert at end : ");
+            scanf(" %c", &input_val);
+
+            out = insert_at_end(&end,&beg,input_val);
+            if (out == 1)
+                printf("%c inserted \n", input_val);
+            else if (out == -1)
+                printf("%c inserted and new linked list created \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+            
+
+        case 3:
+            out = delete_at_beg(&beg,&end);
+            if (out == 1)
+                printf("Deleted value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Linked List Reset \n");
+            break;
+        case 4:
+            out = delete_at_end(&end,&beg);
+            if (out == 1)
+                printf("Deleted value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Linked List Reset \n");
+            break;
+
+        case 5:
+            printf("Enter the number insert : ");
+            scanf(" %c", &input_val);
+            printf("Enter the position to insert  : ");
+            scanf("%d", &pos);
+
+            out = insert_at_pos(&end,&beg,input_val,pos);
+            if (out == 1)
+                printf("%c inserted at %d\n", input_val,pos);
+            else if (out == -1)
+                printf("%c inserted and new linked list created \n", input_val);
+            else if (out == -2)
+                printf("%c inserted at end \n", input_val);
+            else
+                printf("cant insert\n");
+            break;
+
+        case 6:
+            show(beg,end);
+            printf("\nEnter the position to delete : ");
+            scanf("%d", &input_val);
+
+            out = delete_at_pos(&end,&beg,input_val);
+            if (out == 1)
+                printf("%c Deleted \n", input_val);
+            else if (out == -1)
+                printf("%c deleted the last position \n", input_val);
+            else if (out == -2)
+                printf("deleted the beg eleement \n");
+            else
+                printf("Empty \n");
+            break;
+
+        case 7:
+            out = is_empty(beg,end);
+            if (out == 1)
+                printf("Empty\n");
+            else
+                printf("Not empty \n");
+            break;
+
+
+
+        case 8:
+            show(beg,end);
+            break;
+            
+            case 9:
+            printf("%d is the size of Linked List ", fn_size(beg,end));
+            break;
+            
+            case 10:
+            printf("Enter the element to search : ");
+            scanf(" %c", &input_val);
+            out = search(end,beg,input_val);
+            if (out == -2)
+            printf("No data  \n");
+            else if (out == -1)
+            printf("Element Not Found\n");
+            else
+            printf("Element Found at %d \n",out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&beg,&end);
+            if (out == 1)
+                printf("Cleared \n");
+            else
+                printf("Cant Clear \n");
+            break;
+
+                
+                case 12:
+                if (is_empty(beg,end) != 1){show(beg,end);}
+                    out = sort(&beg,&end);
+                if (out == 1){
+                    printf("Sorted\n");
+                    show(beg,end);}
+                else
+                    printf("Cant Sort \n");
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-06-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-06-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-06-05" -->
+
+<!-- qrun:field-start output id="q-06-05" -->
+
+```text
+$ gcc q-06-05.c -o ./bin/q-06-05.out && ./bin/q-06-05.out
+q-06-05.c: In function ‘main’:
+q-06-05.c:367:21: warning: format ‘%d’ expects argument of type ‘int *’, but argument 2 has type ‘char *’ [-Wformat=]
+  367 |             scanf("%d", &input_val);
+      |                    ~^   ~~~~~~~~~~
+      |                     |   |
+      |                     |   char *
+      |                     int *
+      |                    %hhd
+q-06-05.c:422:27: warning: implicit declaration of function ‘sort’; did you mean ‘qsort’? [-Wimplicit-function-declaration]
+  422 |                     out = sort(&beg,&end);
+      |                           ^~~~
+      |                           qsort
+/usr/bin/ld: /tmp/cc5NWjFP.o: in function `main':
+q-06-05.c:(.text+0xea5): undefined reference to `sort'
+collect2: error: ld returned 1 exit status
+```
+
+<!-- qrun:field-end output id="q-06-05" -->
+<!-- qrun:entry-end id="q-06-05" -->
+
+<!-- qrun:topic-end id="topic-06" -->
