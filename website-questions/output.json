@@ -888,6 +888,369 @@
       "last_run_at": "2026-10-23T21:38:50+05:30",
       "updated_at": "2026-10-23T21:38:50+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-03-01",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-23T22:12:14+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "q-03-01.c: In function ‘main’:\nq-03-01.c:12:21: warning: format ‘%d’ expects argument of type ‘int *’, but argument 2 has type ‘int’ [-Wformat=]\n   12 |             scanf(\"%d\",matrix[i][j]);\n      |                    ~^  ~~~~~~~~~~~~\n      |                     |           |\n      |                     int *       int\nEnter the element (row : 0, col : 0) -> ^C",
+          "exit_code": 130,
+          "code_sha256": "501bef2efb05c0c361f871a598fd5e49dcf0b57da11e07b149457996a35c1c59"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-23T22:12:46+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 2\nEnter the element (row : 1, col : 0) -> 3\nEnter the element (row : 1, col : 1) -> 4\nEnter the element (row : 2, col : 0) -> 5\nEnter the element (row : 2, col : 1) -> 6\nEnter the element (row : 3, col : 0) -> 7\nEnter the element (row : 3, col : 1) -> 8\n+-------+-------+-------+\n|                       |\n|    1  |    2  |\n|                       |\n|+-------+-------+-------+\n|                       |\n|    3  |    4  |\n|                       |\n|+-------+-------+-------+\n|                       |\n|    5  |    6  |\n|                       |\n|+-------+-------+-------+\n|                       |\n|    7  |    8  |\n|                       |\n|+-------+-------+-------+\n",
+          "exit_code": 0,
+          "code_sha256": "0a4ede21dcce3907ee0c927bccba4dc1093d99d2bdf4b642d83c15ed97cac135"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-23T22:13:35+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 2\nEnter the element (row : 1, col : 0) -> 2\nEnter the element (row : 1, col : 1) -> 2\nEnter the element (row : 2, col : 0) -> 2\nEnter the element (row : 2, col : 1) -> 2\nEnter the element (row : 3, col : 0) -> 2\nEnter the element (row : 3, col : 1) -> 2\n+-------+-------+\n|                 |\n|    1  |    2  |\n|                       |\n|+-------+-------+-------+\n|                 |\n|    2  |    2  |\n|                       |\n|+-------+-------+-------+\n|                 |\n|    2  |    2  |\n|                       |\n|+-------+-------+-------+\n|                 |\n|    2  |    2  |\n|                       |\n|+-------+-------+-------+\n",
+          "exit_code": 0,
+          "code_sha256": "8f6c43edc681212e8bcb0bf1d580f6c2fa521bf8971af40ec8fc7342e3dbd91d"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-23T22:14:20+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 2\nEnter the element (row : 1, col : 0) -> 2\nEnter the element (row : 1, col : 1) -> 2\nEnter the element (row : 2, col : 0) -> 2\nEnter the element (row : 2, col : 1) -> 2\nEnter the element (row : 3, col : 0) -> 2\nEnter the element (row : 3, col : 1) -> 2\n+-------+------+\n|               |\n|    1  |    2  ||               |\n|+-------+------+\n|               |\n|    2  |    2  ||               |\n|+-------+------+\n|               |\n|    2  |    2  ||               |\n|+-------+------+\n|               |\n|    2  |    2  ||               |\n|+-------+------+\n",
+          "exit_code": 0,
+          "code_sha256": "bef74328078dc4021bebed38c88fb8323d51d5e623ceb989c8b6ae1af63a93c9"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-23T22:15:06+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 1\nEnter the element (row : 1, col : 0) -> 1\nEnter the element (row : 1, col : 1) -> 1\nEnter the element (row : 2, col : 0) -> 1\nEnter the element (row : 2, col : 1) -> 11\nEnter the element (row : 3, col : 0) -> 1\nEnter the element (row : 3, col : 1) -> 1\n+-------+------+\n|               |\n|    1  |    1  |\n|               |+-------+------+\n|               |\n|    1  |    1  |\n|               |+-------+------+\n|               |\n|    1  |   11  |\n|               |+-------+------+\n|               |\n|    1  |    1  |\n|               |+-------+------+\n",
+          "exit_code": 0,
+          "code_sha256": "dab44384982c88130ab2a151623fe564e09bf3e02d179427a326be921002f993"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-23T22:15:18+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 1\nEnter the element (row : 1, col : 0) -> 1\nEnter the element (row : 1, col : 1) -> 11\nEnter the element (row : 2, col : 0) -> 1\nEnter the element (row : 2, col : 1) -> 1\nEnter the element (row : 3, col : 0) -> 1\nEnter the element (row : 3, col : 1) -> 1\n+-------+------+\n|               |\n|    1  |    1  |\n|               |\n+-------+------+\n|               |\n|    1  |   11  |\n|               |\n+-------+------+\n|               |\n|    1  |    1  |\n|               |\n+-------+------+\n|               |\n|    1  |    1  |\n|               |\n+-------+------+\n",
+          "exit_code": 0,
+          "code_sha256": "0c45fa7a47d9fc3e3df681e2d041a599fd934708923e6da0484d9ea92402c588"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-23T22:15:41+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 1\nEnter the element (row : 1, col : 0) -> 1\nEnter the element (row : 1, col : 1) -> 1\nEnter the element (row : 2, col : 0) -> 1\nEnter the element (row : 2, col : 1) -> 1\nEnter the element (row : 3, col : 0) -> 1\nEnter the element (row : 3, col : 1) -> 1\n+-------+-------+\n|                |\n|    1  |    1  |\n|                |\n+-------+-------+\n|                |\n|    1  |    1  |\n|                |\n+-------+-------+\n|                |\n|    1  |    1  |\n|                |\n+-------+-------+\n|                |\n|    1  |    1  |\n|                |\n+-------+-------+\n",
+          "exit_code": 0,
+          "code_sha256": "9fc9c3a8ea1d55aafcf67c61804da07eb1b72abb12c639d7e61fd9fe8e6bacba"
+        },
+        {
+          "run_number": 8,
+          "timestamp": "2026-10-23T22:15:55+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "1Enter the element (row : 0, col : 0) -> \nEnter the element (row : 0, col : 1) -> 1\nEnter the element (row : 1, col : 0) -> 1\nEnter the element (row : 1, col : 1) -> 1\nEnter the element (row : 2, col : 0) -> 1\nEnter the element (row : 2, col : 1) -> 1\nEnter the element (row : 3, col : 0) -> 1\nEnter the element (row : 3, col : 1) -> 1\n+-------+-------+\n|                |\n|    1   |    1   |\n|                |\n+-------+-------+\n|                |\n|    1   |    1   |\n|                |\n+-------+-------+\n|                |\n|    1   |    1   |\n|                |\n+-------+-------+\n|                |\n|    1   |    1   |\n|                |\n+-------+-------+\n",
+          "exit_code": 0,
+          "code_sha256": "bad7187a87933fec8969aef0ecbf91e4a533e49b18263fcee2fd8bb35098be23"
+        },
+        {
+          "run_number": 9,
+          "timestamp": "2026-10-23T22:16:25+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 1\nEnter the element (row : 1, col : 0) -> 1\nEnter the element (row : 1, col : 1) -> 1\nEnter the element (row : 2, col : 0) -> 1\nEnter the element (row : 2, col : 1) -> 1\nEnter the element (row : 3, col : 0) -> 1\nEnter the element (row : 3, col : 1) -> 1\n+--------+--------+\n|                  |\n|    1   |    1   |\n|                  |\n+--------+--------+\n|                  |\n|    1   |    1   |\n|                  |\n+--------+--------+\n|                  |\n|    1   |    1   |\n|                  |\n+--------+--------+\n|                  |\n|    1   |    1   |\n|                  |\n+--------+--------+\n",
+          "exit_code": 0,
+          "code_sha256": "5955ed5d16d73e6fcd27705f6df4fd45fb2e2af0c14a0f02e75f1d275b0430a6"
+        },
+        {
+          "run_number": 10,
+          "timestamp": "2026-10-24T09:19:51+05:30",
+          "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+          "mode": "compile-run",
+          "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 2\nEnter the element (row : 1, col : 0) -> 3\nEnter the element (row : 1, col : 1) -> 4\nEnter the element (row : 2, col : 0) -> 5\nEnter the element (row : 2, col : 1) -> 6\nEnter the element (row : 3, col : 0) -> 3\nEnter the element (row : 3, col : 1) -> 23\n+--------+--------+\n|                  |\n|    1   |    2   |\n|                  |\n+--------+--------+\n|                  |\n|    3   |    4   |\n|                  |\n+--------+--------+\n|                  |\n|    5   |    6   |\n|                  |\n+--------+--------+\n|                  |\n|    3   |   23   |\n|                  |\n+--------+--------+\n",
+          "exit_code": 0,
+          "code_sha256": "5955ed5d16d73e6fcd27705f6df4fd45fb2e2af0c14a0f02e75f1d275b0430a6"
+        }
+      ],
+      "run_count": 10,
+      "created_at": "2026-10-23T22:12:14+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 1,
+      "question": "Enter a matrix of 4 rows and 2 columns from the user and display it in matrix format.",
+      "source_file": "q-03-01.c",
+      "code": "// Multi-Dimensional Arrays -> Q 01 : Enter a matrix of 4 rows and 2 columns from the user and display it in matrix format.\n\n#include <stdio.h>\n\nint main(){\n\n    int matrix[4][2] = {0};\n\n    for (int i = 0; i < 4 ; i++){\n        for (int j = 0; j < 2 ; j++){\n            printf(\"Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix[i][j]);\n        }\n    }\n\n    printf(\"+--------+--------+\\n\");\n    for (int i = 0; i < 4 ; i++){\n        printf(\"|                  |\\n|\");\n        for (int j = 0; j < 2 ; j++){\n            printf(\"  %3d   |\",matrix[i][j]);\n        }\n        printf(\"\\n|                  |\\n\");\n        printf(\"+--------+--------+\\n\");\n            \n    }\n    \n\n    return 0;\n}\n",
+      "code_sha256": "5955ed5d16d73e6fcd27705f6df4fd45fb2e2af0c14a0f02e75f1d275b0430a6",
+      "code_updated_at": "2026-10-23T22:16:25+05:30",
+      "command": "gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out",
+      "output": "Enter the element (row : 0, col : 0) -> 1\nEnter the element (row : 0, col : 1) -> 2\nEnter the element (row : 1, col : 0) -> 3\nEnter the element (row : 1, col : 1) -> 4\nEnter the element (row : 2, col : 0) -> 5\nEnter the element (row : 2, col : 1) -> 6\nEnter the element (row : 3, col : 0) -> 3\nEnter the element (row : 3, col : 1) -> 23\n+--------+--------+\n|                  |\n|    1   |    2   |\n|                  |\n+--------+--------+\n|                  |\n|    3   |    4   |\n|                  |\n+--------+--------+\n|                  |\n|    5   |    6   |\n|                  |\n+--------+--------+\n|                  |\n|    3   |   23   |\n|                  |\n+--------+--------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:19:51+05:30",
+      "updated_at": "2026-10-24T09:19:51+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-02",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:29:48+05:30",
+          "command": "gcc q-03-02.c -o ./bin/q-03-02.out && ./bin/q-03-02.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 5\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 6\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 7\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 8\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 9\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 9\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 8\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 7\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 6\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 5\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 4\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 1\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "3c846d0b17469c052d0e74db5e97e8245d30dd4d2649ea4eda67520b35d0009e"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T09:29:48+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 2,
+      "question": "Enter two matrices from the user, add them, and display the result.",
+      "source_file": "q-03-02.c",
+      "code": "// Multi-Dimensional Arrays -> Q 02 : Enter two matrices from the user, add them, and display the result.\n\n#include <stdio.h>\n#define MATSIZE 3\n\nint main(){\n\n    int matrix1[MATSIZE][MATSIZE] = {0};\n    int matrix2[MATSIZE][MATSIZE] = {0};\n    int mat_sum[MATSIZE][MATSIZE] = {0};\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 1, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix1[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 2, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix2[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            mat_sum[i][j] = matrix1[i][j] + matrix2[i][j];\n        }\n    }\n\n    printf(\"+---------+---------+---------+\\n\");\n    for (int i = 0; i < MATSIZE ; i++){\n        printf(\"|         |         |         |\\n|\");\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"   %3d   |\",mat_sum[i][j]);\n            \n        }\n        printf(\"\\n|         |         |         |\\n\");\n        printf(\"+---------+---------+---------+\\n\");\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "3c846d0b17469c052d0e74db5e97e8245d30dd4d2649ea4eda67520b35d0009e",
+      "code_updated_at": "2026-10-24T09:29:48+05:30",
+      "command": "gcc q-03-02.c -o ./bin/q-03-02.out && ./bin/q-03-02.out",
+      "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 5\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 6\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 7\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 8\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 9\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 9\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 8\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 7\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 6\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 5\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 4\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 1\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    10   |\n|         |         |         |\n+---------+---------+---------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:29:48+05:30",
+      "updated_at": "2026-10-24T09:29:48+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-03",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:31:16+05:30",
+          "command": "gcc q-03-03.c -o ./bin/q-03-03.out && ./bin/q-03-03.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 55\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 4\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 56\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 3\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 3323\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 434\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 54\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 4\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 34\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 2, col : 0) -> \n434\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 434\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 434\n+-------+-Subtraction-+-------+\n+---------+---------+---------+\n|         |         |         |\n|   -3322   |   -432   |   -51   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     0   |    21   |     2   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|   -378   |   -431   |   -432   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "30db08a77bd9cc55ae32766baad843428e78a113861536e3ec9c1fbfe4e1bc86"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T09:31:40+05:30",
+          "command": "gcc q-03-03.c -o ./bin/q-03-03.out && ./bin/q-03-03.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 23\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 26\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 75\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 24\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 5\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 32\nFor Matrix 1, Enter the element (row : 2, col : 2) -> \n2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 456\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 4\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 32\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 46\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 89\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 85\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 9\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 54\n+-------+-Subtraction-+-------+\n+---------+---------+---------+\n|         |         |         |\n|   -455   |    19   |   -28   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    23   |    29   |   -65   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|   -80   |    23   |   -52   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "30db08a77bd9cc55ae32766baad843428e78a113861536e3ec9c1fbfe4e1bc86"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-24T09:31:16+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 3,
+      "question": "Enter two matrices from the user, subtract them, and display the result.",
+      "source_file": "q-03-03.c",
+      "code": "// Multi-Dimensional Arrays -> Q 03 : Enter two matrices from the user, subtract them, and display the result.\n\n#include <stdio.h>\n#define MATSIZE 3\n\nint main(){\n\n    int matrix1[MATSIZE][MATSIZE] = {0};\n    int matrix2[MATSIZE][MATSIZE] = {0};\n    int mat_sub[MATSIZE][MATSIZE] = {0};\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 1, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix1[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 2, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix2[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            mat_sub[i][j] = matrix1[i][j] - matrix2[i][j];\n        }\n    }\n\n    printf(\"+-------+-Subtraction-+-------+\\n\");\n    printf(\"+---------+---------+---------+\\n\");\n    for (int i = 0; i < MATSIZE ; i++){\n        printf(\"|         |         |         |\\n|\");\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"   %3d   |\",mat_sub[i][j]);\n            \n        }\n        printf(\"\\n|         |         |         |\\n\");\n        printf(\"+---------+---------+---------+\\n\");\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "30db08a77bd9cc55ae32766baad843428e78a113861536e3ec9c1fbfe4e1bc86",
+      "code_updated_at": "2026-10-24T09:31:16+05:30",
+      "command": "gcc q-03-03.c -o ./bin/q-03-03.out && ./bin/q-03-03.out",
+      "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 23\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 26\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 75\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 24\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 5\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 32\nFor Matrix 1, Enter the element (row : 2, col : 2) -> \n2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 456\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 4\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 32\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 46\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 89\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 85\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 9\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 54\n+-------+-Subtraction-+-------+\n+---------+---------+---------+\n|         |         |         |\n|   -455   |    19   |   -28   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    23   |    29   |   -65   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|   -80   |    23   |   -52   |\n|         |         |         |\n+---------+---------+---------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:31:40+05:30",
+      "updated_at": "2026-10-24T09:31:40+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-04",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:43:06+05:30",
+          "command": "gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 4\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 5\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 1\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 1\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 12\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 2\n",
+          "exit_code": 139,
+          "code_sha256": "45bcdd5b10f5b706291e5cda5c155ed342b87170a5daa8a58fbc17cb335fd218"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T09:45:33+05:30",
+          "command": "gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 1\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 3\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 1\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 4\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 12\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 12\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 12\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 1\n\n+--------+-Multiiply-+--------+\n+---------+---------+---------+\n|         |         |         |\n|    64   |    27   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    44   |    33   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    56   |    36   |    13   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "13c06d9ae0a457b6f502af497dcc5bc1b5c522cad0a1f3065709017dedd6651d"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T09:47:18+05:30",
+          "command": "gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 1\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 12\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 1) -> ^C",
+          "exit_code": 130,
+          "code_sha256": "13c06d9ae0a457b6f502af497dcc5bc1b5c522cad0a1f3065709017dedd6651d"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T09:47:32+05:30",
+          "command": "gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 1, col : 1) -> \n2\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 1\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 1\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 1\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 2\n\n+--------+-Multiiply-+--------+\n+---------+---------+---------+\n|         |         |         |\n|    10   |    14   |    15   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     9   |    11   |    13   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    13   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "13c06d9ae0a457b6f502af497dcc5bc1b5c522cad0a1f3065709017dedd6651d"
+        }
+      ],
+      "run_count": 4,
+      "created_at": "2026-10-24T09:43:06+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 4,
+      "question": "Enter two matrices from the user, multiply them, and display the result.",
+      "source_file": "q-03-04.c",
+      "code": "// Multi-Dimensional Arrays -> Q 04 : Enter two matrices from the user, multiply them, and display the result.\n\n#include <stdio.h>\n#define MATSIZE 3\n\nint main(){\n\n    int matrix1[MATSIZE][MATSIZE] = {0};\n    int matrix2[MATSIZE][MATSIZE] = {0};\n    int mat_mul[MATSIZE][MATSIZE] = {0};\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 1, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix1[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 2, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix2[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            int sum = 0;\n            for (int k = 0; k < MATSIZE; k++) {\n                        sum += matrix1[i][k] * matrix2[k][j];\n                    }\n\n                    mat_mul[i][j] = sum;\n\n        }\n    }\n\n    printf(\"\\n+--------+-Multiiply-+--------+\\n\");\n    printf(\"+---------+---------+---------+\\n\");\n    for (int i = 0; i < MATSIZE ; i++){\n        printf(\"|         |         |         |\\n|\");\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"   %3d   |\",mat_mul[i][j]);\n            \n        }\n        printf(\"\\n|         |         |         |\\n\");\n        printf(\"+---------+---------+---------+\\n\");\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "13c06d9ae0a457b6f502af497dcc5bc1b5c522cad0a1f3065709017dedd6651d",
+      "code_updated_at": "2026-10-24T09:45:33+05:30",
+      "command": "gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out",
+      "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 1, col : 1) -> \n2\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 1\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 2\nFor Matrix 2, Enter the element (row : 0, col : 0) -> 3\nFor Matrix 2, Enter the element (row : 0, col : 1) -> 1\nFor Matrix 2, Enter the element (row : 0, col : 2) -> 3\nFor Matrix 2, Enter the element (row : 1, col : 0) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 1) -> 2\nFor Matrix 2, Enter the element (row : 1, col : 2) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 0) -> 1\nFor Matrix 2, Enter the element (row : 2, col : 1) -> 3\nFor Matrix 2, Enter the element (row : 2, col : 2) -> 2\n\n+--------+-Multiiply-+--------+\n+---------+---------+---------+\n|         |         |         |\n|    10   |    14   |    15   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     9   |    11   |    13   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |    10   |    13   |\n|         |         |         |\n+---------+---------+---------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:47:32+05:30",
+      "updated_at": "2026-10-24T09:47:32+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-05",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:47:41+05:30",
+          "command": "gcc q-03-05.c -o ./bin/q-03-05.out && ./bin/q-03-05.out",
+          "mode": "compile-run",
+          "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 45\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 5\n\n+--------+-CopiedMat-+--------+\n+---------+---------+---------+\n|         |         |         |\n|     1   |     2   |     2   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     3   |     2   |     2   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     2   |    45   |     5   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "3b4dc961fc3a11a6e71d9ab6abc06857dda8101d9a027c0fbe65a27d68c80333"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T09:47:41+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 5,
+      "question": "Enter a matrix from the user and copy it into another matrix of the same size.",
+      "source_file": "q-03-05.c",
+      "code": "// Multi-Dimensional Arrays -> Q 05 : Enter a matrix from the user and copy it into another matrix of the same size.\n\n#include <stdio.h>\n#define MATSIZE 3\n\nint main(){\n\n    int matrix1[MATSIZE][MATSIZE] = {0};\n    int copied[MATSIZE][MATSIZE] = {0};\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix 1, Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix1[i][j]);\n        }\n    }\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            copied[i][j] = matrix1[i][j];\n        }\n    }\n\n    printf(\"\\n+--------+-CopiedMat-+--------+\\n\");\n    printf(\"+---------+---------+---------+\\n\");\n    for (int i = 0; i < MATSIZE ; i++){\n        printf(\"|         |         |         |\\n|\");\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"   %3d   |\",copied[i][j]);\n            \n        }\n        printf(\"\\n|         |         |         |\\n\");\n        printf(\"+---------+---------+---------+\\n\");\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "3b4dc961fc3a11a6e71d9ab6abc06857dda8101d9a027c0fbe65a27d68c80333",
+      "code_updated_at": "2026-10-24T09:47:41+05:30",
+      "command": "gcc q-03-05.c -o ./bin/q-03-05.out && ./bin/q-03-05.out",
+      "output": "For Matrix 1, Enter the element (row : 0, col : 0) -> 1\nFor Matrix 1, Enter the element (row : 0, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 0, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 0) -> 3\nFor Matrix 1, Enter the element (row : 1, col : 1) -> 2\nFor Matrix 1, Enter the element (row : 1, col : 2) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 0) -> 2\nFor Matrix 1, Enter the element (row : 2, col : 1) -> 45\nFor Matrix 1, Enter the element (row : 2, col : 2) -> 5\n\n+--------+-CopiedMat-+--------+\n+---------+---------+---------+\n|         |         |         |\n|     1   |     2   |     2   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     3   |     2   |     2   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     2   |    45   |     5   |\n|         |         |         |\n+---------+---------+---------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:47:41+05:30",
+      "updated_at": "2026-10-24T09:47:41+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-06",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:49:25+05:30",
+          "command": "gcc q-03-06.c -o ./bin/q-03-06.out && ./bin/q-03-06.out",
+          "mode": "compile-run",
+          "output": "For Matrix , Enter the element (row : 0, col : 0) -> 1\nFor Matrix , Enter the element (row : 0, col : 1) -> 2\nFor Matrix , Enter the element (row : 0, col : 2) -> 1\nFor Matrix , Enter the element (row : 1, col : 0) -> 2\nFor Matrix , Enter the element (row : 1, col : 1) -> 1\nFor Matrix , Enter the element (row : 1, col : 2) -> 2\nFor Matrix , Enter the element (row : 2, col : 0) -> 1\nFor Matrix , Enter the element (row : 2, col : 1) -> 2\nFor Matrix , Enter the element (row : 2, col : 2) -> 1\nEnter The scalar -> 5\n\n+--------+-ScalarMUL-+--------+\n+---------+---------+---------+\n|         |         |         |\n|     5   |    10   |     5   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |     5   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     5   |    10   |     5   |\n|         |         |         |\n+---------+---------+---------+\n",
+          "exit_code": 0,
+          "code_sha256": "4c45510173184ca3d51dda641cda5f4d2b02df6beecccc55671dd44a992db172"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T09:49:25+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 6,
+      "question": "Enter a matrix from the user, multiply it by a scalar value, and display the result.",
+      "source_file": "q-03-06.c",
+      "code": "// Multi-Dimensional Arrays -> Q 06 : Enter a matrix from the user, multiply it by a scalar value, and display the result.\n\n#include <stdio.h>\n#define MATSIZE 3\n\nint main(){\n\n    int matrix1[MATSIZE][MATSIZE] = {0};\n    int scalar;\n\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"For Matrix , Enter the element (row : %d, col : %d) -> \",i,j);\n            scanf(\"%d\",&matrix1[i][j]);\n        }\n    }\n    \n    printf(\"Enter The scalar -> \");\n    scanf(\"%d\",&scalar);\n\n    for (int i = 0; i < MATSIZE ; i++){\n        for (int j = 0; j < MATSIZE ; j++){\n            matrix1[i][j] = matrix1[i][j] * scalar;\n        }\n    }\n\n    printf(\"\\n+--------+-ScalarMUL-+--------+\\n\");\n    printf(\"+---------+---------+---------+\\n\");\n    for (int i = 0; i < MATSIZE ; i++){\n        printf(\"|         |         |         |\\n|\");\n        for (int j = 0; j < MATSIZE ; j++){\n            printf(\"   %3d   |\",matrix1[i][j]);\n            \n        }\n        printf(\"\\n|         |         |         |\\n\");\n        printf(\"+---------+---------+---------+\\n\");\n    }\n\n    return 0;\n}\n",
+      "code_sha256": "4c45510173184ca3d51dda641cda5f4d2b02df6beecccc55671dd44a992db172",
+      "code_updated_at": "2026-10-24T09:49:25+05:30",
+      "command": "gcc q-03-06.c -o ./bin/q-03-06.out && ./bin/q-03-06.out",
+      "output": "For Matrix , Enter the element (row : 0, col : 0) -> 1\nFor Matrix , Enter the element (row : 0, col : 1) -> 2\nFor Matrix , Enter the element (row : 0, col : 2) -> 1\nFor Matrix , Enter the element (row : 1, col : 0) -> 2\nFor Matrix , Enter the element (row : 1, col : 1) -> 1\nFor Matrix , Enter the element (row : 1, col : 2) -> 2\nFor Matrix , Enter the element (row : 2, col : 0) -> 1\nFor Matrix , Enter the element (row : 2, col : 1) -> 2\nFor Matrix , Enter the element (row : 2, col : 2) -> 1\nEnter The scalar -> 5\n\n+--------+-ScalarMUL-+--------+\n+---------+---------+---------+\n|         |         |         |\n|     5   |    10   |     5   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|    10   |     5   |    10   |\n|         |         |         |\n+---------+---------+---------+\n|         |         |         |\n|     5   |    10   |     5   |\n|         |         |         |\n+---------+---------+---------+\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T09:49:25+05:30",
+      "updated_at": "2026-10-24T09:49:25+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-03-07",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T09:50:57+05:30",
+          "command": "gcc q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+          "mode": "compile-run",
+          "output": "q-03-07.c:2:10: fatal error: iostream: No such file or directory\n    2 | #include <iostream>\n      |          ^~~~~~~~~~\ncompilation terminated.\n",
+          "exit_code": 1,
+          "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T09:58:32+05:30",
+          "command": "gcc q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+          "mode": "compile-run",
+          "output": "q-03-07.c:2:10: fatal error: iostream: No such file or directory\n    2 | #include <iostream>\n      |          ^~~~~~~~~~\ncompilation terminated.\n",
+          "exit_code": 1,
+          "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T09:58:42+05:30",
+          "command": "gcc q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+          "mode": "compile-run",
+          "output": "q-03-07.c:2:10: fatal error: iostream: No such file or directory\n    2 | #include <iostream>\n      |          ^~~~~~~~~~\ncompilation terminated.\n",
+          "exit_code": 1,
+          "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T10:01:00+05:30",
+          "command": "gcc q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+          "mode": "compile-run",
+          "output": "q-03-07.c:2:10: fatal error: iostream: No such file or directory\n    2 | #include <iostream>\n      |          ^~~~~~~~~~\ncompilation terminated.\n",
+          "exit_code": 1,
+          "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T10:01:53+05:30",
+          "command": "g++ -x c++ q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+          "mode": "compile-run",
+          "output": "\n-> Menu : \n   -> 1 : Play \n   -> 0 : Exit \n\n-> Enter the Choice : 1\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 0\n|         |         |         |             X : 0\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :1\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |         |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 1\n|         |         |         |             X : 0\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :3\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 1\n|         |         |         |             X : 1\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :5\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 2\n|         |    O    |         |             X : 1\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :9\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 2\n|         |    O    |         |             X : 2\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :7\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 3\n|         |    O    |         |             X : 2\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :6\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 3\n|         |    O    |    X    |             X : 3\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n-> Player X Won\n\n-> Menu : \n   -> 1 : Play \n   -> 0 : Exit \n\n-> Enter the Choice : 0\n  -> Exiting \n",
+          "exit_code": 0,
+          "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e"
+        }
+      ],
+      "run_count": 5,
+      "created_at": "2026-10-24T09:50:57+05:30",
+      "topic": "Multi-Dimensional Arrays",
+      "topic_index": 3,
+      "question_number": 7,
+      "question": "Create a Tic-Tac-Toe game using 2D arrays.",
+      "source_file": "q-03-07.c",
+      "code": "// Multi-Dimensional Arrays -> Q 07 : Create a Tic-Tac-Toe game using 2D arrays.\n#include <iostream>\n#include <string>\n\n    class tictactoe{\n\n\n    private:\n\n    char board[3][3] = { {' ',' ',' '} , {' ',' ',' '} , {' ',' ',' '} };\n    int choice = 0;\n    int state = 0;\n    int o_count = 0 , x_count = 0 ;\n    bool turn_o = true ;\n\n    public:\n\n\n    void display(){\n\n    char turn = 'O';\n    if (turn_o == true){\n        turn = 'O';\n    }\n    else {\n        turn = 'X';\n    }\n\n        \n    std::cout << \"\\n\\n--------------------------------------------------------------\\n\\n\\n\";\n    \n    std::cout << \"-------------------------------\\n\";\n    std::cout << \"|         |         |         |\\n\";\n    std::cout << \"|    \"<<board[0][0]<<\"    |    \"<<board[0][1]<<\"    |    \"<<board[0][2]<< \"    |\\n\";\n    std::cout << \"|        1|        2|        3|\\n\";\n    std::cout << \"-------------------------------\\n\";\n    std::cout << \"|         |         |         |\" << \"             O : \" << o_count << \"\\n\";\n    std::cout << \"|    \"<<board[1][0]<<\"    |    \"<<board[1][1]<<\"    |    \"<< board[1][2]<< \"    |\"<<\"             X : \" << x_count << \"\\n\";;\n    std::cout << \"|        4|        5|        6|\"<<\"             \"<< turn << \"'s Turn\\n\";\n    std::cout << \"-------------------------------\\n\";\n    std::cout << \"|         |         |         |\\n\";\n    std::cout << \"|    \"<<board[2][0]<<\"    |    \"<<board[2][1]<<\"    |    \"<< board[2][2]<< \"    |\\n\";\n    std::cout << \"|        7|        8|        9|\\n\";\n    std::cout << \"-------------------------------\\n\";\n    \n    std::cout << \"\\n\\n--------------------------------------------------------------\\n\\n\\n\";\n    \n    };\n\n    void enter(char player){\n\n            do {\n            std::cout << \"\\n-> Enter the Choice of Player \"<<player<<\" :\";\n            std::cin >> choice;\n\n            if (std::cin.fail() || !(choice > 0 && choice <= 9)){\n                std::cin.clear();\n                std::cin.ignore(1000 , '\\n');\n                std::cout << \"  -> Enter a Valid Position ! \\n\";\n                continue;\n            }\n\n            break;\n\n            }while(true);\n\n        }\n\n    int set_choice(int position , char player){\n\n        switch (position){\n\n            case 1:\n            {\n                board[0][0] = player;\n                break;\n            };\n\n            case 2:\n            {\n                board[0][1] = player;\n                break;\n            };\n\n            case 3:\n            {\n                board[0][2] = player;\n                break;\n            };\n\n            case 4:\n            {\n                board[1][0] = player;\n                break;\n            };\n\n            case 5:\n            {\n                board[1][1] = player;\n                break;\n            };\n\n            case 6:\n            {\n                board[1][2] = player;\n                break;\n            };\n\n            case 7:\n            {\n                board[2][0] = player;\n                break;\n            };\n\n            case 8:\n            {\n                board[2][1] = player;\n                break;\n            };\n\n            case 9:\n            {\n                board[2][2] = player;\n                break;\n            };\n\n            default:\n            return  0;\n\n        }\n\n        return 1;\n\n    }\n    \n\n    bool check_available(int position){\n\n    bool a = false;\n    switch (position){\n\n            case 1:\n            {\n                if (board[0][0] == ' ') \n                a = true;\n                break;\n            };\n\n            case 2:\n            {\n                if (board[0][1] == ' ') \n                a = true;\n                break;\n            };\n\n            case 3:\n            {\n                if (board[0][2] == ' ') \n                a = true;\n                break;\n            };\n\n            case 4:\n            {\n                if (board[1][0] == ' ') \n                a = true;\n                break;\n            };\n\n            case 5:\n            {\n                if (board[1][1] == ' ') \n                a = true;\n                break;\n            };\n\n            case 6:\n            {\n                if (board[1][2] == ' ') \n                a = true;\n                break;\n            };\n\n            case 7:\n            {\n                if (board[2][0] == ' ') \n                a = true;\n                break;\n            };\n\n            case 8:\n            {\n                if (board[2][1] == ' ') \n                a = true;\n                break;\n            };\n\n            case 9:\n            {\n                if (board[2][2] == ' ') \n                a = true;\n                break;\n            };\n        }\n\n        return a;\n\n    }\n\n\n    // 00  01  02\n    // 10  11  12\n    // 20  21  22\n\n    char check_win(){\n        // if (state < 5) {\n        //     return 0;\n        // }\n\n        char a = ' ';\n        int o = 0 , x = 0;\n        for (int i = 0 ; i < 3 ; i ++){\n            if (board[i][0] == ' '){\n                continue;\n            }\n\n            for (int j = 0 ; j < 3 ; j ++){\n                if (board[i][j] == ' '){\n                    continue;\n                }\n                else if (board[i][j] == 'O'){\n                    o ++;\n                }\n                else if (board[i][j] == 'X'){\n                    x ++;\n                }\n            }\n\n            if (o == 3){\n                return 'O';\n            }\n            else if (x == 3){\n                return 'X';\n            }\n            o = 0 , x = 0;\n        }\n\n        \n        o = 0 , x = 0;\n        \n        \n        for (int i = 0 ; i < 3 ; i ++){\n            if (board[0][i] == ' '){\n                continue;\n            }\n            for (int j = 0 ; j < 3 ; j ++){\n                if (board[j][i] == ' '){\n                    continue;\n                }\n                else if (board[j][i] == 'O'){\n                    o ++;\n                }\n                else if (board[j][i] == 'X'){\n                    x ++;\n                }\n            }\n            if (o == 3){\n                return 'O';\n            }\n            else if (x == 3){\n                return 'X';\n            }\n            o = 0 , x = 0;\n        }\n\n\n        // o = 0 , x = 0;\n\n        if ((board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O' ) || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O' )){\n            return 'O';\n        }\n\n        else if ((board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X' ) || (board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X' ) ){\n            return 'X';\n        }\n\n        return ' ';\n\n    }\n\n    int play(){\n\n    char player = 'O' , win = ' ';\n    \n    \n    do {\n\n        if ((o_count + x_count) == 9 ){\n            std::cout << \"-> Game Draw \";\n            return 1;\n        }\n\n        if (turn_o == true){\n            player = 'O';\n        }\n        else {\n            player = 'X';\n        }\n        \n        // ________________\n\n        if (state > 5){\n            win = check_win();\n            if (win == ' ');\n            else {\n                display();\n                std::cout << \"-> Player \"<< win << \" Won\\n\";\n                break;\n            }\n        }\n        \n        // ________________\n\n        display();\n\n        // _______________\n\n        do{\n\n        enter(player); // -> choic set\n\n        if (check_available(choice)){\n            set_choice(choice,player);\n            break;\n        }\n        else{\n            std::cout<<\"    -> Already Filled\\n\";\n        }\n        }while(true);\n\n        // ___________\n\n        if (turn_o == true){\n            // player = 'O';\n            o_count++;\n        }\n        else {\n            // player = 'X';\n            x_count++;\n        }\n\n        // ____________\n\n\n        turn_o = !turn_o;\n        state++;\n\n    }while(true); \n\n    return 1;\n\n    }\n\n\n\n\n    };\n\n\n    void play(){\n    int choice;\n    \n    \n    do {\n        tictactoe a;\n        std::cout<< \"\\n-> Menu : \\n\";\n        std::cout<< \"   -> 1 : Play \\n\";\n        std::cout<< \"   -> 0 : Exit \\n\\n\";\n        std::cout<< \"-> Enter the Choice : \";\n        std::cin >> choice;\n        if (std::cin.fail()){\n                    std::cin.clear();\n                    std::cin.ignore(1000 , '\\n');\n                    std::cout << \"  -> Enter a Valid Choice ! \\n\";\n                    continue;\n                }\n        if (choice == 1){\n            a.play();\n        }\n        else if (choice == 0){\n            std::cout << \"  -> Exiting \\n\";\n            break;\n        }\n        else {\n            std::cout << \"  -> Enter a Valid Choice ! \\n\";\n        }\n\n    }while (true);\n    }\n\n\nint main(){\n\n    play();\n    \n    return 0;\n};",
+      "code_sha256": "e6300456ed69d8f616532ddb02ab61dbd57f117a84fbef49efa5804e8df3bf4e",
+      "code_updated_at": "2026-10-24T09:50:57+05:30",
+      "command": "g++ -x c++ q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out",
+      "output": "\n-> Menu : \n   -> 1 : Play \n   -> 0 : Exit \n\n-> Enter the Choice : 1\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 0\n|         |         |         |             X : 0\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :1\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |         |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 1\n|         |         |         |             X : 0\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :3\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 1\n|         |         |         |             X : 1\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :5\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 2\n|         |    O    |         |             X : 1\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|         |         |         |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :9\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 2\n|         |    O    |         |             X : 2\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|         |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player O :7\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 3\n|         |    O    |         |             X : 2\n|        4|        5|        6|             X's Turn\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n\n-> Enter the Choice of Player X :6\n\n\n--------------------------------------------------------------\n\n\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        1|        2|        3|\n-------------------------------\n|         |         |         |             O : 3\n|         |    O    |    X    |             X : 3\n|        4|        5|        6|             O's Turn\n-------------------------------\n|         |         |         |\n|    O    |         |    X    |\n|        7|        8|        9|\n-------------------------------\n\n\n--------------------------------------------------------------\n\n\n-> Player X Won\n\n-> Menu : \n   -> 1 : Play \n   -> 0 : Exit \n\n-> Enter the Choice : 0\n  -> Exiting \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:01:53+05:30",
+      "updated_at": "2026-10-24T10:01:53+05:30",
+      "output_stale": false
     }
   ]
 }

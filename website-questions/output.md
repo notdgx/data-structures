@@ -1865,3 +1865,1270 @@ Total trapped water -> 98
 <!-- qrun:entry-end id="q-00-20" -->
 
 <!-- qrun:topic-end id="topic-00" -->
+
+<!-- qrun:topic-start id="topic-03" -->
+
+<!-- qrun:field-start topic id="topic-03" -->
+
+# Multi-Dimensional Arrays
+
+<!-- qrun:field-end topic id="topic-03" -->
+
+<!-- qrun:entry-start id="q-03-01" -->
+
+<!-- qrun:field-start question id="q-03-01" -->
+
+## Q 01 : Enter a matrix of 4 rows and 2 columns from the user and display it in matrix format.
+
+<!-- qrun:field-end question id="q-03-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-01" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 01 : Enter a matrix of 4 rows and 2 columns from the user and display it in matrix format.
+
+#include <stdio.h>
+
+int main(){
+
+    int matrix[4][2] = {0};
+
+    for (int i = 0; i < 4 ; i++){
+        for (int j = 0; j < 2 ; j++){
+            printf("Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix[i][j]);
+        }
+    }
+
+    printf("+--------+--------+\n");
+    for (int i = 0; i < 4 ; i++){
+        printf("|                  |\n|");
+        for (int j = 0; j < 2 ; j++){
+            printf("  %3d   |",matrix[i][j]);
+        }
+        printf("\n|                  |\n");
+        printf("+--------+--------+\n");
+            
+    }
+    
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-01" -->
+
+<!-- qrun:field-start output id="q-03-01" -->
+
+```text
+$ gcc q-03-01.c -o ./bin/q-03-01.out && ./bin/q-03-01.out
+Enter the element (row : 0, col : 0) -> 1
+Enter the element (row : 0, col : 1) -> 2
+Enter the element (row : 1, col : 0) -> 3
+Enter the element (row : 1, col : 1) -> 4
+Enter the element (row : 2, col : 0) -> 5
+Enter the element (row : 2, col : 1) -> 6
+Enter the element (row : 3, col : 0) -> 3
+Enter the element (row : 3, col : 1) -> 23
++--------+--------+
+|                  |
+|    1   |    2   |
+|                  |
++--------+--------+
+|                  |
+|    3   |    4   |
+|                  |
++--------+--------+
+|                  |
+|    5   |    6   |
+|                  |
++--------+--------+
+|                  |
+|    3   |   23   |
+|                  |
++--------+--------+
+```
+
+<!-- qrun:field-end output id="q-03-01" -->
+<!-- qrun:entry-end id="q-03-01" -->
+
+
+<!-- qrun:entry-start id="q-03-02" -->
+
+<!-- qrun:field-start question id="q-03-02" -->
+
+## Q 02 : Enter two matrices from the user, add them, and display the result.
+
+<!-- qrun:field-end question id="q-03-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-02" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 02 : Enter two matrices from the user, add them, and display the result.
+
+#include <stdio.h>
+#define MATSIZE 3
+
+int main(){
+
+    int matrix1[MATSIZE][MATSIZE] = {0};
+    int matrix2[MATSIZE][MATSIZE] = {0};
+    int mat_sum[MATSIZE][MATSIZE] = {0};
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 1, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 2, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix2[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            mat_sum[i][j] = matrix1[i][j] + matrix2[i][j];
+        }
+    }
+
+    printf("+---------+---------+---------+\n");
+    for (int i = 0; i < MATSIZE ; i++){
+        printf("|         |         |         |\n|");
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("   %3d   |",mat_sum[i][j]);
+            
+        }
+        printf("\n|         |         |         |\n");
+        printf("+---------+---------+---------+\n");
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-02" -->
+
+<!-- qrun:field-start output id="q-03-02" -->
+
+```text
+$ gcc q-03-02.c -o ./bin/q-03-02.out && ./bin/q-03-02.out
+For Matrix 1, Enter the element (row : 0, col : 0) -> 1
+For Matrix 1, Enter the element (row : 0, col : 1) -> 2
+For Matrix 1, Enter the element (row : 0, col : 2) -> 3
+For Matrix 1, Enter the element (row : 1, col : 0) -> 4
+For Matrix 1, Enter the element (row : 1, col : 1) -> 5
+For Matrix 1, Enter the element (row : 1, col : 2) -> 6
+For Matrix 1, Enter the element (row : 2, col : 0) -> 7
+For Matrix 1, Enter the element (row : 2, col : 1) -> 8
+For Matrix 1, Enter the element (row : 2, col : 2) -> 9
+For Matrix 2, Enter the element (row : 0, col : 0) -> 9
+For Matrix 2, Enter the element (row : 0, col : 1) -> 8
+For Matrix 2, Enter the element (row : 0, col : 2) -> 7
+For Matrix 2, Enter the element (row : 1, col : 0) -> 6
+For Matrix 2, Enter the element (row : 1, col : 1) -> 5
+For Matrix 2, Enter the element (row : 1, col : 2) -> 4
+For Matrix 2, Enter the element (row : 2, col : 0) -> 3
+For Matrix 2, Enter the element (row : 2, col : 1) -> 2
+For Matrix 2, Enter the element (row : 2, col : 2) -> 1
++---------+---------+---------+
+|         |         |         |
+|    10   |    10   |    10   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|    10   |    10   |    10   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|    10   |    10   |    10   |
+|         |         |         |
++---------+---------+---------+
+```
+
+<!-- qrun:field-end output id="q-03-02" -->
+<!-- qrun:entry-end id="q-03-02" -->
+
+
+<!-- qrun:entry-start id="q-03-03" -->
+
+<!-- qrun:field-start question id="q-03-03" -->
+
+## Q 03 : Enter two matrices from the user, subtract them, and display the result.
+
+<!-- qrun:field-end question id="q-03-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-03" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 03 : Enter two matrices from the user, subtract them, and display the result.
+
+#include <stdio.h>
+#define MATSIZE 3
+
+int main(){
+
+    int matrix1[MATSIZE][MATSIZE] = {0};
+    int matrix2[MATSIZE][MATSIZE] = {0};
+    int mat_sub[MATSIZE][MATSIZE] = {0};
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 1, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 2, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix2[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            mat_sub[i][j] = matrix1[i][j] - matrix2[i][j];
+        }
+    }
+
+    printf("+-------+-Subtraction-+-------+\n");
+    printf("+---------+---------+---------+\n");
+    for (int i = 0; i < MATSIZE ; i++){
+        printf("|         |         |         |\n|");
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("   %3d   |",mat_sub[i][j]);
+            
+        }
+        printf("\n|         |         |         |\n");
+        printf("+---------+---------+---------+\n");
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-03" -->
+
+<!-- qrun:field-start output id="q-03-03" -->
+
+```text
+$ gcc q-03-03.c -o ./bin/q-03-03.out && ./bin/q-03-03.out
+For Matrix 1, Enter the element (row : 0, col : 0) -> 1
+For Matrix 1, Enter the element (row : 0, col : 1) -> 23
+For Matrix 1, Enter the element (row : 0, col : 2) -> 4
+For Matrix 1, Enter the element (row : 1, col : 0) -> 26
+For Matrix 1, Enter the element (row : 1, col : 1) -> 75
+For Matrix 1, Enter the element (row : 1, col : 2) -> 24
+For Matrix 1, Enter the element (row : 2, col : 0) -> 5
+For Matrix 1, Enter the element (row : 2, col : 1) -> 32
+For Matrix 1, Enter the element (row : 2, col : 2) -> 
+2
+For Matrix 2, Enter the element (row : 0, col : 0) -> 456
+For Matrix 2, Enter the element (row : 0, col : 1) -> 4
+For Matrix 2, Enter the element (row : 0, col : 2) -> 32
+For Matrix 2, Enter the element (row : 1, col : 0) -> 3
+For Matrix 2, Enter the element (row : 1, col : 1) -> 46
+For Matrix 2, Enter the element (row : 1, col : 2) -> 89
+For Matrix 2, Enter the element (row : 2, col : 0) -> 85
+For Matrix 2, Enter the element (row : 2, col : 1) -> 9
+For Matrix 2, Enter the element (row : 2, col : 2) -> 54
++-------+-Subtraction-+-------+
++---------+---------+---------+
+|         |         |         |
+|   -455   |    19   |   -28   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|    23   |    29   |   -65   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|   -80   |    23   |   -52   |
+|         |         |         |
++---------+---------+---------+
+```
+
+<!-- qrun:field-end output id="q-03-03" -->
+<!-- qrun:entry-end id="q-03-03" -->
+
+
+<!-- qrun:entry-start id="q-03-04" -->
+
+<!-- qrun:field-start question id="q-03-04" -->
+
+## Q 04 : Enter two matrices from the user, multiply them, and display the result.
+
+<!-- qrun:field-end question id="q-03-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-04" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 04 : Enter two matrices from the user, multiply them, and display the result.
+
+#include <stdio.h>
+#define MATSIZE 3
+
+int main(){
+
+    int matrix1[MATSIZE][MATSIZE] = {0};
+    int matrix2[MATSIZE][MATSIZE] = {0};
+    int mat_mul[MATSIZE][MATSIZE] = {0};
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 1, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 2, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix2[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            int sum = 0;
+            for (int k = 0; k < MATSIZE; k++) {
+                        sum += matrix1[i][k] * matrix2[k][j];
+                    }
+
+                    mat_mul[i][j] = sum;
+
+        }
+    }
+
+    printf("\n+--------+-Multiiply-+--------+\n");
+    printf("+---------+---------+---------+\n");
+    for (int i = 0; i < MATSIZE ; i++){
+        printf("|         |         |         |\n|");
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("   %3d   |",mat_mul[i][j]);
+            
+        }
+        printf("\n|         |         |         |\n");
+        printf("+---------+---------+---------+\n");
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-04" -->
+
+<!-- qrun:field-start output id="q-03-04" -->
+
+```text
+$ gcc q-03-04.c -o ./bin/q-03-04.out && ./bin/q-03-04.out
+For Matrix 1, Enter the element (row : 0, col : 0) -> 1
+For Matrix 1, Enter the element (row : 0, col : 1) -> 2
+For Matrix 1, Enter the element (row : 0, col : 2) -> 3
+For Matrix 1, Enter the element (row : 1, col : 0) -> 1
+For Matrix 1, Enter the element (row : 1, col : 1) -> 
+2
+For Matrix 1, Enter the element (row : 1, col : 2) -> 2
+For Matrix 1, Enter the element (row : 2, col : 0) -> 2
+For Matrix 1, Enter the element (row : 2, col : 1) -> 1
+For Matrix 1, Enter the element (row : 2, col : 2) -> 2
+For Matrix 2, Enter the element (row : 0, col : 0) -> 3
+For Matrix 2, Enter the element (row : 0, col : 1) -> 1
+For Matrix 2, Enter the element (row : 0, col : 2) -> 3
+For Matrix 2, Enter the element (row : 1, col : 0) -> 2
+For Matrix 2, Enter the element (row : 1, col : 1) -> 2
+For Matrix 2, Enter the element (row : 1, col : 2) -> 3
+For Matrix 2, Enter the element (row : 2, col : 0) -> 1
+For Matrix 2, Enter the element (row : 2, col : 1) -> 3
+For Matrix 2, Enter the element (row : 2, col : 2) -> 2
+
++--------+-Multiiply-+--------+
++---------+---------+---------+
+|         |         |         |
+|    10   |    14   |    15   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|     9   |    11   |    13   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|    10   |    10   |    13   |
+|         |         |         |
++---------+---------+---------+
+```
+
+<!-- qrun:field-end output id="q-03-04" -->
+<!-- qrun:entry-end id="q-03-04" -->
+
+
+<!-- qrun:entry-start id="q-03-05" -->
+
+<!-- qrun:field-start question id="q-03-05" -->
+
+## Q 05 : Enter a matrix from the user and copy it into another matrix of the same size.
+
+<!-- qrun:field-end question id="q-03-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-05" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 05 : Enter a matrix from the user and copy it into another matrix of the same size.
+
+#include <stdio.h>
+#define MATSIZE 3
+
+int main(){
+
+    int matrix1[MATSIZE][MATSIZE] = {0};
+    int copied[MATSIZE][MATSIZE] = {0};
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix 1, Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            copied[i][j] = matrix1[i][j];
+        }
+    }
+
+    printf("\n+--------+-CopiedMat-+--------+\n");
+    printf("+---------+---------+---------+\n");
+    for (int i = 0; i < MATSIZE ; i++){
+        printf("|         |         |         |\n|");
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("   %3d   |",copied[i][j]);
+            
+        }
+        printf("\n|         |         |         |\n");
+        printf("+---------+---------+---------+\n");
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-05" -->
+
+<!-- qrun:field-start output id="q-03-05" -->
+
+```text
+$ gcc q-03-05.c -o ./bin/q-03-05.out && ./bin/q-03-05.out
+For Matrix 1, Enter the element (row : 0, col : 0) -> 1
+For Matrix 1, Enter the element (row : 0, col : 1) -> 2
+For Matrix 1, Enter the element (row : 0, col : 2) -> 2
+For Matrix 1, Enter the element (row : 1, col : 0) -> 3
+For Matrix 1, Enter the element (row : 1, col : 1) -> 2
+For Matrix 1, Enter the element (row : 1, col : 2) -> 2
+For Matrix 1, Enter the element (row : 2, col : 0) -> 2
+For Matrix 1, Enter the element (row : 2, col : 1) -> 45
+For Matrix 1, Enter the element (row : 2, col : 2) -> 5
+
++--------+-CopiedMat-+--------+
++---------+---------+---------+
+|         |         |         |
+|     1   |     2   |     2   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|     3   |     2   |     2   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|     2   |    45   |     5   |
+|         |         |         |
++---------+---------+---------+
+```
+
+<!-- qrun:field-end output id="q-03-05" -->
+<!-- qrun:entry-end id="q-03-05" -->
+
+
+<!-- qrun:entry-start id="q-03-06" -->
+
+<!-- qrun:field-start question id="q-03-06" -->
+
+## Q 06 : Enter a matrix from the user, multiply it by a scalar value, and display the result.
+
+<!-- qrun:field-end question id="q-03-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-06" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 06 : Enter a matrix from the user, multiply it by a scalar value, and display the result.
+
+#include <stdio.h>
+#define MATSIZE 3
+
+int main(){
+
+    int matrix1[MATSIZE][MATSIZE] = {0};
+    int scalar;
+
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("For Matrix , Enter the element (row : %d, col : %d) -> ",i,j);
+            scanf("%d",&matrix1[i][j]);
+        }
+    }
+    
+    printf("Enter The scalar -> ");
+    scanf("%d",&scalar);
+
+    for (int i = 0; i < MATSIZE ; i++){
+        for (int j = 0; j < MATSIZE ; j++){
+            matrix1[i][j] = matrix1[i][j] * scalar;
+        }
+    }
+
+    printf("\n+--------+-ScalarMUL-+--------+\n");
+    printf("+---------+---------+---------+\n");
+    for (int i = 0; i < MATSIZE ; i++){
+        printf("|         |         |         |\n|");
+        for (int j = 0; j < MATSIZE ; j++){
+            printf("   %3d   |",matrix1[i][j]);
+            
+        }
+        printf("\n|         |         |         |\n");
+        printf("+---------+---------+---------+\n");
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-03-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-06" -->
+
+<!-- qrun:field-start output id="q-03-06" -->
+
+```text
+$ gcc q-03-06.c -o ./bin/q-03-06.out && ./bin/q-03-06.out
+For Matrix , Enter the element (row : 0, col : 0) -> 1
+For Matrix , Enter the element (row : 0, col : 1) -> 2
+For Matrix , Enter the element (row : 0, col : 2) -> 1
+For Matrix , Enter the element (row : 1, col : 0) -> 2
+For Matrix , Enter the element (row : 1, col : 1) -> 1
+For Matrix , Enter the element (row : 1, col : 2) -> 2
+For Matrix , Enter the element (row : 2, col : 0) -> 1
+For Matrix , Enter the element (row : 2, col : 1) -> 2
+For Matrix , Enter the element (row : 2, col : 2) -> 1
+Enter The scalar -> 5
+
++--------+-ScalarMUL-+--------+
++---------+---------+---------+
+|         |         |         |
+|     5   |    10   |     5   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|    10   |     5   |    10   |
+|         |         |         |
++---------+---------+---------+
+|         |         |         |
+|     5   |    10   |     5   |
+|         |         |         |
++---------+---------+---------+
+```
+
+<!-- qrun:field-end output id="q-03-06" -->
+<!-- qrun:entry-end id="q-03-06" -->
+
+
+<!-- qrun:entry-start id="q-03-07" -->
+
+<!-- qrun:field-start question id="q-03-07" -->
+
+## Q 07 : Create a Tic-Tac-Toe game using 2D arrays.
+
+<!-- qrun:field-end question id="q-03-07" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-03-07" -->
+
+```c
+// Multi-Dimensional Arrays -> Q 07 : Create a Tic-Tac-Toe game using 2D arrays.
+#include <iostream>
+#include <string>
+
+    class tictactoe{
+
+
+    private:
+
+    char board[3][3] = { {' ',' ',' '} , {' ',' ',' '} , {' ',' ',' '} };
+    int choice = 0;
+    int state = 0;
+    int o_count = 0 , x_count = 0 ;
+    bool turn_o = true ;
+
+    public:
+
+
+    void display(){
+
+    char turn = 'O';
+    if (turn_o == true){
+        turn = 'O';
+    }
+    else {
+        turn = 'X';
+    }
+
+        
+    std::cout << "\n\n--------------------------------------------------------------\n\n\n";
+    
+    std::cout << "-------------------------------\n";
+    std::cout << "|         |         |         |\n";
+    std::cout << "|    "<<board[0][0]<<"    |    "<<board[0][1]<<"    |    "<<board[0][2]<< "    |\n";
+    std::cout << "|        1|        2|        3|\n";
+    std::cout << "-------------------------------\n";
+    std::cout << "|         |         |         |" << "             O : " << o_count << "\n";
+    std::cout << "|    "<<board[1][0]<<"    |    "<<board[1][1]<<"    |    "<< board[1][2]<< "    |"<<"             X : " << x_count << "\n";;
+    std::cout << "|        4|        5|        6|"<<"             "<< turn << "'s Turn\n";
+    std::cout << "-------------------------------\n";
+    std::cout << "|         |         |         |\n";
+    std::cout << "|    "<<board[2][0]<<"    |    "<<board[2][1]<<"    |    "<< board[2][2]<< "    |\n";
+    std::cout << "|        7|        8|        9|\n";
+    std::cout << "-------------------------------\n";
+    
+    std::cout << "\n\n--------------------------------------------------------------\n\n\n";
+    
+    };
+
+    void enter(char player){
+
+            do {
+            std::cout << "\n-> Enter the Choice of Player "<<player<<" :";
+            std::cin >> choice;
+
+            if (std::cin.fail() || !(choice > 0 && choice <= 9)){
+                std::cin.clear();
+                std::cin.ignore(1000 , '\n');
+                std::cout << "  -> Enter a Valid Position ! \n";
+                continue;
+            }
+
+            break;
+
+            }while(true);
+
+        }
+
+    int set_choice(int position , char player){
+
+        switch (position){
+
+            case 1:
+            {
+                board[0][0] = player;
+                break;
+            };
+
+            case 2:
+            {
+                board[0][1] = player;
+                break;
+            };
+
+            case 3:
+            {
+                board[0][2] = player;
+                break;
+            };
+
+            case 4:
+            {
+                board[1][0] = player;
+                break;
+            };
+
+            case 5:
+            {
+                board[1][1] = player;
+                break;
+            };
+
+            case 6:
+            {
+                board[1][2] = player;
+                break;
+            };
+
+            case 7:
+            {
+                board[2][0] = player;
+                break;
+            };
+
+            case 8:
+            {
+                board[2][1] = player;
+                break;
+            };
+
+            case 9:
+            {
+                board[2][2] = player;
+                break;
+            };
+
+            default:
+            return  0;
+
+        }
+
+        return 1;
+
+    }
+    
+
+    bool check_available(int position){
+
+    bool a = false;
+    switch (position){
+
+            case 1:
+            {
+                if (board[0][0] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 2:
+            {
+                if (board[0][1] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 3:
+            {
+                if (board[0][2] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 4:
+            {
+                if (board[1][0] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 5:
+            {
+                if (board[1][1] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 6:
+            {
+                if (board[1][2] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 7:
+            {
+                if (board[2][0] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 8:
+            {
+                if (board[2][1] == ' ') 
+                a = true;
+                break;
+            };
+
+            case 9:
+            {
+                if (board[2][2] == ' ') 
+                a = true;
+                break;
+            };
+        }
+
+        return a;
+
+    }
+
+
+    // 00  01  02
+    // 10  11  12
+    // 20  21  22
+
+    char check_win(){
+        // if (state < 5) {
+        //     return 0;
+        // }
+
+        char a = ' ';
+        int o = 0 , x = 0;
+        for (int i = 0 ; i < 3 ; i ++){
+            if (board[i][0] == ' '){
+                continue;
+            }
+
+            for (int j = 0 ; j < 3 ; j ++){
+                if (board[i][j] == ' '){
+                    continue;
+                }
+                else if (board[i][j] == 'O'){
+                    o ++;
+                }
+                else if (board[i][j] == 'X'){
+                    x ++;
+                }
+            }
+
+            if (o == 3){
+                return 'O';
+            }
+            else if (x == 3){
+                return 'X';
+            }
+            o = 0 , x = 0;
+        }
+
+        
+        o = 0 , x = 0;
+        
+        
+        for (int i = 0 ; i < 3 ; i ++){
+            if (board[0][i] == ' '){
+                continue;
+            }
+            for (int j = 0 ; j < 3 ; j ++){
+                if (board[j][i] == ' '){
+                    continue;
+                }
+                else if (board[j][i] == 'O'){
+                    o ++;
+                }
+                else if (board[j][i] == 'X'){
+                    x ++;
+                }
+            }
+            if (o == 3){
+                return 'O';
+            }
+            else if (x == 3){
+                return 'X';
+            }
+            o = 0 , x = 0;
+        }
+
+
+        // o = 0 , x = 0;
+
+        if ((board[0][0] == 'O' && board[1][1] == 'O' && board[2][2] == 'O' ) || (board[0][2] == 'O' && board[1][1] == 'O' && board[2][0] == 'O' )){
+            return 'O';
+        }
+
+        else if ((board[0][2] == 'X' && board[1][1] == 'X' && board[2][0] == 'X' ) || (board[0][0] == 'X' && board[1][1] == 'X' && board[2][2] == 'X' ) ){
+            return 'X';
+        }
+
+        return ' ';
+
+    }
+
+    int play(){
+
+    char player = 'O' , win = ' ';
+    
+    
+    do {
+
+        if ((o_count + x_count) == 9 ){
+            std::cout << "-> Game Draw ";
+            return 1;
+        }
+
+        if (turn_o == true){
+            player = 'O';
+        }
+        else {
+            player = 'X';
+        }
+        
+        // ________________
+
+        if (state > 5){
+            win = check_win();
+            if (win == ' ');
+            else {
+                display();
+                std::cout << "-> Player "<< win << " Won\n";
+                break;
+            }
+        }
+        
+        // ________________
+
+        display();
+
+        // _______________
+
+        do{
+
+        enter(player); // -> choic set
+
+        if (check_available(choice)){
+            set_choice(choice,player);
+            break;
+        }
+        else{
+            std::cout<<"    -> Already Filled\n";
+        }
+        }while(true);
+
+        // ___________
+
+        if (turn_o == true){
+            // player = 'O';
+            o_count++;
+        }
+        else {
+            // player = 'X';
+            x_count++;
+        }
+
+        // ____________
+
+
+        turn_o = !turn_o;
+        state++;
+
+    }while(true); 
+
+    return 1;
+
+    }
+
+
+
+
+    };
+
+
+    void play(){
+    int choice;
+    
+    
+    do {
+        tictactoe a;
+        std::cout<< "\n-> Menu : \n";
+        std::cout<< "   -> 1 : Play \n";
+        std::cout<< "   -> 0 : Exit \n\n";
+        std::cout<< "-> Enter the Choice : ";
+        std::cin >> choice;
+        if (std::cin.fail()){
+                    std::cin.clear();
+                    std::cin.ignore(1000 , '\n');
+                    std::cout << "  -> Enter a Valid Choice ! \n";
+                    continue;
+                }
+        if (choice == 1){
+            a.play();
+        }
+        else if (choice == 0){
+            std::cout << "  -> Exiting \n";
+            break;
+        }
+        else {
+            std::cout << "  -> Enter a Valid Choice ! \n";
+        }
+
+    }while (true);
+    }
+
+
+int main(){
+
+    play();
+    
+    return 0;
+};
+```
+
+<!-- qrun:field-end code id="q-03-07" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-03-07" -->
+
+
+
+<!-- qrun:field-end freshness id="q-03-07" -->
+
+<!-- qrun:field-start output id="q-03-07" -->
+
+```text
+$ g++ -x c++ q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out
+
+-> Menu : 
+   -> 1 : Play 
+   -> 0 : Exit 
+
+-> Enter the Choice : 1
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|         |         |         |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 0
+|         |         |         |             X : 0
+|        4|        5|        6|             O's Turn
+-------------------------------
+|         |         |         |
+|         |         |         |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player O :1
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |         |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 1
+|         |         |         |             X : 0
+|        4|        5|        6|             X's Turn
+-------------------------------
+|         |         |         |
+|         |         |         |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player X :3
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 1
+|         |         |         |             X : 1
+|        4|        5|        6|             O's Turn
+-------------------------------
+|         |         |         |
+|         |         |         |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player O :5
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 2
+|         |    O    |         |             X : 1
+|        4|        5|        6|             X's Turn
+-------------------------------
+|         |         |         |
+|         |         |         |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player X :9
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 2
+|         |    O    |         |             X : 2
+|        4|        5|        6|             O's Turn
+-------------------------------
+|         |         |         |
+|         |         |    X    |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player O :7
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 3
+|         |    O    |         |             X : 2
+|        4|        5|        6|             X's Turn
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+
+-> Enter the Choice of Player X :6
+
+
+--------------------------------------------------------------
+
+
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        1|        2|        3|
+-------------------------------
+|         |         |         |             O : 3
+|         |    O    |    X    |             X : 3
+|        4|        5|        6|             O's Turn
+-------------------------------
+|         |         |         |
+|    O    |         |    X    |
+|        7|        8|        9|
+-------------------------------
+
+
+--------------------------------------------------------------
+
+
+-> Player X Won
+
+-> Menu : 
+   -> 1 : Play 
+   -> 0 : Exit 
+
+-> Enter the Choice : 0
+  -> Exiting 
+```
+
+<!-- qrun:field-end output id="q-03-07" -->
+<!-- qrun:entry-end id="q-03-07" -->
+
+<!-- qrun:topic-end id="topic-03" -->
