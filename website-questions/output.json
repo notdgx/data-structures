@@ -1251,6 +1251,753 @@
       "last_run_at": "2026-10-24T10:01:53+05:30",
       "updated_at": "2026-10-24T10:01:53+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-01-01",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:17:17+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hellojsfsffsffsfsfsfsfff\nThe String you entered in UPPERCASE -> HELLOJSFS",
+          "exit_code": 0,
+          "code_sha256": "f2847b96454948720319267f5d3163ecb87244e6349f4b692ef4bcf182b79da0"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T10:20:19+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> fsds\nd\n\n\nThe String you entered in UPPERCASE -> FSDS\nD\n\n\n",
+          "exit_code": 0,
+          "code_sha256": "f2847b96454948720319267f5d3163ecb87244e6349f4b692ef4bcf182b79da0"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T10:20:27+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> \n\n\n\n\n\n\n\n\nThe String you entered in UPPERCASE -> \n\n\n\n\n\n\n\n\n",
+          "exit_code": 0,
+          "code_sha256": "f2847b96454948720319267f5d3163ecb87244e6349f4b692ef4bcf182b79da0"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T10:21:07+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "q-01-01.c: In function ‘main’:\nq-01-01.c:12:14: error: expected expression before ‘=’ token\n   12 |         ch = = getchar();\n      |              ^\n",
+          "exit_code": 1,
+          "code_sha256": "4a738c53fab780bd4078eeeda0bbba04bee256f87e502964112c3517f84806f3"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T10:21:12+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> \nThe String you entered in UPPERCASE -> ",
+          "exit_code": 0,
+          "code_sha256": "56cea0f6f255affd3f24abc8f1a2410151397eaff7a028e0c50c44757b6dece5"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T10:21:16+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "2Enter the string -> ^C",
+          "exit_code": 130,
+          "code_sha256": "56cea0f6f255affd3f24abc8f1a2410151397eaff7a028e0c50c44757b6dece5"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T10:21:21+05:30",
+          "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello ad\nThe String you entered in UPPERCASE -> HELLO AD",
+          "exit_code": 0,
+          "code_sha256": "56cea0f6f255affd3f24abc8f1a2410151397eaff7a028e0c50c44757b6dece5"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-24T10:17:17+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 1,
+      "question": "Enter a string from the user and convert it to uppercase.",
+      "source_file": "q-01-01.c",
+      "code": "// Strings -> Q 01 : Enter a string from the user and convert it to uppercase.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[10],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for(i = 0; i < s-1 ; i++){\n        if (str[i] >= 97 && str[i] <= 122 ){\n            str[i] = str[i] -32;\n        }\n    }\n\n    printf(\"The String you entered in UPPERCASE -> %s\",str);\n    \n    return 0;\n}\n",
+      "code_sha256": "56cea0f6f255affd3f24abc8f1a2410151397eaff7a028e0c50c44757b6dece5",
+      "code_updated_at": "2026-10-24T10:21:12+05:30",
+      "command": "gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out",
+      "output": "Enter the string -> hello ad\nThe String you entered in UPPERCASE -> HELLO AD",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:21:21+05:30",
+      "updated_at": "2026-10-24T10:21:21+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-03",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:22:34+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "",
+          "exit_code": 0,
+          "code_sha256": "ed8a6776cc2c5c48f07522f57c1b54068907291d1bb84b230552bbaac4cd985d"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T10:27:34+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello MISter tONY   sTanK\nThe String you entered in Sentence case -> Hello MISTer Tony   Stank",
+          "exit_code": 0,
+          "code_sha256": "4bebee68a8dfb06444f894f98ee2eb1b361748fc16711f49a1885743d34fe908"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T10:28:32+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello miSTER tOnY StANK\nThe String you entered in Sentence case -> HELLO MIster ToNy STank",
+          "exit_code": 0,
+          "code_sha256": "27679771ad3730848c088637baec35b1e125c15ffc2a8605b9abf5e1cb624d14"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T10:33:06+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> heLLO MISFJ csDFS fnsFF\nThe String you entered in Sentence case -> Hello MISFJ Csdfs Fnsff",
+          "exit_code": 0,
+          "code_sha256": "907ccf4368857d7bfc264ef23d944fd9a133e5ddd8e864f13627ac3722cbbc0b"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T10:35:38+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Helel MISDDF gSDFdF KkKk\nThe String you entered in Sentence case -> hElel misddf GsdfDf kKkK",
+          "exit_code": 0,
+          "code_sha256": "e0dbe89f5b5010c426fa137f9445958572e6cdf22e1db23f6560d74cd8f43532"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T10:36:36+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello MISTER tONy stANK\nThe String you entered in Sentence case -> Hello mister Tony Stank",
+          "exit_code": 0,
+          "code_sha256": "f32d52478e1cd859cd0df5caba1a0b8a1c49b8531d0898a649d6af31011029bd"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T10:37:17+05:30",
+          "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello MISTER toNY sTAnK\nThe String you entered in Sentence case -> Hello Mister Tony Stank",
+          "exit_code": 0,
+          "code_sha256": "c6f75fd9c17b95821dc23ad46b74db0a110ff355656c693a3762c703f3d61d3f"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-24T10:22:34+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 3,
+      "question": "Enter a string from the user and convert it into sentence case.",
+      "source_file": "q-01-03.c",
+      "code": "// Strings -> Q 03 : Enter a string from the user and convert it into sentence case.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[100],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    int flag = 0;\n    for(i = 0; i < s-1 ; i++){\n        if (str[i] >= 97 && str[i] <= 122 ){\n            if (flag == 0){\n                str[i] = str[i] -32;\n            flag = 1;}\n        }\n        else if(str[i] >= 65 && str[i] <= 90 ){\n            if (flag == 0){\n                flag = 1;\n            }\n            else{\n            str[i] = str[i] + 32;}\n        }\n        else if (str[i] == ' ' && flag == 1){\n            flag = 0;\n        }\n    }\n\n    printf(\"The String you entered in Sentence case -> %s\",str);\n    \n    return 0;\n}\n",
+      "code_sha256": "c6f75fd9c17b95821dc23ad46b74db0a110ff355656c693a3762c703f3d61d3f",
+      "code_updated_at": "2026-10-24T10:37:17+05:30",
+      "command": "gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out",
+      "output": "Enter the string -> hello MISTER toNY sTAnK\nThe String you entered in Sentence case -> Hello Mister Tony Stank",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:37:17+05:30",
+      "updated_at": "2026-10-24T10:37:17+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-02",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:22:47+05:30",
+          "command": "gcc q-01-02.c -o ./bin/q-01-02.out && ./bin/q-01-02.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> HELLO JR\nThe String you entered in lowercase -> hello jr",
+          "exit_code": 0,
+          "code_sha256": "e123c2533a81c62611c62284480f3dae83aa432ed3aee0a5761f176ba7f322c8"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T10:22:47+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 2,
+      "question": "Enter a string from the user and convert it to lowercase.",
+      "source_file": "q-01-02.c",
+      "code": "// Strings -> Q 02 : Enter a string from the user and convert it to lowercase.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[10],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for(i = 0; i < s-1 ; i++){\n        if (str[i] >= 65 && str[i] <= 90 ){\n            str[i] = str[i] + 32;\n        }\n    }\n\n    printf(\"The String you entered in lowercase -> %s\",str);\n    \n    return 0;\n}\n",
+      "code_sha256": "e123c2533a81c62611c62284480f3dae83aa432ed3aee0a5761f176ba7f322c8",
+      "code_updated_at": "2026-10-24T10:22:47+05:30",
+      "command": "gcc q-01-02.c -o ./bin/q-01-02.out && ./bin/q-01-02.out",
+      "output": "Enter the string -> HELLO JR\nThe String you entered in lowercase -> hello jr",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:22:47+05:30",
+      "updated_at": "2026-10-24T10:22:47+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-04",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:43:42+05:30",
+          "command": "gcc q-01-04.c -o ./bin/q-01-04.out && ./bin/q-01-04.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hello MISTER tONY sTARK\nThe String you entered in Title  case -> Hello mister tony stark",
+          "exit_code": 0,
+          "code_sha256": "340bddee077785e80bdd191a55b51de47136c942f3538bb37976912b67cabf88"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T10:43:42+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 4,
+      "question": "Enter a string from the user and convert it into title case.",
+      "source_file": "q-01-04.c",
+      "code": "// Strings -> Q 04 : Enter a string from the user and convert it into title case.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[100],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    int flag = 0;\n    for(i = 0; i < s-1 ; i++){\n        if (str[i]>='a' && str[i]<='z'){\n            if (flag == 0){\n                flag = 1;\n                str[i] -= 32; \n            }\n        }\n        else if (str[i]>='A' && str[i]<='Z'){\n            if (flag == 0){\n                flag = 1;\n            }\n            else {\n                str[i] += 32;\n            }\n        }\n\n    }\n\n    printf(\"The String you entered in Title  case -> %s\",str);\n    \n    return 0;\n}\n",
+      "code_sha256": "340bddee077785e80bdd191a55b51de47136c942f3538bb37976912b67cabf88",
+      "code_updated_at": "2026-10-24T10:43:42+05:30",
+      "command": "gcc q-01-04.c -o ./bin/q-01-04.out && ./bin/q-01-04.out",
+      "output": "Enter the string -> Hello MISTER tONY sTARK\nThe String you entered in Title  case -> Hello mister tony stark",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:43:42+05:30",
+      "updated_at": "2026-10-24T10:43:42+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-05",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:44:48+05:30",
+          "command": "gcc q-01-05.c -o ./bin/q-01-05.out && ./bin/q-01-05.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hello Mister Tony StARK\nThe String you entered in Toggle  case -> hELLO mISTER tONY sTark",
+          "exit_code": 0,
+          "code_sha256": "e8bdd9c963b9bc53bcdc9b3977d1e2bd2f643f7a195526d3c665cacd96124e6e"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T10:44:48+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 5,
+      "question": "Enter a string from the user and convert it into toggle case.",
+      "source_file": "q-01-05.c",
+      "code": "// Strings -> Q 05 : Enter a string from the user and convert it into toggle case.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[100],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for(i = 0; i < s-1 ; i++){\n        if (str[i]>='a' && str[i]<='z'){\n                str[i] -= 32; \n\n        }\n        else if (str[i]>='A' && str[i]<='Z'){\n                str[i] += 32;\n        }\n\n    }\n\n    printf(\"The String you entered in Toggle  case -> %s\",str);\n    \n    return 0;\n}\n",
+      "code_sha256": "e8bdd9c963b9bc53bcdc9b3977d1e2bd2f643f7a195526d3c665cacd96124e6e",
+      "code_updated_at": "2026-10-24T10:44:48+05:30",
+      "command": "gcc q-01-05.c -o ./bin/q-01-05.out && ./bin/q-01-05.out",
+      "output": "Enter the string -> Hello Mister Tony StARK\nThe String you entered in Toggle  case -> hELLO mISTER tONY sTark",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:44:48+05:30",
+      "updated_at": "2026-10-24T10:44:48+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-06",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:48:32+05:30",
+          "command": "gcc q-01-06.c -o ./bin/q-01-06.out && ./bin/q-01-06.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hello To the World\nThe String you entered -> Hello To the World\nLength of the string is -> 18",
+          "exit_code": 0,
+          "code_sha256": "acb817e6c234ee59e6115ef838287befc3fbe686c647d9e0c98160e5c467ccd3"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T10:48:32+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 6,
+      "question": "Enter a string from the user and find its length.",
+      "source_file": "q-01-06.c",
+      "code": "// Strings -> Q 06 : Enter a string from the user and find its length.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[100],ch;\n    int s = sizeof(str)/sizeof(str[0]) , i;\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    printf(\"The String you entered -> \");\n    int length = printf(\"%s\",str);\n    printf(\"\\nLength of the string is -> %d\",length);\n    \n    return 0;\n}\n",
+      "code_sha256": "acb817e6c234ee59e6115ef838287befc3fbe686c647d9e0c98160e5c467ccd3",
+      "code_updated_at": "2026-10-24T10:48:32+05:30",
+      "command": "gcc q-01-06.c -o ./bin/q-01-06.out && ./bin/q-01-06.out",
+      "output": "Enter the string -> Hello To the World\nThe String you entered -> Hello To the World\nLength of the string is -> 18",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T10:48:32+05:30",
+      "updated_at": "2026-10-24T10:48:32+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-07",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T10:52:03+05:30",
+          "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello to the World\nEnter the string 2-> Hello to the World\nThe String 1 you entered -> Hello to the World\nThe String 2 you entered -> Hello to the World\nNot Equal\n",
+          "exit_code": 0,
+          "code_sha256": "c5253a6319da11b11f3ee050048d57e8bcb6ced986a6059014dff7d9512ff6f9"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T10:53:21+05:30",
+          "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> Hello World\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> Hello World\nNot Equal\n",
+          "exit_code": 0,
+          "code_sha256": "f4fc37dcfd9bfb4b3003d291e9f78bdd3e254caa21ee81a645ec4f1219b71f0b"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T11:40:37+05:30",
+          "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> Hello World\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> Hello World\nNot Equal\n",
+          "exit_code": 0,
+          "code_sha256": "bf2462a2f88d4598fee3b73a6e9d5900d14488d188cea31bd685c9caa52b950a"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T11:40:43+05:30",
+          "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello\nEnter the string 2 -> Hello\nThe String 1 you entered -> Hello\nThe String 2 you entered -> Hello\nNot Equal\n",
+          "exit_code": 0,
+          "code_sha256": "bf2462a2f88d4598fee3b73a6e9d5900d14488d188cea31bd685c9caa52b950a"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T11:41:11+05:30",
+          "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> Hello World\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> Hello World\nEqual\n",
+          "exit_code": 1,
+          "code_sha256": "2a195d3f039cf513aa5c4afb511e02e4428e3033fd53614c06a3366b4056656d"
+        }
+      ],
+      "run_count": 5,
+      "created_at": "2026-10-24T10:52:03+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 7,
+      "question": "Enter two strings from the user and compare whether they are equal.",
+      "source_file": "q-01-07.c",
+      "code": "// Strings -> Q 07 : Enter two strings from the user and compare whether they are equal.\n\n#include <stdio.h>\n// #include <conio.>\n\nint main(){\n\n    char str[100],ch;\n    char str2[100];\n    int s = sizeof(str)/sizeof(str[0]) , i,j;\n\n    printf(\"Enter the string 1 -> \") ;\n    for(i = 0 ; i < s-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    printf(\"Enter the string 2 -> \") ;\n    for(j= 0 ; j < s-1;j++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str2[j] = ch;\n    }\n    str2[j] ='\\0';\n\n\n    printf(\"The String 1 you entered -> %s\\n\",str);\n    printf(\"The String 2 you entered -> %s\\n\",str2);\n\n    if (i != j){\n        printf(\"Not Equal\\n\");\n        return 0;\n    }\n    for(int k = 0 ; k<i ; i++){\n        if (str[k] != str2[k]){\n            printf(\"Not Equal\\n\");\n            return 0;\n        }\n    }\n    printf(\"Equal\\n\");\n    \n    return 1;\n}\n",
+      "code_sha256": "2a195d3f039cf513aa5c4afb511e02e4428e3033fd53614c06a3366b4056656d",
+      "code_updated_at": "2026-10-24T11:41:11+05:30",
+      "command": "gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out",
+      "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> Hello World\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> Hello World\nEqual\n",
+      "exit_code": 1,
+      "last_run_at": "2026-10-24T11:41:11+05:30",
+      "updated_at": "2026-10-24T11:41:11+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-08",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T11:45:54+05:30",
+          "command": "gcc q-01-08.c -o ./bin/q-01-08.out && ./bin/q-01-08.out",
+          "mode": "compile-run",
+          "output": "q-01-08.c: In function ‘main’:\nq-01-08.c:22:24: error: expected ‘;’ before ‘}’ token\n   22 |         str_cat[i] = ch\n      |                        ^\n      |                        ;\n   23 |     }\n      |     ~                   \n",
+          "exit_code": 1,
+          "code_sha256": "694ac65528b70c1f8025e66f6a9a39a5ec19a69fbadbf4561e97f4e33d590a9c"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T11:46:14+05:30",
+          "command": "gcc q-01-08.c -o ./bin/q-01-08.out && ./bin/q-01-08.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World \nEnter the string 2 -> How Are you?\nThe String 1 you entered -> Hello World \nThe String 2 you entered -> How Are you?\nThe String Concatinated -> Hello World How Are you?\n",
+          "exit_code": 0,
+          "code_sha256": "654e31a2084a729b20af8f51a26ee4e325e67a189396806a4822ae6524d5e88b"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T11:46:32+05:30",
+          "command": "gcc q-01-08.c -o ./bin/q-01-08.out && ./bin/q-01-08.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> How are You\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> How are You\nThe String Concatinated -> Hello WorldHow are You\n",
+          "exit_code": 0,
+          "code_sha256": "654e31a2084a729b20af8f51a26ee4e325e67a189396806a4822ae6524d5e88b"
+        }
+      ],
+      "run_count": 3,
+      "created_at": "2026-10-24T11:45:54+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 8,
+      "question": "Enter two strings from the user, concatenate them into another string, and display the result.",
+      "source_file": "q-01-08.c",
+      "code": "// Strings -> Q 08 : Enter two strings from the user, concatenate them into another string, and display the result.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    char str2[STR_SIZE];\n    char str_cat[STR_SIZE * 2];\n    int i,j;\n\n    printf(\"Enter the string 1 -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n        str_cat[i] = ch;\n    }\n    str[i] ='\\0';\n\n    printf(\"Enter the string 2 -> \") ;\n    for(j= 0 ; j < STR_SIZE-1;j++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str2[j] = ch;\n    }\n    str2[j] ='\\0';\n\n\n    printf(\"The String 1 you entered -> %s\\n\",str);\n    printf(\"The String 2 you entered -> %s\\n\",str2);\n    \n    strcat(str_cat,str2);\n    printf(\"The String Concatinated -> %s\\n\",str_cat);\n\n\n    return 0;\n}\n",
+      "code_sha256": "654e31a2084a729b20af8f51a26ee4e325e67a189396806a4822ae6524d5e88b",
+      "code_updated_at": "2026-10-24T11:46:14+05:30",
+      "command": "gcc q-01-08.c -o ./bin/q-01-08.out && ./bin/q-01-08.out",
+      "output": "Enter the string 1 -> Hello World\nEnter the string 2 -> How are You\nThe String 1 you entered -> Hello World\nThe String 2 you entered -> How are You\nThe String Concatinated -> Hello WorldHow are You\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T11:46:32+05:30",
+      "updated_at": "2026-10-24T11:46:32+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-09",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T11:48:36+05:30",
+          "command": "gcc q-01-09.c -o ./bin/q-01-09.out && ./bin/q-01-09.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World ,\nThe String you entered -> Hello World ,\nThe String copied as   -> \n",
+          "exit_code": 0,
+          "code_sha256": "c76a0526fabf075ccaee457a9e193e311f09e9127f1e3ccc38e1f2267d507881"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T11:49:01+05:30",
+          "command": "gcc q-01-09.c -o ./bin/q-01-09.out && ./bin/q-01-09.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World ,    ,\nThe String you entered -> Hello World ,    ,\nThe String copied as   -> Hello World ,    \n",
+          "exit_code": 0,
+          "code_sha256": "41f06bd339b086a99f83d708ebdc42de9c8dd67877d9160dd05d7af64709a5de"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T11:49:41+05:30",
+          "command": "gcc q-01-09.c -o ./bin/q-01-09.out && ./bin/q-01-09.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> Hello World  ,   , dd ,\nThe String you entered -> Hello World  ,   , dd ,\nThe String copied as   -> Hello World  ,   , dd ,\n",
+          "exit_code": 0,
+          "code_sha256": "d555982e14c151bd99df80ac0c0229f96ccfe7475b79ddca336a9001c05ec06e"
+        }
+      ],
+      "run_count": 3,
+      "created_at": "2026-10-24T11:48:36+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 9,
+      "question": "Enter a string from the user and copy it into another string variable.",
+      "source_file": "q-01-09.c",
+      "code": "// Strings -> Q 09 : Enter a string from the user and copy it into another string variable.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    char str2[STR_SIZE];\n    int i,j;\n\n    printf(\"Enter the string 1 -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for( j = 0 ; j < i;j++){\n        str2[j] = str[j];\n    }\n    str2[j] ='\\0';\n\n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The String copied as   -> %s\\n\",str2);\n\n    return 0;\n}\n",
+      "code_sha256": "d555982e14c151bd99df80ac0c0229f96ccfe7475b79ddca336a9001c05ec06e",
+      "code_updated_at": "2026-10-24T11:49:41+05:30",
+      "command": "gcc q-01-09.c -o ./bin/q-01-09.out && ./bin/q-01-09.out",
+      "output": "Enter the string 1 -> Hello World  ,   , dd ,\nThe String you entered -> Hello World  ,   , dd ,\nThe String copied as   -> Hello World  ,   , dd ,\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T11:49:41+05:30",
+      "updated_at": "2026-10-24T11:49:41+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-10",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T11:52:25+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "q-01-10.c: In function ‘main’:\nq-01-10.c:28:32: error: expected ‘;’ before ‘}’ token\n   28 |         printf(\"Invalid index\")\n      |                                ^\n      |                                ;\n   29 |     }\n      |     ~                           \n",
+          "exit_code": 1,
+          "code_sha256": "6ec5a1cd5267f11ed1a7ff0e3dd990c56684ecd1dd1314c95aa0685f6cf778f0"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T11:52:31+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "q-01-10.c: In function ‘main’:\nq-01-10.c:28:32: error: expected ‘;’ before ‘}’ token\n   28 |         printf(\"Invalid index\")\n      |                                ^\n      |                                ;\n   29 |     }\n      |     ~                           \n",
+          "exit_code": 1,
+          "code_sha256": "531756cd678b5dbefcb966df841e0a76f1c8910305ed533053a0aec381877054"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T11:52:36+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> H^C",
+          "exit_code": 130,
+          "code_sha256": "531756cd678b5dbefcb966df841e0a76f1c8910305ed533053a0aec381877054"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T11:52:41+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "Enter the string 1 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "ea906bcd99aaa8d9396ef8c9b57f9741fe5a0e2f51279aa2c496b602066b2657"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T11:52:43+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "\\Enter the string  -> ^C",
+          "exit_code": 130,
+          "code_sha256": "ea906bcd99aaa8d9396ef8c9b57f9741fe5a0e2f51279aa2c496b602066b2657"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T11:52:58+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "Enter the string  -> Hello Workdsdfcvd n,f ssssssss, ,\nEnter the index number (0 to 33) ->33\nThe Charachter at index 33 is -> 0\n",
+          "exit_code": 0,
+          "code_sha256": "ea906bcd99aaa8d9396ef8c9b57f9741fe5a0e2f51279aa2c496b602066b2657"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T11:53:27+05:30",
+          "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+          "mode": "compile-run",
+          "output": "Enter the string  -> Hello Worlf asd, fhdhf kd, ,,,, s ,\nEnter the index number (0 to 34) ->34\nThe Charachter at index 34 is -> ,\n",
+          "exit_code": 0,
+          "code_sha256": "408f73d77cd4345cdd2fabcdd14b703f3bcbc8d8b9318cec3748517ee19e7632"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-24T11:52:25+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 10,
+      "question": "Enter a string and an index number from the user, then print the character at that index.",
+      "source_file": "q-01-10.c",
+      "code": "// Strings -> Q 10 : Enter a string and an index number from the user, then print the character at that index.\n\n#include <stdio.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i,index;\n\n    printf(\"Enter the string  -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    printf(\"Enter the index number (0 to %d) ->\",i-1);\n    scanf(\"%d\",&index);\n    if (index <= i){\n        printf(\"The Charachter at index %d is -> %c\\n\",index,str[index]);\n    }\n    else {\n        printf(\"Invalid index\");\n    }\n    return 0;\n}\n",
+      "code_sha256": "408f73d77cd4345cdd2fabcdd14b703f3bcbc8d8b9318cec3748517ee19e7632",
+      "code_updated_at": "2026-10-24T11:53:27+05:30",
+      "command": "gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out",
+      "output": "Enter the string  -> Hello Worlf asd, fhdhf kd, ,,,, s ,\nEnter the index number (0 to 34) ->34\nThe Charachter at index 34 is -> ,\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T11:53:27+05:30",
+      "updated_at": "2026-10-24T11:53:27+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-11",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T11:56:39+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> He^C",
+          "exit_code": 130,
+          "code_sha256": "c895a1e34fe48d3e501275be02b5db3ecaf1276699a6ad697d05f2591f55f462"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T11:56:56+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> wwwlll  iiOOii  lllwww\n",
+          "exit_code": 139,
+          "code_sha256": "c895a1e34fe48d3e501275be02b5db3ecaf1276699a6ad697d05f2591f55f462"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T11:57:45+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> fdhfjkd\n",
+          "exit_code": 139,
+          "code_sha256": "fe91c96b0b8dd573166fd50a0af518195c967b5d7a0598212d7e57a7ad9572f2"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T11:58:52+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> sdfvdsfgv\n",
+          "exit_code": 139,
+          "code_sha256": "32272bb4003cb9297fa092e773b72ece756281086ea0634a335bf1af1125c2f9"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T11:59:35+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hhgfcfds\n",
+          "exit_code": 139,
+          "code_sha256": "1888426133067ae4e721280c0b542ad3a77f68b6946e1169a347961ff48c52f7"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T12:01:13+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> wwwlll  iiOOOii  lllwww\nThe String you entered -> wwwlll  iiOOOii  lllwww\nThe String reverse -> wwwlll  iiOOOii  lllwww\nNot a palindrome\n",
+          "exit_code": 0,
+          "code_sha256": "7fad8e49e163d8b2e2b706d659694b98a8bf1448d2cdae54c0b8ec6b4063fd13"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T12:02:39+05:30",
+          "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> wwwll i  oooTTTTrTTTTooo  i llwww\nThe String you entered -> wwwll i  oooTTTTrTTTTooo  i llwww\nThe String reverse     -> wwwll i  oooTTTTrTTTTooo  i llwww\nA palindrome\n",
+          "exit_code": 0,
+          "code_sha256": "efd665f6821cbec189ccebc6ae8079cff7e27f828060487b5a438d63c9fe7d20"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-24T11:56:39+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 11,
+      "question": "Enter a string from the user and check whether it is a palindrome.",
+      "source_file": "q-01-11.c",
+      "code": "// Strings -> Q 11 : Enter a string from the user and check whether it is a palindrome.\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    char str2[STR_SIZE];\n    int i,j;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n    for(j= 0 ; j<i ; j++){\n        str2[i-j-1] = str[j];\n    }\n    str2[i] ='\\0';\n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The String reverse     -> %s\\n\",str2);\n    if (strcmp(str,str2) == 1){\n        printf(\"Not a palindrome\\n\");\n    }\n    else{\n        printf(\"A palindrome\\n\");\n    }\n\n    \n    \n    return 0;\n}\n",
+      "code_sha256": "efd665f6821cbec189ccebc6ae8079cff7e27f828060487b5a438d63c9fe7d20",
+      "code_updated_at": "2026-10-24T12:02:39+05:30",
+      "command": "gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out",
+      "output": "Enter the string -> wwwll i  oooTTTTrTTTTooo  i llwww\nThe String you entered -> wwwll i  oooTTTTrTTTTooo  i llwww\nThe String reverse     -> wwwll i  oooTTTTrTTTTooo  i llwww\nA palindrome\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:02:39+05:30",
+      "updated_at": "2026-10-24T12:02:39+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-12",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:04:23+05:30",
+          "command": "gcc q-01-12.c -o ./bin/q-01-12.out && ./bin/q-01-12.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> hello World\nEach element in new line -> \nh\ne\nl\nl\no\n \nW\no\nr\nl\nd\n",
+          "exit_code": 0,
+          "code_sha256": "5bf2d9e5e2d8b4487b9abd52ad731301d7aa43bc8d3297578bad988d0cc9665f"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T12:04:23+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 12,
+      "question": "Enter a string from the user and print each character on a new line.",
+      "source_file": "q-01-12.c",
+      "code": "// Strings -> Q 12 : Enter a string from the user and print each character on a new line.\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n    printf(\"Each element in new line -> \\n\") ;\n    for (int j = 0 ; j < i ; j++){\n        printf(\"%c\\n\",str[j]);\n    }\n\n\n    return 0;\n}\n",
+      "code_sha256": "5bf2d9e5e2d8b4487b9abd52ad731301d7aa43bc8d3297578bad988d0cc9665f",
+      "code_updated_at": "2026-10-24T12:04:23+05:30",
+      "command": "gcc q-01-12.c -o ./bin/q-01-12.out && ./bin/q-01-12.out",
+      "output": "Enter the string -> hello World\nEach element in new line -> \nh\ne\nl\nl\no\n \nW\no\nr\nl\nd\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:04:23+05:30",
+      "updated_at": "2026-10-24T12:04:23+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-13",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:05:01+05:30",
+          "command": "gcc q-01-13.c -o ./bin/q-01-13.out && ./bin/q-01-13.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hello World <3\nThe String you entered -> Hello World <3\nThe String reverse     -> 3< dlroW olleH\n",
+          "exit_code": 0,
+          "code_sha256": "9ca2ea181cca735d63d7d47f60071702ca5a246856e506bee1d7f470bc12c958"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T12:05:01+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 13,
+      "question": "Enter a string from the user and copy its reverse into another string.",
+      "source_file": "q-01-13.c",
+      "code": "// Strings -> Q 13 : Enter a string from the user and copy its reverse into another string.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    char str2[STR_SIZE];\n    int i,j;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n    for(j= 0 ; j<i ; j++){\n        str2[i-j-1] = str[j];\n    }\n    str2[i] ='\\0';\n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The String reverse     -> %s\\n\",str2);\n\n\n    return 0;\n}\n",
+      "code_sha256": "9ca2ea181cca735d63d7d47f60071702ca5a246856e506bee1d7f470bc12c958",
+      "code_updated_at": "2026-10-24T12:05:01+05:30",
+      "command": "gcc q-01-13.c -o ./bin/q-01-13.out && ./bin/q-01-13.out",
+      "output": "Enter the string -> Hello World <3\nThe String you entered -> Hello World <3\nThe String reverse     -> 3< dlroW olleH\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:05:01+05:30",
+      "updated_at": "2026-10-24T12:05:01+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-14",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:08:12+05:30",
+          "command": "gcc q-01-14.c -o ./bin/q-01-14.out && ./bin/q-01-14.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hello World\nThe String you entered -> Hello World\n\nThe Diff of ASCII in Adjacent values -> \ne (1) - H (0) = 29\nl (2) - e (1) = 7\nl (3) - l (2) = 0\no (4) - l (3) = 3\n  (5) - o (4) = -79\nW (6) -   (5) = 55\no (7) - W (6) = 24\nr (8) - o (7) = 3\nl (9) - r (8) = -6\nd (10) - l (9) = -8\n",
+          "exit_code": 0,
+          "code_sha256": "7f06eecf819788d8c8290d97c67e50f751f27f45a94cd7a3e194a15ee72a9503"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T12:08:12+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 14,
+      "question": "Enter a string from the user and print the difference between the ASCII values of consecutive characters.",
+      "source_file": "q-01-14.c",
+      "code": "// Strings -> Q 14 : Enter a string from the user and print the difference between the ASCII values of consecutive characters.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n\n    printf(\"The String you entered -> %s\\n\",str);\n    \n    printf(\"\\nThe Diff of ASCII in Adjacent values -> \\n\");\n    for(int j =1 ; j < i ; j++){\n        printf(\"%c (%d) - %c (%d) = %d\\n\",str[j],j,str[j-1],j-1,str[j]-str[j-1]);\n    }\n\n\n    return 0;\n}\n",
+      "code_sha256": "7f06eecf819788d8c8290d97c67e50f751f27f45a94cd7a3e194a15ee72a9503",
+      "code_updated_at": "2026-10-24T12:08:12+05:30",
+      "command": "gcc q-01-14.c -o ./bin/q-01-14.out && ./bin/q-01-14.out",
+      "output": "Enter the string -> Hello World\nThe String you entered -> Hello World\n\nThe Diff of ASCII in Adjacent values -> \ne (1) - H (0) = 29\nl (2) - e (1) = 7\nl (3) - l (2) = 0\no (4) - l (3) = 3\n  (5) - o (4) = -79\nW (6) -   (5) = 55\no (7) - W (6) = 24\nr (8) - o (7) = 3\nl (9) - r (8) = -6\nd (10) - l (9) = -8\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:08:12+05:30",
+      "updated_at": "2026-10-24T12:08:12+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-15",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:12:38+05:30",
+          "command": "gcc q-01-15.c -o ./bin/q-01-15.out && ./bin/q-01-15.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Hwllo World dfdn anh E\nEnter the Charachter to search -> E\nThe String you entered -> Hwllo World dfdn anh E\nThe Char   you entered -> E\nFound at index pos -> 21Not Fouund\n",
+          "exit_code": 0,
+          "code_sha256": "10667b2fe0ef4dec69077fe6e3b94945a3d58078d51681057060344786bfa356"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T12:13:10+05:30",
+          "command": "gcc q-01-15.c -o ./bin/q-01-15.out && ./bin/q-01-15.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> Helo qhsdksaj fbgd A djfnfh E\nEnter the Charachter to search -> A\nThe String you entered -> Helo qhsdksaj fbgd A djfnfh E\nThe Char   you entered -> A\nFound at index pos -> 19",
+          "exit_code": 1,
+          "code_sha256": "9589f4dab85828caa87804d4c6267901c7f9c3cb9700ecd74fe964b3abf1b152"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-24T12:12:38+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 15,
+      "question": "Enter a string and a character from the user, then search for the character in the string.",
+      "source_file": "q-01-15.c",
+      "code": "// Strings -> Q 15 : Enter a string and a character from the user, then search for the character in the string.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n    char srch;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n    printf(\"Enter the Charachter to search -> \");\n    scanf(\"%c\",&srch);\n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The Char   you entered -> %c\\n\",srch);\n\n    for (int j = 0 ; j < i; j ++){\n        if (str[j] ==  srch ){\n            printf(\"Found at index pos -> %d\",j);\n            return 1;\n        }\n    }\n    \n    printf(\"Not Fouund\\n\");\n    \n    return 0;\n}\n",
+      "code_sha256": "9589f4dab85828caa87804d4c6267901c7f9c3cb9700ecd74fe964b3abf1b152",
+      "code_updated_at": "2026-10-24T12:13:10+05:30",
+      "command": "gcc q-01-15.c -o ./bin/q-01-15.out && ./bin/q-01-15.out",
+      "output": "Enter the string -> Helo qhsdksaj fbgd A djfnfh E\nEnter the Charachter to search -> A\nThe String you entered -> Helo qhsdksaj fbgd A djfnfh E\nThe Char   you entered -> A\nFound at index pos -> 19",
+      "exit_code": 1,
+      "last_run_at": "2026-10-24T12:13:10+05:30",
+      "updated_at": "2026-10-24T12:13:10+05:30",
+      "output_stale": false
     }
   ]
 }

@@ -3132,3 +3132,1141 @@ $ g++ -x c++ q-03-07.c -o ./bin/q-03-07.out && ./bin/q-03-07.out
 <!-- qrun:entry-end id="q-03-07" -->
 
 <!-- qrun:topic-end id="topic-03" -->
+
+<!-- qrun:topic-start id="topic-01" -->
+
+<!-- qrun:field-start topic id="topic-01" -->
+
+# Strings
+
+<!-- qrun:field-end topic id="topic-01" -->
+
+<!-- qrun:entry-start id="q-01-01" -->
+
+<!-- qrun:field-start question id="q-01-01" -->
+
+## Q 01 : Enter a string from the user and convert it to uppercase.
+
+<!-- qrun:field-end question id="q-01-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-01" -->
+
+```c
+// Strings -> Q 01 : Enter a string from the user and convert it to uppercase.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[10],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for(i = 0; i < s-1 ; i++){
+        if (str[i] >= 97 && str[i] <= 122 ){
+            str[i] = str[i] -32;
+        }
+    }
+
+    printf("The String you entered in UPPERCASE -> %s",str);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-01" -->
+
+<!-- qrun:field-start output id="q-01-01" -->
+
+```text
+$ gcc q-01-01.c -o ./bin/q-01-01.out && ./bin/q-01-01.out
+Enter the string -> hello ad
+The String you entered in UPPERCASE -> HELLO AD
+```
+
+<!-- qrun:field-end output id="q-01-01" -->
+<!-- qrun:entry-end id="q-01-01" -->
+
+
+<!-- qrun:entry-start id="q-01-03" -->
+
+<!-- qrun:field-start question id="q-01-03" -->
+
+## Q 03 : Enter a string from the user and convert it into sentence case.
+
+<!-- qrun:field-end question id="q-01-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-03" -->
+
+```c
+// Strings -> Q 03 : Enter a string from the user and convert it into sentence case.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[100],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    int flag = 0;
+    for(i = 0; i < s-1 ; i++){
+        if (str[i] >= 97 && str[i] <= 122 ){
+            if (flag == 0){
+                str[i] = str[i] -32;
+            flag = 1;}
+        }
+        else if(str[i] >= 65 && str[i] <= 90 ){
+            if (flag == 0){
+                flag = 1;
+            }
+            else{
+            str[i] = str[i] + 32;}
+        }
+        else if (str[i] == ' ' && flag == 1){
+            flag = 0;
+        }
+    }
+
+    printf("The String you entered in Sentence case -> %s",str);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-03" -->
+
+<!-- qrun:field-start output id="q-01-03" -->
+
+```text
+$ gcc q-01-03.c -o ./bin/q-01-03.out && ./bin/q-01-03.out
+Enter the string -> hello MISTER toNY sTAnK
+The String you entered in Sentence case -> Hello Mister Tony Stank
+```
+
+<!-- qrun:field-end output id="q-01-03" -->
+<!-- qrun:entry-end id="q-01-03" -->
+
+
+<!-- qrun:entry-start id="q-01-02" -->
+
+<!-- qrun:field-start question id="q-01-02" -->
+
+## Q 02 : Enter a string from the user and convert it to lowercase.
+
+<!-- qrun:field-end question id="q-01-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-02" -->
+
+```c
+// Strings -> Q 02 : Enter a string from the user and convert it to lowercase.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[10],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for(i = 0; i < s-1 ; i++){
+        if (str[i] >= 65 && str[i] <= 90 ){
+            str[i] = str[i] + 32;
+        }
+    }
+
+    printf("The String you entered in lowercase -> %s",str);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-02" -->
+
+<!-- qrun:field-start output id="q-01-02" -->
+
+```text
+$ gcc q-01-02.c -o ./bin/q-01-02.out && ./bin/q-01-02.out
+Enter the string -> HELLO JR
+The String you entered in lowercase -> hello jr
+```
+
+<!-- qrun:field-end output id="q-01-02" -->
+<!-- qrun:entry-end id="q-01-02" -->
+
+
+<!-- qrun:entry-start id="q-01-04" -->
+
+<!-- qrun:field-start question id="q-01-04" -->
+
+## Q 04 : Enter a string from the user and convert it into title case.
+
+<!-- qrun:field-end question id="q-01-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-04" -->
+
+```c
+// Strings -> Q 04 : Enter a string from the user and convert it into title case.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[100],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    int flag = 0;
+    for(i = 0; i < s-1 ; i++){
+        if (str[i]>='a' && str[i]<='z'){
+            if (flag == 0){
+                flag = 1;
+                str[i] -= 32; 
+            }
+        }
+        else if (str[i]>='A' && str[i]<='Z'){
+            if (flag == 0){
+                flag = 1;
+            }
+            else {
+                str[i] += 32;
+            }
+        }
+
+    }
+
+    printf("The String you entered in Title  case -> %s",str);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-04" -->
+
+<!-- qrun:field-start output id="q-01-04" -->
+
+```text
+$ gcc q-01-04.c -o ./bin/q-01-04.out && ./bin/q-01-04.out
+Enter the string -> Hello MISTER tONY sTARK
+The String you entered in Title  case -> Hello mister tony stark
+```
+
+<!-- qrun:field-end output id="q-01-04" -->
+<!-- qrun:entry-end id="q-01-04" -->
+
+
+<!-- qrun:entry-start id="q-01-05" -->
+
+<!-- qrun:field-start question id="q-01-05" -->
+
+## Q 05 : Enter a string from the user and convert it into toggle case.
+
+<!-- qrun:field-end question id="q-01-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-05" -->
+
+```c
+// Strings -> Q 05 : Enter a string from the user and convert it into toggle case.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[100],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for(i = 0; i < s-1 ; i++){
+        if (str[i]>='a' && str[i]<='z'){
+                str[i] -= 32; 
+
+        }
+        else if (str[i]>='A' && str[i]<='Z'){
+                str[i] += 32;
+        }
+
+    }
+
+    printf("The String you entered in Toggle  case -> %s",str);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-05" -->
+
+<!-- qrun:field-start output id="q-01-05" -->
+
+```text
+$ gcc q-01-05.c -o ./bin/q-01-05.out && ./bin/q-01-05.out
+Enter the string -> Hello Mister Tony StARK
+The String you entered in Toggle  case -> hELLO mISTER tONY sTark
+```
+
+<!-- qrun:field-end output id="q-01-05" -->
+<!-- qrun:entry-end id="q-01-05" -->
+
+
+<!-- qrun:entry-start id="q-01-06" -->
+
+<!-- qrun:field-start question id="q-01-06" -->
+
+## Q 06 : Enter a string from the user and find its length.
+
+<!-- qrun:field-end question id="q-01-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-06" -->
+
+```c
+// Strings -> Q 06 : Enter a string from the user and find its length.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[100],ch;
+    int s = sizeof(str)/sizeof(str[0]) , i;
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    printf("The String you entered -> ");
+    int length = printf("%s",str);
+    printf("\nLength of the string is -> %d",length);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-06" -->
+
+<!-- qrun:field-start output id="q-01-06" -->
+
+```text
+$ gcc q-01-06.c -o ./bin/q-01-06.out && ./bin/q-01-06.out
+Enter the string -> Hello To the World
+The String you entered -> Hello To the World
+Length of the string is -> 18
+```
+
+<!-- qrun:field-end output id="q-01-06" -->
+<!-- qrun:entry-end id="q-01-06" -->
+
+
+<!-- qrun:entry-start id="q-01-07" -->
+
+<!-- qrun:field-start question id="q-01-07" -->
+
+## Q 07 : Enter two strings from the user and compare whether they are equal.
+
+<!-- qrun:field-end question id="q-01-07" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-07" -->
+
+```c
+// Strings -> Q 07 : Enter two strings from the user and compare whether they are equal.
+
+#include <stdio.h>
+// #include <conio.>
+
+int main(){
+
+    char str[100],ch;
+    char str2[100];
+    int s = sizeof(str)/sizeof(str[0]) , i,j;
+
+    printf("Enter the string 1 -> ") ;
+    for(i = 0 ; i < s-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    printf("Enter the string 2 -> ") ;
+    for(j= 0 ; j < s-1;j++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str2[j] = ch;
+    }
+    str2[j] ='\0';
+
+
+    printf("The String 1 you entered -> %s\n",str);
+    printf("The String 2 you entered -> %s\n",str2);
+
+    if (i != j){
+        printf("Not Equal\n");
+        return 0;
+    }
+    for(int k = 0 ; k<i ; i++){
+        if (str[k] != str2[k]){
+            printf("Not Equal\n");
+            return 0;
+        }
+    }
+    printf("Equal\n");
+    
+    return 1;
+}
+```
+
+<!-- qrun:field-end code id="q-01-07" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-07" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-07" -->
+
+<!-- qrun:field-start output id="q-01-07" -->
+
+```text
+$ gcc q-01-07.c -o ./bin/q-01-07.out && ./bin/q-01-07.out
+Enter the string 1 -> Hello World
+Enter the string 2 -> Hello World
+The String 1 you entered -> Hello World
+The String 2 you entered -> Hello World
+Equal
+```
+
+<!-- qrun:field-end output id="q-01-07" -->
+<!-- qrun:entry-end id="q-01-07" -->
+
+
+<!-- qrun:entry-start id="q-01-08" -->
+
+<!-- qrun:field-start question id="q-01-08" -->
+
+## Q 08 : Enter two strings from the user, concatenate them into another string, and display the result.
+
+<!-- qrun:field-end question id="q-01-08" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-08" -->
+
+```c
+// Strings -> Q 08 : Enter two strings from the user, concatenate them into another string, and display the result.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char str2[STR_SIZE];
+    char str_cat[STR_SIZE * 2];
+    int i,j;
+
+    printf("Enter the string 1 -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+        str_cat[i] = ch;
+    }
+    str[i] ='\0';
+
+    printf("Enter the string 2 -> ") ;
+    for(j= 0 ; j < STR_SIZE-1;j++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str2[j] = ch;
+    }
+    str2[j] ='\0';
+
+
+    printf("The String 1 you entered -> %s\n",str);
+    printf("The String 2 you entered -> %s\n",str2);
+    
+    strcat(str_cat,str2);
+    printf("The String Concatinated -> %s\n",str_cat);
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-08" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-08" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-08" -->
+
+<!-- qrun:field-start output id="q-01-08" -->
+
+```text
+$ gcc q-01-08.c -o ./bin/q-01-08.out && ./bin/q-01-08.out
+Enter the string 1 -> Hello World
+Enter the string 2 -> How are You
+The String 1 you entered -> Hello World
+The String 2 you entered -> How are You
+The String Concatinated -> Hello WorldHow are You
+```
+
+<!-- qrun:field-end output id="q-01-08" -->
+<!-- qrun:entry-end id="q-01-08" -->
+
+
+<!-- qrun:entry-start id="q-01-09" -->
+
+<!-- qrun:field-start question id="q-01-09" -->
+
+## Q 09 : Enter a string from the user and copy it into another string variable.
+
+<!-- qrun:field-end question id="q-01-09" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-09" -->
+
+```c
+// Strings -> Q 09 : Enter a string from the user and copy it into another string variable.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char str2[STR_SIZE];
+    int i,j;
+
+    printf("Enter the string 1 -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for( j = 0 ; j < i;j++){
+        str2[j] = str[j];
+    }
+    str2[j] ='\0';
+
+
+    printf("The String you entered -> %s\n",str);
+    printf("The String copied as   -> %s\n",str2);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-09" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-09" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-09" -->
+
+<!-- qrun:field-start output id="q-01-09" -->
+
+```text
+$ gcc q-01-09.c -o ./bin/q-01-09.out && ./bin/q-01-09.out
+Enter the string 1 -> Hello World  ,   , dd ,
+The String you entered -> Hello World  ,   , dd ,
+The String copied as   -> Hello World  ,   , dd ,
+```
+
+<!-- qrun:field-end output id="q-01-09" -->
+<!-- qrun:entry-end id="q-01-09" -->
+
+
+<!-- qrun:entry-start id="q-01-10" -->
+
+<!-- qrun:field-start question id="q-01-10" -->
+
+## Q 10 : Enter a string and an index number from the user, then print the character at that index.
+
+<!-- qrun:field-end question id="q-01-10" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-10" -->
+
+```c
+// Strings -> Q 10 : Enter a string and an index number from the user, then print the character at that index.
+
+#include <stdio.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i,index;
+
+    printf("Enter the string  -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    printf("Enter the index number (0 to %d) ->",i-1);
+    scanf("%d",&index);
+    if (index <= i){
+        printf("The Charachter at index %d is -> %c\n",index,str[index]);
+    }
+    else {
+        printf("Invalid index");
+    }
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-10" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-10" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-10" -->
+
+<!-- qrun:field-start output id="q-01-10" -->
+
+```text
+$ gcc q-01-10.c -o ./bin/q-01-10.out && ./bin/q-01-10.out
+Enter the string  -> Hello Worlf asd, fhdhf kd, ,,,, s ,
+Enter the index number (0 to 34) ->34
+The Charachter at index 34 is -> ,
+```
+
+<!-- qrun:field-end output id="q-01-10" -->
+<!-- qrun:entry-end id="q-01-10" -->
+
+
+<!-- qrun:entry-start id="q-01-11" -->
+
+<!-- qrun:field-start question id="q-01-11" -->
+
+## Q 11 : Enter a string from the user and check whether it is a palindrome.
+
+<!-- qrun:field-end question id="q-01-11" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-11" -->
+
+```c
+// Strings -> Q 11 : Enter a string from the user and check whether it is a palindrome.
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char str2[STR_SIZE];
+    int i,j;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    for(j= 0 ; j<i ; j++){
+        str2[i-j-1] = str[j];
+    }
+    str2[i] ='\0';
+
+    printf("The String you entered -> %s\n",str);
+    printf("The String reverse     -> %s\n",str2);
+    if (strcmp(str,str2) == 1){
+        printf("Not a palindrome\n");
+    }
+    else{
+        printf("A palindrome\n");
+    }
+
+    
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-11" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-11" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-11" -->
+
+<!-- qrun:field-start output id="q-01-11" -->
+
+```text
+$ gcc q-01-11.c -o ./bin/q-01-11.out && ./bin/q-01-11.out
+Enter the string -> wwwll i  oooTTTTrTTTTooo  i llwww
+The String you entered -> wwwll i  oooTTTTrTTTTooo  i llwww
+The String reverse     -> wwwll i  oooTTTTrTTTTooo  i llwww
+A palindrome
+```
+
+<!-- qrun:field-end output id="q-01-11" -->
+<!-- qrun:entry-end id="q-01-11" -->
+
+
+<!-- qrun:entry-start id="q-01-12" -->
+
+<!-- qrun:field-start question id="q-01-12" -->
+
+## Q 12 : Enter a string from the user and print each character on a new line.
+
+<!-- qrun:field-end question id="q-01-12" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-12" -->
+
+```c
+// Strings -> Q 12 : Enter a string from the user and print each character on a new line.
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("Each element in new line -> \n") ;
+    for (int j = 0 ; j < i ; j++){
+        printf("%c\n",str[j]);
+    }
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-12" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-12" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-12" -->
+
+<!-- qrun:field-start output id="q-01-12" -->
+
+```text
+$ gcc q-01-12.c -o ./bin/q-01-12.out && ./bin/q-01-12.out
+Enter the string -> hello World
+Each element in new line -> 
+h
+e
+l
+l
+o
+ 
+W
+o
+r
+l
+d
+```
+
+<!-- qrun:field-end output id="q-01-12" -->
+<!-- qrun:entry-end id="q-01-12" -->
+
+
+<!-- qrun:entry-start id="q-01-13" -->
+
+<!-- qrun:field-start question id="q-01-13" -->
+
+## Q 13 : Enter a string from the user and copy its reverse into another string.
+
+<!-- qrun:field-end question id="q-01-13" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-13" -->
+
+```c
+// Strings -> Q 13 : Enter a string from the user and copy its reverse into another string.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char str2[STR_SIZE];
+    int i,j;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    for(j= 0 ; j<i ; j++){
+        str2[i-j-1] = str[j];
+    }
+    str2[i] ='\0';
+
+    printf("The String you entered -> %s\n",str);
+    printf("The String reverse     -> %s\n",str2);
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-13" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-13" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-13" -->
+
+<!-- qrun:field-start output id="q-01-13" -->
+
+```text
+$ gcc q-01-13.c -o ./bin/q-01-13.out && ./bin/q-01-13.out
+Enter the string -> Hello World <3
+The String you entered -> Hello World <3
+The String reverse     -> 3< dlroW olleH
+```
+
+<!-- qrun:field-end output id="q-01-13" -->
+<!-- qrun:entry-end id="q-01-13" -->
+
+
+<!-- qrun:entry-start id="q-01-14" -->
+
+<!-- qrun:field-start question id="q-01-14" -->
+
+## Q 14 : Enter a string from the user and print the difference between the ASCII values of consecutive characters.
+
+<!-- qrun:field-end question id="q-01-14" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-14" -->
+
+```c
+// Strings -> Q 14 : Enter a string from the user and print the difference between the ASCII values of consecutive characters.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+
+    printf("The String you entered -> %s\n",str);
+    
+    printf("\nThe Diff of ASCII in Adjacent values -> \n");
+    for(int j =1 ; j < i ; j++){
+        printf("%c (%d) - %c (%d) = %d\n",str[j],j,str[j-1],j-1,str[j]-str[j-1]);
+    }
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-14" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-14" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-14" -->
+
+<!-- qrun:field-start output id="q-01-14" -->
+
+```text
+$ gcc q-01-14.c -o ./bin/q-01-14.out && ./bin/q-01-14.out
+Enter the string -> Hello World
+The String you entered -> Hello World
+
+The Diff of ASCII in Adjacent values -> 
+e (1) - H (0) = 29
+l (2) - e (1) = 7
+l (3) - l (2) = 0
+o (4) - l (3) = 3
+  (5) - o (4) = -79
+W (6) -   (5) = 55
+o (7) - W (6) = 24
+r (8) - o (7) = 3
+l (9) - r (8) = -6
+d (10) - l (9) = -8
+```
+
+<!-- qrun:field-end output id="q-01-14" -->
+<!-- qrun:entry-end id="q-01-14" -->
+
+
+<!-- qrun:entry-start id="q-01-15" -->
+
+<!-- qrun:field-start question id="q-01-15" -->
+
+## Q 15 : Enter a string and a character from the user, then search for the character in the string.
+
+<!-- qrun:field-end question id="q-01-15" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-15" -->
+
+```c
+// Strings -> Q 15 : Enter a string and a character from the user, then search for the character in the string.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+    char srch;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("Enter the Charachter to search -> ");
+    scanf("%c",&srch);
+
+    printf("The String you entered -> %s\n",str);
+    printf("The Char   you entered -> %c\n",srch);
+
+    for (int j = 0 ; j < i; j ++){
+        if (str[j] ==  srch ){
+            printf("Found at index pos -> %d",j);
+            return 1;
+        }
+    }
+    
+    printf("Not Fouund\n");
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-15" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-15" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-15" -->
+
+<!-- qrun:field-start output id="q-01-15" -->
+
+```text
+$ gcc q-01-15.c -o ./bin/q-01-15.out && ./bin/q-01-15.out
+Enter the string -> Helo qhsdksaj fbgd A djfnfh E
+Enter the Charachter to search -> A
+The String you entered -> Helo qhsdksaj fbgd A djfnfh E
+The Char   you entered -> A
+Found at index pos -> 19
+```
+
+<!-- qrun:field-end output id="q-01-15" -->
+<!-- qrun:entry-end id="q-01-15" -->
+
+<!-- qrun:topic-end id="topic-01" -->
