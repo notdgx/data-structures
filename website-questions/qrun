@@ -721,5 +721,13 @@ if [[ $log_status -ne 0 ]]; then
     echo "qrun: execution finished with status $run_status, but logging failed" >&2
     exit "$log_status"
 fi
+
+# Automatically stage the current source file and output logs.
+if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    git add -- "$source_abs" output.md output.json || {
+        echo "qrun: WARNING: Git staging failed." >&2
+    }
+fi
+
 exit "$run_status"
 
