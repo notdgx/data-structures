@@ -2694,6 +2694,90 @@
       "last_run_at": "2026-10-24T17:53:26+05:30",
       "updated_at": "2026-10-24T17:53:26+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-01-28",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T18:39:09+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "q-01-28.c: In function ‘main’:\nq-01-28.c:109:58: warning: backslash and newline separated by space\n  109 |                 printf(\"Enter word to delete -> \");      \\\n      |                                                           \nq-01-28.c:173:1: error: expected declaration or statement at end of input\n  173 | }\n      | ^\n",
+          "exit_code": 1,
+          "code_sha256": "7c5d06cd72527d870e2f61dcbf61efdb0909f774775faf9569afe9c48cbc55ae"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T18:41:48+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 5\n",
+          "exit_code": 0,
+          "code_sha256": "74a39a6d0b6d8a39f6d89a343148042b17fe23ab118f9f22df9b88263b295dae"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T18:41:53+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 32\nInvalid Input\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 23\nInvalid Input\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> ^C",
+          "exit_code": 130,
+          "code_sha256": "74a39a6d0b6d8a39f6d89a343148042b17fe23ab118f9f22df9b88263b295dae"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T18:43:34+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 4\n\nDictionary ->>\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 1\nEnter word to search -> Book\nThe Word -> 'Book' found at index -> 2\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 2\nEnter word to enter -> Causality\nEnter Meaning to enter -> the principle that there is a cause for everything that happens\nWord Entered at index -> 5\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 4\n\nDictionary ->>\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> ^C",
+          "exit_code": 130,
+          "code_sha256": "74a39a6d0b6d8a39f6d89a343148042b17fe23ab118f9f22df9b88263b295dae"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T18:44:37+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 3\nEnter word to delete -> Book\nThe Word -> 'Book' found at index -> 2\nWord Removed !\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\nEnter choice -> 5\n",
+          "exit_code": 0,
+          "code_sha256": "13c00800f89baf6b68156744e7cc214846aa1effce8f083d9b46d2350b81df77"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T18:52:50+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n5\n",
+          "exit_code": 0,
+          "code_sha256": "16854019003ae854542ecbd9532e269a2ade54646d5a0be872d733bb3f8a0b83"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T18:53:45+05:30",
+          "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+          "mode": "compile-run",
+          "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n1\nEnter word to search -> Cat\nThe Word -> 'Cat' found at index -> 2\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n1\nEnter word to search -> Book\nThe Word -> 'Book' found at index -> 1\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n2\nEnter word to enter -> Causality\nEnter Meaning to enter -> the principle that there is a cause for everything that happens\nWord Entered at index -> 5\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n5 -> Causality :\nthe principle that there is a cause for everything that happens\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n3\nEnter word to delete -> Causality\nThe Word -> 'Causality' found at index -> 5\nWord Removed !\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n5\n",
+          "exit_code": 0,
+          "code_sha256": "16854019003ae854542ecbd9532e269a2ade54646d5a0be872d733bb3f8a0b83"
+        }
+      ],
+      "run_count": 7,
+      "created_at": "2026-10-24T18:39:09+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 28,
+      "question": "Create a dictionary containing 10 words and their meanings, with operations to create, delete, and search.",
+      "source_file": "q-01-28.c",
+      "code": "// Strings -> Q 28 : Create a dictionary containing 10 words and their meanings, with operations to create, delete, and search.\n\n#include <stdio.h>\n#include <string.h>\n\n#define N_WORD 10\n#define S_MENG 100\n\nint main()\n{\n    char dict[N_WORD][2][S_MENG] = {\n        {\"Apple\", \"A fruit\"},\n        {\"Book\", \"Something used for reading\"},\n        {\"Cat\", \"A small domesticated animal\"},\n        {\"Dog\", \"A domesticated animal\"},\n        {\"Earth\", \"The planet we live on\"}\n    };\n    \n    int count = 5;\n    \n    char word[S_MENG],ch;\n    int i,j;\n    int choice, index = -1 ;\n\n    while (1) {\n\n        printf(\"\\n1 -> Search word\\n\");\n        printf(\"2 -> Create word\\n\");\n        printf(\"3 -> Delete word\\n\");\n        printf(\"4 -> Display dictionary\\n\");\n        printf(\"5 -> Exit\\n\");\n        \n        scanf(\"%d\", &choice);\n        getchar();\n\n        switch(choice){\n        case 1 : {\n\n            index = -1;\n\n            printf(\"Enter word to search -> \");            \n            for(i = 0 ; i < S_MENG-1;i++){\n                ch =  getchar();\n                if (ch == '\\n'){\n                    break;\n                }\n                word[i] = ch;\n            }\n            word[i] ='\\0';\n\n\n            for (j = 0; j < count ; j++){\n                if (strcmp(word,dict[j][0]) == 0){\n                    index = j;\n                    break;\n                }\n            }\n\n            if (index == -1){ printf(\"The Word -> '%s' Not found\\n\",word);}\n            else {printf(\"The Word -> '%s' found at index -> %d\\n\",word,index);}\n            break;\n        }\n\n\n        case 2 : {\n            if (count >= 10){\n                printf(\"Maximum Word limit Reached\\n\");\n                break;\n            }\n\n            if ((count<=10) && (count>=0)){\n                printf(\"Enter word to enter -> \");            \n                for(i = 0 ; i < S_MENG-1;i++){\n                    ch =  getchar();\n                    if (ch == '\\n'){\n                        break;\n                    }\n                    word[i] = ch;\n                }\n                word[i] ='\\0';\n\n                count;\n\n\n                strcpy(dict[count][0],word);\n\n                printf(\"Enter Meaning to enter -> \");            \n                for(i = 0 ; i < S_MENG-1;i++){\n                    ch =  getchar();\n                    if (ch == '\\n'){\n                        break;\n                    }\n                    word[i] = ch;\n                }\n                word[i] ='\\0';\n    \n                strcpy(dict[count][1],word);\n                count++;\n\n                printf(\"Word Entered at index -> %d\\n\",count-1);\n                break;\n\n            }}\n\n\n            case 3: {\n\n                if (count == 0){\n                    printf(\"Dict Empty\\n\");\n                    break;\n                }\n                \n                printf(\"Enter word to delete -> \");          \n                for(i = 0 ; i < S_MENG-1;i++){\n                    ch =  getchar();\n                    if (ch == '\\n'){\n                        break;\n                    }\n                    word[i] = ch;\n                }\n                word[i] ='\\0';\n                index = -1;\n\n                for (j = 0; j < count ; j++){\n                if (strcmp(word,dict[j][0]) == 0){\n                    index = j;\n                    break;\n                }}\n            \n                if (j == -1){ printf(\"The Word -> '%s' Not found\\n\",word);}\n                else {printf(\"The Word -> '%s' found at index -> %d\\n\",word,j);\n                    dict[index][0][0] = '\\0';\n                    dict[index][1][0] = '\\0';\n                        printf(\"Word Removed !\\n\");}\n                break;\n            \n            }\n\n            case 4: {\n\n                if (count == 0){\n                    printf(\"Dict Empty\\n\");\n                    break;\n                }\n                \n                printf(\"\\nDictionary ->>\\n\\n\");\n                for (j = 0 ; j < count ; j++){\n                    if (dict[j][0][0] == 0){continue;}\n                    printf(\"%d -> %s :\\n\",j,dict[j][0]);\n                    printf(\"%s\\n\",dict[j][1]);\n                    printf(\"\\n\");\n                }\n\n                break;\n\n            }\n\n            case 5:{\n                return 0;\n            }\n\n            default: {\n                printf(\"Invalid Input\\n\");\n            }\n\n            \n            \n        }\n    \n    \n    }\n    return 0;\n        }\n\n",
+      "code_sha256": "16854019003ae854542ecbd9532e269a2ade54646d5a0be872d733bb3f8a0b83",
+      "code_updated_at": "2026-10-24T18:52:50+05:30",
+      "command": "gcc q-01-28.c -o ./bin/q-01-28.out && ./bin/q-01-28.out",
+      "output": "\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n1\nEnter word to search -> Cat\nThe Word -> 'Cat' found at index -> 2\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n1\nEnter word to search -> Book\nThe Word -> 'Book' found at index -> 1\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n2\nEnter word to enter -> Causality\nEnter Meaning to enter -> the principle that there is a cause for everything that happens\nWord Entered at index -> 5\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n5 -> Causality :\nthe principle that there is a cause for everything that happens\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n3\nEnter word to delete -> Causality\nThe Word -> 'Causality' found at index -> 5\nWord Removed !\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n4\n\nDictionary ->>\n\n0 -> Apple :\nA fruit\n\n1 -> Book :\nSomething used for reading\n\n2 -> Cat :\nA small domesticated animal\n\n3 -> Dog :\nA domesticated animal\n\n4 -> Earth :\nThe planet we live on\n\n\n1 -> Search word\n2 -> Create word\n3 -> Delete word\n4 -> Display dictionary\n5 -> Exit\n5\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T18:53:45+05:30",
+      "updated_at": "2026-10-24T18:53:45+05:30",
+      "output_stale": false
     }
   ]
 }
