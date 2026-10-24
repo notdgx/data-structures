@@ -4664,33 +4664,7 @@ int main(){
 
 ```text
 $ gcc q-01-20.c -o ./bin/q-01-20.out && ./bin/q-01-20.out
-Enter the string, enter ` when done enterin -> hellow worjsn 
-fdfhdfkd  skddm ksj 
-fsksn 
-
-
-fss
-fdfd
-hello 
-
-world
-`
-The string you entered:
-hellow worjsn 
-fdfhdfkd  skddm ksj 
-fsksn 
-
-
-fss
-fdfd
-hello 
-
-world
-
-Characters: 68
-Words: 10
-Spaces: 8
-Lines: 10
+Enter the string, enter ` when done enterin -> ^C
 ```
 
 <!-- qrun:field-end output id="q-01-20" -->
@@ -4812,5 +4786,719 @@ J X D R
 
 <!-- qrun:field-end output id="q-01-21" -->
 <!-- qrun:entry-end id="q-01-21" -->
+
+
+<!-- qrun:entry-start id="q-01-22" -->
+
+<!-- qrun:field-start question id="q-01-22" -->
+
+## Q 22 : Enter a string from the user, sort its characters in ascending order, and print it.
+
+<!-- qrun:field-end question id="q-01-22" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-22" -->
+
+```c
+// Strings -> Q 22 : Enter a string from the user, sort its characters in ascending order, and print it.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+
+void mergearr(char arr[], int u, int l)
+{
+    int mid = (u + l ) / 2;
+    char newarr[u - l + 1];
+    int i = l;
+    int k = 0;
+    int j = mid + 1;
+
+    while (i <= mid && j <= u) {
+        if (arr[i] <= arr[j]) {
+            newarr[k] = arr[i];
+            i++;
+        }
+        else {
+            newarr[k] = arr[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i <= mid) {
+        newarr[k] = arr[i];
+        i++;
+        k++;
+    }
+
+    while (j <= u) {
+        newarr[k] = arr[j];
+        j++;
+        k++;
+    }
+
+    for (int x = 0; x < k; x++) {
+        arr[l + x] = newarr[x];
+    }
+
+}
+
+
+void mergesort(char arr[], int l, int u){
+    if (l >= u){
+        return;
+    }
+
+    int mid = (l + u) / 2;
+
+    mergesort(arr, l, mid);
+    mergesort(arr, mid + 1, u);
+
+    mergearr(arr, u, l);
+}
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    printf("The String you entered -> %s\n",str);
+    mergesort(str,0,i-1);
+
+    
+
+    printf("The Sorted String now  -> %s\n",str);
+
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-22" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-22" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-22" -->
+
+<!-- qrun:field-start output id="q-01-22" -->
+
+```text
+$ gcc q-01-22.c -o ./bin/q-01-22.out && ./bin/q-01-22.out
+Enter the string -> sbdndj bskdh sn..f.s uaa fhjs bbcc a
+The String you entered -> sbdndj bskdh sn..f.s uaa fhjs bbcc a
+The Sorted String now  ->       ...aaabbbbccdddffhhjjknnsssssu
+```
+
+<!-- qrun:field-end output id="q-01-22" -->
+<!-- qrun:entry-end id="q-01-22" -->
+
+
+<!-- qrun:entry-start id="q-01-23" -->
+
+<!-- qrun:field-start question id="q-01-23" -->
+
+## Q 23 : Enter a sentence and a word from the user, then count the occurrences of that word in the sentence.
+
+<!-- qrun:field-end question id="q-01-23" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-23" -->
+
+```c
+// Strings -> Q 23 : Enter a sentence and a word from the user, then count the occurrences of that word in the sentence.
+
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char word[STR_SIZE/4];
+
+    int i,j,flag = 0,count = 0;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("Enter the word   -> ") ;
+    for(j = 0 ; j < STR_SIZE/4 -1;j++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        word[j] = ch;
+    }
+    word[j] ='\0';int word_len = strlen(word);
+
+    if (word_len > 0) {
+        for (int k = 0; k <= i - word_len; k++) {
+
+            if (strncmp(&str[k], word, word_len) == 0) {
+
+                if (k == 0 || str[k - 1] == ' ' ||
+                    str[k - 1] == '\t') {
+
+                    if (str[k + word_len] == '\0' ||
+                        str[k + word_len] == ' ' ||
+                        str[k + word_len] == '\t' ||
+                        str[k + word_len] == '.' ||
+                        str[k + word_len] == ',' ||
+                        str[k + word_len] == '!' ||
+                        str[k + word_len] == '?' ||
+                        str[k + word_len] == ';' ||
+                        str[k + word_len] == ':') {
+
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+
+    printf("The String you entered -> %s\n",str);
+    printf("The Word   you entered -> %s\n",word);
+    printf("The Occurance of Word  -> %d\n",count);
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-23" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-23" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-23" -->
+
+<!-- qrun:field-start output id="q-01-23" -->
+
+```text
+$ gcc q-01-23.c -o ./bin/q-01-23.out && ./bin/q-01-23.out
+Enter the string -> the the ht eb adhdj th the the 
+Enter the word   -> the
+The String you entered -> the the ht eb adhdj th the the 
+The Word   you entered -> the
+The Occurance of Word  -> 4
+```
+
+<!-- qrun:field-end output id="q-01-23" -->
+<!-- qrun:entry-end id="q-01-23" -->
+
+
+<!-- qrun:entry-start id="q-01-24" -->
+
+<!-- qrun:field-start question id="q-01-24" -->
+
+## Q 24 : Enter a sentence and a word from the user, then replace the first occurrence of that word with another word.
+
+<!-- qrun:field-end question id="q-01-24" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-24" -->
+
+```c
+// Strings -> Q 24 : Enter a sentence and a word from the user, then replace the first occurrence of that word with another word.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+int main()
+{
+    char str[STR_SIZE], ch;
+    char word[STR_SIZE / 4];
+    char newword[STR_SIZE / 4];
+    char result[STR_SIZE * 2];
+
+    int i, j, k, p;
+    int word_len, newword_len;
+    int flag, found = 0;
+
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("Enter the word to replace  -> ") ;
+    for(j = 0 ; j < STR_SIZE/4 -1;j++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        word[j] = ch;
+    }
+    word[j] ='\0';
+
+    printf("Enter the new word  -> ");
+    for (k = 0; k < STR_SIZE / 4 - 1; k++) {
+        ch = getchar();
+        if (ch == '\n'){
+            break;
+        }
+        newword[k] = ch;
+    }
+    newword[k] = '\0';
+
+    word_len = strlen(word);
+    newword_len = strlen(newword);
+
+    k = 0;
+
+    for (i = 0; str[i] != '\0'; ) {
+        flag = 0;
+        if (word_len > 0 &&
+            strncmp(&str[i], word, word_len) == 0) {
+            if ((i == 0 || str[i - 1] == ' ' ||
+                 str[i - 1] == '\t') &&
+                (str[i + word_len] == '\0' ||
+                 str[i + word_len] == ' ' ||
+                 str[i + word_len] == '\t' ||
+                 str[i + word_len] == '.' ||
+                 str[i + word_len] == ',' ||
+                 str[i + word_len] == '!' ||
+                 str[i + word_len] == '?' ||
+                 str[i + word_len] == ';' ||
+                 str[i + word_len] == ':')) {
+                flag = 1;
+            }
+        }
+
+        if (flag == 1 && found == 0) {
+            for (p = 0; p < newword_len; p++) {
+                result[k++] = newword[p];
+            }
+
+            i += word_len;
+            found = 1;
+        }
+        else {
+            result[k++] = str[i];
+            i++;
+        }
+    }
+
+    result[k] = '\0';
+
+    printf("The String you entered -> %s\n",str);
+    printf("The String after replaceemnt  -> %s\n",str);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-24" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-24" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-24" -->
+
+<!-- qrun:field-start output id="q-01-24" -->
+
+```text
+$ gcc q-01-24.c -o ./bin/q-01-24.out && ./bin/q-01-24.out
+Enter the string -> the the the hte shdgb stthr the 
+Enter the word to replace  -> the 
+Enter the new word  -> yes
+The String you entered -> the the the hte shdgb stthr the 
+The String after replaceemnt  -> the the the hte shdgb stthr the 
+```
+
+<!-- qrun:field-end output id="q-01-24" -->
+<!-- qrun:entry-end id="q-01-24" -->
+
+
+<!-- qrun:entry-start id="q-01-25" -->
+
+<!-- qrun:field-start question id="q-01-25" -->
+
+## Q 25 : Enter a string from the user and trim spaces from both ends, if any.
+
+<!-- qrun:field-end question id="q-01-25" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-25" -->
+
+```c
+// Strings -> Q 25 : Enter a string from the user and trim spaces from both ends, if any.
+
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char str2[STR_SIZE];
+    int i,start= 0;
+    int end;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("The String you entered -> %s\n",str);
+    
+    end = i - 1;
+    
+    while (str[start] == ' ' && start < i) {
+        start++;
+    }
+    
+    while (end >= start && str[end] == ' ') {
+        end--;
+    }
+    
+    int j = 0;
+    for (int k = start; k <= end; k++) {
+        str[j] = str[k];
+        j++;
+    }
+    str[j] = '\0';
+    
+    printf("The String after Trimming -> %s\n",str);
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-25" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-25" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-25" -->
+
+<!-- qrun:field-start output id="q-01-25" -->
+
+```text
+$ gcc q-01-25.c -o ./bin/q-01-25.out && ./bin/q-01-25.out
+Enter the string ->     hello     world                    
+The String you entered ->     hello     world                    
+The String after Trimming -> hello     world
+```
+
+<!-- qrun:field-end output id="q-01-25" -->
+<!-- qrun:entry-end id="q-01-25" -->
+
+
+<!-- qrun:entry-start id="q-01-26" -->
+
+<!-- qrun:field-start question id="q-01-26" -->
+
+## Q 26 : Enter a string from the user, split the first and second words, and return the starting index of the second word.
+
+<!-- qrun:field-end question id="q-01-26" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-26" -->
+
+```c
+// Strings -> Q 26 : Enter a string from the user, split the first and second words, and return the starting index of the second word.
+
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    char word1[STR_SIZE/4];
+    char word2[STR_SIZE];
+    int i,inword = 0,n=0;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+
+    
+
+    for (int j = 0 ; j < i ; j++){
+        if ((str[j] >= 'a' && str[j] <='z') || ((str[j] >= 'A' && str[j] <='Z'))){
+            inword = 1;
+            word1[n] = str[j];
+            n++;
+        }
+        else if ((inword = 1) && (str[j] == ' ')){
+            int x = 0;
+            while (j<i)
+            {
+                word2[x] = str[j];
+                x++;
+                j++;
+            }
+
+            break;
+        }
+    }
+
+    printf("The String you entered -> %s\n",str);
+    printf("The First Word         -> %s\n",word1);
+    printf("The Second Word        -> %s\n",word2);
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-26" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-26" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-26" -->
+
+<!-- qrun:field-start output id="q-01-26" -->
+
+```text
+$ gcc q-01-26.c -o ./bin/q-01-26.out && ./bin/q-01-26.out
+Enter the string -> hello world aaa aaa aaa gggg
+The String you entered -> hello world aaa aaa aaa gggg
+The First Word         -> hello
+The Second Word        ->  world aaa aaa aaa gggg
+```
+
+<!-- qrun:field-end output id="q-01-26" -->
+<!-- qrun:entry-end id="q-01-26" -->
+
+
+<!-- qrun:entry-start id="q-01-27" -->
+
+<!-- qrun:field-start question id="q-01-27" -->
+
+## Q 27 : Display a string using the alignment option selected by the user (1 for left, 2 for center, 3 for right).
+
+<!-- qrun:field-end question id="q-01-27" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-27" -->
+
+```c
+// Strings -> Q 27 : Display a string using the alignment option selected by the user (1 for left, 2 for center, 3 for right).
+
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+#define WIDTH 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i,option;
+    int terminal_width = 100;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+
+    printf("The String you entered -> %s\n",str);
+    printf("The Options ->\n1 -> Left\n2 -> Center\n3 -> Right\n");
+    scanf("%d",&option);
+    if (option == 1) {
+        printf("%-*s\n", WIDTH, str);
+    }
+    else if (option == 2) {
+        int spaces = (WIDTH - i) / 2;
+
+        for (i = 0; i < spaces; i++) {
+            printf(" ");
+        }
+
+        printf("%s\n", str);
+    }
+    else if (option == 3) {
+        printf("%*s\n", WIDTH, str);
+    }
+
+    
+
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-27" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-27" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-27" -->
+
+<!-- qrun:field-start output id="q-01-27" -->
+
+```text
+$ gcc q-01-27.c -o ./bin/q-01-27.out && ./bin/q-01-27.out
+Enter the string -> Hello World 
+The String you entered -> Hello World 
+The Options ->
+1 -> Left
+2 -> Center
+3 -> Right
+3
+                                                                                        Hello World 
+```
+
+<!-- qrun:field-end output id="q-01-27" -->
+<!-- qrun:entry-end id="q-01-27" -->
+
+
+<!-- qrun:entry-start id="q-01-29" -->
+
+<!-- qrun:field-start question id="q-01-29" -->
+
+## Q 29 : Enter a string from the user and convert its characters into their ASCII values in an integer array (e.g., 10 characters).
+
+<!-- qrun:field-end question id="q-01-29" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-29" -->
+
+```c
+// Strings -> Q 29 : Enter a string from the user and convert its characters into their ASCII values in an integer array (e.g., 10 characters).
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int arr[STR_SIZE];
+    int i;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for(int j = 0 ; j < i ; j++){
+        arr[j] = (str[j]);
+    }
+    
+
+    printf("The String you entered -> %s\n",str);
+    printf("The Array of ASCII val -> [");
+    for(int j = 0 ; j < i ; j++){
+        printf(" %d,",arr[j]);
+    }
+    printf("]\n");
+
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-29" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-29" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-29" -->
+
+<!-- qrun:field-start output id="q-01-29" -->
+
+```text
+$ gcc q-01-29.c -o ./bin/q-01-29.out && ./bin/q-01-29.out
+Enter the string -> Hello World i am here!
+The String you entered -> Hello World i am here!
+The Array of ASCII val -> [ 72, 101, 108, 108, 111, 32, 87, 111, 114, 108, 100, 32, 105, 32, 97, 109, 32, 104, 101, 114, 101, 33,]
+```
+
+<!-- qrun:field-end output id="q-01-29" -->
+<!-- qrun:entry-end id="q-01-29" -->
 
 <!-- qrun:topic-end id="topic-01" -->
