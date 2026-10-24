@@ -4269,4 +4269,548 @@ Found at index pos -> 19
 <!-- qrun:field-end output id="q-01-15" -->
 <!-- qrun:entry-end id="q-01-15" -->
 
+
+<!-- qrun:entry-start id="q-01-16" -->
+
+<!-- qrun:field-start question id="q-01-16" -->
+
+## Q 16 : Enter a string and a character from the user, then print the character's index if it exists; otherwise, print -1.
+
+<!-- qrun:field-end question id="q-01-16" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-16" -->
+
+```c
+// Strings -> Q 16 : Enter a string and a character from the user, then print the character's index if it exists; otherwise, print -1.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+    char srch;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+    printf("Enter the Charachter to search -> ");
+    scanf("%c",&srch);
+
+    printf("The String you entered -> %s\n",str);
+    printf("The Char   you entered -> %c\n",srch);
+
+    for (int j = 0 ; j < i; j ++){
+        if (str[j] ==  srch ){
+            printf("Found at index pos -> %d",j);
+            return 1;
+        }
+    }
+    
+    printf("Not Fouund , -1\n");
+    
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-16" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-16" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-16" -->
+
+<!-- qrun:field-start output id="q-01-16" -->
+
+```text
+$ gcc q-01-16.c -o ./bin/q-01-16.out && ./bin/q-01-16.out
+Enter the string -> fghjsghd HElLLO World 
+Enter the Charachter to search -> l
+The String you entered -> fghjsghd HElLLO World 
+The Char   you entered -> l
+Found at index pos -> 11
+```
+
+<!-- qrun:field-end output id="q-01-16" -->
+<!-- qrun:entry-end id="q-01-16" -->
+
+
+<!-- qrun:entry-start id="q-01-17" -->
+
+<!-- qrun:field-start question id="q-01-17" -->
+
+## Q 17 : Enter a string from the user and count the number of vowels.
+
+<!-- qrun:field-end question id="q-01-17" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-17" -->
+
+```c
+// Strings -> Q 17 : Enter a string from the user and count the number of vowels.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i,count = 0;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        if (ch == 'a' ||ch == 'e' ||ch == 'i' ||ch == 'o' ||ch == 'u' ||ch == 'A' ||ch == 'E' ||ch == 'I' ||ch == 'O' ||ch == 'U'){count++;}
+
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    
+
+    printf("The String you entered -> %s\n",str);
+    printf("The No of vowels in str -> %d\n",count);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-17" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-17" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-17" -->
+
+<!-- qrun:field-start output id="q-01-17" -->
+
+```text
+$ gcc q-01-17.c -o ./bin/q-01-17.out && ./bin/q-01-17.out
+Enter the string -> AEIOU aeiou AEIOU aeiou UOIEA
+The String you entered -> AEIOU aeiou AEIOU aeiou UOIEA
+The No of vowels in str -> 25
+```
+
+<!-- qrun:field-end output id="q-01-17" -->
+<!-- qrun:entry-end id="q-01-17" -->
+
+
+<!-- qrun:entry-start id="q-01-18" -->
+
+<!-- qrun:field-start question id="q-01-18" -->
+
+## Q 18 : Enter a string from the user and convert it into an integer.
+
+<!-- qrun:field-end question id="q-01-18" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-18" -->
+
+```c
+// Strings -> Q 18 : Enter a string from the user and convert it into an integer.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+    int value = 0;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        if (!(ch>='0' && ch<='9')){
+            printf("Non Integer char\n");
+            return 0;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for (int j = 0 ; j < i ; j++){
+        value = value* 10 + (str[j] - '0');
+    }
+    
+    printf("The String you entered -> %s\n",str);
+    printf("The Integer value become -> %d\n",value);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-18" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-18" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-18" -->
+
+<!-- qrun:field-start output id="q-01-18" -->
+
+```text
+$ gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out
+Enter the string -> 3456
+The String you entered -> 3456
+The Integer value become -> 3456
+```
+
+<!-- qrun:field-end output id="q-01-18" -->
+<!-- qrun:entry-end id="q-01-18" -->
+
+
+<!-- qrun:entry-start id="q-01-19" -->
+
+<!-- qrun:field-start question id="q-01-19" -->
+
+## Q 19 : Enter a string from the user and convert it into a float.
+
+<!-- qrun:field-end question id="q-01-19" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-19" -->
+
+```c
+// Strings -> Q 19 : Enter a string from the user and convert it into a float.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+    float value = 0;
+    float dec = 0;
+    float place = 0.1f;
+    int flag = 0;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+        if (!((ch>='0' && ch<='9') || ch == '.')){
+            printf("Non Float char\n");
+            return 0;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+    for (int j = 0 ; j < i ; j++){
+        if (str[j] == '.') { flag = 1; continue;}
+        if (flag == 0){
+        value = value* 10 + (str[j] - '0');
+        }
+
+        else {
+            dec = dec  + (str[j] - '0') * place;
+            place /= 10;
+        }
+    }
+
+    value += dec;
+    
+    printf("The String you entered -> %s\n",str);
+    printf("The Float value become -> %f\n",value);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-19" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-19" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-19" -->
+
+<!-- qrun:field-start output id="q-01-19" -->
+
+```text
+$ gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out
+Enter the string -> 23324.332
+The String you entered -> 23324.332
+The Float value become -> 23324.332031
+```
+
+<!-- qrun:field-end output id="q-01-19" -->
+<!-- qrun:entry-end id="q-01-19" -->
+
+
+<!-- qrun:entry-start id="q-01-20" -->
+
+<!-- qrun:field-start question id="q-01-20" -->
+
+## Q 20 : Enter a string from the user and count the number of characters, words, spaces, and lines.
+
+<!-- qrun:field-end question id="q-01-20" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-20" -->
+
+```c
+// Strings -> Q 20 : Enter a string from the user and count the number of characters, words, spaces, and lines.
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+    int c_count = 0;
+    int w_count = 0;
+    int s_count = 0;
+    int l_count = 0;
+
+    int in_word = 0;
+
+    printf("Enter the string, enter ` when done enterin -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '`'){
+            break;
+        }
+        str[i] = ch;
+    }
+    str[i] ='\0';
+    for (int j = 0; j < i; j++) {
+        c_count++;
+
+        if (str[j] == ' ') {
+            s_count++;
+        }
+
+        if (str[j] == '\n') {
+            l_count++;
+        }
+
+        if (str[j] != ' ' && str[j] != '\n' && str[j] != '\t') {
+            if (in_word == 0) {
+                w_count++;
+                in_word = 1;
+            }
+        } else {
+            in_word = 0;
+        }
+    }
+
+    printf("The string you entered:\n%s\n", str);
+    printf("Characters: %d\n", c_count);
+    printf("Words: %d\n", w_count);
+    printf("Spaces: %d\n", s_count);
+    printf("Lines: %d\n", l_count + (i > 0 && str[i - 1] != '\n'));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-20" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-20" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-20" -->
+
+<!-- qrun:field-start output id="q-01-20" -->
+
+```text
+$ gcc q-01-20.c -o ./bin/q-01-20.out && ./bin/q-01-20.out
+Enter the string, enter ` when done enterin -> hellow worjsn 
+fdfhdfkd  skddm ksj 
+fsksn 
+
+
+fss
+fdfd
+hello 
+
+world
+`
+The string you entered:
+hellow worjsn 
+fdfhdfkd  skddm ksj 
+fsksn 
+
+
+fss
+fdfd
+hello 
+
+world
+
+Characters: 68
+Words: 10
+Spaces: 8
+Lines: 10
+```
+
+<!-- qrun:field-end output id="q-01-20" -->
+<!-- qrun:entry-end id="q-01-20" -->
+
+
+<!-- qrun:entry-start id="q-01-21" -->
+
+<!-- qrun:field-start question id="q-01-21" -->
+
+## Q 21 : Print all permutations of a string, e.g., "ABCDE".
+
+<!-- qrun:field-end question id="q-01-21" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-01-21" -->
+
+```c
+// Strings -> Q 21 : Print all permutations of a string, e.g., "ABCDE".
+
+
+#include <stdio.h>
+#include <string.h>
+#define STR_SIZE 100
+
+
+void permute(char arr[], int start, int n) {
+    if (start == n) {
+        for (int i = 0; i < n; i++) {
+            printf("%c ", arr[i]);
+        }
+        printf("\n");
+        return;
+    }
+
+    for (int i = start; i < n; i++) {
+        // swap 
+        char temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+
+        permute(arr, start + 1, n);
+
+        // undo it 
+        temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+
+
+int main(){
+
+    char str[STR_SIZE],ch;
+    int i;
+
+    printf("Enter the string -> ") ;
+    for(i = 0 ; i < STR_SIZE-1;i++){
+        ch =  getchar();
+        if (ch == '\n'){
+            break;
+        }
+
+        str[i] = ch;
+    }
+    str[i] ='\0';
+
+
+    printf("The string you entered -> %s\n",str);
+    permute(str,0,i);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-01-21" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-01-21" -->
+
+
+
+<!-- qrun:field-end freshness id="q-01-21" -->
+
+<!-- qrun:field-start output id="q-01-21" -->
+
+```text
+$ gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out
+Enter the string -> XDRJ
+The string you entered -> XDRJ
+X D R J 
+X D J R 
+X R D J 
+X R J D 
+X J R D 
+X J D R 
+D X R J 
+D X J R 
+D R X J 
+D R J X 
+D J R X 
+D J X R 
+R D X J 
+R D J X 
+R X D J 
+R X J D 
+R J X D 
+R J D X 
+J D R X 
+J D X R 
+J R D X 
+J R X D 
+J X R D 
+J X D R 
+```
+
+<!-- qrun:field-end output id="q-01-21" -->
+<!-- qrun:entry-end id="q-01-21" -->
+
 <!-- qrun:topic-end id="topic-01" -->

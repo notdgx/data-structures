@@ -1998,6 +1998,321 @@
       "last_run_at": "2026-10-24T12:13:10+05:30",
       "updated_at": "2026-10-24T12:13:10+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-01-16",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:16:12+05:30",
+          "command": "gcc q-01-16.c -o ./bin/q-01-16.out && ./bin/q-01-16.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> fghjsghd HElLLO World \nEnter the Charachter to search -> l\nThe String you entered -> fghjsghd HElLLO World \nThe Char   you entered -> l\nFound at index pos -> 11",
+          "exit_code": 1,
+          "code_sha256": "bc73c3f41df28a3f1232165c5ad0a2854440aebe6da4bec1cc0227835a4962a5"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T12:16:12+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 16,
+      "question": "Enter a string and a character from the user, then print the character's index if it exists; otherwise, print -1.",
+      "source_file": "q-01-16.c",
+      "code": "// Strings -> Q 16 : Enter a string and a character from the user, then print the character's index if it exists; otherwise, print -1.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n    char srch;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n    printf(\"Enter the Charachter to search -> \");\n    scanf(\"%c\",&srch);\n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The Char   you entered -> %c\\n\",srch);\n\n    for (int j = 0 ; j < i; j ++){\n        if (str[j] ==  srch ){\n            printf(\"Found at index pos -> %d\",j);\n            return 1;\n        }\n    }\n    \n    printf(\"Not Fouund , -1\\n\");\n    \n    return 0;\n}\n",
+      "code_sha256": "bc73c3f41df28a3f1232165c5ad0a2854440aebe6da4bec1cc0227835a4962a5",
+      "code_updated_at": "2026-10-24T12:16:12+05:30",
+      "command": "gcc q-01-16.c -o ./bin/q-01-16.out && ./bin/q-01-16.out",
+      "output": "Enter the string -> fghjsghd HElLLO World \nEnter the Charachter to search -> l\nThe String you entered -> fghjsghd HElLLO World \nThe Char   you entered -> l\nFound at index pos -> 11",
+      "exit_code": 1,
+      "last_run_at": "2026-10-24T12:16:12+05:30",
+      "updated_at": "2026-10-24T12:16:12+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-17",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:19:07+05:30",
+          "command": "gcc q-01-17.c -o ./bin/q-01-17.out && ./bin/q-01-17.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> AEIOU aeiou AEIOU aeiou UOIEA\nThe String you entered -> AEIOU aeiou AEIOU aeiou UOIEA\nThe No of vowels in str -> 25\n",
+          "exit_code": 0,
+          "code_sha256": "57f19b988065bdeb7ad5ddbdf3a5e6392ad0de5f4aae04e22ff39d63fdffa5fb"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T12:19:07+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 17,
+      "question": "Enter a string from the user and count the number of vowels.",
+      "source_file": "q-01-17.c",
+      "code": "// Strings -> Q 17 : Enter a string from the user and count the number of vowels.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i,count = 0;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        if (ch == 'a' ||ch == 'e' ||ch == 'i' ||ch == 'o' ||ch == 'u' ||ch == 'A' ||ch == 'E' ||ch == 'I' ||ch == 'O' ||ch == 'U'){count++;}\n\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    \n\n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The No of vowels in str -> %d\\n\",count);\n\n    return 0;\n}\n",
+      "code_sha256": "57f19b988065bdeb7ad5ddbdf3a5e6392ad0de5f4aae04e22ff39d63fdffa5fb",
+      "code_updated_at": "2026-10-24T12:19:07+05:30",
+      "command": "gcc q-01-17.c -o ./bin/q-01-17.out && ./bin/q-01-17.out",
+      "output": "Enter the string -> AEIOU aeiou AEIOU aeiou UOIEA\nThe String you entered -> AEIOU aeiou AEIOU aeiou UOIEA\nThe No of vowels in str -> 25\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:19:07+05:30",
+      "updated_at": "2026-10-24T12:19:07+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-18",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:42:59+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 2434453\nThe String you entered -> 2434453\nThe Integer value become -> 25\n",
+          "exit_code": 0,
+          "code_sha256": "85d6172aadac1efe39af8c525c32aa1a09302a5dfa2dbfe0f1d7462821eb9003"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T12:43:45+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 435y6\nNon Integer char\n",
+          "exit_code": 0,
+          "code_sha256": "de229785046079605ac5da58a82fee376a91cae5dc72e3f390b7ee4bb00056ad"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T12:43:48+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 2345\nThe String you entered -> 2345\nThe Integer value become -> 0\n",
+          "exit_code": 0,
+          "code_sha256": "de229785046079605ac5da58a82fee376a91cae5dc72e3f390b7ee4bb00056ad"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T12:44:01+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 234\nThe String you entered -> 234\nThe Integer value become -> 432\n",
+          "exit_code": 0,
+          "code_sha256": "08a00667ccc5fc4143d886ba24d2523ba1800f7e5f7742f465fa090597dadc71"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T12:46:11+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> -2343434\nNon Integer char\n",
+          "exit_code": 0,
+          "code_sha256": "8f8de6181890ef892efe7250021b37e3af40e504ce531bd521c90626e1a51f8c"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T12:46:36+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> -323456\nThe String you entered -> -323456\nThe Integer value become -> 5333328\n",
+          "exit_code": 0,
+          "code_sha256": "5e1fbf237099e73102af5ab6e52b42cb1d8a9fa7249ed946ab91f942696a2e84"
+        },
+        {
+          "run_number": 7,
+          "timestamp": "2026-10-24T12:47:06+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 3456\nThe String you entered -> 3456\nThe Integer value become -> -53328\n",
+          "exit_code": 0,
+          "code_sha256": "5a9474079620f86bc727a38b3fddf6ea9d3bdaa60ea018ff46549870650ef79f"
+        },
+        {
+          "run_number": 8,
+          "timestamp": "2026-10-24T12:48:05+05:30",
+          "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 3456\nThe String you entered -> 3456\nThe Integer value become -> 3456\n",
+          "exit_code": 0,
+          "code_sha256": "3adeb7634fa7c92bec38b0f78dfdc80e98edb08d16a4ef85565503790b59bc73"
+        }
+      ],
+      "run_count": 8,
+      "created_at": "2026-10-24T12:42:59+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 18,
+      "question": "Enter a string from the user and convert it into an integer.",
+      "source_file": "q-01-18.c",
+      "code": "// Strings -> Q 18 : Enter a string from the user and convert it into an integer.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n    int value = 0;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        if (!(ch>='0' && ch<='9')){\n            printf(\"Non Integer char\\n\");\n            return 0;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for (int j = 0 ; j < i ; j++){\n        value = value* 10 + (str[j] - '0');\n    }\n    \n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The Integer value become -> %d\\n\",value);\n\n    return 0;\n}\n",
+      "code_sha256": "3adeb7634fa7c92bec38b0f78dfdc80e98edb08d16a4ef85565503790b59bc73",
+      "code_updated_at": "2026-10-24T12:48:05+05:30",
+      "command": "gcc q-01-18.c -o ./bin/q-01-18.out && ./bin/q-01-18.out",
+      "output": "Enter the string -> 3456\nThe String you entered -> 3456\nThe Integer value become -> 3456\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:48:05+05:30",
+      "updated_at": "2026-10-24T12:48:05+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-19",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T12:53:48+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "q-01-19.c: In function ‘main’:\nq-01-19.c:46:40: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘double’ [-Wformat=]\n   46 |     printf(\"The Float value become -> %d\\n\",value);\n      |                                       ~^    ~~~~~\n      |                                        |    |\n      |                                        int  double\n      |                                       %f\nEnter the string -> ^[[A^C",
+          "exit_code": 130,
+          "code_sha256": "1d777e6d32edd60a149dc4eacae64494dd0a6fdd009cda1ba94c2d09d1dc4869"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T12:53:52+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 1213.23\nNon Integer char\n",
+          "exit_code": 0,
+          "code_sha256": "1d777e6d32edd60a149dc4eacae64494dd0a6fdd009cda1ba94c2d09d1dc4869"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T12:54:39+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 4343.23\nNon Float char\n",
+          "exit_code": 0,
+          "code_sha256": "d3b4ddd5d439a265ddc796fce4f1cac0f471d39b1c5a3be208633d4bd93926c8"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T12:55:35+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 3435.43\nNon Float char\n",
+          "exit_code": 0,
+          "code_sha256": "cf51e56052a79e1153432ef004635ac0f5c281089f6368f3488baa50f1bdb28f"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-24T12:55:53+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 34343.32\nThe String you entered -> 34343.32\nThe Float value become -> 34342.832031\n",
+          "exit_code": 0,
+          "code_sha256": "f773d4d6373ed7cde36948bd4f232a0147bacea752e0afe8b0c7f0a9de3054be"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-24T12:56:38+05:30",
+          "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> 23324.332\nThe String you entered -> 23324.332\nThe Float value become -> 23324.332031\n",
+          "exit_code": 0,
+          "code_sha256": "939b818ad79d450bc9b25c1670a4211f4e0415283057522fc54a7d7470b0ab37"
+        }
+      ],
+      "run_count": 6,
+      "created_at": "2026-10-24T12:53:48+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 19,
+      "question": "Enter a string from the user and convert it into a float.",
+      "source_file": "q-01-19.c",
+      "code": "// Strings -> Q 19 : Enter a string from the user and convert it into a float.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n    float value = 0;\n    float dec = 0;\n    float place = 0.1f;\n    int flag = 0;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n        if (!((ch>='0' && ch<='9') || ch == '.')){\n            printf(\"Non Float char\\n\");\n            return 0;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n    for (int j = 0 ; j < i ; j++){\n        if (str[j] == '.') { flag = 1; continue;}\n        if (flag == 0){\n        value = value* 10 + (str[j] - '0');\n        }\n\n        else {\n            dec = dec  + (str[j] - '0') * place;\n            place /= 10;\n        }\n    }\n\n    value += dec;\n    \n    printf(\"The String you entered -> %s\\n\",str);\n    printf(\"The Float value become -> %f\\n\",value);\n\n    return 0;\n}\n",
+      "code_sha256": "939b818ad79d450bc9b25c1670a4211f4e0415283057522fc54a7d7470b0ab37",
+      "code_updated_at": "2026-10-24T12:56:38+05:30",
+      "command": "gcc q-01-19.c -o ./bin/q-01-19.out && ./bin/q-01-19.out",
+      "output": "Enter the string -> 23324.332\nThe String you entered -> 23324.332\nThe Float value become -> 23324.332031\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T12:56:38+05:30",
+      "updated_at": "2026-10-24T12:56:38+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-20",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T13:19:36+05:30",
+          "command": "gcc q-01-20.c -o ./bin/q-01-20.out && ./bin/q-01-20.out",
+          "mode": "compile-run",
+          "output": "Enter the string, enter ` when done enterin -> hellow worjsn \nfdfhdfkd  skddm ksj \nfsksn \n\n\nfss\nfdfd\nhello \n\nworld\n`\nThe string you entered:\nhellow worjsn \nfdfhdfkd  skddm ksj \nfsksn \n\n\nfss\nfdfd\nhello \n\nworld\n\nCharacters: 68\nWords: 10\nSpaces: 8\nLines: 10\n",
+          "exit_code": 0,
+          "code_sha256": "fb3b14fae6429f7ccc27ae5ebc90470c8f06ad80072ddcc83a923e1b27a141d6"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-24T13:19:36+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 20,
+      "question": "Enter a string from the user and count the number of characters, words, spaces, and lines.",
+      "source_file": "q-01-20.c",
+      "code": "// Strings -> Q 20 : Enter a string from the user and count the number of characters, words, spaces, and lines.\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n    int c_count = 0;\n    int w_count = 0;\n    int s_count = 0;\n    int l_count = 0;\n\n    int in_word = 0;\n\n    printf(\"Enter the string, enter ` when done enterin -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '`'){\n            break;\n        }\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n    for (int j = 0; j < i; j++) {\n        c_count++;\n\n        if (str[j] == ' ') {\n            s_count++;\n        }\n\n        if (str[j] == '\\n') {\n            l_count++;\n        }\n\n        if (str[j] != ' ' && str[j] != '\\n' && str[j] != '\\t') {\n            if (in_word == 0) {\n                w_count++;\n                in_word = 1;\n            }\n        } else {\n            in_word = 0;\n        }\n    }\n\n    printf(\"The string you entered:\\n%s\\n\", str);\n    printf(\"Characters: %d\\n\", c_count);\n    printf(\"Words: %d\\n\", w_count);\n    printf(\"Spaces: %d\\n\", s_count);\n    printf(\"Lines: %d\\n\", l_count + (i > 0 && str[i - 1] != '\\n'));\n\n    return 0;\n}",
+      "code_sha256": "fb3b14fae6429f7ccc27ae5ebc90470c8f06ad80072ddcc83a923e1b27a141d6",
+      "code_updated_at": "2026-10-24T13:19:36+05:30",
+      "command": "gcc q-01-20.c -o ./bin/q-01-20.out && ./bin/q-01-20.out",
+      "output": "Enter the string, enter ` when done enterin -> hellow worjsn \nfdfhdfkd  skddm ksj \nfsksn \n\n\nfss\nfdfd\nhello \n\nworld\n`\nThe string you entered:\nhellow worjsn \nfdfhdfkd  skddm ksj \nfsksn \n\n\nfss\nfdfd\nhello \n\nworld\n\nCharacters: 68\nWords: 10\nSpaces: 8\nLines: 10\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T13:19:36+05:30",
+      "updated_at": "2026-10-24T13:19:36+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-01-21",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T13:23:33+05:30",
+          "command": "gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out",
+          "mode": "compile-run",
+          "output": "q-01-21.c: In function ‘main’:\nq-01-21.c:42:9: error: ‘ch’ undeclared (first use in this function)\n   42 |         ch =  getchar();\n      |         ^~\nq-01-21.c:42:9: note: each undeclared identifier is reported only once for each function it appears in\n",
+          "exit_code": 1,
+          "code_sha256": "3e8448b208475ccbdb6df3f8812f61591e9f977a838170ef9fb40274e60421dd"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T13:24:06+05:30",
+          "command": "gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> ABCD\nThe string you entered -> ABCDA B C \nA C B \nB A C \nB C A \nC B A \nC A B \n",
+          "exit_code": 0,
+          "code_sha256": "e31c491864844daa842a04f4acbf17802a5dd749f2d31cdab16d27275140a8e8"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-24T13:24:34+05:30",
+          "command": "gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> ABCDE\nThe string you entered -> ABCDE\nA B C D E \nA B C E D \nA B D C E \nA B D E C \nA B E D C \nA B E C D \nA C B D E \nA C B E D \nA C D B E \nA C D E B \nA C E D B \nA C E B D \nA D C B E \nA D C E B \nA D B C E \nA D B E C \nA D E B C \nA D E C B \nA E C D B \nA E C B D \nA E D C B \nA E D B C \nA E B D C \nA E B C D \nB A C D E \nB A C E D \nB A D C E \nB A D E C \nB A E D C \nB A E C D \nB C A D E \nB C A E D \nB C D A E \nB C D E A \nB C E D A \nB C E A D \nB D C A E \nB D C E A \nB D A C E \nB D A E C \nB D E A C \nB D E C A \nB E C D A \nB E C A D \nB E D C A \nB E D A C \nB E A D C \nB E A C D \nC B A D E \nC B A E D \nC B D A E \nC B D E A \nC B E D A \nC B E A D \nC A B D E \nC A B E D \nC A D B E \nC A D E B \nC A E D B \nC A E B D \nC D A B E \nC D A E B \nC D B A E \nC D B E A \nC D E B A \nC D E A B \nC E A D B \nC E A B D \nC E D A B \nC E D B A \nC E B D A \nC E B A D \nD B C A E \nD B C E A \nD B A C E \nD B A E C \nD B E A C \nD B E C A \nD C B A E \nD C B E A \nD C A B E \nD C A E B \nD C E A B \nD C E B A \nD A C B E \nD A C E B \nD A B C E \nD A B E C \nD A E B C \nD A E C B \nD E C A B \nD E C B A \nD E A C B \nD E A B C \nD E B A C \nD E B C A \nE B C D A \nE B C A D \nE B D C A \nE B D A C \nE B A D C \nE B A C D \nE C B D A \nE C B A D \nE C D B A \nE C D A B \nE C A D B \nE C A B D \nE D C B A \nE D C A B \nE D B C A \nE D B A C \nE D A B C \nE D A C B \nE A C D B \nE A C B D \nE A D C B \nE A D B C \nE A B D C \nE A B C D \n",
+          "exit_code": 0,
+          "code_sha256": "276f163af83f7653e23e1acba9a369adc5b5b3143a6ba5c18e93385b4bdb166f"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-24T13:24:48+05:30",
+          "command": "gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out",
+          "mode": "compile-run",
+          "output": "Enter the string -> XDRJ\nThe string you entered -> XDRJ\nX D R J \nX D J R \nX R D J \nX R J D \nX J R D \nX J D R \nD X R J \nD X J R \nD R X J \nD R J X \nD J R X \nD J X R \nR D X J \nR D J X \nR X D J \nR X J D \nR J X D \nR J D X \nJ D R X \nJ D X R \nJ R D X \nJ R X D \nJ X R D \nJ X D R \n",
+          "exit_code": 0,
+          "code_sha256": "276f163af83f7653e23e1acba9a369adc5b5b3143a6ba5c18e93385b4bdb166f"
+        }
+      ],
+      "run_count": 4,
+      "created_at": "2026-10-24T13:23:33+05:30",
+      "topic": "Strings",
+      "topic_index": 1,
+      "question_number": 21,
+      "question": "Print all permutations of a string, e.g., \"ABCDE\".",
+      "source_file": "q-01-21.c",
+      "code": "// Strings -> Q 21 : Print all permutations of a string, e.g., \"ABCDE\".\n\n\n#include <stdio.h>\n#include <string.h>\n#define STR_SIZE 100\n\n\nvoid permute(char arr[], int start, int n) {\n    if (start == n) {\n        for (int i = 0; i < n; i++) {\n            printf(\"%c \", arr[i]);\n        }\n        printf(\"\\n\");\n        return;\n    }\n\n    for (int i = start; i < n; i++) {\n        // swap \n        char temp = arr[start];\n        arr[start] = arr[i];\n        arr[i] = temp;\n\n        permute(arr, start + 1, n);\n\n        // undo it \n        temp = arr[start];\n        arr[start] = arr[i];\n        arr[i] = temp;\n    }\n}\n\n\n\nint main(){\n\n    char str[STR_SIZE],ch;\n    int i;\n\n    printf(\"Enter the string -> \") ;\n    for(i = 0 ; i < STR_SIZE-1;i++){\n        ch =  getchar();\n        if (ch == '\\n'){\n            break;\n        }\n\n        str[i] = ch;\n    }\n    str[i] ='\\0';\n\n\n    printf(\"The string you entered -> %s\\n\",str);\n    permute(str,0,i);\n\n    return 0;\n}\n",
+      "code_sha256": "276f163af83f7653e23e1acba9a369adc5b5b3143a6ba5c18e93385b4bdb166f",
+      "code_updated_at": "2026-10-24T13:24:34+05:30",
+      "command": "gcc q-01-21.c -o ./bin/q-01-21.out && ./bin/q-01-21.out",
+      "output": "Enter the string -> XDRJ\nThe string you entered -> XDRJ\nX D R J \nX D J R \nX R D J \nX R J D \nX J R D \nX J D R \nD X R J \nD X J R \nD R X J \nD R J X \nD J R X \nD J X R \nR D X J \nR D J X \nR X D J \nR X J D \nR J X D \nR J D X \nJ D R X \nJ D X R \nJ R D X \nJ R X D \nJ X R D \nJ X D R \n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T13:24:48+05:30",
+      "updated_at": "2026-10-24T13:24:48+05:30",
+      "output_stale": false
     }
   ]
 }
