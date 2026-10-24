@@ -2778,6 +2778,45 @@
       "last_run_at": "2026-10-24T18:53:45+05:30",
       "updated_at": "2026-10-24T18:53:45+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-04-01",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-24T20:14:02+05:30",
+          "command": "gcc q-04-01.c -o ./bin/q-04-01.out && ./bin/q-04-01.out",
+          "mode": "compile-run",
+          "output": "",
+          "exit_code": 0,
+          "code_sha256": "fb2788f8d47eb085e7ae1f37500c0bb943306359613403c99829baf6665431de"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-24T20:16:55+05:30",
+          "command": "gcc q-04-01.c -o ./bin/q-04-01.out && ./bin/q-04-01.out",
+          "mode": "compile-run",
+          "output": "\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack is empty\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 24\n24 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 24\n24 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 64\n64 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 45\n45 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 3\nTop value : 45\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 4\nSize of stack : 4\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 5\nStack is not empty\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack elements :\n\n|   24  ||   24  ||   64  ||>  45 <|\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 2\nPopped value : 45\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack elements :\n\n|   24  ||   24  ||>  64 <|\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 0\nexitting ...\n",
+          "exit_code": 0,
+          "code_sha256": "03b002dd1da4bf8b1a3c1735173e946708cd8696a66792088972103038283497"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-24T20:14:02+05:30",
+      "topic": "Stacks",
+      "topic_index": 4,
+      "question_number": 1,
+      "question": "Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.",
+      "source_file": "q-04-01.c",
+      "code": "// Stacks -> Q 01 : Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.\n\n#include <stdio.h>\n\n#define STACK_SIZE 6\n\nint push(int arr[], int *top, int num){\n    if (*top >= STACK_SIZE - 1){return 0;}\n    arr[++(*top)] = num;\n    return 1;\n}\n\nint pop(int arr[], int *top, int *value){\n    if (*top < 0){return 0;}\n    *value = arr[*top];\n    (*top)--;\n    return 1;\n}\n\nint peek(int arr[], int *top, int *value){\n    if (*top < 0){return 0;}\n    *value = arr[*top];\n    return 1;\n}\n\nint size_st(int *top){\n    return (*top) + 1;\n}\n\nint isempty(int *top){\n    return (*top == -1);\n}\n\nvoid show_st(int arr[], int *top)\n{\n    if (*top == -1){\n        printf(\"Stack is empty\\n\");\n        return;\n    }\n\n    printf(\"Stack elements :\\n\\n\");\n      for (int i = 0 ; i < *top ; i++){\n        printf(\"|  %3d  |\", arr[i]);\n    }\n    printf(\"|> %3d <|\\n\", arr[*top]);\n\n}\n\nint main()\n{\n    int arr[STACK_SIZE];\n    int top = -1;\n    int choice;\n    int input_val;\n    int out;\n    int temp;\n\n    while (1)\n    {\n        printf(\"\\nEnter the choice :\\n\");\n        printf(\"1 : push\\n\");\n        printf(\"2 : pop\\n\");\n        printf(\"3 : peek\\n\");\n        printf(\"4 : size\\n\");\n        printf(\"5 : isempty\\n\");\n        printf(\"6 : show\\n\");\n        printf(\"0 : exit\\n\");\n        printf(\"Enter choice : \");\n\n        scanf(\"%d\", &choice);\n\n        switch (choice)\n        {\n        case 1:\n            printf(\"Enter the number to push : \");\n            scanf(\"%d\", &input_val);\n\n            out = push(arr, &top, input_val);\n            if (out == 1)\n                printf(\"%d pushed to stack\\n\", input_val);\n            else\n                printf(\"Stack overflow \\n\");\n            break;\n\n        case 2:\n            out = pop(arr, &top, &temp);\n            if (out == 1)\n                printf(\"Popped value : %d\\n\", temp);\n            else\n                printf(\"Stack underflow \\n\");\n            break;\n\n        case 3:\n            out = peek(arr, &top, &temp);\n            if (out == 1)\n                printf(\"Top value : %d\\n\", temp);\n            else\n                printf(\"Stack is empty \\n\");\n            break;\n\n        case 4:\n            printf(\"Size of stack : %d\\n\", size_st(&top));\n            break;\n\n        case 5:\n            if (isempty(&top))\n                printf(\"Stack is empty \\n\");\n            else\n                printf(\"Stack is not empty\\n\");\n            break;\n\n        case 6:\n            show_st(arr, &top);\n            break;\n\n        case 0:\n            printf(\"exitting ...\\n\");\n            return 0;\n\n        default:\n            printf(\"Invalid choice\\n\");\n        }\n    }\n\n    return 0;\n}",
+      "code_sha256": "03b002dd1da4bf8b1a3c1735173e946708cd8696a66792088972103038283497",
+      "code_updated_at": "2026-10-24T20:16:55+05:30",
+      "command": "gcc q-04-01.c -o ./bin/q-04-01.out && ./bin/q-04-01.out",
+      "output": "\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack is empty\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 24\n24 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 24\n24 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 64\n64 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 1\nEnter the number to push : 45\n45 pushed to stack\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 3\nTop value : 45\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 4\nSize of stack : 4\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 5\nStack is not empty\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack elements :\n\n|   24  ||   24  ||   64  ||>  45 <|\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 2\nPopped value : 45\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 6\nStack elements :\n\n|   24  ||   24  ||>  64 <|\n\nEnter the choice :\n1 : push\n2 : pop\n3 : peek\n4 : size\n5 : isempty\n6 : show\n0 : exit\nEnter choice : 0\nexitting ...\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-24T20:16:55+05:30",
+      "updated_at": "2026-10-24T20:16:55+05:30",
+      "output_stale": false
     }
   ]
 }

@@ -729,5 +729,7 @@ if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
     }
 fi
 
+python3 /home/dx/coding/data-structures/website-questions/update_question_d.py
+
 exit "$run_status"
 
