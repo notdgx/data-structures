@@ -6142,4 +6142,1382 @@ exitting ...
 
 <!-- qrun:field-end output id="q-04-01" -->
 <!-- qrun:entry-end id="q-04-01" -->
+
+
+<!-- qrun:entry-start id="q-04-02" -->
+
+<!-- qrun:field-start question id="q-04-02" -->
+
+## Q 02 : Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-04-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-04-02" -->
+
+```c
+// Stacks -> Q 02 : Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.
+
+#include <stdio.h>
+
+#define STACK_SIZE 6
+
+int push(char arr[], int *top, char num){
+    if (*top >= STACK_SIZE - 1){return 0;}
+    arr[++(*top)] = num;
+    return 1;
+}
+
+int pop(char arr[], int *top, char *value){
+    if (*top < 0){return 0;}
+    *value = arr[*top];
+    (*top)--;
+    return 1;
+}
+
+int peek(char arr[], int *top, char *value){
+    if (*top < 0){return 0;}
+    *value = arr[*top];
+    return 1;
+}
+
+int size_st(int *top){
+    return (*top) + 1;
+}
+
+int isempty(int *top){
+    return (*top == -1);
+}
+
+void show_st(char arr[], int *top)
+{
+    if (*top == -1){
+        printf("Stack is empty\n");
+        return;
+    }
+
+    printf("Stack elements :\n\n");
+      for (int i = 0 ; i < *top ; i++){
+        printf("|  %3c  |", arr[i]);
+    }
+    printf("|> %c <|\n", arr[*top]);
+
+}
+
+int main()
+{
+    char arr[STACK_SIZE];
+    int top = -1;
+    int choice;
+    char input_val;
+    int out;
+    char temp;
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : push\n");
+        printf("2 : pop\n");
+        printf("3 : peek\n");
+        printf("4 : size\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to push : ");
+            scanf(" %c", &input_val);
+
+            out = push(arr, &top, input_val);
+            if (out == 1)
+                printf("%c pushed to stack\n", input_val);
+            else
+                printf("Stack overflow \n");
+            break;
+
+        case 2:
+            out = pop(arr, &top, &temp);
+            if (out == 1)
+                printf("Popped value : %c\n", temp);
+            else
+                printf("Stack underflow \n");
+            break;
+
+        case 3:
+            out = peek(arr, &top, &temp);
+            if (out == 1)
+                printf("Top value : %c\n", temp);
+            else
+                printf("Stack is empty \n");
+            break;
+
+        case 4:
+            printf("Size of stack : %d\n", size_st(&top));
+            break;
+
+        case 5:
+            if (isempty(&top))
+                printf("Stack is empty \n");
+            else
+                printf("Stack is not empty\n");
+            break;
+
+        case 6:
+            show_st(arr, &top);
+            break;
+
+        case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-04-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-04-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-04-02" -->
+
+<!-- qrun:field-start output id="q-04-02" -->
+
+```text
+$ gcc q-04-02.c -o ./bin/q-04-02.out && ./bin/q-04-02.out
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : n
+n pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : b
+b pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 3
+Top value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 4
+Size of stack : 3
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|    n  ||    b  ||> g <|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : b
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|> n <|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : n
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack is empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-04-02" -->
+<!-- qrun:entry-end id="q-04-02" -->
+
+
+<!-- qrun:entry-start id="q-04-03" -->
+
+<!-- qrun:field-start question id="q-04-03" -->
+
+## Q 03 : Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-04-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-04-03" -->
+
+```c
+// Stacks -> Q 03 : Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    
+    if (*top == NULL){
+        new_node->pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node->pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)->pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+int peek_node(struct node *top){
+        return top->data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf("NO DATA\n");
+        return;
+    }
+
+    printf("\n|> %3d <|", top->data);
+    top=top->pre_ptr;
+
+    while (top != NULL){
+
+        printf("|  %3d  |", top->data);
+        top=top->pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top->pre_ptr;
+    }
+    return i;
+}
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)->pre_ptr;
+        free(temp);
+    }
+}
+
+
+
+int main(){
+
+    struct node * top = NULL;
+    int choice,input_val,out;
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : push\n");
+        printf("2 : pop\n");
+        printf("3 : peek\n");
+        printf("4 : size\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+
+        case 1:
+            printf("Enter the number to push : ");
+            scanf("%d", &input_val);
+
+            out = add_node(&top,input_val);
+            if (out == 1)
+                printf("%d pushed to stack\n", input_val);
+            else
+                printf("Stack overflow \n");
+            break;
+
+        case 2:
+            out = pop_node(&top);
+            if (out == 1)
+                printf("Popped");
+            else
+                printf("Stack underflow \n");
+            break;
+
+        case 3:
+            out = is_empty(top);
+            if (out == 0)
+                printf("Top value : %d\n", peek_node(top));
+            else
+                printf("Stack is empty \n");
+            break;
+
+        case 4:
+            printf("Size of stack : %d\n", stack_size(top));
+            break;
+
+        case 5:
+            if (is_empty(top))
+                printf("Stack is empty \n");
+            else
+                printf("Stack is not empty\n");
+            break;
+
+        case 6:
+            show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&top);
+            break;
+
+        case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+
+return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-04-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-04-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-04-03" -->
+
+<!-- qrun:field-start output id="q-04-03" -->
+
+```text
+$ gcc q-04-03.c -o ./bin/q-04-03.out && ./bin/q-04-03.out
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 32
+32 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 434
+434 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 534
+534 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 3
+Top value : 534
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 4
+Size of stack : 3
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|> 534 <||  434  ||   32  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|> 434 <||   32  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 7
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-04-03" -->
+<!-- qrun:entry-end id="q-04-03" -->
+
+
+<!-- qrun:entry-start id="q-04-04" -->
+
+<!-- qrun:field-start question id="q-04-04" -->
+
+## Q 04 : Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-04-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-04-04" -->
+
+```c
+// Stacks -> Q 04 : Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node{
+    char data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    
+    if (*top == NULL){
+        new_node->pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node->pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)->pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+char peek_node(struct node *top){
+        return top->data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf("NO DATA\n");
+        return;
+    }
+
+    printf("\n|> %c <|", top->data);
+    top=top->pre_ptr;
+
+    while (top != NULL){
+
+        printf("|  %3c  |", top->data);
+        top=top->pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top->pre_ptr;
+    }
+    return i;
+}
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)->pre_ptr;
+        free(temp);
+    }
+}
+
+
+
+int main(){
+
+    struct node * top = NULL;
+    int choice,out;
+    char input_val;
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : push\n");
+        printf("2 : pop\n");
+        printf("3 : peek\n");
+        printf("4 : size\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+
+        case 1:
+            printf("Enter the number to push : ");
+            scanf(" %c", &input_val);
+
+            out = add_node(&top,input_val);
+            if (out == 1)
+                printf("%c pushed to stack\n", input_val);
+            else
+                printf("Stack overflow \n");
+            break;
+
+        case 2:
+            out = pop_node(&top);
+            if (out == 1)
+                printf("Popped");
+            else
+                printf("Stack underflow \n");
+            break;
+
+        case 3:
+            out = is_empty(top);
+            if (out == 0)
+                printf("Top value : %c\n", peek_node(top));
+            else
+                printf("Stack is empty \n");
+            break;
+
+        case 4:
+            printf("Size of stack : %d\n", stack_size(top));
+            break;
+
+        case 5:
+            if (is_empty(top))
+                printf("Stack is empty \n");
+            else
+                printf("Stack is not empty\n");
+            break;
+
+        case 6:
+            show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&top);
+            break;
+
+        case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }
+
+return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-04-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-04-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-04-04" -->
+
+<!-- qrun:field-start output id="q-04-04" -->
+
+```text
+$ gcc q-04-04.c -o ./bin/q-04-04.out && ./bin/q-04-04.out
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : h
+h pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : h
+h pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 3
+Top value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 4
+Size of stack : 4
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|> g <||    h  ||    h  ||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|> h <||    h  ||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|> h <||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 7
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-04-04" -->
+<!-- qrun:entry-end id="q-04-04" -->
+
+
+<!-- qrun:entry-start id="q-04-06" -->
+
+<!-- qrun:field-start question id="q-04-06" -->
+
+## Q 06 : Create a program to match single brackets using a stack.
+
+<!-- qrun:field-end question id="q-04-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-04-06" -->
+
+```c
+// Stacks -> Q 06 : Create a program to match single brackets using a stack.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    char data;
+    struct node * ptr;
+};
+
+
+// QUEUES : IT is normal dynamic sized non circular queue with 
+//          linked list with functions `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search`
+
+int enqueue(struct node ** front,struct node ** rear, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->ptr = NULL;
+
+    if (((*front) == NULL) && ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)->ptr == NULL){
+        (*rear)->ptr = new_node;
+        (*rear) = (*rear)->ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)->ptr == NULL) && ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)->ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+char fn_front(struct node * front){
+    return front->data;
+}
+
+char fn_rear(struct node * rear){
+    return rear->data;
+}
+
+
+int is_empty_queue(struct node * front,struct node * rear){
+    if ((front == NULL) && (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front->ptr;
+    }
+
+    return i;
+}
+
+
+char get_one_by_one(struct node * front , struct node * rear, struct node ** ptr){
+
+    if ((front == NULL) && (rear == front) && (*ptr == NULL)){
+        return '\0';
+    }
+
+    // if ((*ptr) == NULL){
+    //     (*ptr) = front->ptr;
+    //     return front->data; 
+    // }
+
+    while((front) != NULL){
+        if (front == *ptr){
+            *ptr = front->ptr;
+
+            return front->data;
+        }
+        front=front->ptr;
+    }
+    return '\0';    
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)->ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+// STACK 
+
+
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    
+    if (*top == NULL){
+        new_node->ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node->ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)->ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty_stack(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+char peek_node(struct node *top){
+        return top->data;
+}
+
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)->ptr;
+        free(temp);
+    }
+}
+
+
+
+
+// -----------------------------------
+
+
+// BRACKJET MATCHING FUNCTIONS 
+
+
+int match_pair(char a, char b){
+    if (a=='{' && b =='}'){
+        return 1;
+    }
+    else if (a=='[' && b==']'){
+        return 1;
+    }
+    else if (a=='(' && b==')'){
+        return 1;
+    }
+    return 0;
+
+}
+
+int bracket_match(struct node ** front , struct node ** rear,struct node ** top){
+
+    char front_data_queue;
+
+    while(!is_empty_queue(*front,*rear)){
+
+        front_data_queue = fn_front(*front);
+
+        if (front_data_queue == '{' || front_data_queue == '[' || front_data_queue == '('){
+            add_node(top,front_data_queue);}
+        
+        else if (front_data_queue==' '){}
+
+        else if (front_data_queue == '}' || front_data_queue == ']' || front_data_queue == ')'){
+            int state = is_empty_stack(*top);
+            if (!state && match_pair(peek_node(*top),front_data_queue)){
+                pop_node(top);
+            }
+            else{return 0;}
+        }
+        else{return 0;}
+        dequeue(front,rear);
+    }
+
+        if (is_empty_stack(*top))
+            return 1;
+        else
+            return 0;
+
+
+};
+
+
+int main(){
+
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    
+    struct node * get_ptr = NULL;
+
+    struct node * top = NULL;
+    char temp;
+
+    while (1){
+        printf("Enter the brackets : ");
+        while ((temp = getchar()) != '\n'){
+            enqueue(&front,&rear,temp);
+        }
+        printf("\n");
+        printf("+-----------+");
+        printf("\n");
+        printf("Brackets you entered : ");
+
+        get_ptr = front;
+        while((temp = get_one_by_one(front,rear,&get_ptr)) != '\0'){
+            printf("%c",temp);
+        }
+
+        if (bracket_match(&front,&rear,&top) == 1){
+            printf("\nMatched\n");
+        }
+        else {
+            printf("\nDoesnt Matched\n");
+            
+        }
+        printf("\n");
+        printf("+-----------+");
+        printf("\n");
+
+        clear_queue(&front,&rear);
+        clear_stack(&top);
+
+        printf("Do you want to continue ? (Y/N)");
+        temp = getchar();
+        while (getchar() != '\n');
+        if ((temp == 'N') || (temp == 'n')){
+            break;
+        }
+        // fflush(stdin);
+    }
+
+    return 0;
+
+
+}
+
+// > fixesdone
+// - clear/reset the nodes
+// - here we have precidence conflict (temp = getchar()) != '\n'
+// - increasing the frontn 
+```
+
+<!-- qrun:field-end code id="q-04-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-04-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-04-06" -->
+
+<!-- qrun:field-start output id="q-04-06" -->
+
+```text
+$ gcc q-04-06.c -o ./bin/q-04-06.out && ./bin/q-04-06.out
+Enter the brackets : {}{}{}{}{}}{{][[][]][]][][][][[[][[]]
+
++-----------+
+Brackets you entered : {}{}{}{}{}}{{][[][]][]][][][][[[][[]]
+Doesnt Matched
+
++-----------+
+Do you want to continue ? (Y/N)Y
+Enter the brackets : {{{{{{{{{{{[][][][][]()()[][][][]}}}}}}}}}}
+
++-----------+
+Brackets you entered : {{{{{{{{{{{[][][][][]()()[][][][]}}}}}}}}}}
+Doesnt Matched
+
++-----------+
+Do you want to continue ? (Y/N)N
+```
+
+<!-- qrun:field-end output id="q-04-06" -->
+<!-- qrun:entry-end id="q-04-06" -->
+
 <!-- qrun:topic-end id="topic-04" -->

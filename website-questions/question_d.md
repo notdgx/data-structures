@@ -96,11 +96,11 @@
 
 
 1. ✅ : Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.
-2. ❌ : Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.
-3. ❌ : Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.
-4. ❌ : Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.
+2. ✅ : Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.
+3. ✅ : Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.
+4. ✅ : Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.
 5. ❌ : Enter a string from the user and reverse it using a stack.
-6. ❌ : Create a program to match single brackets using a stack.
+6. ✅ : Create a program to match single brackets using a stack.
 7. ❌ : Create two integer stacks in a single array.
 8. ❌ : Sort a stack in ascending order using an integer array.
 9. ❌ : Enter an infix expression from the user and convert it into a prefix expression.
