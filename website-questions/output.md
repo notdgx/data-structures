@@ -11487,3 +11487,3111 @@ collect2: error: ld returned 1 exit status
 <!-- qrun:entry-end id="q-06-05" -->
 
 <!-- qrun:topic-end id="topic-06" -->
+
+<!-- qrun:topic-start id="topic-05" -->
+
+<!-- qrun:field-start topic id="topic-05" -->
+
+# Queues
+
+<!-- qrun:field-end topic id="topic-05" -->
+
+<!-- qrun:entry-start id="q-05-01" -->
+
+<!-- qrun:field-start question id="q-05-01" -->
+
+## Q 01 : Implement a simple queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-01" -->
+
+```c
+// Queues -> Q 01 : Implement a simple queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+#define QUEUE_SIZE 10
+
+
+int enqueue(int queue[],int * front, int * rear ,int data){
+    if (*front == -1 && *rear == -1){
+        (*front)++;
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    if (*front > -1 && *rear < QUEUE_SIZE - 1){
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    return 0;
+
+}
+
+int dequeue(int * front, int * rear){
+    if (*front == -1 && *rear == -1){
+        return 0;
+    }
+    
+    if ((*front <= *rear ) && (*front < QUEUE_SIZE)){
+        
+        if ((*front == QUEUE_SIZE -1)){
+            *front = -1;
+            *rear = -1;
+            return -1;
+        }
+
+        if (*front == *rear) {
+            *front = -1;
+            *rear = -1;
+             return 1;
+            }
+        
+        (*front)++;
+        return 1;
+    }
+    return 0;
+}
+
+int fn_front(int queue[],int front){
+    return queue[front];
+}
+
+int fn_rear(int queue[],int rear){
+    return queue[rear];
+}
+
+int is_empty(int queue[],int front, int rear){
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return 1;
+    }
+
+    return 0;
+}
+
+int size(int queue[],int front, int rear){
+
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return 0;
+    }
+    
+    return rear-front+1;
+}
+
+
+void show(int queue[],int front, int rear){
+    
+    if ((front == -1 && rear == -1) || (front > rear)){
+        printf("no data");
+        return;
+    }
+
+    if (front == rear){
+        printf("||f> %3d <r|", queue[front]);
+        return;
+    }
+
+    printf("||f> %3d <|", queue[front]);
+
+    for (int i = front+1 ; i < rear ; i++){
+        printf("|  %3d  |", queue[i]);
+    }
+    printf("|r> %3d <||\n", queue[rear]);
+
+}
+
+int search(int queue[],int front, int rear,int data){
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return -1;
+    }
+
+    for (int i = front ; i < rear + 1 ; i++){
+        if (queue[i] == data){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+
+int main(){
+
+    int * queue = (int *)(malloc(sizeof(int) * QUEUE_SIZE));
+    int front = -1;
+    int rear = -1;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to enqueue : ");
+            scanf("%d", &input_val);
+
+            out = enqueue(queue,&front,&rear,input_val);
+            if (out == 1)
+                printf("%d enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&front,&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf("Front value : %d\n", fn_front(queue,front));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf("rear value : %d\n", fn_rear(queue,rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(queue,front,rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(queue,front,rear);
+            break;
+            
+        case 7:
+            printf("%d is the sixe of Queue ", size(queue,front,rear));
+                break;
+        case 8:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(queue,front,rear,input_val);
+            if (out == 1)
+                printf("Element Found \n");
+            else if (out == 0)
+                printf("Element Not Found\n");
+            else
+                printf("No data  \n");
+
+                break;
+
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-05-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-01" -->
+
+<!-- qrun:field-start output id="q-05-01" -->
+
+```text
+$ gcc q-05-01.c -o ./bin/q-05-01.out && ./bin/q-05-01.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 324
+324 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 546
+546 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 345
+345 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 3
+Front value : 324
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 4
+rear value : 345
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 5
+Queue is not empty
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 6
+||f> 324 <||  546  ||r> 345 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 7
+3 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 20
+20 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 8
+Enter the element to search : 20
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 6
+||f> 345 <||r>  20 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 6
+||f>  20 <r|
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-01" -->
+<!-- qrun:entry-end id="q-05-01" -->
+
+
+<!-- qrun:entry-start id="q-05-02" -->
+
+<!-- qrun:field-start question id="q-05-02" -->
+
+## Q 02 : Implement a simple queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-02" -->
+
+```c
+// Queues -> Q 02 : Implement a simple queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+#define QUEUE_SIZE 10
+
+
+int enqueue(char queue[],int * front, int * rear ,char data){
+    if (*front == -1 && *rear == -1){
+        (*front)++;
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    if (*front > -1 && *rear < QUEUE_SIZE - 1){
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    return 0;
+
+}
+
+int dequeue(int * front, int * rear){
+    if (*front == -1 && *rear == -1){
+        return 0;
+    }
+    
+    if ((*front <= *rear ) && (*front < QUEUE_SIZE)){
+        
+        if ((*front == QUEUE_SIZE -1)){
+            *front = -1;
+            *rear = -1;
+            return -1;
+        }
+
+        if (*front == *rear) {
+            *front = -1;
+            *rear = -1;
+             return 1;
+            }
+        
+        (*front)++;
+        return 1;
+    }
+    return 0;
+}
+
+int fn_front(char queue[],int front){
+    return queue[front];
+}
+
+int fn_rear(char queue[],int rear){
+    return queue[rear];
+}
+
+int is_empty(char queue[],int front, int rear){
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return 1;
+    }
+
+    return 0;
+}
+
+int size(char queue[],int front, int rear){
+
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return 0;
+    }
+    
+    return rear-front+1;
+}
+
+
+void show(char queue[],int front, int rear){
+    
+    if ((front == -1 && rear == -1) || (front > rear)){
+        printf("no data");
+        return;
+    }
+
+    if (front == rear){
+        printf("||f> %c <r|", queue[front]);
+        return;
+    }
+
+    printf("||f> %c <|", queue[front]);
+
+    for (int i = front+1 ; i < rear ; i++){
+        printf("|  %c  |", queue[i]);
+    }
+    printf("|r> %c <||\n", queue[rear]);
+
+}
+
+int search(char queue[],int front, int rear,char data){
+    if ((front == -1 && rear == -1) || (front > rear)){
+        return -1;
+    }
+
+    for (int i = front ; i < rear + 1 ; i++){
+        if (queue[i] == data){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+
+int main(){
+
+    char * queue = (char *)(malloc(sizeof(int) * QUEUE_SIZE));
+    int front = -1;
+    int rear = -1;
+    int choice,out;
+    char input_val;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the char to enqueue : ");
+            scanf(" %c", &input_val);
+
+            out = enqueue(queue,&front,&rear,input_val);
+            if (out == 1)
+                printf("%c enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&front,&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf("Front value : %c\n", fn_front(queue,front));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf("rear value : %c\n", fn_rear(queue,rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(queue,front,rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(queue,front,rear);
+            break;
+            
+        case 7:
+            printf("%d is the sixe of Queue ", size(queue,front,rear));
+                break;
+        case 8:
+            printf("Enter the element to search : ");
+            scanf(" %c", &input_val);
+            out = search(queue,front,rear,input_val);
+            if (out == 1)
+                printf("Element Found \n");
+            else if (out == 0)
+                printf("Element Not Found\n");
+            else
+                printf("No data  \n");
+
+                break;
+
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-05-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-02" -->
+
+<!-- qrun:field-start output id="q-05-02" -->
+
+```text
+$ gcc q-05-02.c -o ./bin/q-05-02.out && ./bin/q-05-02.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the char to enqueue : d
+d enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the char to enqueue : g
+g enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the char to enqueue : h
+h enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 1
+Enter the char to enqueue : g
+g enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 3
+Front value : d
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 4
+rear value : g
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 7
+4 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 6
+||f> d <||  g  ||  h  ||r> g <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 8
+Enter the element to search : h
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 6
+||f> h <||r> g <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-02" -->
+<!-- qrun:entry-end id="q-05-02" -->
+
+
+<!-- qrun:entry-start id="q-05-03" -->
+
+<!-- qrun:field-start question id="q-05-03" -->
+
+## Q 03 : Implement a dynamically allocated integer queue with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-03" -->
+
+```c
+// Queues -> Q 03 : Implement a dynamically allocated integer queue with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** front,struct node ** rear, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if (((*front) == NULL) && ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)->nxt_ptr == NULL){
+        (*rear)->nxt_ptr = new_node;
+        (*rear) = (*rear)->nxt_ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)->nxt_ptr == NULL) && ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)->nxt_ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+int fn_front(struct node * front){
+    return front->data;
+}
+
+int fn_rear(struct node * rear){
+    return rear->data;
+}
+
+
+int is_empty(struct node * front,struct node * rear){
+    if ((front == NULL) && (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front->nxt_ptr;
+    }
+
+    return i;
+}
+
+
+
+void show(struct node * front,struct node * rear){
+
+
+    if ((front == NULL) && (rear == NULL)){
+        printf("NO DATA\n");
+        return;    
+    }
+
+    if (front == rear){
+        printf("||f> %3d <r||", front->data);
+        return;
+    }
+
+
+    printf("||f> %3d <|", front->data);
+    front = front->nxt_ptr;
+    while(front->nxt_ptr != NULL){
+        printf("|> %3d <||", front->data);
+        front=front->nxt_ptr;
+    }
+    printf("|r> %3d <||\n", rear->data);
+    return;
+
+}
+
+int search(struct node * front,struct node * rear,int data ){
+     if ((front == NULL) && (rear == NULL)){
+        return -1;    
+    }
+
+    while(front != NULL){
+        if (front->data == data){
+            return 1;
+        }
+        front=front->nxt_ptr;
+    }
+
+    return 0;
+
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)->nxt_ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+int main(){
+    
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("9 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to enqueue : ");
+            scanf("%d", &input_val);
+
+            out = enqueue(&front,&rear,input_val);
+            if (out == 1)
+                printf("%d enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&front,&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf("Front value : %d\n", fn_front(front));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf("rear value : %d\n", fn_rear(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(front,rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(front,rear);
+            break;
+            
+            case 7:
+            printf("%d is the sixe of Queue ", fn_size(front));
+            break;
+            
+            case 8:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(front,rear,input_val);
+            if (out == 1)
+            printf("Element Found \n");
+            else if (out == 0)
+            printf("Element Not Found\n");
+            else
+            printf("No data  \n");
+            
+            break;
+            
+            case 9:
+                clear_queue(&front,&rear);
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-05-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-03" -->
+
+<!-- qrun:field-start output id="q-05-03" -->
+
+```text
+$ gcc q-05-03.c -o ./bin/q-05-03.out && ./bin/q-05-03.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 212
+212 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 45
+45 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 45
+45 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 53
+53 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 3
+Front value : 212
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 4
+rear value : 53
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 5
+Queue is not empty
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> 212 <||>  45 <|||>  45 <|||r>  53 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 7
+4 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 8
+Enter the element to search : 53
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f>  45 <||r>  53 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 9
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-03" -->
+<!-- qrun:entry-end id="q-05-03" -->
+
+
+<!-- qrun:entry-start id="q-05-04" -->
+
+<!-- qrun:field-start question id="q-05-04" -->
+
+## Q 04 : Implement a dynamically allocated string queue with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-04" -->
+
+```c
+// Queues -> Q 04 : Implement a dynamically allocated string queue with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    char data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** front,struct node ** rear, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if (((*front) == NULL) && ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)->nxt_ptr == NULL){
+        (*rear)->nxt_ptr = new_node;
+        (*rear) = (*rear)->nxt_ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)->nxt_ptr == NULL) && ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)->nxt_ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+char fn_front(struct node * front){
+    return front->data;
+}
+
+char fn_rear(struct node * rear){
+    return rear->data;
+}
+
+
+int is_empty(struct node * front,struct node * rear){
+    if ((front == NULL) && (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front->nxt_ptr;
+    }
+
+    return i;
+}
+
+
+
+void show(struct node * front,struct node * rear){
+
+
+    if ((front == NULL) && (rear == NULL)){
+        printf("NO DATA\n");
+        return;    
+    }
+
+    if (front == rear){
+        printf("||f> %c <r||", front->data);
+        return;
+    }
+
+
+    printf("||f> %c <|", front->data);
+    front = front->nxt_ptr;
+    while(front->nxt_ptr != NULL){
+        printf("|> %c <||", front->data);
+        front=front->nxt_ptr;
+    }
+    printf("|r> %c <||\n", rear->data);
+    return;
+
+}
+
+int search(struct node * front,struct node * rear,char data ){
+     if ((front == NULL) && (rear == NULL)){
+        return -1;    
+    }
+
+    while(front != NULL){
+        if (front->data == data){
+            return 1;
+        }
+        front=front->nxt_ptr;
+    }
+
+    return 0;
+
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)->nxt_ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+int main(){
+    
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    int choice,out;
+    char input_val;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("9 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to enqueue : ");
+            scanf(" %c", &input_val);
+
+            out = enqueue(&front,&rear,input_val);
+            if (out == 1)
+                printf("%c enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&front,&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf("Front value : %c\n", fn_front(front));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf("rear value : %c\n", fn_rear(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(front,rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(front,rear);
+            break;
+            
+            case 7:
+            printf("%d is the sixe of Queue ", fn_size(front));
+            break;
+            
+            case 8:
+            printf("Enter the element to search : ");
+            scanf(" %c", &input_val);
+            out = search(front,rear,input_val);
+            if (out == 1)
+            printf("Element Found \n");
+            else if (out == 0)
+            printf("Element Not Found\n");
+            else
+            printf("No data  \n");
+            
+            break;
+            
+            case 9:
+                clear_queue(&front,&rear);
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-05-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-04" -->
+
+<!-- qrun:field-start output id="q-05-04" -->
+
+```text
+$ gcc q-05-04.c -o ./bin/q-05-04.out && ./bin/q-05-04.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : f
+f enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : t
+t enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : y
+y enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : o
+o enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 3
+Front value : f
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 4
+rear value : o
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 5
+Queue is not empty
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> f <||> t <|||> y <|||r> o <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 7
+4 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> f <||> t <|||> y <|||r> o <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 8
+Enter the element to search : o
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : f
+f enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> o <||r> f <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 9
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-04" -->
+<!-- qrun:entry-end id="q-05-04" -->
+
+
+<!-- qrun:entry-start id="q-05-05" -->
+
+<!-- qrun:field-start question id="q-05-05" -->
+
+## Q 05 : Implement a circular queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-05" -->
+
+```c
+// Queues -> Q 05 : Implement a circular queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** rear, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if ((*rear) == NULL){
+        *rear = new_node;
+        (*rear)->nxt_ptr = new_node;
+        return 1;
+    }
+    
+    // if ((*rear)->nxt_ptr == *rear){
+        struct node * front = (*rear)->nxt_ptr;
+        (*rear)->nxt_ptr = new_node;
+        (*rear) = new_node;
+        (*rear)->nxt_ptr = front;
+        return 1;
+    // } 
+    
+    // if ((*rear)->nxt_ptr != *rear){
+    //     struct node * temp = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = new_node;
+    //     (*rear) = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = temp;
+    //     return 1;
+    // } 
+
+    // return 0;
+}
+
+
+int dequeue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+
+    if (((*rear) == (*rear)->nxt_ptr)){
+        free(*rear);
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * front = (*rear)->nxt_ptr;
+    (*rear)->nxt_ptr = front->nxt_ptr;
+    free(front);
+    return 1;
+}
+
+
+int fn_front(struct node * rear){
+    return ((rear)->nxt_ptr)->data;
+}
+
+int fn_rear(struct node * rear){
+    return rear->data;
+}
+
+
+int is_empty(struct node * rear){
+    if (rear == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * rear){
+    if (rear == NULL){return 0;}
+
+    struct node * front = rear->nxt_ptr;
+    int i = 0;
+
+    do{
+    i++;
+    front=front->nxt_ptr;
+    }while(front != rear->nxt_ptr);
+
+    return i;
+}
+
+
+void show(struct node ** rear){
+
+
+    if (((*rear) == NULL)){
+        printf("NO DATA\n");
+        return;    
+    }
+
+    if ((*rear) == (*rear)->nxt_ptr){
+        printf("||f> %3d <r||", (*rear)->data);
+        return;
+    }
+
+    struct node * front = (*rear)->nxt_ptr;
+    printf("||f> %3d <|", front->data);
+    front = front->nxt_ptr;
+    
+    // while(front->nxt_ptr != rear->nxt_ptr){
+    //     printf("|> %3d <||", front->data);
+    //     front=front->nxt_ptr;
+    // }
+    
+    while(front != (*rear)){
+        printf("|> %3d <||", front->data);
+        front=front->nxt_ptr;
+    }
+
+    printf("|r> %3d <||\n", (*rear)->data);
+    return;
+    
+}
+
+
+
+int search(struct node * rear,int data ){
+    if ((rear == NULL)){
+        return -1;    
+    }
+    
+    struct node * front = rear->nxt_ptr;
+    do{
+        if (front->data == data){
+            return 1;
+        }
+        front=front->nxt_ptr;
+    }while(front != rear->nxt_ptr);
+    return 0;
+}
+
+
+int clear_queue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+    struct node * temp;
+    struct node * front = (*rear)->nxt_ptr;
+
+    while (front != (*rear)){
+        temp = front;
+        front = front->nxt_ptr;
+        free(temp);
+    }
+    free(*rear);
+    (*rear) = NULL;  
+    return 1; 
+}
+
+
+int main(){
+    
+    struct node * rear = NULL;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("9 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to enqueue : ");
+            scanf("%d", &input_val);
+
+            out = enqueue(&rear,input_val);
+            if (out == 1)
+                printf("%d enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(rear);
+            if (out == 0)
+                printf("Front value : %d\n", fn_front(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(rear);
+            if (out == 0)
+                printf("rear value : %d\n", fn_rear(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(&rear);
+            break;
+            
+            case 7:
+            printf("%d is the sixe of Queue ", fn_size(rear));
+            break;
+            
+            case 8:
+            printf("Enter the element to search : ");
+            scanf("%d", &input_val);
+            out = search(rear,input_val);
+            if (out == 1)
+            printf("Element Found \n");
+            else if (out == 0)
+            printf("Element Not Found\n");
+            else
+            printf("No data  \n");
+            
+            break;
+            
+            case 9:
+                clear_queue(&rear);
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+
+
+// | Condition                            | Stop when...                    |             If starting at front |
+// | ------------------------------------ | ------------------------------- | -------------------------------: |
+// | `front != (*rear)->nxt_ptr`          | `front` reaches **front again** |wont work if 1st isnt skipped then it skips 0 iterations |
+// | `front->nxt_ptr != (*rear)->nxt_ptr` | `front` reaches **rear**        |        doest need skipped 1st front    skips rear |
+// | `front != *rear`                     | `front` reaches **rear**        | processes everything before rear |
+```
+
+<!-- qrun:field-end code id="q-05-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-05" -->
+
+<!-- qrun:field-start output id="q-05-05" -->
+
+```text
+$ gcc q-05-05.c -o ./bin/q-05-05.out && ./bin/q-05-05.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 34
+34 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 3455
+3455 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 30
+30 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 20
+20 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 200
+Invalid choice
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : 200
+200 enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 3
+Front value : 34
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 4
+rear value : 200
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 5
+Queue is not empty
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 7
+5 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f>  34 <||> 3455 <|||>  30 <|||>  20 <|||r> 200 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 8
+Enter the element to search : 20
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f>  30 <||>  20 <|||r> 200 <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 9
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-05" -->
+<!-- qrun:entry-end id="q-05-05" -->
+
+
+<!-- qrun:entry-start id="q-05-06" -->
+
+<!-- qrun:field-start question id="q-05-06" -->
+
+## Q 06 : Implement a circular queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+
+<!-- qrun:field-end question id="q-05-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-05-06" -->
+
+```c
+// Queues -> Q 06 : Implement a circular queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node{
+    char data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** rear, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node->data = data;
+    new_node->nxt_ptr = NULL;
+
+    if ((*rear) == NULL){
+        *rear = new_node;
+        (*rear)->nxt_ptr = new_node;
+        return 1;
+    }
+    
+    // if ((*rear)->nxt_ptr == *rear){
+        struct node * front = (*rear)->nxt_ptr;
+        (*rear)->nxt_ptr = new_node;
+        (*rear) = new_node;
+        (*rear)->nxt_ptr = front;
+        return 1;
+    // } 
+    
+    // if ((*rear)->nxt_ptr != *rear){
+    //     struct node * temp = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = new_node;
+    //     (*rear) = (*rear)->nxt_ptr;
+    //     (*rear)->nxt_ptr = temp;
+    //     return 1;
+    // } 
+
+    // return 0;
+}
+
+
+int dequeue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+
+    if (((*rear) == (*rear)->nxt_ptr)){
+        free(*rear);
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * front = (*rear)->nxt_ptr;
+    (*rear)->nxt_ptr = front->nxt_ptr;
+    free(front);
+    return 1;
+}
+
+
+char fn_front(struct node * rear){
+    return ((rear)->nxt_ptr)->data;
+}
+
+char fn_rear(struct node * rear){
+    return rear->data;
+}
+
+
+int is_empty(struct node * rear){
+    if (rear == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * rear){
+    if (rear == NULL){return 0;}
+
+    struct node * front = rear->nxt_ptr;
+    int i = 0;
+
+    do{
+    i++;
+    front=front->nxt_ptr;
+    }while(front != rear->nxt_ptr);
+
+    return i;
+}
+
+
+void show(struct node ** rear){
+
+
+    if (((*rear) == NULL)){
+        printf("NO DATA\n");
+        return;    
+    }
+
+    if ((*rear) == (*rear)->nxt_ptr){
+        printf("||f> %c <r||", (*rear)->data);
+        return;
+    }
+
+    struct node * front = (*rear)->nxt_ptr;
+    printf("||f> %c <|", front->data);
+    front = front->nxt_ptr;
+    
+    // while(front->nxt_ptr != rear->nxt_ptr){
+    //     printf("|> %3d <||", front->data);
+    //     front=front->nxt_ptr;
+    // }
+    
+    while(front != (*rear)){
+        printf("|> %c <||", front->data);
+        front=front->nxt_ptr;
+    }
+
+    printf("|r> %c <||\n", (*rear)->data);
+    return;
+    
+}
+
+
+
+int search(struct node * rear,char data ){
+    if ((rear == NULL)){
+        return -1;    
+    }
+    
+    struct node * front = rear->nxt_ptr;
+    do{
+        if (front->data == data){
+            return 1;
+        }
+        front=front->nxt_ptr;
+    }while(front != rear->nxt_ptr);
+    return 0;
+}
+
+
+int clear_queue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+    struct node * temp;
+    struct node * front = (*rear)->nxt_ptr;
+
+    while (front != (*rear)){
+        temp = front;
+        front = front->nxt_ptr;
+        free(temp);
+    }
+    free(*rear);
+    (*rear) = NULL;  
+    return 1; 
+}
+
+
+int main(){
+    
+    struct node * rear = NULL;
+    int choice,out;
+    char input_val;
+
+
+    while (1)
+    {
+        printf("\nEnter the choice :\n");
+        printf("1 : enqueue\n");
+        printf("2 : dequeue\n");
+        printf("3 : front\n");
+        printf("4 : rear\n");
+        printf("5 : isempty\n");
+        printf("6 : show\n");
+        printf("7 : size\n");
+        printf("8 : search\n");
+        printf("9 : clear\n");
+        printf("0 : exit\n");
+        printf("Enter choice : ");
+
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the number to enqueue : ");
+            scanf(" %c", &input_val);
+
+            out = enqueue(&rear,input_val);
+            if (out == 1)
+                printf("%c enqueued \n", input_val);
+            else
+                printf("cant enqueue\n");
+            break;
+
+        case 2:
+            out = dequeue(&rear);
+            if (out == 1)
+                printf("Dequeued value\n");
+            else if (out == 0)
+                printf("No Data \n");
+            else
+                printf("Queue Reset \n");
+            break;
+
+        case 3:
+            out = is_empty(rear);
+            if (out == 0)
+                printf("Front value : %c\n", fn_front(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+        case 4:
+            out = is_empty(rear);
+            if (out == 0)
+                printf("rear value : %c\n", fn_rear(rear));
+            else
+                printf("Queue is empty \n");
+            break;
+
+
+        case 5:
+            if (is_empty(rear))
+                printf("Queue is empty \n");
+            else
+                printf("Queue is not empty\n");
+            break;
+
+        case 6:
+            show(&rear);
+            break;
+            
+            case 7:
+            printf("%d is the sixe of Queue ", fn_size(rear));
+            break;
+            
+            case 8:
+            printf("Enter the element to search : ");
+            scanf(" %c", &input_val);
+            out = search(rear,input_val);
+            if (out == 1)
+            printf("Element Found \n");
+            else if (out == 0)
+            printf("Element Not Found\n");
+            else
+            printf("No data  \n");
+            
+            break;
+            
+            case 9:
+                clear_queue(&rear);
+                break;
+
+            case 0:
+            printf("exitting ...\n");
+            return 0;
+
+        default:
+            printf("Invalid choice\n");
+        }
+    }    
+
+
+    return 0;
+}
+
+
+// | Condition                            | Stop when...                    |             If starting at front |
+// | ------------------------------------ | ------------------------------- | -------------------------------: |
+// | `front != (*rear)->nxt_ptr`          | `front` reaches **front again** |wont work if 1st isnt skipped then it skips 0 iterations |
+// | `front->nxt_ptr != (*rear)->nxt_ptr` | `front` reaches **rear**        |        doest need skipped 1st front    skips rear |
+// | `front != *rear`                     | `front` reaches **rear**        | processes everything before rear |
+```
+
+<!-- qrun:field-end code id="q-05-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-05-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-05-06" -->
+
+<!-- qrun:field-start output id="q-05-06" -->
+
+```text
+$ gcc q-05-06.c -o ./bin/q-05-06.out && ./bin/q-05-06.out
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : f
+f enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : d
+d enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : e
+e enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : x
+x enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : y
+y enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 1
+Enter the number to enqueue : r
+r enqueued 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 3
+Front value : f
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 4
+rear value : r
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 5
+Queue is not empty
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> f <||> d <|||> e <|||> x <|||> y <|||r> r <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 7
+6 is the sixe of Queue 
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 8
+Enter the element to search : x
+Element Found 
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 2
+Dequeued value
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+||f> y <||r> r <||
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 9
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : enqueue
+2 : dequeue
+3 : front
+4 : rear
+5 : isempty
+6 : show
+7 : size
+8 : search
+9 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+```
+
+<!-- qrun:field-end output id="q-05-06" -->
+<!-- qrun:entry-end id="q-05-06" -->
+
+<!-- qrun:topic-end id="topic-05" -->

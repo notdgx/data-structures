@@ -114,12 +114,12 @@
 # Queues
 
 
-1. ❌ : Implement a simple queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
-2. ❌ : Implement a simple queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
-3. ❌ : Implement a dynamically allocated integer queue with insert, delete, peek, isEmpty, and isFull operations.
-4. ❌ : Implement a dynamically allocated string queue with insert, delete, peek, isEmpty, and isFull operations.
-5. ❌ : Implement a circular queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
-6. ❌ : Implement a circular queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+1. ✅ : Implement a simple queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+2. ✅ : Implement a simple queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
+3. ✅ : Implement a dynamically allocated integer queue with insert, delete, peek, isEmpty, and isFull operations.
+4. ✅ : Implement a dynamically allocated string queue with insert, delete, peek, isEmpty, and isFull operations.
+5. ✅ : Implement a circular queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
+6. ✅ : Implement a circular queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
 7. ❌ : Implement a priority queue using an integer array with insert, delete, peek, isEmpty, and isFull operations.
 8. ❌ : Implement a priority queue using a string array with insert, delete, peek, isEmpty, and isFull operations.
 9. ❌ : Implement a double-ended queue (deque) using an integer array with insert, delete, peek, isEmpty, and isFull operations.
