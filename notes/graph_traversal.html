@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>graph_traversal</title>
+<style>
+:root{--bg:#000;--pn:#050505;--tx:#e8e8e8;--mu:#8a8a8a;--bd:#262626;--act:#ffb000;--done:#e8e8e8;--skip:#3a3a3a;--hl:#ffffff;--code:#030303;--hi:rgba(255,255,255,.09);--nt:#000;--f:ui-monospace,"SF Mono",Menlo,Consolas,"Courier New",monospace;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);background:#000}
+body{margin:0;padding:16px;color:var(--tx);font:14px/1.55 var(--f);background:#000}
+h1{font-size:20px;margin:0;font-weight:600;}
+h1::before{content:"$ ";color:var(--mu)}h1::after{content:"_";animation:bl 1s steps(1) infinite}
+@keyframes bl{50%{opacity:0}}
+.sub{color:var(--mu);margin:2px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--bd)}.sub::before{content:"// "}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.grp{display:inline-flex;border:1px solid var(--bd)}
+button{background:transparent;color:var(--tx);border:1px solid var(--bd);padding:4px 11px;font:inherit;cursor:pointer;border-radius:0}
+.grp button{border:0;border-right:1px solid var(--bd)}.grp button:last-child{border:0}
+button.on{background:var(--tx);color:#000}button:hover{border-color:var(--tx)}
+input[type=range]{accent-color:var(--tx)}
+#msg{padding:8px 12px;border:1px solid var(--bd);border-left:3px solid var(--act);background:var(--pn);min-height:46px;margin-bottom:12px}
+#msg::before{content:"> ";color:var(--act)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.pn{background:var(--pn);border:1px solid var(--bd);padding:12px;min-width:0}
+.pn h2{font-size:12px;font-weight:400;color:var(--mu);margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.pn h2::before{content:"# "}
+.full{grid-column:1/-1}
+pre{margin:0;background:var(--code);padding:6px 0;font:13px/1.65 var(--f);overflow-x:auto}
+.ln{padding:0 10px;white-space:pre;border-left:2px solid transparent;color:var(--mu)}.ln.on{background:var(--hi);border-left-color:var(--tx);color:var(--tx)}
+table{border-collapse:collapse;margin:auto;font:14px var(--f)}
+td,th{width:36px;height:32px;text-align:center;border:1px solid var(--bd)}th{background:var(--code);font-weight:600}
+td.r{background:var(--hi)}td.c{background:var(--hl);color:var(--nt);font-weight:700}td.z{color:var(--skip)}
+.lst{font:14px var(--f);display:flex;flex-direction:column;gap:4px}
+.lr{display:flex;align-items:center;gap:4px;padding:2px 4px;border:1px solid transparent}.lr.r{background:var(--hi);border-color:var(--bd)}
+.bx{border:1px solid var(--bd);padding:0 8px;background:var(--code);min-width:28px;text-align:center}.bx.hd{font-weight:700}.bx.c{background:var(--hl);color:var(--nt)}
+#stack{display:flex;flex-direction:column-reverse;gap:5px;min-height:150px}
+.fr{border:1px solid var(--bd);padding:5px 10px;font:13px var(--f);display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;animation:in .2s}
+.fr.top{border-color:var(--tx);background:var(--hi)}.fr small{color:var(--mu)}
+.base{text-align:center;color:var(--mu);font-size:11px;border-top:1px dashed var(--bd);order:-1}
+@keyframes in{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+#q{display:flex;gap:6px;flex-wrap:wrap;font:14px var(--f);min-height:70px;align-items:flex-start}
+.qc{border:1px solid var(--bd);width:46px;text-align:center;animation:in .2s}.qc b{display:block;font-size:16px}.qc small{color:var(--mu);font-size:11px}
+.qc.gone{opacity:.35;text-decoration:line-through}.qc.hd{border-color:var(--tx);background:var(--hi)}.qc.tl{border-style:dashed;color:var(--mu)}
+#out{margin-top:8px;font:14px var(--f)}
+#tw{overflow:auto;max-height:340px}
+svg text{font:700 13px var(--f);fill:var(--tx);text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.lg{display:flex;gap:12px;flex-wrap:wrap;color:var(--mu);font-size:12px;margin-top:8px}.lg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
+p{margin:0 0 6px}b{color:#fff;font-weight:600}
+</style></head><body>
+<h1>graph_traversal --dfs --bfs</h1>
+<p class="sub">Same graph, same start (A), same neighbour order. Only the data structure changes: stack versus queue.</p>
+<div class="ctl">
+<span class="grp"><button id="aD" class="on">DFS</button><button id="aB">BFS</button></span>
+<span class="grp"><button id="rM" class="on">Matrix code</button><button id="rL">List code</button></span>
+<button id="pv">&lt; Prev</button><button id="nx">Next &gt;</button><button id="pl">Play</button><button id="rs">Reset</button>
+<label>Speed <input type="range" id="sp" min="150" max="1500" value="700" style="direction:rtl"></label>
+<span id="ct" style="color:var(--mu)"></span></div>
+<div id="msg"></div>
+<div class="grid">
+<div class="pn"><h2 id="hc">C code</h2><pre id="code"></pre></div>
+<div class="pn"><h2>Graph</h2><svg id="g" viewBox="0 0 440 270" width="100%"></svg>
+<div class="lg"><span><i style="background:var(--skip)"></i>unvisited</span><span><i style="background:var(--act)"></i>visited, not finished</span><span><i style="background:var(--done)"></i>finished</span><span>white ring = working on it</span></div></div>
+<div class="pn"><h2>Adjacency matrix  int adj[6][6]</h2><div id="mx"></div></div>
+<div class="pn"><h2>Adjacency list  Node *head[6]</h2><div id="ls" class="lst"></div></div>
+<div class="pn"><h2 id="hs"></h2><div id="stack"></div><div id="q"></div><div id="out"></div></div>
+<div class="pn"><h2 id="ht"></h2><div id="tw"><svg id="t"></svg></div>
+<div class="lg"><span><i style="background:var(--act)"></i>in progress / queued</span><span><i style="background:var(--done)"></i>finished</span><span><i style="background:var(--skip)"></i>returned instantly</span></div></div>
+<div class="pn full"><h2>Notes</h2>
+<p><b>DFS</b> uses the call stack. Each call owns a frame with its own u and loop position; a recursive call suspends the caller and pushes a new frame, a return pops one. The recursion tree records every call ever made, the stack holds only the live path.</p>
+<p><b>BFS</b> uses an explicit queue. h marks the next node to dequeue, t the next free slot. Nodes are marked visited when enqueued, which is what stops duplicates. The tree is built level by level.</p>
+<p>Honest comparison: the matrix version scans all 6 cells of a row even when most are 0, so a full traversal costs O(V^2). The list version only touches real edges, O(V+E). Matrix wins only for dense graphs or constant-time edge lookups. Also, recursive DFS in C will overflow the real stack on a deep graph; this example is tiny so it never shows that.</p></div>
+</div>
+<script>
+const Lb="ABCDEF",adj={A:["B","C"],B:["A","D","E"],C:["A","F"],D:["B"],E:["B","F"],F:["C","E"]};
+const M=[...Lb].map(a=>[...Lb].map(b=>adj[a].includes(b)?1:0));
+const P={A:[220,35],B:[110,115],C:[330,115],D:[45,225],E:[185,225],F:[330,225]};
+const CODE={
+dfs:{m:[`void dfs(int u) {`,`  if (visited[u]) return;`,`  visited[u] = 1;`,`  printf("%c ", 'A' + u);`,`  for (int v = 0; v < N; v++)`,`    if (adj[u][v])`,`      dfs(v);`,`}`],
+ l:[`void dfs(int u) {`,`  if (visited[u]) return;`,`  visited[u] = 1;`,`  printf("%c ", 'A' + u);`,`  for (Node *p = head[u]; p; p = p->next)`,`    dfs(p->v);`,`}`]},
+bfs:{m:[`void bfs(int s) {`,`  int q[N], h = 0, t = 0;`,`  visited[s] = 1; q[t++] = s;`,`  while (h < t) {`,`    int u = q[h++];`,`    printf("%c ", 'A' + u);`,`    for (int v = 0; v < N; v++)`,`      if (adj[u][v] && !visited[v]) {`,`        visited[v] = 1;`,`        q[t++] = v;`,`      }`,`  }`,`}`],
+ l:[`void bfs(int s) {`,`  int q[N], h = 0, t = 0;`,`  visited[s] = 1; q[t++] = s;`,`  while (h < t) {`,`    int u = q[h++];`,`    printf("%c ", 'A' + u);`,`    for (Node *p = head[u]; p; p = p->next)`,`      if (!visited[p->v]) {`,`        visited[p->v] = 1;`,`        q[t++] = p->v;`,`      }`,`  }`,`}`]}};
+function build(algo,rep){
+ const S=[],mx=rep=="m";let stack=[],tree=[],vis=new Set(),done=new Set(),out=[],q=[],h=0,nid=0;
+ const sn=(line,msg,cur,scan)=>S.push({line,msg,cur:cur==null?-1:cur,scan:scan||null,stack:stack.map(f=>({...f})),tree:tree.map(t=>({...t})),vis:[...vis],done:[...done],out:[...out],q:[...q],h});
+ const nb=u=>mx?[...Lb].map((v,j)=>({v,e:M[Lb.indexOf(u)][j]})):adj[u].map(v=>({v,e:1}));
+ if(algo=="dfs"){
+  const T=mx?6:5,R=mx?7:6,E=mx?8:7;
+  const dfs=(u,pid)=>{
+   const id=nid++,n={id,u,pid,st:"act"};tree.push(n);const f={id,u,v:null};stack.push(f);
+   sn(1,"CALL dfs("+u+"): push a new frame (stack depth "+stack.length+") and add a node to the recursion tree.",id);
+   if(vis.has(u)){n.st="skip";sn(2,"visited["+u+"] is already 1, so this call returns at once. It did no work, but it still cost a frame.",id);stack.pop();sn(2,"POP frame of dfs("+u+"). The caller resumes right after its call line.",pid);return}
+   sn(2,"visited["+u+"] is 0, so continue.",id);
+   vis.add(u);sn(3,"visited["+u+"] = 1.",id);
+   out.push(u);sn(4,"printf: visit "+u+".",id);
+   for(const{v,e}of nb(u)){
+    f.v=v;
+    sn(T,mx?"adj["+u+"]["+v+"] = "+e+(e?": edge exists, so recurse.":": no edge, skip."):"p->v = "+v+": next node in the list of "+u+".",id,{u,v});
+    if(!e)continue;
+    sn(R,"dfs("+v+") is called. The frame of dfs("+u+") is suspended here until it returns.",id,{u,v});
+    dfs(v,id);
+    sn(R,"Back in dfs("+u+"): the call returned, loop moves on.",id,{u,v});
+   }
+   f.v=null;n.st="done";done.add(u);
+   sn(E,"No neighbours left. dfs("+u+") finishes.",id);stack.pop();sn(E,"POP frame of dfs("+u+").",pid);
+  };
+  dfs("A",null);sn(E,"Stack is empty. DFS complete.");
+ }else{
+  const ids={},mk=(u,pid)=>{const id=nid++;tree.push({id,u,pid,st:"act"});ids[u]=id;return id};
+  sn(1,"Start BFS from A.");sn(2,"Create queue q with head h = 0 and tail t = 0.");
+  vis.add("A");mk("A",null);q.push("A");
+  sn(3,"visited[A] = 1 and enqueue A. BFS marks a node when it is enqueued, not when it is dequeued.",0);
+  while(h<q.length){
+   sn(4,"h < t ("+h+" < "+q.length+"): queue is not empty.");
+   const u=q[h++],cu=ids[u];
+   sn(5,"Dequeue: u = q[h++] = "+u+". Head pointer moves to "+h+".",cu);
+   out.push(u);sn(6,"printf: visit "+u+".",cu);
+   for(const{v,e}of nb(u)){
+    if(!mx)sn(7,"p->v = "+v+": next node in the list of "+u+".",cu,{u,v});
+    const nv=vis.has(v);
+    sn(8,mx?"adj["+u+"]["+v+"] = "+e+(e?(nv?" but "+v+" is already visited: skip.":" and "+v+" is unvisited: take it."):": no edge, skip."):"visited["+v+"] is "+(nv?"1: skip.":"0: take it."),cu,{u,v});
+    if(e&&!nv){vis.add(v);mk(v,cu);sn(9,"visited["+v+"] = 1 now, so no one else can enqueue it twice.",cu,{u,v});q.push(v);sn(10,"Enqueue q[t++] = "+v+". Waiting in queue: "+q.slice(h).join(" ")+".",cu,{u,v})}
+   }
+   tree[cu].st="done";done.add(u);sn(12,"All neighbours of "+u+" scanned. "+u+" is finished.",cu);
+  }
+  sn(13,"Queue is empty. BFS complete.");
+ }
+ return S;
+}
+let algo="dfs",rep="m",steps,i=0,timer=null;const $=s=>document.querySelector(s);
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const NS="http://www.w3.org/2000/svg";
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e}
+function setup(){stop();steps=build(algo,rep);i=0;
+ $("#aD").classList.toggle("on",algo=="dfs");$("#aB").classList.toggle("on",algo=="bfs");$("#rM").classList.toggle("on",rep=="m");$("#rL").classList.toggle("on",rep=="l");
+ $("#hc").textContent="C code - "+algo.toUpperCase()+" with "+(rep=="m"?"adjacency matrix":"adjacency list");
+ $("#hs").textContent=algo=="dfs"?"Call stack (top = running)":"Queue  q[]  with h and t";
+ $("#ht").textContent=algo=="dfs"?"Recursion tree (one node per call)":"BFS tree (node created on enqueue)";
+ $("#stack").style.display=algo=="dfs"?"flex":"none";$("#q").style.display=algo=="bfs"?"flex":"none";
+ $("#code").innerHTML=CODE[algo][rep].map((c,k)=>'<div class="ln" id="l'+(k+1)+'">'+c.replace(/&/g,"&amp;").replace(/</g,"&lt;")+"</div>").join("");
+ render()}
+function render(){
+ const s=steps[i];$("#msg").textContent=s.msg;$("#ct").textContent="step "+(i+1)+"/"+steps.length;
+ document.querySelectorAll(".ln").forEach(e=>e.classList.remove("on"));const l=$("#l"+s.line);if(l)l.classList.add("on");
+ const cn=s.cur>=0?s.tree[s.cur].u:null,au=s.scan?s.scan.u:cn;
+ const col=u=>s.done.includes(u)?css("--done"):s.vis.includes(u)?css("--act"):css("--skip");
+ const g=$("#g");g.innerHTML="";const seen=new Set();
+ for(const a in adj)for(const b of adj[a]){const k=[a,b].sort().join("");if(seen.has(k))continue;seen.add(k);
+  let on=false;if(algo=="dfs")for(let j=1;j<s.stack.length;j++)if([s.stack[j-1].u,s.stack[j].u].sort().join("")==k)on=true;
+  const sc=s.scan&&[s.scan.u,s.scan.v].sort().join("")==k&&adj[s.scan.u].includes(s.scan.v);
+  el("line",{x1:P[a][0],y1:P[a][1],x2:P[b][0],y2:P[b][1],stroke:sc?css("--hl"):on?css("--act"):css("--bd"),"stroke-width":sc||on?4:2},g)}
+ for(const u in P){if(u==cn)el("circle",{cx:P[u][0],cy:P[u][1],r:26,fill:"none",stroke:css("--hl"),"stroke-width":3},g);
+  el("circle",{cx:P[u][0],cy:P[u][1],r:19,fill:col(u)},g);el("text",{x:P[u][0],y:P[u][1],style:"fill:"+css("--nt")},g).textContent=u}
+ let m="<table><tr><th></th>"+[...Lb].map(x=>'<th style="color:'+col(x)+'">'+x+"</th>").join("")+"</tr>";
+ [...Lb].forEach((a,r)=>{m+='<tr><th style="color:'+col(a)+'">'+a+"</th>"+M[r].map((x,c2)=>'<td class="'+(s.scan&&s.scan.u==a&&s.scan.v==Lb[c2]?"c":au==a?"r":"")+(x?"":" z")+'">'+x+"</td>").join("")+"</tr>"});
+ $("#mx").innerHTML=m+"</table>";
+ $("#ls").innerHTML=[...Lb].map(a=>'<div class="lr'+(au==a?" r":"")+'"><span class="bx hd" style="color:'+col(a)+'">'+a+"</span>"+adj[a].map(v=>' -&gt; <span class="bx'+(s.scan&&s.scan.u==a&&s.scan.v==v?" c":"")+'">'+v+"</span>").join("")+" -&gt; NULL</div>").join("");
+ $("#out").textContent="printf output: "+(s.out.join(" ")||"(nothing yet)");
+ if(algo=="dfs"){const st=$("#stack");st.innerHTML='<div class="base">bottom of stack</div>';
+  s.stack.forEach((f,k)=>{const d=document.createElement("div"),tp=k==s.stack.length-1;d.className="fr"+(tp?" top":"");
+   d.innerHTML="<b>dfs("+f.u+")</b><span>"+(f.v?"v = "+f.v:"v = -")+"</span><small>"+(tp?"running":"suspended")+" | call #"+f.id+"</small>";st.appendChild(d)});
+  if(!s.stack.length)st.innerHTML+='<div class="fr"><small>(empty)</small></div>'}
+ else{let h="";s.q.forEach((u,k)=>{h+='<div class="qc'+(k<s.h?" gone":"")+(k==s.h&&s.h<s.q.length?" hd":"")+'"><b>'+u+"</b><small>q["+k+"]"+(k==s.h?" h":"")+"</small></div>"});
+  h+='<div class="qc tl"><b>_</b><small>q['+s.q.length+'] t</small></div>';$("#q").innerHTML=h}
+ drawTree(s)}
+function drawTree(s){
+ const t=$("#t");t.innerHTML="";const kids={},pos={};let leaf=0,maxd=0;
+ s.tree.forEach(n=>{if(n.pid!=null)(kids[n.pid]=kids[n.pid]||[]).push(n)});
+ (function go(n,d){maxd=Math.max(maxd,d);const ch=kids[n.id]||[];let x;
+  if(!ch.length)x=leaf++;else{ch.forEach(c=>go(c,d+1));x=(pos[ch[0].id].x+pos[ch[ch.length-1].id].x)/2}pos[n.id]={x,d}})(s.tree[0],0);
+ const W=Math.max(leaf,1)*46+30,H=(maxd+1)*54+20;t.setAttribute("width",W);t.setAttribute("height",H);t.setAttribute("viewBox","0 0 "+W+" "+H);
+ const X=n=>pos[n.id].x*46+30,Y=n=>pos[n.id].d*54+26;
+ s.tree.forEach(n=>{if(n.pid!=null){const p=s.tree[n.pid];el("line",{x1:X(p),y1:Y(p),x2:X(n),y2:Y(n),stroke:css("--bd"),"stroke-width":2},t)}});
+ s.tree.forEach(n=>{const c=n.st=="done"?css("--done"):n.st=="skip"?css("--skip"):css("--act");
+  if(n.id==s.cur)el("circle",{cx:X(n),cy:Y(n),r:21,fill:"none",stroke:css("--hl"),"stroke-width":3},t);
+  const o=el("circle",{cx:X(n),cy:Y(n),r:16,fill:c},t);if(n.st=="skip"){o.setAttribute("stroke-dasharray","3 2");o.setAttribute("stroke",css("--tx"))}
+  el("text",{x:X(n),y:Y(n),style:"fill:"+css("--nt")},t).textContent=n.u})}
+function go(k){i=Math.max(0,Math.min(steps.length-1,k));render();if(i==steps.length-1)stop()}
+function stop(){clearInterval(timer);timer=null;$("#pl").textContent="Play"}
+function play(){if(timer){stop();return}if(i>=steps.length-1)i=0;$("#pl").textContent="Pause";timer=setInterval(()=>go(i+1),+$("#sp").value)}
+$("#nx").onclick=()=>{stop();go(i+1)};$("#pv").onclick=()=>{stop();go(i-1)};$("#rs").onclick=()=>{stop();go(0)};$("#pl").onclick=play;
+$("#sp").oninput=()=>{if(timer){stop();play()}};
+$("#aD").onclick=()=>{algo="dfs";setup()};$("#aB").onclick=()=>{algo="bfs";setup()};$("#rM").onclick=()=>{rep="m";setup()};$("#rL").onclick=()=>{rep="l";setup()};
+addEventListener("keydown",e=>{if(e.key=="ArrowRight")$("#nx").click();if(e.key=="ArrowLeft")$("#pv").click();if(e.key==" "){e.preventDefault();play()}});
+matchMedia("(prefers-color-scheme:dark)").addEventListener("change",render);
+setup();
+</script></body></html>
