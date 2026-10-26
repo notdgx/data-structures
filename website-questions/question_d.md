@@ -201,10 +201,10 @@
 2. ✅ : Enter a string and a character from the user, then perform linear search using recursion.
 3. ✅ : Enter an integer array and an integer value from the user, then perform linear search using recursion.
 4. ✅ : Enter a string and a character from the user, then perform linear search using iteration.
-5. ❌ : Enter an integer array and an integer value from the user, then perform binary search using iteration.
-6. ❌ : Enter a string and a character from the user, then perform binary search using recursion.
-7. ❌ : Enter an integer array and an integer value from the user, then perform binary search using recursion.
-8. ❌ : Enter a string and a character from the user, then perform binary search using iteration.
+5. ✅ : Enter an integer array and an integer value from the user, then perform binary search using iteration.
+6. ✅ : Enter a string and a character from the user, then perform binary search using recursion.
+7. ✅ : Enter an integer array and an integer value from the user, then perform binary search using recursion.
+8. ✅ : Enter a string and a character from the user, then perform binary search using iteration.
 9. ❌ : Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.
 10. ❌ : Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.
 

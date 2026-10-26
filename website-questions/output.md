@@ -18566,4 +18566,441 @@ Element found at index -> 9
 <!-- qrun:field-end output id="q-09-04" -->
 <!-- qrun:entry-end id="q-09-04" -->
 
+
+<!-- qrun:entry-start id="q-09-05" -->
+
+<!-- qrun:field-start question id="q-09-05" -->
+
+## Q 05 : Enter an integer array and an integer value from the user, then perform binary search using iteration.
+
+<!-- qrun:field-end question id="q-09-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-05" -->
+
+```c
+// Searching Algorithms -> Q 05 : Enter an integer array and an integer value from the user, then perform binary search using iteration.
+
+#include <stdio.h>
+#define SIZE 100
+
+int binary_search(int arr[], int n, int target)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low <= high){
+        mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] < target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    printf("Enter the SORTED array -> \n");
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+    index = binary_search(arr,n,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-05" -->
+
+<!-- qrun:field-start output id="q-09-05" -->
+
+```text
+$ gcc q-09-05.c -o ./bin/q-09-05.out && ./bin/q-09-05.out
+Enter the size of the array: 10
+Enter the SORTED array -> 
+Enter element number 1 -> 1
+Enter element number 2 -> 2
+Enter element number 3 -> 33
+Enter element number 4 -> 45
+Enter element number 5 -> 55
+Enter element number 6 -> 66
+Enter element number 7 -> 78
+Enter element number 8 -> 89
+Enter element number 9 -> 90
+Enter element number 10 -> 91
+
+Array -> [1, 2, 33, 45, 55, 66, 78, 89, 90, 91, ]
+Enter the value to search -> 2
+Element found at index -> 1
+```
+
+<!-- qrun:field-end output id="q-09-05" -->
+<!-- qrun:entry-end id="q-09-05" -->
+
+
+<!-- qrun:entry-start id="q-09-07" -->
+
+<!-- qrun:field-start question id="q-09-07" -->
+
+## Q 07 : Enter an integer array and an integer value from the user, then perform binary search using recursion.
+
+<!-- qrun:field-end question id="q-09-07" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-07" -->
+
+```c
+// Searching Algorithms -> Q 07 : Enter an integer array and an integer value from the user, then perform binary search using recursion.
+
+#include <stdio.h>
+#define SIZE 100
+
+int binary_search(int arr[], int low, int high, int target){
+    
+    if (low > high){ return -1;}
+
+    int mid = low + (high - low) / 2;
+
+    if (arr[mid] == target){ return mid;}
+
+    if (arr[mid] < target){  return binary_search(arr, mid + 1, high, target);}
+
+    return binary_search(arr, low, mid - 1, target);
+}
+
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    printf("Enter the SORTED array -> \n");
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+    index = binary_search(arr,0,n-1,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-07" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-07" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-07" -->
+
+<!-- qrun:field-start output id="q-09-07" -->
+
+```text
+$ gcc q-09-07.c -o ./bin/q-09-07.out && ./bin/q-09-07.out
+Enter the size of the array: 10
+Enter the SORTED array -> 
+Enter element number 1 -> 10
+Enter element number 2 -> 34
+Enter element number 3 -> 56
+Enter element number 4 -> 66
+Enter element number 5 -> 67
+Enter element number 6 -> 90
+Enter element number 7 -> 91
+Enter element number 8 -> 101
+Enter element number 9 -> 109
+Enter element number 10 -> 200
+
+Array -> [10, 34, 56, 66, 67, 90, 91, 101, 109, 200, ]
+Enter the value to search -> 10
+Element found at index -> 0
+```
+
+<!-- qrun:field-end output id="q-09-07" -->
+<!-- qrun:entry-end id="q-09-07" -->
+
+
+<!-- qrun:entry-start id="q-09-06" -->
+
+<!-- qrun:field-start question id="q-09-06" -->
+
+## Q 06 : Enter a string and a character from the user, then perform binary search using recursion.
+
+<!-- qrun:field-end question id="q-09-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-06" -->
+
+```c
+// Searching Algorithms -> Q 06 : Enter a string and a character from the user, then perform binary search using recursion.
+
+#include <stdio.h>
+#define SIZE 100
+
+int binary_search(char arr[], int low, int high, int target){
+    
+    if (low > high){ return -1;}
+
+    int mid = low + (high - low) / 2;
+
+    if (arr[mid] == target){ return mid;}
+
+    if (arr[mid] < target){  return binary_search(arr, mid + 1, high, target);}
+
+    return binary_search(arr, low, mid - 1, target);
+}
+
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    
+    printf("Enter the SORTED char array\n");
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf(" %c", &arr[i]);
+    }
+
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%c, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf(" %c", &target);
+
+
+    index = binary_search(arr,0,n-1,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-06" -->
+
+<!-- qrun:field-start output id="q-09-06" -->
+
+```text
+$ gcc q-09-06.c -o ./bin/q-09-06.out && ./bin/q-09-06.out
+Enter the size of the array: 10
+Enter the SORTED char array
+Enter element number 1 -> a
+Enter element number 2 -> d
+Enter element number 3 -> e
+Enter element number 4 -> f
+Enter element number 5 -> h
+Enter element number 6 -> j
+Enter element number 7 -> l
+Enter element number 8 -> o
+Enter element number 9 -> p
+Enter element number 10 -> x
+
+Array -> [a, d, e, f, h, j, l, o, p, x, ]
+Enter the value to search -> x
+Element found at index -> 9
+```
+
+<!-- qrun:field-end output id="q-09-06" -->
+<!-- qrun:entry-end id="q-09-06" -->
+
+
+<!-- qrun:entry-start id="q-09-08" -->
+
+<!-- qrun:field-start question id="q-09-08" -->
+
+## Q 08 : Enter a string and a character from the user, then perform binary search using iteration.
+
+<!-- qrun:field-end question id="q-09-08" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-08" -->
+
+```c
+// Searching Algorithms -> Q 08 : Enter a string and a character from the user, then perform binary search using iteration.
+
+#include <stdio.h>
+#define SIZE 100
+
+int binary_search(char arr[], int n, char target)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low <= high){
+        mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] < target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    
+    printf("Enter the SORTED char array\n");
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf(" %c", &arr[i]);
+    }
+
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%c, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf(" %c", &target);
+
+
+    index = binary_search(arr,n,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-08" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-08" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-08" -->
+
+<!-- qrun:field-start output id="q-09-08" -->
+
+```text
+$ gcc q-09-08.c -o ./bin/q-09-08.out && ./bin/q-09-08.out
+Enter the size of the array: 10
+Enter the SORTED char array
+Enter element number 1 -> a
+Enter element number 2 -> d
+Enter element number 3 -> e
+Enter element number 4 -> f
+Enter element number 5 -> h
+Enter element number 6 -> j
+Enter element number 7 -> l
+Enter element number 8 -> o
+Enter element number 9 -> p
+Enter element number 10 -> x
+
+Array -> [a, d, e, f, h, j, l, o, p, x, ]
+Enter the value to search -> x
+Element found at index -> 9
+```
+
+<!-- qrun:field-end output id="q-09-08" -->
+<!-- qrun:entry-end id="q-09-08" -->
+
 <!-- qrun:topic-end id="topic-09" -->
