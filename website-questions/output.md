@@ -18158,3 +18158,412 @@ collect2: error: ld returned 1 exit status
 <!-- qrun:entry-end id="q-08-02" -->
 
 <!-- qrun:topic-end id="topic-08" -->
+
+<!-- qrun:topic-start id="topic-09" -->
+
+<!-- qrun:field-start topic id="topic-09" -->
+
+# Searching Algorithms
+
+<!-- qrun:field-end topic id="topic-09" -->
+
+<!-- qrun:entry-start id="q-09-01" -->
+
+<!-- qrun:field-start question id="q-09-01" -->
+
+## Q 01 : Enter an integer array and an integer value from the user, then perform linear search using iteration.
+
+<!-- qrun:field-end question id="q-09-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-01" -->
+
+```c
+// Searching Algorithms -> Q 01 : Enter an integer array and an integer value from the user, then perform linear search using iteration.
+
+#include <stdio.h>
+#define SIZE 100
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+    for (int i = 0; i < n; i++){
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-01" -->
+
+<!-- qrun:field-start output id="q-09-01" -->
+
+```text
+$ gcc q-09-01.c -o ./bin/q-09-01.out && ./bin/q-09-01.out
+Enter the size of the array: 10
+Enter element number 1 -> 1
+Enter element number 2 -> 34
+Enter element number 3 -> 23
+Enter element number 4 -> -33
+Enter element number 5 -> 0
+Enter element number 6 -> 559
+Enter element number 7 -> 9
+Enter element number 8 -> -9
+Enter element number 9 -> 3
+Enter element number 10 -> 21
+
+Array -> [1, 34, 23, -33, 0, 559, 9, -9, 3, 21, ]
+Enter the value to search -> -9
+Element found at index -> 7
+```
+
+<!-- qrun:field-end output id="q-09-01" -->
+<!-- qrun:entry-end id="q-09-01" -->
+
+
+<!-- qrun:entry-start id="q-09-02" -->
+
+<!-- qrun:field-start question id="q-09-02" -->
+
+## Q 02 : Enter a string and a character from the user, then perform linear search using recursion.
+
+<!-- qrun:field-end question id="q-09-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-02" -->
+
+```c
+// Searching Algorithms -> Q 02 : Enter a string and a character from the user, then perform linear search using recursion.
+
+
+
+#include <stdio.h>
+#define SIZE 100
+
+int linear_srch(char arr[],int n,int index,char data){
+    if(index>=n){
+        return -1;
+    }
+    
+    if(arr[index] == data){
+        return index;
+    }
+    return linear_srch(arr,n,index+1,data);
+}
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf(" %c", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%c, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf(" %c", &target);
+
+
+    index = linear_srch(arr,n,0,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-02" -->
+
+<!-- qrun:field-start output id="q-09-02" -->
+
+```text
+$ gcc q-09-02.c -o ./bin/q-09-02.out && ./bin/q-09-02.out
+Enter the size of the array: 10
+Enter element number 1 -> s
+Enter element number 2 -> f
+Enter element number 3 -> h
+Enter element number 4 -> e
+Enter element number 5 -> v
+Enter element number 6 -> t
+Enter element number 7 -> c
+Enter element number 8 -> y
+Enter element number 9 -> s
+Enter element number 10 -> g
+
+Array -> [s, f, h, e, v, t, c, y, s, g, ]
+Enter the value to search -> c
+Element found at index -> 6
+```
+
+<!-- qrun:field-end output id="q-09-02" -->
+<!-- qrun:entry-end id="q-09-02" -->
+
+
+<!-- qrun:entry-start id="q-09-03" -->
+
+<!-- qrun:field-start question id="q-09-03" -->
+
+## Q 03 : Enter an integer array and an integer value from the user, then perform linear search using recursion.
+
+<!-- qrun:field-end question id="q-09-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-03" -->
+
+```c
+// Searching Algorithms -> Q 03 : Enter an integer array and an integer value from the user, then perform linear search using recursion.
+
+
+#include <stdio.h>
+#define SIZE 100
+
+int linear_srch(int arr[],int n,int index,int data){
+    if(index>=n){
+        return -1;
+    }
+    
+    if(arr[index] == data){
+        return index;
+    }
+    return linear_srch(arr,n,index+1,data);
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+
+    index = linear_srch(arr,n,0,target);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-03" -->
+
+<!-- qrun:field-start output id="q-09-03" -->
+
+```text
+$ gcc q-09-03.c -o ./bin/q-09-03.out && ./bin/q-09-03.out
+Enter the size of the array: 10
+Enter element number 1 -> 1
+Enter element number 2 -> 24
+Enter element number 3 -> 2
+Enter element number 4 -> 456
+Enter element number 5 -> 72
+Enter element number 6 -> -89
+Enter element number 7 -> -9
+Enter element number 8 -> 0
+Enter element number 9 -> 3
+Enter element number 10 -> 43
+
+Array -> [1, 24, 2, 456, 72, -89, -9, 0, 3, 43, ]
+Enter the value to search -> -9
+Element found at index -> 6
+```
+
+<!-- qrun:field-end output id="q-09-03" -->
+<!-- qrun:entry-end id="q-09-03" -->
+
+
+<!-- qrun:entry-start id="q-09-04" -->
+
+<!-- qrun:field-start question id="q-09-04" -->
+
+## Q 04 : Enter a string and a character from the user, then perform linear search using iteration.
+
+<!-- qrun:field-end question id="q-09-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-04" -->
+
+```c
+// Searching Algorithms -> Q 04 : Enter a string and a character from the user, then perform linear search using iteration.
+
+
+#include <stdio.h>
+#define SIZE 100
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf(" %c", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%c, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf(" %c", &target);
+
+    for (int i = 0; i < n; i++){
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-04" -->
+
+<!-- qrun:field-start output id="q-09-04" -->
+
+```text
+$ gcc q-09-04.c -o ./bin/q-09-04.out && ./bin/q-09-04.out
+Enter the size of the array: 10
+Enter element number 1 -> f
+Enter element number 2 -> c
+Enter element number 3 -> s
+Enter element number 4 -> g
+Enter element number 5 -> h
+Enter element number 6 -> x
+Enter element number 7 -> x
+Enter element number 8 -> c
+Enter element number 9 -> e
+Enter element number 10 -> o
+
+Array -> [f, c, s, g, h, x, x, c, e, o, ]
+Enter the value to search -> o
+Element found at index -> 9
+```
+
+<!-- qrun:field-end output id="q-09-04" -->
+<!-- qrun:entry-end id="q-09-04" -->
+
+<!-- qrun:topic-end id="topic-09" -->

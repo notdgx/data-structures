@@ -187,7 +187,7 @@
 
 
 1. ✅ : Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.
-2. ❌ : Create a graph using an adjacency list with insertion and deletion operations.
+2. ✅ : Create a graph using an adjacency list with insertion and deletion operations.
 3. ✅ : Traverse an adjacency matrix using Depth-First Search (DFS).
 4. ❌ : Traverse an adjacency list using Depth-First Search (DFS).
 5. ✅ : Traverse an adjacency matrix using Breadth-First Search (BFS).
@@ -197,10 +197,10 @@
 # Searching Algorithms
 
 
-1. ❌ : Enter an integer array and an integer value from the user, then perform linear search using iteration.
-2. ❌ : Enter a string and a character from the user, then perform linear search using recursion.
-3. ❌ : Enter an integer array and an integer value from the user, then perform linear search using recursion.
-4. ❌ : Enter a string and a character from the user, then perform linear search using iteration.
+1. ✅ : Enter an integer array and an integer value from the user, then perform linear search using iteration.
+2. ✅ : Enter a string and a character from the user, then perform linear search using recursion.
+3. ✅ : Enter an integer array and an integer value from the user, then perform linear search using recursion.
+4. ✅ : Enter a string and a character from the user, then perform linear search using iteration.
 5. ❌ : Enter an integer array and an integer value from the user, then perform binary search using iteration.
 6. ❌ : Enter a string and a character from the user, then perform binary search using recursion.
 7. ❌ : Enter an integer array and an integer value from the user, then perform binary search using recursion.
