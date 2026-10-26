@@ -186,7 +186,7 @@
 # Graphs
 
 
-1. ❌ : Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.
+1. ✅ : Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.
 2. ❌ : Create a graph using an adjacency list with insertion and deletion operations.
 3. ❌ : Traverse an adjacency matrix using Depth-First Search (DFS).
 4. ❌ : Traverse an adjacency list using Depth-First Search (DFS).
