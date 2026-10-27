@@ -219,10 +219,10 @@
 # Sorting Algorithms
 
 
-1. ❌ : Enter an integer array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.
-2. ❌ : Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.
-3. ❌ : Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.
-4. ❌ : Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
+1. ✅ : Enter an integer array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.
+2. ✅ : Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.
+3. ✅ : Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.
+4. ✅ : Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
 5. ❌ : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
 6. ❌ : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
 7. ❌ : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
