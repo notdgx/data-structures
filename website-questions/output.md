@@ -19003,4 +19003,237 @@ Element found at index -> 9
 <!-- qrun:field-end output id="q-09-08" -->
 <!-- qrun:entry-end id="q-09-08" -->
 
+
+<!-- qrun:entry-start id="q-09-09" -->
+
+<!-- qrun:field-start question id="q-09-09" -->
+
+## Q 09 : Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.
+
+<!-- qrun:field-end question id="q-09-09" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-09" -->
+
+```c
+// Searching Algorithms -> Q 09 : Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.
+
+#include <stdio.h>
+#define SIZE 100
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    int steps = 0;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+    for (int i = 0; i < n; i++){
+        steps++;
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+
+    printf("Steps taken -> %d\n", steps);
+
+    printf("\nTime Complexity ->\n");
+    printf("Best case -> O(1) -> 1 step\n");
+    printf("Worst case -> O(n) -> up to %d steps\n", n);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-09" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-09" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-09" -->
+
+<!-- qrun:field-start output id="q-09-09" -->
+
+```text
+$ gcc q-09-09.c -o ./bin/q-09-09.out && ./bin/q-09-09.out
+Enter the size of the array: 10
+Enter element number 1 -> 223
+Enter element number 2 -> 34
+Enter element number 3 -> 53
+Enter element number 4 -> 68
+Enter element number 5 -> 3
+Enter element number 6 -> 9
+Enter element number 7 -> 3
+Enter element number 8 -> 29
+Enter element number 9 -> -9
+Enter element number 10 -> 32
+
+Array -> [223, 34, 53, 68, 3, 9, 3, 29, -9, 32, ]
+Enter the value to search -> -9
+Element found at index -> 8
+Steps taken -> 9
+
+Time Complexity ->
+Best case -> O(1) -> 1 step
+Worst case -> O(n) -> up to 10 steps
+```
+
+<!-- qrun:field-end output id="q-09-09" -->
+<!-- qrun:entry-end id="q-09-09" -->
+
+
+<!-- qrun:entry-start id="q-09-10" -->
+
+<!-- qrun:field-start question id="q-09-10" -->
+
+## Q 10 : Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.
+
+<!-- qrun:field-end question id="q-09-10" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-09-10" -->
+
+```c
+// Searching Algorithms -> Q 10 : Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.
+
+#include <stdio.h>
+#define SIZE 100
+
+int binary_search(int arr[], int n, int target, int * steps)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low <= high){
+        mid = low + (high - low) / 2;
+        (*steps)++;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] < target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+    int steps = 0;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+    
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+    
+    printf("Enter the SORTED array -> \n");
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Enter the value to search -> ");
+    scanf("%d", &target);
+
+    index = binary_search(arr,n,target,&steps);
+
+    if (index != -1){
+        printf("Element found at index -> %d\n", index);}
+    else{
+        printf("Element not found\n");}
+
+    
+    printf("Steps taken in Binary Search -> %d\n", steps);
+
+    printf("\nTime Complexity ->\n");
+    printf("Best case -> O(1)\n");
+    printf("Worst case -> O(log(n))\n");
+
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-09-10" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-09-10" -->
+
+
+
+<!-- qrun:field-end freshness id="q-09-10" -->
+
+<!-- qrun:field-start output id="q-09-10" -->
+
+```text
+$ gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out
+Enter the size of the array: 10
+Enter the SORTED array -> 
+Enter element number 1 -> 12
+Enter element number 2 -> 34
+Enter element number 3 -> 42
+Enter element number 4 -> 56
+Enter element number 5 -> 58
+Enter element number 6 -> 89
+Enter element number 7 -> 90
+Enter element number 8 -> 100
+Enter element number 9 -> 234
+Enter element number 10 -> 300
+
+Array -> [12, 34, 42, 56, 58, 89, 90, 100, 234, 300, ]
+Enter the value to search -> 100
+Element found at index -> 7
+Steps taken in Binary Search -> 2
+
+Time Complexity ->
+Best case -> O(1)
+Worst case -> O(log(n))
+```
+
+<!-- qrun:field-end output id="q-09-10" -->
+<!-- qrun:entry-end id="q-09-10" -->
+
 <!-- qrun:topic-end id="topic-09" -->

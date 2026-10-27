@@ -3879,6 +3879,111 @@
       "last_run_at": "2026-10-26T22:08:21+05:30",
       "updated_at": "2026-10-26T22:08:21+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-09-09",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T18:51:11+05:30",
+          "command": "gcc q-09-09.c -o ./bin/q-09-09.out && ./bin/q-09-09.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> 223\nEnter element number 2 -> 34\nEnter element number 3 -> 53\nEnter element number 4 -> 68\nEnter element number 5 -> 3\nEnter element number 6 -> 9\nEnter element number 7 -> 3\nEnter element number 8 -> 29\nEnter element number 9 -> -9\nEnter element number 10 -> 32\n\nArray -> [223, 34, 53, 68, 3, 9, 3, 29, -9, 32, ]\nEnter the value to search -> -9\nElement found at index -> 8\nSteps taken -> 9\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 10 steps\n",
+          "exit_code": 0,
+          "code_sha256": "33b284160d0a669f2a524c6e3b76d947d6aa953f265d622c2a6fada9685b2e5f"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-27T18:51:11+05:30",
+      "topic": "Searching Algorithms",
+      "topic_index": 9,
+      "question_number": 9,
+      "question": "Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.",
+      "source_file": "q-09-09.c",
+      "code": "// Searching Algorithms -> Q 09 : Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.\n\n#include <stdio.h>\n#define SIZE 100\n\nint main(){\n\n    int arr[SIZE], n, target, index = -1;\n\n    int steps = 0;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i+1);\n        scanf(\"%d\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0 ; i <n ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"Enter the value to search -> \");\n    scanf(\"%d\", &target);\n\n    for (int i = 0; i < n; i++){\n        steps++;\n        if (arr[i] == target){\n            index = i;\n            break;\n        }\n    }\n\n    if (index != -1){\n        printf(\"Element found at index -> %d\\n\", index);}\n    else{\n        printf(\"Element not found\\n\");}\n\n\n    printf(\"Steps taken -> %d\\n\", steps);\n\n    printf(\"\\nTime Complexity ->\\n\");\n    printf(\"Best case -> O(1) -> 1 step\\n\");\n    printf(\"Worst case -> O(n) -> up to %d steps\\n\", n);\n\n    return 0;\n}",
+      "code_sha256": "33b284160d0a669f2a524c6e3b76d947d6aa953f265d622c2a6fada9685b2e5f",
+      "code_updated_at": "2026-10-27T18:51:11+05:30",
+      "command": "gcc q-09-09.c -o ./bin/q-09-09.out && ./bin/q-09-09.out",
+      "output": "Enter the size of the array: 10\nEnter element number 1 -> 223\nEnter element number 2 -> 34\nEnter element number 3 -> 53\nEnter element number 4 -> 68\nEnter element number 5 -> 3\nEnter element number 6 -> 9\nEnter element number 7 -> 3\nEnter element number 8 -> 29\nEnter element number 9 -> -9\nEnter element number 10 -> 32\n\nArray -> [223, 34, 53, 68, 3, 9, 3, 29, -9, 32, ]\nEnter the value to search -> -9\nElement found at index -> 8\nSteps taken -> 9\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 10 steps\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T18:51:11+05:30",
+      "updated_at": "2026-10-27T18:51:11+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-09-10",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T18:53:51+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 21\nEnter element number 2 -> 23\nEnter element number 3 -> 53\nEnter element number 4 -> 245\nEnter element number 5 -> 250\nEnter element number 6 -> 300\nEnter element number 7 -> 500\nEnter element number 8 -> 600\nEnter element number 9 -> 700\nEnter element number 10 -> 800\n\nArray -> [21, 23, 53, 245, 250, 300, 500, 600, 700, 800, ]\nEnter the value to search -> 500\nElement found at index -> 6\nSteps taken -> 0\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 10 steps\n",
+          "exit_code": 0,
+          "code_sha256": "84a16518df6c9dd21ac8e7f3ed43285f7bcc2650753762f890907b7e072f3f1e"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-27T18:54:33+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 12\nEnter element number 2 -> 35\nEnter element number 3 -> 38\nEnter element number 4 -> 45\nEnter element number 5 -> 57\nEnter element number 6 -> 78\nEnter element number 7 -> 89\nEnter element number 8 -> 90\nEnter element number 9 -> 92\nEnter element number 10 -> 100\n\nArray -> [12, 35, 38, 45, 57, 78, 89, 90, 92, 100, ]\nEnter the value to search -> 90\nElement found at index -> 7\nSteps taken -> 0\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 10 steps\n",
+          "exit_code": 0,
+          "code_sha256": "84a16518df6c9dd21ac8e7f3ed43285f7bcc2650753762f890907b7e072f3f1e"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-27T18:55:11+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 212\nEnter element number 2 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "fd5483aab055a666f7fe3cddcd24e14ac09015ec0d93fcb97795cc92fc3b2193"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-27T18:55:49+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 12\nEnter the SORTED array -> \nEnter element number 1 -> 23\nEnter element number 2 -> 34\nEnter element number 3 -> 56\nEnter element number 4 -> 78\nEnter element number 5 -> 79\nEnter element number 6 -> 80\nEnter element number 7 -> 85\nEnter element number 8 -> 90\nEnter element number 9 -> 99\nEnter element number 10 -> 102\nEnter element number 11 -> 150\nEnter element number 12 -> 200\n\nArray -> [23, 34, 56, 78, 79, 80, 85, 90, 99, 102, 150, 200, ]\nEnter the value to search -> 34\nElement found at index -> 1\nSteps taken -> 0\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 12 steps\n",
+          "exit_code": 0,
+          "code_sha256": "fd5483aab055a666f7fe3cddcd24e14ac09015ec0d93fcb97795cc92fc3b2193"
+        },
+        {
+          "run_number": 5,
+          "timestamp": "2026-10-27T18:56:58+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 21\nEnter element number 2 -> 34\nEnter element number 3 -> 70\nEnter element number 4 -> 89\nEnter element number 5 -> 94\nEnter element number 6 -> 99\nEnter element number 7 -> 103\nEnter element number 8 -> 129\nEnter element number 9 -> 134\nEnter element number 10 -> 150\n\nArray -> [21, 34, 70, 89, 94, 99, 103, 129, 134, 150, ]\nEnter the value to search -> 134\nElement found at index -> 8\nSteps taken -> 3\n\nTime Complexity ->\nBest case -> O(1) -> 1 step\nWorst case -> O(n) -> up to 10 steps\n",
+          "exit_code": 0,
+          "code_sha256": "0a81dc9d769757631a5943b7172e4211b366e9d1b3d95a98367e42226dced043"
+        },
+        {
+          "run_number": 6,
+          "timestamp": "2026-10-27T18:59:33+05:30",
+          "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 12\nEnter element number 2 -> 34\nEnter element number 3 -> 42\nEnter element number 4 -> 56\nEnter element number 5 -> 58\nEnter element number 6 -> 89\nEnter element number 7 -> 90\nEnter element number 8 -> 100\nEnter element number 9 -> 234\nEnter element number 10 -> 300\n\nArray -> [12, 34, 42, 56, 58, 89, 90, 100, 234, 300, ]\nEnter the value to search -> 100\nElement found at index -> 7\nSteps taken in Binary Search -> 2\n\nTime Complexity ->\nBest case -> O(1)\nWorst case -> O(log(n))\n",
+          "exit_code": 0,
+          "code_sha256": "c58d7896276b8ef6c91f7351937f47ad33c777739f9747db14ef619c0c342685"
+        }
+      ],
+      "run_count": 6,
+      "created_at": "2026-10-27T18:53:51+05:30",
+      "topic": "Searching Algorithms",
+      "topic_index": 9,
+      "question_number": 10,
+      "question": "Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.",
+      "source_file": "q-09-10.c",
+      "code": "// Searching Algorithms -> Q 10 : Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.\n\n#include <stdio.h>\n#define SIZE 100\n\nint binary_search(int arr[], int n, int target, int * steps)\n{\n    int low = 0, high = n - 1, mid;\n\n    while (low <= high){\n        mid = low + (high - low) / 2;\n        (*steps)++;\n\n        if (arr[mid] == target) {return mid;}\n\n        else if (arr[mid] < target) {low = mid + 1;}\n\n        else{  high = mid - 1;}\n    }\n    return -1;\n}\n\nint main(){\n\n    int arr[SIZE], n, target, index = -1;\n    int steps = 0;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n    \n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n    \n    printf(\"Enter the SORTED array -> \\n\");\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i+1);\n        scanf(\"%d\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0 ; i <n ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"Enter the value to search -> \");\n    scanf(\"%d\", &target);\n\n    index = binary_search(arr,n,target,&steps);\n\n    if (index != -1){\n        printf(\"Element found at index -> %d\\n\", index);}\n    else{\n        printf(\"Element not found\\n\");}\n\n    \n    printf(\"Steps taken in Binary Search -> %d\\n\", steps);\n\n    printf(\"\\nTime Complexity ->\\n\");\n    printf(\"Best case -> O(1)\\n\");\n    printf(\"Worst case -> O(log(n))\\n\");\n\n\n    return 0;\n}",
+      "code_sha256": "c58d7896276b8ef6c91f7351937f47ad33c777739f9747db14ef619c0c342685",
+      "code_updated_at": "2026-10-27T18:59:33+05:30",
+      "command": "gcc q-09-10.c -o ./bin/q-09-10.out && ./bin/q-09-10.out",
+      "output": "Enter the size of the array: 10\nEnter the SORTED array -> \nEnter element number 1 -> 12\nEnter element number 2 -> 34\nEnter element number 3 -> 42\nEnter element number 4 -> 56\nEnter element number 5 -> 58\nEnter element number 6 -> 89\nEnter element number 7 -> 90\nEnter element number 8 -> 100\nEnter element number 9 -> 234\nEnter element number 10 -> 300\n\nArray -> [12, 34, 42, 56, 58, 89, 90, 100, 234, 300, ]\nEnter the value to search -> 100\nElement found at index -> 7\nSteps taken in Binary Search -> 2\n\nTime Complexity ->\nBest case -> O(1)\nWorst case -> O(log(n))\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T18:59:33+05:30",
+      "updated_at": "2026-10-27T18:59:33+05:30",
+      "output_stale": false
     }
   ]
 }
