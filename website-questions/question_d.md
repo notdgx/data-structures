@@ -235,9 +235,9 @@
 14. ✅ : Enter a string array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
 15. ✅ : Enter a string array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
 16. ✅ : Enter a string array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
-17. ❌ : Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
-18. ❌ : Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
-19. ❌ : Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.
-20. ❌ : Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.
+17. ✅ : Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+18. ✅ : Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+19. ✅ : Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.
+20. ✅ : Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.
 
 

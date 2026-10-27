@@ -4274,12 +4274,12 @@
       "source_file": "q-10-09.c",
       "code": "// Sorting Algorithms -> Q 09 : Enter an integer array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.\n\n\n#include <stdio.h>\n#include <time.h>\n\n#define SIZE 100\n\nint partition(int arr[], int low, int high, long long *comparisons){\n    int pivot = arr[high];\n    int i = low - 1;\n    int temp;\n\n    for (int j = low; j < high; j++){\n        (*comparisons)++;\n\n        if (arr[j] <= pivot){\n            i++;\n\n            temp = arr[i];\n            arr[i] = arr[j];\n            arr[j] = temp;\n        }\n    }\n\n    temp = arr[i + 1];\n    arr[i + 1] = arr[high];\n    arr[high] = temp;\n\n    return i + 1;\n}\n\nvoid quick_sort(int arr[], int n, long long *comparisons){\n\n    int stack[SIZE];\n    int top = -1;\n    int low, high, pivot;\n\n    stack[++top] = 0;\n    stack[++top] = n - 1;\n\n    while (top >= 0){\n        high = stack[top--];\n        low = stack[top--];\n\n        pivot = partition(arr, low, high, comparisons);\n\n        if (pivot - 1 > low){\n            stack[++top] = low;\n            stack[++top] = pivot - 1;\n        }\n\n        if (pivot + 1 < high){\n            stack[++top] = pivot + 1;\n            stack[++top] = high;\n        }\n    }\n}\n\nint main(){\n\n    int arr[SIZE], n;\n    long long comparisons = 0;\n    \n    clock_t start, end;\n    double elapsed;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i + 1);\n        scanf(\"%d\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%d, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n\n    start = clock();\n    quick_sort(arr, n, &comparisons);\n    end = clock();\n\n    elapsed = (double)(end - start) / CLOCKS_PER_SEC;\n\n    printf(\"\\nSorted array -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%d, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nTotal comparisons -> %lld\\n\", comparisons);\n    \n    printf(\"Execution time -> %.9f seconds\\n\", elapsed);\n    \n    printf(\"Best-case time complexity -> O(n log n)\\n\");\n    printf(\"Worst-case time complexity -> O(n^2)\\n\");\n\n    return 0;\n}",
       "code_sha256": "bcb4b762c2020fe880587989085a609ddd0109d0dbdb28ee9daff512ce4ae963",
-      "code_updated_at": "2026-10-27T21:32:39+05:30",
+      "code_updated_at": "2026-10-27T22:16:20+05:30",
       "command": "gcc q-10-09.c -o ./bin/q-10-09.out && ./bin/q-10-09.out",
       "output": "Enter the size of the array: 10\nEnter element number 1 -> 23\nEnter element number 2 -> -23\nEnter element number 3 -> 56\nEnter element number 4 -> 73\nEnter element number 5 -> 0\nEnter element number 6 -> 452\nEnter element number 7 -> 46\nEnter element number 8 -> 24\nEnter element number 9 -> 56\nEnter element number 10 -> -323\n\nArray -> [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]\n\nSorted array -> [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]\n\nTotal comparisons -> 29\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n^2)\n",
       "exit_code": 0,
       "last_run_at": "2026-10-27T21:32:39+05:30",
-      "updated_at": "2026-10-27T21:32:39+05:30",
+      "updated_at": "2026-10-27T22:16:20+05:30",
       "output_stale": false
     },
     {
@@ -4517,6 +4517,171 @@
       "exit_code": 0,
       "last_run_at": "2026-10-27T21:54:52+05:30",
       "updated_at": "2026-10-27T21:54:52+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-10-17",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T22:02:10+05:30",
+          "command": "gcc q-10-17.c -o ./bin/q-10-17.out && ./bin/q-10-17.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> c\nEnter element number 4 -> f\nEnter element number 5 -> h\nEnter element number 6 -> t\nEnter element number 7 -> a\nEnter element number 8 -> j\nEnter element number 9 -> y\nEnter element number 10 -> b\n\nArray -> [z, x, c, f, h, t, a, j, y, b, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 25\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n log n)\n",
+          "exit_code": 0,
+          "code_sha256": "e0e6f567faf1840da08b869f896eb19e8da87dd440d1ea9dc6aff2062202e8d5"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-27T22:02:10+05:30",
+      "topic": "Sorting Algorithms",
+      "topic_index": 10,
+      "question_number": 17,
+      "question": "Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.",
+      "source_file": "q-10-17.c",
+      "code": "// Sorting Algorithms -> Q 17 : Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.\n\n#include <stdio.h>\n#include <time.h>\n\n#define SIZE 100\n\nvoid merge_sort(char arr[], int n, long long *comparisons){\n    char temp[SIZE];\n\n    for (int width = 1; width < n; width *= 2){\n        for (int left = 0; left < n - 1; left += 2 * width){\n            int mid = left + width - 1;\n            int right = left + 2 * width - 1;\n\n            if (mid >= n - 1){continue;}\n\n            if (right >= n){\n                right = n - 1;}\n\n            int i = left;\n            int j = mid + 1;\n            int k = left;\n\n            while (i <= mid && j <= right){\n                (*comparisons)++;\n                if (arr[i] <= arr[j]){\n                    temp[k++] = arr[i++];\n                }\n                else{\n                    temp[k++] = arr[j++];\n                }\n            }\n\n            while (i <= mid){ temp[k++] = arr[i++]; }\n            while (j <= right){ temp[k++] = arr[j++]; }\n\n            for (int p = left; p <= right; p++){\n                arr[p] = temp[p];\n            }\n        }\n    }\n}\n\nint main(){\n\n    char arr[SIZE];\n    int  n;\n    long long comparisons = 0;\n    clock_t start, end;\n    double elapsed;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i + 1);\n        scanf(\" %c\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    \n\n    start = clock();\n    merge_sort(arr, n, &comparisons);\n    end = clock();\n\n    elapsed = (double)(end - start) / CLOCKS_PER_SEC;\n\n    printf(\"\\nSorted array -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nTotal comparisons -> %lld\\n\", comparisons);\n    \n    printf(\"Execution time -> %.9f seconds\\n\", elapsed);\n\n    printf(\"Best-case time complexity -> O(n log n)\\n\");\n    printf(\"Worst-case time complexity -> O(n log n)\\n\");\n    \n\n    return 0;\n}",
+      "code_sha256": "e0e6f567faf1840da08b869f896eb19e8da87dd440d1ea9dc6aff2062202e8d5",
+      "code_updated_at": "2026-10-27T22:02:10+05:30",
+      "command": "gcc q-10-17.c -o ./bin/q-10-17.out && ./bin/q-10-17.out",
+      "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> c\nEnter element number 4 -> f\nEnter element number 5 -> h\nEnter element number 6 -> t\nEnter element number 7 -> a\nEnter element number 8 -> j\nEnter element number 9 -> y\nEnter element number 10 -> b\n\nArray -> [z, x, c, f, h, t, a, j, y, b, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 25\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n log n)\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T22:02:10+05:30",
+      "updated_at": "2026-10-27T22:02:10+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-10-18",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T22:04:15+05:30",
+          "command": "gcc q-10-18.c -o ./bin/q-10-18.out && ./bin/q-10-18.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> x\nEnter element number 2 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "0e472e5448843a7f5388831ad5c76dce7e57bc56fadc93b1131f03986f8902a7"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-27T22:04:26+05:30",
+          "command": "gcc q-10-18.c -o ./bin/q-10-18.out && ./bin/q-10-18.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: z\nEnter element number 1 -> Enter element number 2 -> x\nEnter element number 3 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "0e472e5448843a7f5388831ad5c76dce7e57bc56fadc93b1131f03986f8902a7"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-27T22:04:39+05:30",
+          "command": "gcc q-10-18.c -o ./bin/q-10-18.out && ./bin/q-10-18.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 22\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n log n)\n",
+          "exit_code": 0,
+          "code_sha256": "0e472e5448843a7f5388831ad5c76dce7e57bc56fadc93b1131f03986f8902a7"
+        }
+      ],
+      "run_count": 3,
+      "created_at": "2026-10-27T22:04:15+05:30",
+      "topic": "Sorting Algorithms",
+      "topic_index": 10,
+      "question_number": 18,
+      "question": "Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.",
+      "source_file": "q-10-18.c",
+      "code": "// Sorting Algorithms -> Q 18 : Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.\n\n#include <stdio.h>\n#include <time.h>\n\n#define SIZE 100\n\nvoid merge(char arr[], char temp[], int left,int mid, int right,long long *comparisons){\n\n    int i = left;\n    int j = mid + 1;\n    int k = left;\n\n    while (i <= mid && j <= right){\n        (*comparisons)++;\n        if (arr[i] <= arr[j]){\n            temp[k++] = arr[i++];\n        }\n        else{\n            temp[k++] = arr[j++];\n        }\n    }\n\n    while (i <= mid){temp[k++] = arr[i++]; }\n\n    while (j <= right){temp[k++] = arr[j++]; }\n\n    for (int p = left; p <= right; p++){\n        arr[p] = temp[p];\n    }\n}\n\nvoid merge_sort(char arr[], char temp[], int left, int right,long long *comparisons){\n\n    if (left >= right){ return;}\n\n    int mid = left + (right - left) / 2;\n\n    merge_sort(arr, temp, left, mid, comparisons);\n    merge_sort(arr, temp, mid + 1, right, comparisons);\n\n    merge(arr, temp, left, mid, right, comparisons);\n}\n\nint main(){\n\n    char arr[SIZE], temp[SIZE];\n    int n;\n    long long comparisons = 0;\n\n    clock_t start, end;\n    double elapsed;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i + 1);\n        scanf(\" %c\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n\n    start = clock();\n    merge_sort(arr, temp, 0, n - 1, &comparisons);\n    end = clock();\n\n    elapsed = (double)(end - start) / CLOCKS_PER_SEC;\n\n    printf(\"\\nSorted array -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nTotal comparisons -> %lld\\n\", comparisons);\n    \n    printf(\"Execution time -> %.9f seconds\\n\", elapsed);\n\n    printf(\"Best-case time complexity -> O(n log n)\\n\");\n    printf(\"Worst-case time complexity -> O(n log n)\\n\");\n\n    return 0;\n}",
+      "code_sha256": "0e472e5448843a7f5388831ad5c76dce7e57bc56fadc93b1131f03986f8902a7",
+      "code_updated_at": "2026-10-27T22:04:15+05:30",
+      "command": "gcc q-10-18.c -o ./bin/q-10-18.out && ./bin/q-10-18.out",
+      "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 22\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n log n)\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T22:04:39+05:30",
+      "updated_at": "2026-10-27T22:04:39+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-10-19",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T22:10:41+05:30",
+          "command": "gcc q-10-19.c -o ./bin/q-10-19.out && ./bin/q-10-19.out",
+          "mode": "compile-run",
+          "output": "q-10-19.c: In function ‘quick_sort’:\nq-10-19.c:45:27: warning: passing argument 1 of ‘partition’ from incompatible pointer type [-Wincompatible-pointer-types]\n   45 |         pivot = partition(arr, low, high, comparisons);\n      |                           ^~~\n      |                           |\n      |                           int *\nq-10-19.c:8:20: note: expected ‘char *’ but argument is of type ‘int *’\n    8 | int partition(char arr[], int low, int high, long long *comparisons){\n      |               ~~~~~^~~~~\nEnter the size of the array: ^C",
+          "exit_code": 130,
+          "code_sha256": "3f0febbed0128a8ad220c0e65969035258ca437b6a00ae25709f192439c82ec2"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-27T22:11:13+05:30",
+          "command": "gcc q-10-19.c -o ./bin/q-10-19.out && ./bin/q-10-19.out",
+          "mode": "compile-run",
+          "output": "q-10-19.c: In function ‘quick_sort’:\nq-10-19.c:45:27: warning: passing argument 1 of ‘partition’ from incompatible pointer type [-Wincompatible-pointer-types]\n   45 |         pivot = partition(arr, low, high, comparisons);\n      |                           ^~~\n      |                           |\n      |                           int *\nq-10-19.c:8:20: note: expected ‘char *’ but argument is of type ‘int *’\n    8 | int partition(char arr[], int low, int high, long long *comparisons){\n      |               ~~~~~^~~~~\nEnter the size of the array: ^C",
+          "exit_code": 130,
+          "code_sha256": "3f0febbed0128a8ad220c0e65969035258ca437b6a00ae25709f192439c82ec2"
+        },
+        {
+          "run_number": 3,
+          "timestamp": "2026-10-27T22:16:20+05:30",
+          "command": "gcc q-10-19.c -o ./bin/q-10-19.out && ./bin/q-10-19.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> c\nEnter element number 4 -> f\nEnter element number 5 -> h\nEnter element number 6 -> r\nEnter element number 7 -> ^C",
+          "exit_code": 130,
+          "code_sha256": "a10aa854dfa14febd7a771e52bdb50056f54c45bb4a32e35663c90858a816bd3"
+        },
+        {
+          "run_number": 4,
+          "timestamp": "2026-10-27T22:16:32+05:30",
+          "command": "gcc q-10-19.c -o ./bin/q-10-19.out && ./bin/q-10-19.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 28\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n^2)\n",
+          "exit_code": 0,
+          "code_sha256": "a10aa854dfa14febd7a771e52bdb50056f54c45bb4a32e35663c90858a816bd3"
+        }
+      ],
+      "run_count": 4,
+      "created_at": "2026-10-27T22:10:41+05:30",
+      "topic": "Sorting Algorithms",
+      "topic_index": 10,
+      "question_number": 19,
+      "question": "Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.",
+      "source_file": "q-10-19.c",
+      "code": "// Sorting Algorithms -> Q 19 : Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.\n\n#include <stdio.h>\n#include <time.h>\n\n#define SIZE 100\n\nint partition(char arr[], int low, int high, long long *comparisons){\n    char pivot = arr[high];\n    int i = low - 1;\n    char temp;\n\n    for (int j = low; j < high; j++){\n        (*comparisons)++;\n\n        if (arr[j] <= pivot){\n            i++;\n\n            temp = arr[i];\n            arr[i] = arr[j];\n            arr[j] = temp;\n        }\n    }\n\n    temp = arr[i + 1];\n    arr[i + 1] = arr[high];\n    arr[high] = temp;\n\n    return i + 1;\n}\n\nvoid quick_sort(char arr[], int n, long long *comparisons){\n\n    int stack[SIZE];\n    int top = -1;\n    int low, high, pivot;\n\n    stack[++top] = 0;\n    stack[++top] = n - 1;\n\n    while (top >= 0){\n        high = stack[top--];\n        low = stack[top--];\n\n        pivot = partition(arr, low, high, comparisons);\n\n        if (pivot - 1 > low){\n            stack[++top] = low;\n            stack[++top] = pivot - 1;\n        }\n\n        if (pivot + 1 < high){\n            stack[++top] = pivot + 1;\n            stack[++top] = high;\n        }\n    }\n}\n\nint main(){\n\n    char arr[SIZE];\n    int n;\n    long long comparisons = 0;\n    \n    clock_t start, end;\n    double elapsed;\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i + 1);\n        scanf(\" %c\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n\n    start = clock();\n    quick_sort(arr, n, &comparisons);\n    end = clock();\n\n    elapsed = (double)(end - start) / CLOCKS_PER_SEC;\n\n    printf(\"\\nSorted array -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nTotal comparisons -> %lld\\n\", comparisons);\n    \n    printf(\"Execution time -> %.9f seconds\\n\", elapsed);\n    \n    printf(\"Best-case time complexity -> O(n log n)\\n\");\n    printf(\"Worst-case time complexity -> O(n^2)\\n\");\n\n    return 0;\n}",
+      "code_sha256": "a10aa854dfa14febd7a771e52bdb50056f54c45bb4a32e35663c90858a816bd3",
+      "code_updated_at": "2026-10-27T22:16:20+05:30",
+      "command": "gcc q-10-19.c -o ./bin/q-10-19.out && ./bin/q-10-19.out",
+      "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 28\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n^2)\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T22:16:32+05:30",
+      "updated_at": "2026-10-27T22:16:32+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-10-20",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-27T22:18:09+05:30",
+          "command": "gcc q-10-20.c -o ./bin/q-10-20.out && ./bin/q-10-20.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 28\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n^2)\n",
+          "exit_code": 0,
+          "code_sha256": "22ad14974633bc9407746ec9d3fba691b37a5655568d9c0d4914e5baf353c67b"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-27T22:18:09+05:30",
+      "topic": "Sorting Algorithms",
+      "topic_index": 10,
+      "question_number": 20,
+      "question": "Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.",
+      "source_file": "q-10-20.c",
+      "code": "// Sorting Algorithms -> Q 20 : Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.\n\n#include <stdio.h>\n#include <time.h>\n\n#define SIZE 100\n\nint partition(char arr[], int low, int high, long long *comparisons){\n    char pivot = arr[high];\n    int i = low - 1;\n    char temp;\n\n    for (int j = low; j < high; j++){\n        (*comparisons)++;\n\n        if (arr[j] <= pivot){\n            i++;\n\n            temp = arr[i];\n            arr[i] = arr[j];\n            arr[j] = temp;\n        }\n    }\n\n    temp = arr[i + 1];\n    arr[i + 1] = arr[high];\n    arr[high] = temp;\n\n    return i + 1;\n}\n\nvoid quick_sort(char arr[], int low, int high, long long *comparisons){\n    if (low < high){\n        int pivot = partition(arr, low, high, comparisons);\n\n        quick_sort(arr, low, pivot - 1, comparisons);\n        quick_sort(arr, pivot + 1, high, comparisons);\n    }\n}\n\nint main(){\n\n    char arr[SIZE];\n    int n;\n    long long comparisons = 0;\n    \n    clock_t start, end;\n    double elapsed;\n\n\n    printf(\"Enter the size of the array: \");\n    scanf(\"%d\", &n);\n\n    if (n <= 0 || n > SIZE){\n        printf(\"Invalid array size\\n\");\n        return 1;\n    }\n\n    for (int i = 0; i < n; i++){\n        printf(\"Enter element number %d -> \", i + 1);\n        scanf(\" %c\", &arr[i]);\n    }\n\n    printf(\"\\nArray -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    start = clock();\n    quick_sort(arr, 0, n-1, &comparisons);\n    end = clock();\n\n    elapsed = (double)(end - start) / CLOCKS_PER_SEC;\n\n    printf(\"\\nSorted array -> [\");\n    for (int i = 0; i < n; i++){\n        printf(\"%c, \", arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"\\nTotal comparisons -> %lld\\n\", comparisons);\n\n    printf(\"Execution time -> %.9f seconds\\n\", elapsed);\n\n    printf(\"Best-case time complexity -> O(n log n)\\n\");\n    printf(\"Worst-case time complexity -> O(n^2)\\n\");\n\n    return 0;\n}",
+      "code_sha256": "22ad14974633bc9407746ec9d3fba691b37a5655568d9c0d4914e5baf353c67b",
+      "code_updated_at": "2026-10-27T22:18:09+05:30",
+      "command": "gcc q-10-20.c -o ./bin/q-10-20.out && ./bin/q-10-20.out",
+      "output": "Enter the size of the array: 10\nEnter element number 1 -> z\nEnter element number 2 -> x\nEnter element number 3 -> f\nEnter element number 4 -> h\nEnter element number 5 -> t\nEnter element number 6 -> a\nEnter element number 7 -> j\nEnter element number 8 -> y\nEnter element number 9 -> b\nEnter element number 10 -> c\n\nArray -> [z, x, f, h, t, a, j, y, b, c, ]\n\nSorted array -> [a, b, c, f, h, j, t, x, y, z, ]\n\nTotal comparisons -> 28\nExecution time -> 0.000002000 seconds\nBest-case time complexity -> O(n log n)\nWorst-case time complexity -> O(n^2)\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-27T22:18:09+05:30",
+      "updated_at": "2026-10-27T22:18:09+05:30",
       "output_stale": false
     }
   ]
