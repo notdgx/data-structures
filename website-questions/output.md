@@ -19801,4 +19801,578 @@ Worst-case time complexity -> O(n^2)
 <!-- qrun:field-end output id="q-10-04" -->
 <!-- qrun:entry-end id="q-10-04" -->
 
+
+<!-- qrun:entry-start id="q-10-05" -->
+
+<!-- qrun:field-start question id="q-10-05" -->
+
+## Q 05 : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+<!-- qrun:field-end question id="q-10-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-10-05" -->
+
+```c
+// Sorting Algorithms -> Q 05 : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include <stdio.h>
+#include <time.h>
+
+#define SIZE 100
+
+void insertion_sort(int arr[], int n, long long *comparisons){
+
+    int key, j;
+    for (int i = 1; i < n; i++){
+        key = arr[i];
+        j = i - 1;
+
+        while (j >= 0){
+            (*comparisons)++;
+            if (arr[j] > key){
+                arr[j + 1] = arr[j];
+                j--;}
+            
+            else{break;}
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("\nSorted array -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nTotal comparisons -> %lld\n", comparisons);
+    
+    printf("Best-case comparisons -> %d\n", n - 1);
+    printf("Worst-case comparisons -> %lld\n",(long long)n * (n - 1) / 2);
+
+    printf("Execution time -> %.9f seconds\n", elapsed);
+
+    printf("\nBest-case time complexity -> O(n)\n");
+    printf("Worst-case time complexity -> O(n^2)\n");
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-10-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-10-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-10-05" -->
+
+<!-- qrun:field-start output id="q-10-05" -->
+
+```text
+$ gcc q-10-05.c -o ./bin/q-10-05.out && ./bin/q-10-05.out
+Enter the size of the array: 10
+Enter element number 1 -> 23
+Enter element number 2 -> -23
+Enter element number 3 -> 56
+Enter element number 4 -> 73
+Enter element number 5 -> 0
+Enter element number 6 -> 452
+Enter element number 7 -> 46
+Enter element number 8 -> 24
+Enter element number 9 -> 56
+Enter element number 10 -> -323
+
+Array -> [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -> [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -> 29
+Best-case comparisons -> 9
+Worst-case comparisons -> 45
+Execution time -> 0.000002000 seconds
+
+Best-case time complexity -> O(n)
+Worst-case time complexity -> O(n^2)
+```
+
+<!-- qrun:field-end output id="q-10-05" -->
+<!-- qrun:entry-end id="q-10-05" -->
+
+
+<!-- qrun:entry-start id="q-10-06" -->
+
+<!-- qrun:field-start question id="q-10-06" -->
+
+## Q 06 : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+<!-- qrun:field-end question id="q-10-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-10-06" -->
+
+```c
+// Sorting Algorithms -> Q 06 : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include <stdio.h>
+#include <time.h>
+
+#define SIZE 100
+
+void insertion_sort(int arr[], int n, long long *comparisons){
+
+    if (n <= 1){ return;}
+
+    insertion_sort(arr, n - 1, comparisons);
+
+    int key = arr[n - 1];
+    int j = n - 2;
+
+    while (j >= 0){
+        (*comparisons)++;
+        if (arr[j] > key){
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        else{break;}
+    }
+
+    arr[j + 1] = key;
+}
+
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i+1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("\nSorted array -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nTotal comparisons -> %lld\n", comparisons);
+    
+    printf("Best-case comparisons -> %d\n", n - 1);
+    printf("Worst-case comparisons -> %lld\n",(long long)n * (n - 1) / 2);
+
+    printf("Execution time -> %.9f seconds\n", elapsed);
+
+    printf("\nBest-case time complexity -> O(n)\n");
+    printf("Worst-case time complexity -> O(n^2)\n");
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-10-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-10-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-10-06" -->
+
+<!-- qrun:field-start output id="q-10-06" -->
+
+```text
+$ gcc q-10-06.c -o ./bin/q-10-06.out && ./bin/q-10-06.out
+Enter the size of the array: 10
+Enter element number 1 -> 23
+Enter element number 2 -> -23
+Enter element number 3 -> 56
+Enter element number 4 -> 73
+Enter element number 5 -> 0
+Enter element number 6 -> 452
+Enter element number 7 -> 46
+Enter element number 8 -> 24
+Enter element number 9 -> 56
+Enter element number 10 -> -323
+
+Array -> [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -> [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -> 29
+Best-case comparisons -> 9
+Worst-case comparisons -> 45
+Execution time -> 0.000001000 seconds
+
+Best-case time complexity -> O(n)
+Worst-case time complexity -> O(n^2)
+```
+
+<!-- qrun:field-end output id="q-10-06" -->
+<!-- qrun:entry-end id="q-10-06" -->
+
+
+<!-- qrun:entry-start id="q-10-07" -->
+
+<!-- qrun:field-start question id="q-10-07" -->
+
+## Q 07 : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+<!-- qrun:field-end question id="q-10-07" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-10-07" -->
+
+```c
+// Sorting Algorithms -> Q 07 : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include <stdio.h>
+#include <time.h>
+
+#define SIZE 100
+
+void merge_sort(int arr[], int n, long long *comparisons){
+    int temp[SIZE];
+
+    for (int width = 1; width < n; width *= 2){
+        for (int left = 0; left < n - 1; left += 2 * width){
+            int mid = left + width - 1;
+            int right = left + 2 * width - 1;
+
+            if (mid >= n - 1){continue;}
+
+            if (right >= n){
+                right = n - 1;}
+
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+
+            while (i <= mid && j <= right){
+                (*comparisons)++;
+                if (arr[i] <= arr[j]){
+                    temp[k++] = arr[i++];
+                }
+                else{
+                    temp[k++] = arr[j++];
+                }
+            }
+
+            while (i <= mid){ temp[k++] = arr[i++]; }
+            while (j <= right){ temp[k++] = arr[j++]; }
+
+            for (int p = left; p <= right; p++){
+                arr[p] = temp[p];
+            }
+        }
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+    
+
+    start = clock();
+    merge_sort(arr, n, &comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("\nSorted array -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nTotal comparisons -> %lld\n", comparisons);
+    
+    printf("Execution time -> %.6f seconds\n", elapsed);
+
+    printf("Best-case time complexity -> O(n log n)\n");
+    printf("Worst-case time complexity -> O(n log n)\n");
+    
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-10-07" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-10-07" -->
+
+
+
+<!-- qrun:field-end freshness id="q-10-07" -->
+
+<!-- qrun:field-start output id="q-10-07" -->
+
+```text
+$ gcc q-10-07.c -o ./bin/q-10-07.out && ./bin/q-10-07.out
+Enter the size of the array: 10
+Enter element number 1 -> 23
+Enter element number 2 -> -23
+Enter element number 3 -> 56
+Enter element number 4 -> 73
+Enter element number 5 -> 0
+Enter element number 6 -> 452
+Enter element number 7 -> 46
+Enter element number 8 -> 24
+Enter element number 9 -> 56
+Enter element number 10 -> -323
+
+Array -> [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -> [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -> 25
+Execution time -> 0.000002 seconds
+Best-case time complexity -> O(n log n)
+Worst-case time complexity -> O(n log n)
+```
+
+<!-- qrun:field-end output id="q-10-07" -->
+<!-- qrun:entry-end id="q-10-07" -->
+
+
+<!-- qrun:entry-start id="q-10-08" -->
+
+<!-- qrun:field-start question id="q-10-08" -->
+
+## Q 08 : Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+<!-- qrun:field-end question id="q-10-08" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-10-08" -->
+
+```c
+// Sorting Algorithms -> Q 08 : Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include <stdio.h>
+#include <time.h>
+
+#define SIZE 100
+
+void merge(int arr[], int temp[], int left,int mid, int right,long long *comparisons){
+
+    int i = left;
+    int j = mid + 1;
+    int k = left;
+
+    while (i <= mid && j <= right){
+        (*comparisons)++;
+        if (arr[i] <= arr[j]){
+            temp[k++] = arr[i++];
+        }
+        else{
+            temp[k++] = arr[j++];
+        }
+    }
+
+    while (i <= mid){temp[k++] = arr[i++]; }
+
+    while (j <= right){temp[k++] = arr[j++]; }
+
+    for (int p = left; p <= right; p++){
+        arr[p] = temp[p];
+    }
+}
+
+void merge_sort(int arr[], int temp[], int left, int right,long long *comparisons){
+
+    if (left >= right){ return;}
+
+    int mid = left + (right - left) / 2;
+
+    merge_sort(arr, temp, left, mid, comparisons);
+    merge_sort(arr, temp, mid + 1, right, comparisons);
+
+    merge(arr, temp, left, mid, right, comparisons);
+}
+
+int main(){
+
+    int arr[SIZE], temp[SIZE], n;
+    long long comparisons = 0;
+
+    clock_t start, end;
+    double elapsed;
+
+    printf("Enter the size of the array: ");
+    scanf("%d", &n);
+
+    if (n <= 0 || n > SIZE){
+        printf("Invalid array size\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++){
+        printf("Enter element number %d -> ", i + 1);
+        scanf("%d", &arr[i]);
+    }
+
+    printf("\nArray -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+
+    start = clock();
+    merge_sort(arr, temp, 0, n - 1, &comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf("\nSorted array -> [");
+    for (int i = 0; i < n; i++){
+        printf("%d, ", arr[i]);
+    }
+    printf("]\n");
+
+    printf("\nTotal comparisons -> %lld\n", comparisons);
+    
+    printf("Execution time -> %.9f seconds\n", elapsed);
+
+    printf("Best-case time complexity -> O(n log n)\n");
+    printf("Worst-case time complexity -> O(n log n)\n");
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-10-08" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-10-08" -->
+
+
+
+<!-- qrun:field-end freshness id="q-10-08" -->
+
+<!-- qrun:field-start output id="q-10-08" -->
+
+```text
+$ gcc q-10-08.c -o ./bin/q-10-08.out && ./bin/q-10-08.out
+Enter the size of the array: 10
+Enter element number 1 -> 23
+Enter element number 2 -> -23
+Enter element number 3 -> 56
+Enter element number 4 -> 73
+Enter element number 5 -> 0
+Enter element number 6 -> 452
+Enter element number 7 -> 46
+Enter element number 8 -> 24
+Enter element number 9 -> 56
+Enter element number 10 -> -323
+
+Array -> [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -> [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -> 24
+Execution time -> 0.000002000 seconds
+Best-case time complexity -> O(n log n)
+Worst-case time complexity -> O(n log n)
+```
+
+<!-- qrun:field-end output id="q-10-08" -->
+<!-- qrun:entry-end id="q-10-08" -->
+
 <!-- qrun:topic-end id="topic-10" -->

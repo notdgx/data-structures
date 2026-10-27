@@ -223,10 +223,10 @@
 2. ✅ : Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.
 3. ✅ : Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.
 4. ✅ : Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
-5. ❌ : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
-6. ❌ : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
-7. ❌ : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
-8. ❌ : Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+5. ✅ : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
+6. ✅ : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
+7. ✅ : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+8. ✅ : Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
 9. ❌ : Enter an integer array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.
 10. ❌ : Enter an integer array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.
 11. ❌ : Enter a string array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.
