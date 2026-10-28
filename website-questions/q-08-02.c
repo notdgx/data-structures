@@ -38,20 +38,17 @@ int add_vertice(struct vertice ** head,int data){
     }
 
     struct vertice * temp = (*head);
-    while (temp->other_vertice!=NULL){
+    struct vertice * pre = (*head);
+    while (temp!=NULL){
         if (temp->data == data){
             free(new_vertice);
             return -1; // if data doenst esit the mallc will still create extra spce 
         }
+        pre = temp;
         temp = temp->other_vertice;
     }
 
-    if (temp->data == data) {
-    free(new_vertice);
-    return -1;
-    }
-
-    temp->other_vertice = new_vertice;
+    pre->other_vertice = new_vertice;
     return 2;
     
 }
@@ -70,7 +67,7 @@ int remove_vertice(struct vertice ** head,int data){
     struct vertice * temp = (*head);
     struct vertice * prev = (*head);
     int found = 0;
-    while (temp->other_vertice!=NULL)
+    while (temp!=NULL)
     {
         if (temp->data == data){
             found = 1;
@@ -82,33 +79,37 @@ int remove_vertice(struct vertice ** head,int data){
     }
 
     if (found == 0){return -1;}
+    if (temp == (*head)){
+        (*head) = temp->other_vertice;
+    }
+    else{
+        prev->other_vertice = temp->other_vertice;
+    }
 
-    struct vertice * next = temp->other_vertice;
-    
-    prev->other_vertice = next;
     // temp has the address of node to be deleted it is free and floating but not deleted yet and incoming edges also connected 
 
     struct vertice * temp_tra = ((*head));
-    prev = NULL;
-    next = NULL;
 
     while (temp_tra != NULL)
     {
-        struct edge * prev_edge = temp_tra->edge_connection;
         struct edge * curr_edge = temp_tra->edge_connection;
+        struct edge * prev_edge = temp_tra->edge_connection;
 
-        if(curr_edge == NULL){continue;}
-        if(curr_edge->dest == temp){
-            temp_tra->edge_connection = curr_edge->next_edge;
-            free(curr_edge);
-            curr_edge = NULL;
+        if(curr_edge == NULL){
             temp_tra = temp_tra->other_vertice;
-            continue;
-        }
+            continue;}
+    
+        // if(curr_edge->dest == temp){
+        //     temp_tra->edge_connection = curr_edge->next_edge;
+        //     free(curr_edge);
+        //     curr_edge = NULL;
+        //     temp_tra = temp_tra->other_vertice;
+        //     continue;
+        // }
         int found = 0;
         while (curr_edge != NULL)
         {
-            if (curr_edge->dest != temp){
+            if (curr_edge->dest == temp){
                 found = 1;
                 break;
             }
@@ -117,14 +118,30 @@ int remove_vertice(struct vertice ** head,int data){
         }
 
         if (found == 1){
-            prev_edge = curr_edge->next_edge;
+            if (curr_edge == temp_tra->edge_connection){
+                temp_tra->edge_connection = curr_edge->next_edge;
+            }
+            else{
+                prev_edge->next_edge = curr_edge->next_edge;
+            }
             free(curr_edge);
-            curr_edge = NULL;
+
         }
 
         temp_tra = temp_tra->other_vertice;
 
     }
+
+    struct edge * curr_edge = temp->edge_connection;
+    struct edge * prev_edge = NULL;
+    while (curr_edge != NULL)
+    {
+        prev_edge = curr_edge;
+        curr_edge = curr_edge->next_edge;
+        free(prev_edge);
+    }
+
+    
 
     free(temp);
     return 1;
@@ -163,6 +180,7 @@ void show_edges(struct vertice * head){
         edge = head->edge_connection;
         while(edge!=NULL){
             printf("  (%3d)",edge->dest->data);
+            edge = edge->next_edge;
         }
         printf("\n");
         head = head->other_vertice;
@@ -188,25 +206,21 @@ int connect_vertice(struct vertice ** head,int source,int dest){
     struct vertice * addof_source = NULL;
     struct vertice * addof_dest = NULL;
 
-    int found_source = 0;
-    int found_dest = 0;
 
     while (temp!=NULL)
     {
         if (temp->data == source){
-            found_source = 1;
             addof_source = temp;
         }
         else if (temp->data == dest){
-            found_dest = 1;
             addof_dest = temp;
         }
 
         temp = temp->other_vertice;
     }
 
-    if (found_dest != 1){return -1;} 
-    if (found_source != 1) {return -2;}
+    if (addof_dest== NULL){return -1;} 
+    if (addof_source == NULL) {return -2;}
 
     struct edge * curr_edge = addof_source->edge_connection;
     struct edge * pre_edge = addof_source->edge_connection;
@@ -218,11 +232,18 @@ int connect_vertice(struct vertice ** head,int source,int dest){
     }
 
     struct edge * new_edge = (struct edge *)(malloc(sizeof(struct edge)));
-    if (new_edge = NULL){return -4;}
-    pre_edge->next_edge = new_edge;
+    if (new_edge == NULL){return -4;}
     new_edge->dest = addof_dest;
     new_edge->next_edge = NULL;
+
+    if (addof_source->edge_connection == NULL){
+        addof_source->edge_connection = new_edge;
+    }
+    else{
+        pre_edge->next_edge = new_edge;
+    }
     
+    return 1;
     return 1;
     
     
@@ -243,25 +264,21 @@ int disconnect_vertice(struct vertice ** head,int source, int dest){
     struct vertice * addof_source = NULL;
     struct vertice * addof_dest = NULL;
 
-    int found_source = 0;
-    int found_dest = 0;
-
+ 
     while (temp!=NULL)
     {
         if (temp->data == source){
-            found_source = 1;
             addof_source = temp;
         }
         else if (temp->data == dest){
-            found_dest = 1;
             addof_dest = temp;
         }
 
         temp = temp->other_vertice;
     }
 
-    if (found_dest != 1){return -1;} 
-    if (found_source != 1) {return -2;}
+    if (addof_dest== NULL){return -1;} 
+    if (addof_source == NULL) {return -2;}
 
     int is_connected = 0;
 
@@ -274,8 +291,12 @@ int disconnect_vertice(struct vertice ** head,int source, int dest){
         curr_edge = curr_edge->next_edge;
     }
 
-    if(is_connected == 0){return -3;}
-    pre_edge->next_edge = curr_edge->next_edge;
+    if (curr_edge == addof_source->edge_connection){
+        addof_source->edge_connection = curr_edge->next_edge;
+    }
+    else{
+        pre_edge->next_edge = curr_edge->next_edge;
+    }
     free(curr_edge);
     return 1;
 
@@ -311,6 +332,7 @@ void show_degree(struct vertice * head,int data){
         edge = edge->next_edge;
     }
     printf("\n");
+    printf("+------------+\n");
     printf("Degree of Vertice %d is -> %d\n",head->data,count);
     return;
     
@@ -330,7 +352,7 @@ int main(){
         printf("1 : Show vertices\n");
         printf("2 : Show edges\n");
         printf("3 : Add vertices\n");
-        printf("4 : Remove last vertice\n");
+        printf("4 : Remove vertice\n");
         printf("5 : Connect Vertices\n");
         printf("6 : Disonnect Vertices\n");
         printf("7 : Show Neighbours and Degree\n");
@@ -342,11 +364,11 @@ int main(){
         switch (choice)
         {
         case 1:
-            show_vertice(&head);
+            show_vertice(head);
             break;
 
         case 2:
-            show_edges(&head);
+            show_edges(head);
             break;
 
         case 3:
@@ -355,7 +377,7 @@ int main(){
             out = add_vertice(&head,input_val);
             if (out == -1)
                 printf("Already Exist, Cannot add data\n");
-            else if (out == -0)
+            else if (out == 0)
                 printf("Malloc Failed \n");
             else if (out == 1)
                 printf("Added, no initial vertices was there \n");
@@ -365,12 +387,12 @@ int main(){
 
         case 4:
             show_vertice(head);
-            printf("\nEnter the data of vertice to remoce : ");
+            printf("\nEnter the data of vertice to remove : ");
             scanf("%d", &input_val); 
             out = remove_vertice(&head,input_val);
             if (out == 0)
                 printf("No data\n");
-            if (out == -1)
+            else if (out == -1)
                 printf("Vertice not found\n");
             else
                 printf("%d Removed\n",input_val);
@@ -398,7 +420,7 @@ int main(){
             break;
 
         case 6:
-            show_edges(&head);
+            show_edges(head);
             printf("\nEnter the data of source vertice : ");
             scanf("%d", &input_val);
             printf("Enter the data of dest vertice : ");
@@ -420,7 +442,7 @@ int main(){
             show_vertice(head);
             printf("\nEnter the data of vertice : ");
             scanf("%d", &input_val);
-            show_neighbours(&head,input_val);
+            show_degree(head,input_val);
             break;
 
                     
