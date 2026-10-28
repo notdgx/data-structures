@@ -146,9 +146,9 @@
 3. ✅ : Implement a doubly linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
 4. ✅ : Implement a doubly circular linked list storing integer values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
 5. ✅ : Implement a singly linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
-6. ❌ : Implement a singly circular linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
-7. ❌ : Implement a doubly linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
-8. ❌ : Implement a doubly circular linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+6. ✅ : Implement a singly circular linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+7. ✅ : Implement a doubly linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
+8. ✅ : Implement a doubly circular linked list storing string values with insert at beginning, insert at position, insert at end, delete at beginning, delete at end, delete at position, isEmpty, isFull, display, and search operations.
 9. ❌ : Enter two polynomial equations dynamically, add them, and display the result.
 10. ❌ : Enter two polynomial equations dynamically, subtract them, and display the result.
 11. ❌ : Enter two polynomial equations dynamically, multiply them, and display the result.
