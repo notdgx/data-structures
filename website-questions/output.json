@@ -4890,6 +4890,264 @@
       "last_run_at": "2026-10-28T18:19:30+05:30",
       "updated_at": "2026-10-28T18:19:30+05:30",
       "output_stale": false
+    },
+    {
+      "id": "q-02-01",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:11:53+05:30",
+          "command": "gcc q-02-01.c -o ./bin/q-02-01.out && ./bin/q-02-01.out",
+          "mode": "compile-run",
+          "output": "Enter the number -> 10\nFactorial of 10 -> 3628800\n",
+          "exit_code": 0,
+          "code_sha256": "7ea4509870861a7adcac7f2f6572322d038b461a13a726d97e2dcfb063d5a22e"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:11:53+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 1,
+      "question": "Calculate the factorial of a number using recursion.",
+      "source_file": "q-02-01.c",
+      "code": "// Recursion -> Q 01 : Calculate the factorial of a number using recursion.\n\n#include <stdio.h>\n\nint factorial(int n){\n    if (n == 0 || n == 1) return 1;\n    return n * factorial(n - 1);\n}\n\n\nint main() {\n\n    int n;\n    printf(\"Enter the number -> \");\n    scanf(\"%d\", &n);\n\n    if (n < 0) {\n        printf(\"Factorial not defined for negative numbers \\n\");\n        return 1;\n    }\n\n    printf(\"Factorial of %d -> %d\\n\", n, factorial(n));\n\n    return 0;\n}",
+      "code_sha256": "7ea4509870861a7adcac7f2f6572322d038b461a13a726d97e2dcfb063d5a22e",
+      "code_updated_at": "2026-10-31T10:11:53+05:30",
+      "command": "gcc q-02-01.c -o ./bin/q-02-01.out && ./bin/q-02-01.out",
+      "output": "Enter the number -> 10\nFactorial of 10 -> 3628800\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:11:53+05:30",
+      "updated_at": "2026-10-31T10:11:53+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-02",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:16:42+05:30",
+          "command": "gcc q-02-02.c -o ./bin/q-02-02.out && ./bin/q-02-02.out",
+          "mode": "compile-run",
+          "output": "Enter the positionm -> 10\nFibonacci number at position 10 -> 55\n",
+          "exit_code": 0,
+          "code_sha256": "4148e7159da33ae0af9c0707b8a7e997b493379c2607d4edc37b60ff0bde8578"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:16:42+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 2,
+      "question": "Calculate the Fibonacci number using recursion.",
+      "source_file": "q-02-02.c",
+      "code": "// Recursion -> Q 02 : Calculate the Fibonacci number using recursion.\n#include <stdio.h>\n\nint fibonacci(int n) {\n    if (n == 0) {return 0;}\n    if (n == 1) { return 1;}\n\n    return fibonacci(n - 1) + fibonacci(n - 2);\n}\n\nint main() {\n    int n;\n\n    printf(\"Enter the positionm -> \");\n    scanf(\"%d\", &n);\n\n    if (n < 0) {\n        printf(\"Invalid position\\n\");\n        return 1;\n    }\n\n    printf(\"Fibonacci number at position %d -> %d\\n\", n, fibonacci(n));\n\n    return 0;\n}",
+      "code_sha256": "4148e7159da33ae0af9c0707b8a7e997b493379c2607d4edc37b60ff0bde8578",
+      "code_updated_at": "2026-10-31T10:16:42+05:30",
+      "command": "gcc q-02-02.c -o ./bin/q-02-02.out && ./bin/q-02-02.out",
+      "output": "Enter the positionm -> 10\nFibonacci number at position 10 -> 55\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:16:42+05:30",
+      "updated_at": "2026-10-31T10:16:42+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-03",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:22:02+05:30",
+          "command": "gcc q-02-03.c -o ./bin/q-02-03.out && ./bin/q-02-03.out",
+          "mode": "compile-run",
+          "output": "Sum of natural numbers up to 10 -> 55\n",
+          "exit_code": 0,
+          "code_sha256": "688c1691a9373776174a00cc052379bb0459f159952ad49b4c44c9d4110de5db"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:22:02+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 3,
+      "question": "Calculate the sum of natural numbers up to 10 using recursion.",
+      "source_file": "q-02-03.c",
+      "code": "// Recursion -> Q 03 : Calculate the sum of natural numbers up to 10 using recursion.\n#include <stdio.h>\n\nint sum(int n) {\n    if (n == 0){ return 0;}\n    return n + sum(n - 1);\n}\n\nint main() {\n\n    printf(\"Sum of natural numbers up to 10 -> %d\\n\", sum(10));\n    return 0;\n}",
+      "code_sha256": "688c1691a9373776174a00cc052379bb0459f159952ad49b4c44c9d4110de5db",
+      "code_updated_at": "2026-10-31T10:22:02+05:30",
+      "command": "gcc q-02-03.c -o ./bin/q-02-03.out && ./bin/q-02-03.out",
+      "output": "Sum of natural numbers up to 10 -> 55\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:22:02+05:30",
+      "updated_at": "2026-10-31T10:22:02+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-04",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:24:23+05:30",
+          "command": "gcc q-02-04.c -o ./bin/q-02-04.out && ./bin/q-02-04.out",
+          "mode": "compile-run",
+          "output": "Enter a number -> 10\nBinary of 10 -> 1010",
+          "exit_code": 0,
+          "code_sha256": "4788ad535d9e228c26e4baa0303e5c66c1c1c2d17d6ba8fd636d941abe257438"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:24:23+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 4,
+      "question": "Convert a number into binary using recursion.",
+      "source_file": "q-02-04.c",
+      "code": "// Recursion -> Q 04 : Convert a number into binary using recursion.\n#include <stdio.h>\n\nvoid binary(int n) {\n    if (n == 0){ return;}\n    \n    binary(n / 2);\n    printf(\"%d\", n % 2);\n}\n\nint main() {\n    int n;\n\n    printf(\"Enter a number -> \");\n    scanf(\"%d\", &n);\n\n    if (n < 0) {\n        printf(\"number should be +ve\\n\");\n        return 1;\n    }\n\n    printf(\"Binary of %d -> \", n);\n\n    if (n == 0){ printf(\"0\");}\n    else       { binary(n);}\n\n    return 0;\n}",
+      "code_sha256": "4788ad535d9e228c26e4baa0303e5c66c1c1c2d17d6ba8fd636d941abe257438",
+      "code_updated_at": "2026-10-31T10:24:23+05:30",
+      "command": "gcc q-02-04.c -o ./bin/q-02-04.out && ./bin/q-02-04.out",
+      "output": "Enter a number -> 10\nBinary of 10 -> 1010",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:24:23+05:30",
+      "updated_at": "2026-10-31T10:24:23+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-05",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:28:55+05:30",
+          "command": "gcc q-02-05.c -o ./bin/q-02-05.out && ./bin/q-02-05.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array -> 10\nEnter the element 1 -> 13\nEnter the element 2 -> 466\nEnter the element 3 -> 24\nEnter the element 4 -> 632\nEnter the element 5 -> 53\nEnter the element 6 -> 4\nEnter the element 7 -> 66\nEnter the element 8 -> 888\nEnter the element 9 -> 9999\nEnter the element 10 -> 32\n\nArray You entered -> [13, 466, 24, 632, 53, 4, 66, 888, 9999, 32, ]\nLargest element -> 9999\n",
+          "exit_code": 0,
+          "code_sha256": "e5f3cd6d3280a361b93d1288f9622f1fe695c078bc731873e561a631a197e338"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:28:55+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 5,
+      "question": "Find the largest element in an integer array using recursion.",
+      "source_file": "q-02-05.c",
+      "code": "// Recursion -> Q 05 : Find the largest element in an integer array using recursion.\n\n#include <stdio.h>\n#define SIZE 100\n\nint largest(int arr[], int n){\n\n    if (n == 1){ return arr[0];}\n\n    int max = largest(arr, n - 1);\n\n    if (arr[n - 1] > max) {\n        return arr[n - 1];\n    }\n\n    return max;\n}\n\nint main() {\n    int arr[SIZE], n;\n\n    printf(\"Enter the size of the array -> \");\n    scanf(\"%d\", &n);\n\n    for (int i = 0; i< n ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray You entered -> [\");\n    for (int i = 0 ; i <n ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"Largest element -> %d\\n\", largest(arr, n));\n\n    return 0;\n}",
+      "code_sha256": "e5f3cd6d3280a361b93d1288f9622f1fe695c078bc731873e561a631a197e338",
+      "code_updated_at": "2026-10-31T10:28:55+05:30",
+      "command": "gcc q-02-05.c -o ./bin/q-02-05.out && ./bin/q-02-05.out",
+      "output": "Enter the size of the array -> 10\nEnter the element 1 -> 13\nEnter the element 2 -> 466\nEnter the element 3 -> 24\nEnter the element 4 -> 632\nEnter the element 5 -> 53\nEnter the element 6 -> 4\nEnter the element 7 -> 66\nEnter the element 8 -> 888\nEnter the element 9 -> 9999\nEnter the element 10 -> 32\n\nArray You entered -> [13, 466, 24, 632, 53, 4, 66, 888, 9999, 32, ]\nLargest element -> 9999\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:28:55+05:30",
+      "updated_at": "2026-10-31T10:28:55+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-06",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:30:18+05:30",
+          "command": "gcc q-02-06.c -o ./bin/q-02-06.out && ./bin/q-02-06.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array -> 10\nEnter the element 1 -> 2\nEnter the element 2 -> 42\nEnter the element 3 -> 5\nEnter the element 4 -> 999\nEnter the element 5 -> 343\nEnter the element 6 -> 3\nEnter the element 7 -> 245\nEnter the element 8 -> 99\nEnter the element 9 -> -32\nEnter the element 10 -> -400\n\nArray You entered -> [2, 42, 5, 999, 343, 3, 245, 99, -32, -400, ]\nSmallest element -> -400\n",
+          "exit_code": 0,
+          "code_sha256": "7c4de6038c1a306f50d678ddb0388deb843278852d5f45ec37aa8d05c6cd8b3e"
+        }
+      ],
+      "run_count": 1,
+      "created_at": "2026-10-31T10:30:18+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 6,
+      "question": "Find the smallest element in an integer array using recursion.",
+      "source_file": "q-02-06.c",
+      "code": "// Recursion -> Q 06 : Find the smallest element in an integer array using recursion.\n\n#include <stdio.h>\n#define SIZE 100\n\nint smallest(int arr[], int n) {\n    if (n == 1){ return arr[0];}\n\n    int min = smallest(arr, n - 1);\n\n    if (arr[n - 1] < min) {\n        return arr[n - 1];\n    }\n\n    return min;\n}\n\nint main() {\n    int arr[SIZE], n;\n\n    printf(\"Enter the size of the array -> \");\n    scanf(\"%d\", &n);\n\n    for (int i = 0; i< n ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray You entered -> [\");\n    for (int i = 0 ; i <n ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"Smallest element -> %d\\n\", smallest(arr, n));\n\n    return 0;\n}",
+      "code_sha256": "7c4de6038c1a306f50d678ddb0388deb843278852d5f45ec37aa8d05c6cd8b3e",
+      "code_updated_at": "2026-10-31T10:30:18+05:30",
+      "command": "gcc q-02-06.c -o ./bin/q-02-06.out && ./bin/q-02-06.out",
+      "output": "Enter the size of the array -> 10\nEnter the element 1 -> 2\nEnter the element 2 -> 42\nEnter the element 3 -> 5\nEnter the element 4 -> 999\nEnter the element 5 -> 343\nEnter the element 6 -> 3\nEnter the element 7 -> 245\nEnter the element 8 -> 99\nEnter the element 9 -> -32\nEnter the element 10 -> -400\n\nArray You entered -> [2, 42, 5, 999, 343, 3, 245, 99, -32, -400, ]\nSmallest element -> -400\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:30:18+05:30",
+      "updated_at": "2026-10-31T10:30:18+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-07",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:31:39+05:30",
+          "command": "gcc q-02-07.c -o ./bin/q-02-07.out && ./bin/q-02-07.out",
+          "mode": "compile-run",
+          "output": "q-02-07.c: In function ‘dig_sum’:\nq-02-07.c:10:23: warning: implicit declaration of function ‘digitSum’ [-Wimplicit-function-declaration]\n   10 |     return (n % 10) + digitSum(n / 10);\n      |                       ^~~~~~~~\n/usr/bin/ld: /tmp/ccr0Bdqe.o: in function `dig_sum':\nq-02-07.c:(.text+0x6c): undefined reference to `digitSum'\ncollect2: error: ld returned 1 exit status\n",
+          "exit_code": 1,
+          "code_sha256": "85687237344cfd8de1d5c1285b5b9a61b4981a2aedaea9be8f2b7da676b26692"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-31T10:31:56+05:30",
+          "command": "gcc q-02-07.c -o ./bin/q-02-07.out && ./bin/q-02-07.out",
+          "mode": "compile-run",
+          "output": "Enter the number -> 1022239\nSum of digits -> 19\n",
+          "exit_code": 0,
+          "code_sha256": "45fd70b965727caea82a66d59ee6468aa3a544c0c0592381cc304374da08f510"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-31T10:31:39+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 7,
+      "question": "Enter a number from the user and add all its digits using recursion.",
+      "source_file": "q-02-07.c",
+      "code": "// Recursion -> Q 07 : Enter a number from the user and add all its digits using recursion.\n\n#include <stdio.h>\n\nint dig_sum(int n){\n    if (n == 0) {\n        return 0;\n    }\n\n    return (n % 10) + dig_sum(n / 10);\n}\n\nint main(){\n\n    int n;\n    printf(\"Enter the number -> \");\n    scanf(\"%d\", &n);\n\n    if (n < 0){ n = -n;}\n\n    printf(\"Sum of digits -> %d\\n\", dig_sum(n));\n\n    return 0;\n}",
+      "code_sha256": "45fd70b965727caea82a66d59ee6468aa3a544c0c0592381cc304374da08f510",
+      "code_updated_at": "2026-10-31T10:31:56+05:30",
+      "command": "gcc q-02-07.c -o ./bin/q-02-07.out && ./bin/q-02-07.out",
+      "output": "Enter the number -> 1022239\nSum of digits -> 19\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:31:56+05:30",
+      "updated_at": "2026-10-31T10:31:56+05:30",
+      "output_stale": false
+    },
+    {
+      "id": "q-02-08",
+      "runs": [
+        {
+          "run_number": 1,
+          "timestamp": "2026-10-31T10:34:23+05:30",
+          "command": "gcc q-02-08.c -o ./bin/q-02-08.out && ./bin/q-02-08.out",
+          "mode": "compile-run",
+          "output": "q-02-08.c: In function ‘main’:\nq-02-08.c:30:35: warning: format ‘%f’ expects argument of type ‘double’, but argument 2 has type ‘int’ [-Wformat=]\n   30 |     printf(\"Arthemetic Mean -> %.4f\\n\", arrsum(arr, n)/n);\n      |                                ~~~^     ~~~~~~~~~~~~~~~~\n      |                                   |                   |\n      |                                   double              int\n      |                                %.4d\nEnter the size of the array -> ^C",
+          "exit_code": 130,
+          "code_sha256": "ad25d46ac28fb769ba2c8ddb3b94721aef221134c623f90d81254fb499805da1"
+        },
+        {
+          "run_number": 2,
+          "timestamp": "2026-10-31T10:34:43+05:30",
+          "command": "gcc q-02-08.c -o ./bin/q-02-08.out && ./bin/q-02-08.out",
+          "mode": "compile-run",
+          "output": "Enter the size of the array -> 10\nEnter the element 1 -> 2323\nEnter the element 2 -> 43\nEnter the element 3 -> 53\nEnter the element 4 -> 6\nEnter the element 5 -> 556\nEnter the element 6 -> 2\nEnter the element 7 -> 4\nEnter the element 8 -> 2\nEnter the element 9 -> 57\nEnter the element 10 -> 9899\n\nArray You entered -> [2323, 43, 53, 6, 556, 2, 4, 2, 57, 9899, ]\nArthemetic Mean -> 1294.5000\n",
+          "exit_code": 0,
+          "code_sha256": "0095aae24ad5b32113bad86308fca10635d9c7dd2f315bbd7c7663d8ba41f873"
+        }
+      ],
+      "run_count": 2,
+      "created_at": "2026-10-31T10:34:23+05:30",
+      "topic": "Recursion",
+      "topic_index": 2,
+      "question_number": 8,
+      "question": "Find the arithmetic mean of an integer array using recursion.",
+      "source_file": "q-02-08.c",
+      "code": "// Recursion -> Q 08 : Find the arithmetic mean of an integer array using recursion.\n\n#include <stdio.h>\n#define SIZE 100\n\nint arrsum(int arr[], int n){\n    if (n == 0){ return 0;}\n\n    return arr[n - 1] + arrsum(arr, n - 1);\n}\n\n\nint main() {\n    int arr[SIZE], n;\n\n    printf(\"Enter the size of the array -> \");\n    scanf(\"%d\", &n);\n\n    for (int i = 0; i< n ; i++ ){\n        printf(\"Enter the element %d -> \",i+1);\n        scanf(\"%d\",&arr[i]);\n    }\n\n    printf(\"\\nArray You entered -> [\");\n    for (int i = 0 ; i <n ; i ++){\n        printf(\"%d, \",arr[i]);\n    }\n    printf(\"]\\n\");\n\n    printf(\"Arthemetic Mean -> %.4f\\n\", (float)arrsum(arr, n)/n);\n\n    return 0;\n}",
+      "code_sha256": "0095aae24ad5b32113bad86308fca10635d9c7dd2f315bbd7c7663d8ba41f873",
+      "code_updated_at": "2026-10-31T10:34:43+05:30",
+      "command": "gcc q-02-08.c -o ./bin/q-02-08.out && ./bin/q-02-08.out",
+      "output": "Enter the size of the array -> 10\nEnter the element 1 -> 2323\nEnter the element 2 -> 43\nEnter the element 3 -> 53\nEnter the element 4 -> 6\nEnter the element 5 -> 556\nEnter the element 6 -> 2\nEnter the element 7 -> 4\nEnter the element 8 -> 2\nEnter the element 9 -> 57\nEnter the element 10 -> 9899\n\nArray You entered -> [2323, 43, 53, 6, 556, 2, 4, 2, 57, 9899, ]\nArthemetic Mean -> 1294.5000\n",
+      "exit_code": 0,
+      "last_run_at": "2026-10-31T10:34:43+05:30",
+      "updated_at": "2026-10-31T10:34:43+05:30",
+      "output_stale": false
     }
   ]
 }

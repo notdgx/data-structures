@@ -66,14 +66,14 @@
 # Recursion
 
 
-1. ❌ : Calculate the factorial of a number using recursion.
-2. ❌ : Calculate the Fibonacci number using recursion.
-3. ❌ : Calculate the sum of natural numbers up to 10 using recursion.
-4. ❌ : Convert a number into binary using recursion.
-5. ❌ : Find the largest element in an integer array using recursion.
-6. ❌ : Find the smallest element in an integer array using recursion.
-7. ❌ : Enter a number from the user and add all its digits using recursion.
-8. ❌ : Find the arithmetic mean of an integer array using recursion.
+1. ✅ : Calculate the factorial of a number using recursion.
+2. ✅ : Calculate the Fibonacci number using recursion.
+3. ✅ : Calculate the sum of natural numbers up to 10 using recursion.
+4. ✅ : Convert a number into binary using recursion.
+5. ✅ : Find the largest element in an integer array using recursion.
+6. ✅ : Find the smallest element in an integer array using recursion.
+7. ✅ : Enter a number from the user and add all its digits using recursion.
+8. ✅ : Find the arithmetic mean of an integer array using recursion.
 
 
 

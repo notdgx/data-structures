@@ -25305,3 +25305,568 @@ Worst-case time complexity -> O(n^2)
 <!-- qrun:entry-end id="q-10-20" -->
 
 <!-- qrun:topic-end id="topic-10" -->
+
+<!-- qrun:topic-start id="topic-02" -->
+
+<!-- qrun:field-start topic id="topic-02" -->
+
+# Recursion
+
+<!-- qrun:field-end topic id="topic-02" -->
+
+<!-- qrun:entry-start id="q-02-01" -->
+
+<!-- qrun:field-start question id="q-02-01" -->
+
+## Q 01 : Calculate the factorial of a number using recursion.
+
+<!-- qrun:field-end question id="q-02-01" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-01" -->
+
+```c
+// Recursion -> Q 01 : Calculate the factorial of a number using recursion.
+
+#include <stdio.h>
+
+int factorial(int n){
+    if (n == 0 || n == 1) return 1;
+    return n * factorial(n - 1);
+}
+
+
+int main() {
+
+    int n;
+    printf("Enter the number -> ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Factorial not defined for negative numbers \n");
+        return 1;
+    }
+
+    printf("Factorial of %d -> %d\n", n, factorial(n));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-01" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-01" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-01" -->
+
+<!-- qrun:field-start output id="q-02-01" -->
+
+```text
+$ gcc q-02-01.c -o ./bin/q-02-01.out && ./bin/q-02-01.out
+Enter the number -> 10
+Factorial of 10 -> 3628800
+```
+
+<!-- qrun:field-end output id="q-02-01" -->
+<!-- qrun:entry-end id="q-02-01" -->
+
+
+<!-- qrun:entry-start id="q-02-02" -->
+
+<!-- qrun:field-start question id="q-02-02" -->
+
+## Q 02 : Calculate the Fibonacci number using recursion.
+
+<!-- qrun:field-end question id="q-02-02" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-02" -->
+
+```c
+// Recursion -> Q 02 : Calculate the Fibonacci number using recursion.
+#include <stdio.h>
+
+int fibonacci(int n) {
+    if (n == 0) {return 0;}
+    if (n == 1) { return 1;}
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+
+    printf("Enter the positionm -> ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Invalid position\n");
+        return 1;
+    }
+
+    printf("Fibonacci number at position %d -> %d\n", n, fibonacci(n));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-02" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-02" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-02" -->
+
+<!-- qrun:field-start output id="q-02-02" -->
+
+```text
+$ gcc q-02-02.c -o ./bin/q-02-02.out && ./bin/q-02-02.out
+Enter the positionm -> 10
+Fibonacci number at position 10 -> 55
+```
+
+<!-- qrun:field-end output id="q-02-02" -->
+<!-- qrun:entry-end id="q-02-02" -->
+
+
+<!-- qrun:entry-start id="q-02-03" -->
+
+<!-- qrun:field-start question id="q-02-03" -->
+
+## Q 03 : Calculate the sum of natural numbers up to 10 using recursion.
+
+<!-- qrun:field-end question id="q-02-03" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-03" -->
+
+```c
+// Recursion -> Q 03 : Calculate the sum of natural numbers up to 10 using recursion.
+#include <stdio.h>
+
+int sum(int n) {
+    if (n == 0){ return 0;}
+    return n + sum(n - 1);
+}
+
+int main() {
+
+    printf("Sum of natural numbers up to 10 -> %d\n", sum(10));
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-03" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-03" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-03" -->
+
+<!-- qrun:field-start output id="q-02-03" -->
+
+```text
+$ gcc q-02-03.c -o ./bin/q-02-03.out && ./bin/q-02-03.out
+Sum of natural numbers up to 10 -> 55
+```
+
+<!-- qrun:field-end output id="q-02-03" -->
+<!-- qrun:entry-end id="q-02-03" -->
+
+
+<!-- qrun:entry-start id="q-02-04" -->
+
+<!-- qrun:field-start question id="q-02-04" -->
+
+## Q 04 : Convert a number into binary using recursion.
+
+<!-- qrun:field-end question id="q-02-04" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-04" -->
+
+```c
+// Recursion -> Q 04 : Convert a number into binary using recursion.
+#include <stdio.h>
+
+void binary(int n) {
+    if (n == 0){ return;}
+    
+    binary(n / 2);
+    printf("%d", n % 2);
+}
+
+int main() {
+    int n;
+
+    printf("Enter a number -> ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("number should be +ve\n");
+        return 1;
+    }
+
+    printf("Binary of %d -> ", n);
+
+    if (n == 0){ printf("0");}
+    else       { binary(n);}
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-04" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-04" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-04" -->
+
+<!-- qrun:field-start output id="q-02-04" -->
+
+```text
+$ gcc q-02-04.c -o ./bin/q-02-04.out && ./bin/q-02-04.out
+Enter a number -> 10
+Binary of 10 -> 1010
+```
+
+<!-- qrun:field-end output id="q-02-04" -->
+<!-- qrun:entry-end id="q-02-04" -->
+
+
+<!-- qrun:entry-start id="q-02-05" -->
+
+<!-- qrun:field-start question id="q-02-05" -->
+
+## Q 05 : Find the largest element in an integer array using recursion.
+
+<!-- qrun:field-end question id="q-02-05" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-05" -->
+
+```c
+// Recursion -> Q 05 : Find the largest element in an integer array using recursion.
+
+#include <stdio.h>
+#define SIZE 100
+
+int largest(int arr[], int n){
+
+    if (n == 1){ return arr[0];}
+
+    int max = largest(arr, n - 1);
+
+    if (arr[n - 1] > max) {
+        return arr[n - 1];
+    }
+
+    return max;
+}
+
+int main() {
+    int arr[SIZE], n;
+
+    printf("Enter the size of the array -> ");
+    scanf("%d", &n);
+
+    for (int i = 0; i< n ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray You entered -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Largest element -> %d\n", largest(arr, n));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-05" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-05" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-05" -->
+
+<!-- qrun:field-start output id="q-02-05" -->
+
+```text
+$ gcc q-02-05.c -o ./bin/q-02-05.out && ./bin/q-02-05.out
+Enter the size of the array -> 10
+Enter the element 1 -> 13
+Enter the element 2 -> 466
+Enter the element 3 -> 24
+Enter the element 4 -> 632
+Enter the element 5 -> 53
+Enter the element 6 -> 4
+Enter the element 7 -> 66
+Enter the element 8 -> 888
+Enter the element 9 -> 9999
+Enter the element 10 -> 32
+
+Array You entered -> [13, 466, 24, 632, 53, 4, 66, 888, 9999, 32, ]
+Largest element -> 9999
+```
+
+<!-- qrun:field-end output id="q-02-05" -->
+<!-- qrun:entry-end id="q-02-05" -->
+
+
+<!-- qrun:entry-start id="q-02-06" -->
+
+<!-- qrun:field-start question id="q-02-06" -->
+
+## Q 06 : Find the smallest element in an integer array using recursion.
+
+<!-- qrun:field-end question id="q-02-06" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-06" -->
+
+```c
+// Recursion -> Q 06 : Find the smallest element in an integer array using recursion.
+
+#include <stdio.h>
+#define SIZE 100
+
+int smallest(int arr[], int n) {
+    if (n == 1){ return arr[0];}
+
+    int min = smallest(arr, n - 1);
+
+    if (arr[n - 1] < min) {
+        return arr[n - 1];
+    }
+
+    return min;
+}
+
+int main() {
+    int arr[SIZE], n;
+
+    printf("Enter the size of the array -> ");
+    scanf("%d", &n);
+
+    for (int i = 0; i< n ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray You entered -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Smallest element -> %d\n", smallest(arr, n));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-06" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-06" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-06" -->
+
+<!-- qrun:field-start output id="q-02-06" -->
+
+```text
+$ gcc q-02-06.c -o ./bin/q-02-06.out && ./bin/q-02-06.out
+Enter the size of the array -> 10
+Enter the element 1 -> 2
+Enter the element 2 -> 42
+Enter the element 3 -> 5
+Enter the element 4 -> 999
+Enter the element 5 -> 343
+Enter the element 6 -> 3
+Enter the element 7 -> 245
+Enter the element 8 -> 99
+Enter the element 9 -> -32
+Enter the element 10 -> -400
+
+Array You entered -> [2, 42, 5, 999, 343, 3, 245, 99, -32, -400, ]
+Smallest element -> -400
+```
+
+<!-- qrun:field-end output id="q-02-06" -->
+<!-- qrun:entry-end id="q-02-06" -->
+
+
+<!-- qrun:entry-start id="q-02-07" -->
+
+<!-- qrun:field-start question id="q-02-07" -->
+
+## Q 07 : Enter a number from the user and add all its digits using recursion.
+
+<!-- qrun:field-end question id="q-02-07" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-07" -->
+
+```c
+// Recursion -> Q 07 : Enter a number from the user and add all its digits using recursion.
+
+#include <stdio.h>
+
+int dig_sum(int n){
+    if (n == 0) {
+        return 0;
+    }
+
+    return (n % 10) + dig_sum(n / 10);
+}
+
+int main(){
+
+    int n;
+    printf("Enter the number -> ");
+    scanf("%d", &n);
+
+    if (n < 0){ n = -n;}
+
+    printf("Sum of digits -> %d\n", dig_sum(n));
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-07" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-07" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-07" -->
+
+<!-- qrun:field-start output id="q-02-07" -->
+
+```text
+$ gcc q-02-07.c -o ./bin/q-02-07.out && ./bin/q-02-07.out
+Enter the number -> 1022239
+Sum of digits -> 19
+```
+
+<!-- qrun:field-end output id="q-02-07" -->
+<!-- qrun:entry-end id="q-02-07" -->
+
+
+<!-- qrun:entry-start id="q-02-08" -->
+
+<!-- qrun:field-start question id="q-02-08" -->
+
+## Q 08 : Find the arithmetic mean of an integer array using recursion.
+
+<!-- qrun:field-end question id="q-02-08" -->
+
+### CODE
+
+<!-- qrun:field-start code id="q-02-08" -->
+
+```c
+// Recursion -> Q 08 : Find the arithmetic mean of an integer array using recursion.
+
+#include <stdio.h>
+#define SIZE 100
+
+int arrsum(int arr[], int n){
+    if (n == 0){ return 0;}
+
+    return arr[n - 1] + arrsum(arr, n - 1);
+}
+
+
+int main() {
+    int arr[SIZE], n;
+
+    printf("Enter the size of the array -> ");
+    scanf("%d", &n);
+
+    for (int i = 0; i< n ; i++ ){
+        printf("Enter the element %d -> ",i+1);
+        scanf("%d",&arr[i]);
+    }
+
+    printf("\nArray You entered -> [");
+    for (int i = 0 ; i <n ; i ++){
+        printf("%d, ",arr[i]);
+    }
+    printf("]\n");
+
+    printf("Arthemetic Mean -> %.4f\n", (float)arrsum(arr, n)/n);
+
+    return 0;
+}
+```
+
+<!-- qrun:field-end code id="q-02-08" -->
+
+### OUTPUT
+
+<!-- qrun:field-start freshness id="q-02-08" -->
+
+
+
+<!-- qrun:field-end freshness id="q-02-08" -->
+
+<!-- qrun:field-start output id="q-02-08" -->
+
+```text
+$ gcc q-02-08.c -o ./bin/q-02-08.out && ./bin/q-02-08.out
+Enter the size of the array -> 10
+Enter the element 1 -> 2323
+Enter the element 2 -> 43
+Enter the element 3 -> 53
+Enter the element 4 -> 6
+Enter the element 5 -> 556
+Enter the element 6 -> 2
+Enter the element 7 -> 4
+Enter the element 8 -> 2
+Enter the element 9 -> 57
+Enter the element 10 -> 9899
+
+Array You entered -> [2323, 43, 53, 6, 556, 2, 4, 2, 57, 9899, ]
+Arthemetic Mean -> 1294.5000
+```
+
+<!-- qrun:field-end output id="q-02-08" -->
+<!-- qrun:entry-end id="q-02-08" -->
+
+<!-- qrun:topic-end id="topic-02" -->
