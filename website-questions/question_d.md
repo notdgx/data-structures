@@ -159,8 +159,8 @@
 # Trees
 
 
-1. ❌ : Construct a binary tree from preorder and inorder traversals.
-2. ❌ : Perform level-order traversal of a binary tree.
+1. ✅ : Construct a binary tree from preorder and inorder traversals.
+2. ✅ : Perform level-order traversal of a binary tree.
 3. ❌ : Print the left view of a binary tree.
 4. ❌ : Display the right view of a binary tree.
 5. ❌ : Construct a binary tree from postorder and inorder traversals.
