@@ -163,10 +163,10 @@
 2. ✅ : Perform level-order traversal of a binary tree.
 3. ✅ : Print the left view of a binary tree.
 4. ✅ : Display the right view of a binary tree.
-5. ❌ : Construct a binary tree from postorder and inorder traversals.
-6. ❌ : Find the maximum depth of a binary tree.
+5. ✅ : Construct a binary tree from postorder and inorder traversals.
+6. ✅ : Find the maximum depth of a binary tree.
 7. ❌ : Create a binary search tree using arrays and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.
-8. ❌ : Create a binary search tree dynamically and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.
+8. ✅ : Create a binary search tree dynamically and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.
 9. ❌ : Find the inorder predecessor and inorder successor of a dynamically represented binary search tree.
 10. ❌ : Check whether a binary search tree contains a dead end.
 11. ❌ : Convert a binary tree into a binary search tree using an array.
@@ -178,7 +178,7 @@
 17. ❌ : Create a strictly binary tree dynamically from user input.
 18. ❌ : Create an almost complete binary tree dynamically from user input.
 19. ❌ : Create a complete binary tree dynamically from user input.
-20. ❌ : Count the number of nodes in a dynamically constructed binary search tree.
+20. ✅ : Count the number of nodes in a dynamically constructed binary search tree.
 
 
 
