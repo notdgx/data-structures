@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEARCHING ALGORITHMS - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>SEARCHING ALGORITHMS</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Enter an integer array and an integer value from the user, then perform linear search using iteration.</a></li>
+                    <li><a href="#q2">2. Enter a string and a character from the user, then perform linear search using recursion.</a></li>
+                    <li><a href="#q3">3. Enter an integer array and an integer value from the user, then perform linear search using recursion.</a></li>
+                    <li><a href="#q4">4. Enter a string and a character from the user, then perform linear search using iteration.</a></li>
+                    <li><a href="#q5">5. Enter an integer array and an integer value from the user, then perform binary search using iteration.</a></li>
+                    <li><a href="#q6">6. Enter a string and a character from the user, then perform binary search using recursion.</a></li>
+                    <li><a href="#q7">7. Enter an integer array and an integer value from the user, then perform binary search using recursion.</a></li>
+                    <li><a href="#q8">8. Enter a string and a character from the user, then perform binary search using iteration.</a></li>
+                    <li><a href="#q9">9. Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.</a></li>
+                    <li><a href="#q10">10. Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Enter an integer array and an integer value from the user, then perform linear search using iteration.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 01 : Enter an integer array and an integer value from the user, then perform linear search using iteration.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+    for (int i = 0; i &lt; n; i++){
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 1
+Enter element number 2 -&gt; 34
+Enter element number 3 -&gt; 23
+Enter element number 4 -&gt; -33
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 559
+Enter element number 7 -&gt; 9
+Enter element number 8 -&gt; -9
+Enter element number 9 -&gt; 3
+Enter element number 10 -&gt; 21
+
+Array -&gt; [1, 34, 23, -33, 0, 559, 9, -9, 3, 21, ]
+Enter the value to search -&gt; -9
+Element found at index -&gt; 7
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Enter a string and a character from the user, then perform linear search using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 02 : Enter a string and a character from the user, then perform linear search using recursion.
+
+
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int linear_srch(char arr[],int n,int index,char data){
+    if(index&gt;=n){
+        return -1;
+    }
+    
+    if(arr[index] == data){
+        return index;
+    }
+    return linear_srch(arr,n,index+1,data);
+}
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%c, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot; %c&quot;, &amp;target);
+
+
+    index = linear_srch(arr,n,0,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; s
+Enter element number 2 -&gt; f
+Enter element number 3 -&gt; h
+Enter element number 4 -&gt; e
+Enter element number 5 -&gt; v
+Enter element number 6 -&gt; t
+Enter element number 7 -&gt; c
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; s
+Enter element number 10 -&gt; g
+
+Array -&gt; [s, f, h, e, v, t, c, y, s, g, ]
+Enter the value to search -&gt; c
+Element found at index -&gt; 6
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Enter an integer array and an integer value from the user, then perform linear search using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 03 : Enter an integer array and an integer value from the user, then perform linear search using recursion.
+
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int linear_srch(int arr[],int n,int index,int data){
+    if(index&gt;=n){
+        return -1;
+    }
+    
+    if(arr[index] == data){
+        return index;
+    }
+    return linear_srch(arr,n,index+1,data);
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+
+    index = linear_srch(arr,n,0,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 1
+Enter element number 2 -&gt; 24
+Enter element number 3 -&gt; 2
+Enter element number 4 -&gt; 456
+Enter element number 5 -&gt; 72
+Enter element number 6 -&gt; -89
+Enter element number 7 -&gt; -9
+Enter element number 8 -&gt; 0
+Enter element number 9 -&gt; 3
+Enter element number 10 -&gt; 43
+
+Array -&gt; [1, 24, 2, 456, 72, -89, -9, 0, 3, 43, ]
+Enter the value to search -&gt; -9
+Element found at index -&gt; 6
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Enter a string and a character from the user, then perform linear search using iteration.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 04 : Enter a string and a character from the user, then perform linear search using iteration.
+
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%c, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot; %c&quot;, &amp;target);
+
+    for (int i = 0; i &lt; n; i++){
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; f
+Enter element number 2 -&gt; c
+Enter element number 3 -&gt; s
+Enter element number 4 -&gt; g
+Enter element number 5 -&gt; h
+Enter element number 6 -&gt; x
+Enter element number 7 -&gt; x
+Enter element number 8 -&gt; c
+Enter element number 9 -&gt; e
+Enter element number 10 -&gt; o
+
+Array -&gt; [f, c, s, g, h, x, x, c, e, o, ]
+Enter the value to search -&gt; o
+Element found at index -&gt; 9
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Enter an integer array and an integer value from the user, then perform binary search using iteration.</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 05 : Enter an integer array and an integer value from the user, then perform binary search using iteration.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int binary_search(int arr[], int n, int target)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low &lt;= high){
+        mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] &lt; target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+    
+    printf(&quot;Enter the SORTED array -&gt; \n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+    index = binary_search(arr,n,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>Enter the size of the array: 10
+Enter the SORTED array -&gt; 
+Enter element number 1 -&gt; 1
+Enter element number 2 -&gt; 2
+Enter element number 3 -&gt; 33
+Enter element number 4 -&gt; 45
+Enter element number 5 -&gt; 55
+Enter element number 6 -&gt; 66
+Enter element number 7 -&gt; 78
+Enter element number 8 -&gt; 89
+Enter element number 9 -&gt; 90
+Enter element number 10 -&gt; 91
+
+Array -&gt; [1, 2, 33, 45, 55, 66, 78, 89, 90, 91, ]
+Enter the value to search -&gt; 2
+Element found at index -&gt; 1
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Enter a string and a character from the user, then perform binary search using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 06 : Enter a string and a character from the user, then perform binary search using recursion.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int binary_search(char arr[], int low, int high, int target){
+    
+    if (low &gt; high){ return -1;}
+
+    int mid = low + (high - low) / 2;
+
+    if (arr[mid] == target){ return mid;}
+
+    if (arr[mid] &lt; target){  return binary_search(arr, mid + 1, high, target);}
+
+    return binary_search(arr, low, mid - 1, target);
+}
+
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+    
+    
+    printf(&quot;Enter the SORTED char array\n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%c, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot; %c&quot;, &amp;target);
+
+
+    index = binary_search(arr,0,n-1,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>Enter the size of the array: 10
+Enter the SORTED char array
+Enter element number 1 -&gt; a
+Enter element number 2 -&gt; d
+Enter element number 3 -&gt; e
+Enter element number 4 -&gt; f
+Enter element number 5 -&gt; h
+Enter element number 6 -&gt; j
+Enter element number 7 -&gt; l
+Enter element number 8 -&gt; o
+Enter element number 9 -&gt; p
+Enter element number 10 -&gt; x
+
+Array -&gt; [a, d, e, f, h, j, l, o, p, x, ]
+Enter the value to search -&gt; x
+Element found at index -&gt; 9
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q7">
+<h3>7. Enter an integer array and an integer value from the user, then perform binary search using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 7:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 07 : Enter an integer array and an integer value from the user, then perform binary search using recursion.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int binary_search(int arr[], int low, int high, int target){
+    
+    if (low &gt; high){ return -1;}
+
+    int mid = low + (high - low) / 2;
+
+    if (arr[mid] == target){ return mid;}
+
+    if (arr[mid] &lt; target){  return binary_search(arr, mid + 1, high, target);}
+
+    return binary_search(arr, low, mid - 1, target);
+}
+
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+    
+    printf(&quot;Enter the SORTED array -&gt; \n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+    index = binary_search(arr,0,n-1,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 7:</h4>
+<pre><code>Enter the size of the array: 10
+Enter the SORTED array -&gt; 
+Enter element number 1 -&gt; 10
+Enter element number 2 -&gt; 34
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 66
+Enter element number 5 -&gt; 67
+Enter element number 6 -&gt; 90
+Enter element number 7 -&gt; 91
+Enter element number 8 -&gt; 101
+Enter element number 9 -&gt; 109
+Enter element number 10 -&gt; 200
+
+Array -&gt; [10, 34, 56, 66, 67, 90, 91, 101, 109, 200, ]
+Enter the value to search -&gt; 10
+Element found at index -&gt; 0
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. Enter a string and a character from the user, then perform binary search using iteration.</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 08 : Enter a string and a character from the user, then perform binary search using iteration.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int binary_search(char arr[], int n, char target)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low &lt;= high){
+        mid = low + (high - low) / 2;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] &lt; target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+
+int main(){
+
+    char arr[SIZE],target;
+    int n, index = -1;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+    
+    
+    printf(&quot;Enter the SORTED char array\n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%c, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot; %c&quot;, &amp;target);
+
+
+    index = binary_search(arr,n,target);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 8:</h4>
+<pre><code>Enter the size of the array: 10
+Enter the SORTED char array
+Enter element number 1 -&gt; a
+Enter element number 2 -&gt; d
+Enter element number 3 -&gt; e
+Enter element number 4 -&gt; f
+Enter element number 5 -&gt; h
+Enter element number 6 -&gt; j
+Enter element number 7 -&gt; l
+Enter element number 8 -&gt; o
+Enter element number 9 -&gt; p
+Enter element number 10 -&gt; x
+
+Array -&gt; [a, d, e, f, h, j, l, o, p, x, ]
+Enter the value to search -&gt; x
+Element found at index -&gt; 9
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q9">
+<h3>9. Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.</h3>
+<div class="answer-box">
+<h4>Answer 9:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 09 : Calculate the best-case and worst-case time complexity of linear search and measure its execution time on an integer array.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+
+    int steps = 0;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+    for (int i = 0; i &lt; n; i++){
+        steps++;
+        if (arr[i] == target){
+            index = i;
+            break;
+        }
+    }
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+
+    printf(&quot;Steps taken -&gt; %d\n&quot;, steps);
+
+    printf(&quot;\nTime Complexity -&gt;\n&quot;);
+    printf(&quot;Best case -&gt; O(1) -&gt; 1 step\n&quot;);
+    printf(&quot;Worst case -&gt; O(n) -&gt; up to %d steps\n&quot;, n);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 9:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 223
+Enter element number 2 -&gt; 34
+Enter element number 3 -&gt; 53
+Enter element number 4 -&gt; 68
+Enter element number 5 -&gt; 3
+Enter element number 6 -&gt; 9
+Enter element number 7 -&gt; 3
+Enter element number 8 -&gt; 29
+Enter element number 9 -&gt; -9
+Enter element number 10 -&gt; 32
+
+Array -&gt; [223, 34, 53, 68, 3, 9, 3, 29, -9, 32, ]
+Enter the value to search -&gt; -9
+Element found at index -&gt; 8
+Steps taken -&gt; 9
+
+Time Complexity -&gt;
+Best case -&gt; O(1) -&gt; 1 step
+Worst case -&gt; O(n) -&gt; up to 10 steps
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q10">
+<h3>10. Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.</h3>
+<div class="answer-box">
+<h4>Answer 10:</h4>
+<pre><code>// Searching Algorithms -&gt; Q 10 : Calculate the best-case and worst-case time complexity of binary search and measure its execution time on an integer array.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int binary_search(int arr[], int n, int target, int * steps)
+{
+    int low = 0, high = n - 1, mid;
+
+    while (low &lt;= high){
+        mid = low + (high - low) / 2;
+        (*steps)++;
+
+        if (arr[mid] == target) {return mid;}
+
+        else if (arr[mid] &lt; target) {low = mid + 1;}
+
+        else{  high = mid - 1;}
+    }
+    return -1;
+}
+
+int main(){
+
+    int arr[SIZE], n, target, index = -1;
+    int steps = 0;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+    
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+    
+    printf(&quot;Enter the SORTED array -&gt; \n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Enter the value to search -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;target);
+
+    index = binary_search(arr,n,target,&amp;steps);
+
+    if (index != -1){
+        printf(&quot;Element found at index -&gt; %d\n&quot;, index);}
+    else{
+        printf(&quot;Element not found\n&quot;);}
+
+    
+    printf(&quot;Steps taken in Binary Search -&gt; %d\n&quot;, steps);
+
+    printf(&quot;\nTime Complexity -&gt;\n&quot;);
+    printf(&quot;Best case -&gt; O(1)\n&quot;);
+    printf(&quot;Worst case -&gt; O(log(n))\n&quot;);
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 10:</h4>
+<pre><code>Enter the size of the array: 10
+Enter the SORTED array -&gt; 
+Enter element number 1 -&gt; 12
+Enter element number 2 -&gt; 34
+Enter element number 3 -&gt; 42
+Enter element number 4 -&gt; 56
+Enter element number 5 -&gt; 58
+Enter element number 6 -&gt; 89
+Enter element number 7 -&gt; 90
+Enter element number 8 -&gt; 100
+Enter element number 9 -&gt; 234
+Enter element number 10 -&gt; 300
+
+Array -&gt; [12, 34, 42, 56, 58, 89, 90, 100, 234, 300, ]
+Enter the value to search -&gt; 100
+Element found at index -&gt; 7
+Steps taken in Binary Search -&gt; 2
+
+Time Complexity -&gt;
+Best case -&gt; O(1)
+Worst case -&gt; O(log(n))
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

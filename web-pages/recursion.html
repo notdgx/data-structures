@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RECURSION - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>RECURSION</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Calculate the factorial of a number using recursion.</a></li>
+                    <li><a href="#q2">2. Calculate the Fibonacci number using recursion.</a></li>
+                    <li><a href="#q3">3. Calculate the sum of natural numbers up to 10 using recursion.</a></li>
+                    <li><a href="#q4">4. Convert a number into binary using recursion.</a></li>
+                    <li><a href="#q5">5. Find the largest element in an integer array using recursion.</a></li>
+                    <li><a href="#q6">6. Find the smallest element in an integer array using recursion.</a></li>
+                    <li><a href="#q7">7. Enter a number from the user and add all its digits using recursion.</a></li>
+                    <li><a href="#q8">8. Find the arithmetic mean of an integer array using recursion.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Calculate the factorial of a number using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Recursion -&gt; Q 01 : Calculate the factorial of a number using recursion.
+
+#include &lt;stdio.h&gt;
+
+int factorial(int n){
+    if (n == 0 || n == 1) return 1;
+    return n * factorial(n - 1);
+}
+
+
+int main() {
+
+    int n;
+    printf(&quot;Enter the number -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0) {
+        printf(&quot;Factorial not defined for negative numbers \n&quot;);
+        return 1;
+    }
+
+    printf(&quot;Factorial of %d -&gt; %d\n&quot;, n, factorial(n));
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>Enter the number -&gt; 10
+Factorial of 10 -&gt; 3628800
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Calculate the Fibonacci number using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Recursion -&gt; Q 02 : Calculate the Fibonacci number using recursion.
+#include &lt;stdio.h&gt;
+
+int fibonacci(int n) {
+    if (n == 0) {return 0;}
+    if (n == 1) { return 1;}
+
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n;
+
+    printf(&quot;Enter the positionm -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0) {
+        printf(&quot;Invalid position\n&quot;);
+        return 1;
+    }
+
+    printf(&quot;Fibonacci number at position %d -&gt; %d\n&quot;, n, fibonacci(n));
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>Enter the positionm -&gt; 10
+Fibonacci number at position 10 -&gt; 55
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Calculate the sum of natural numbers up to 10 using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Recursion -&gt; Q 03 : Calculate the sum of natural numbers up to 10 using recursion.
+#include &lt;stdio.h&gt;
+
+int sum(int n) {
+    if (n == 0){ return 0;}
+    return n + sum(n - 1);
+}
+
+int main() {
+
+    printf(&quot;Sum of natural numbers up to 10 -&gt; %d\n&quot;, sum(10));
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>Sum of natural numbers up to 10 -&gt; 55
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Convert a number into binary using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Recursion -&gt; Q 04 : Convert a number into binary using recursion.
+#include &lt;stdio.h&gt;
+
+void binary(int n) {
+    if (n == 0){ return;}
+    
+    binary(n / 2);
+    printf(&quot;%d&quot;, n % 2);
+}
+
+int main() {
+    int n;
+
+    printf(&quot;Enter a number -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0) {
+        printf(&quot;number should be +ve\n&quot;);
+        return 1;
+    }
+
+    printf(&quot;Binary of %d -&gt; &quot;, n);
+
+    if (n == 0){ printf(&quot;0&quot;);}
+    else       { binary(n);}
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>Enter a number -&gt; 10
+Binary of 10 -&gt; 1010</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Find the largest element in an integer array using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Recursion -&gt; Q 05 : Find the largest element in an integer array using recursion.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int largest(int arr[], int n){
+
+    if (n == 1){ return arr[0];}
+
+    int max = largest(arr, n - 1);
+
+    if (arr[n - 1] &gt; max) {
+        return arr[n - 1];
+    }
+
+    return max;
+}
+
+int main() {
+    int arr[SIZE], n;
+
+    printf(&quot;Enter the size of the array -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 0; i&lt; n ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray You entered -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Largest element -&gt; %d\n&quot;, largest(arr, n));
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>Enter the size of the array -&gt; 10
+Enter the element 1 -&gt; 13
+Enter the element 2 -&gt; 466
+Enter the element 3 -&gt; 24
+Enter the element 4 -&gt; 632
+Enter the element 5 -&gt; 53
+Enter the element 6 -&gt; 4
+Enter the element 7 -&gt; 66
+Enter the element 8 -&gt; 888
+Enter the element 9 -&gt; 9999
+Enter the element 10 -&gt; 32
+
+Array You entered -&gt; [13, 466, 24, 632, 53, 4, 66, 888, 9999, 32, ]
+Largest element -&gt; 9999
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Find the smallest element in an integer array using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Recursion -&gt; Q 06 : Find the smallest element in an integer array using recursion.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int smallest(int arr[], int n) {
+    if (n == 1){ return arr[0];}
+
+    int min = smallest(arr, n - 1);
+
+    if (arr[n - 1] &lt; min) {
+        return arr[n - 1];
+    }
+
+    return min;
+}
+
+int main() {
+    int arr[SIZE], n;
+
+    printf(&quot;Enter the size of the array -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 0; i&lt; n ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray You entered -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Smallest element -&gt; %d\n&quot;, smallest(arr, n));
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>Enter the size of the array -&gt; 10
+Enter the element 1 -&gt; 2
+Enter the element 2 -&gt; 42
+Enter the element 3 -&gt; 5
+Enter the element 4 -&gt; 999
+Enter the element 5 -&gt; 343
+Enter the element 6 -&gt; 3
+Enter the element 7 -&gt; 245
+Enter the element 8 -&gt; 99
+Enter the element 9 -&gt; -32
+Enter the element 10 -&gt; -400
+
+Array You entered -&gt; [2, 42, 5, 999, 343, 3, 245, 99, -32, -400, ]
+Smallest element -&gt; -400
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q7">
+<h3>7. Enter a number from the user and add all its digits using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 7:</h4>
+<pre><code>// Recursion -&gt; Q 07 : Enter a number from the user and add all its digits using recursion.
+
+#include &lt;stdio.h&gt;
+
+int dig_sum(int n){
+    if (n == 0) {
+        return 0;
+    }
+
+    return (n % 10) + dig_sum(n / 10);
+}
+
+int main(){
+
+    int n;
+    printf(&quot;Enter the number -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt; 0){ n = -n;}
+
+    printf(&quot;Sum of digits -&gt; %d\n&quot;, dig_sum(n));
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 7:</h4>
+<pre><code>Enter the number -&gt; 1022239
+Sum of digits -&gt; 19
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. Find the arithmetic mean of an integer array using recursion.</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>// Recursion -&gt; Q 08 : Find the arithmetic mean of an integer array using recursion.
+
+#include &lt;stdio.h&gt;
+#define SIZE 100
+
+int arrsum(int arr[], int n){
+    if (n == 0){ return 0;}
+
+    return arr[n - 1] + arrsum(arr, n - 1);
+}
+
+
+int main() {
+    int arr[SIZE], n;
+
+    printf(&quot;Enter the size of the array -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    for (int i = 0; i&lt; n ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray You entered -&gt; [&quot;);
+    for (int i = 0 ; i &lt;n ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;Arthemetic Mean -&gt; %.4f\n&quot;, (float)arrsum(arr, n)/n);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 8:</h4>
+<pre><code>Enter the size of the array -&gt; 10
+Enter the element 1 -&gt; 2323
+Enter the element 2 -&gt; 43
+Enter the element 3 -&gt; 53
+Enter the element 4 -&gt; 6
+Enter the element 5 -&gt; 556
+Enter the element 6 -&gt; 2
+Enter the element 7 -&gt; 4
+Enter the element 8 -&gt; 2
+Enter the element 9 -&gt; 57
+Enter the element 10 -&gt; 9899
+
+Array You entered -&gt; [2323, 43, 53, 6, 556, 2, 4, 2, 57, 9899, ]
+Arthemetic Mean -&gt; 1294.5000
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,5088 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TREES - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>TREES</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Construct a binary tree from preorder and inorder traversals.</a></li>
+                    <li><a href="#q2">2. Perform level-order traversal of a binary tree.</a></li>
+                    <li><a href="#q3">3. Print the left view of a binary tree.</a></li>
+                    <li><a href="#q4">4. Display the right view of a binary tree.</a></li>
+                    <li><a href="#q5">5. Construct a binary tree from postorder and inorder traversals.</a></li>
+                    <li><a href="#q6">6. Find the maximum depth of a binary tree.</a></li>
+                    <li><a href="#q8">8. Create a binary search tree dynamically and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.</a></li>
+                    <li><a href="#q20">20. Count the number of nodes in a dynamically constructed binary search tree.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Construct a binary tree from preorder and inorder traversals.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Trees -&gt; Q 01 : Construct a binary tree from preorder and inorder traversals.
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+int preindex = 0;
+
+int search(int inorder[], int start, int end, int value) {
+    for (int i = start; i &lt;= end; i++) {
+        if (inorder[i] == value) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+struct Node* build_tree(int preorder[], int inorder[], int start, int end) {
+
+    if (start &gt; end) {
+        return NULL;
+    }
+
+    struct Node *new_node = (struct Node*)malloc(sizeof(struct Node));
+
+    new_node-&gt;data = preorder[preindex++];
+
+    int pos = search(inorder, start, end, new_node-&gt;data);
+
+    new_node-&gt;left = build_tree(preorder, inorder, start, pos - 1);
+    new_node-&gt;right = build_tree(preorder, inorder, pos + 1, end);
+
+    return new_node;
+}
+
+
+void display(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    // inorder display 
+    display(root-&gt;left);
+    printf(&quot;%d &quot;, root-&gt;data);
+    display(root-&gt;right);
+}
+
+int main(){
+
+    int n, preorder[100], inorder[100];
+
+    printf(&quot;Enter number of nodes -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter preorder -&gt; &quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;preorder[i]);
+    }
+
+    printf(&quot;Enter inorder -&gt; &quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;inorder[i]);
+    }
+
+    struct Node *root = build_tree(preorder, inorder, 0, n - 1);
+    printf(&quot;Constructed tree -&gt; &quot;);
+    display(root);
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>Enter number of nodes -&gt; 7
+Enter preorder -&gt; 1 2 4 5 3 6 7 
+Enter inorder -&gt; 4 2 5 1 6 3 7 
+Constructed tree -&gt; 4 2 5 1 6 3 7 </code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Perform level-order traversal of a binary tree.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Trees -&gt; Q 02 : Perform level-order traversal of a binary tree.
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 43
+43 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 56
+56 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 63
+63 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 45
+45 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 5
+5 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 6
+| 43 || 5 || 56 || 45 || 63 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 7
+| 5 || 43 || 45 || 56 || 63 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 8
+| 5 || 45 || 63 || 56 || 43 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 10
+| 43 || 5 || 56 || 45 || 63 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Print the left view of a binary tree.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Trees -&gt; Q 03 : Print the left view of a binary tree.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+// 11 . LEFT VIEW 
+
+void leftview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    leftview(root-&gt;left, level + 1, max_level);
+    leftview(root-&gt;right, level + 1, max_level);
+}
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;11 : left view\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 11: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int maxLevel = -1;
+                leftview(root, 0, &amp;maxLevel);
+                break;
+            }
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 34
+34 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 56
+56 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 78
+78 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 23
+23 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 56
+cant insert same value again 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 0
+0 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -35
+-35 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 6
+| 34 || 23 || 0 || -35 || 56 || 78 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 11
+| 34 || 23 || 0 || -35 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Display the right view of a binary tree.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Trees -&gt; Q 04 : Display the right view of a binary tree.
+
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+// 11. LEFT VIEW
+// 12. RIGTH VIEW
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+// 11 . LEFT VIEW 
+
+void leftview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    leftview(root-&gt;left, level + 1, max_level);
+    leftview(root-&gt;right, level + 1, max_level);
+}
+
+// 12. RIGHT VIEW
+
+void rightview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    rightview(root-&gt;right, level + 1, max_level);
+    rightview(root-&gt;left, level + 1, max_level);
+}
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;11 : left view\n&quot;);
+        printf(&quot;12 : right view\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 11: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                leftview(root, 0, &amp;max_level);
+                break;
+            }
+
+            case 12: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                rightview(root, 0, &amp;max_level);
+                break;
+            }
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 24
+24 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 56
+56 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 77
+77 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 2
+2 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 0
+0 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -34
+-34 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -3
+-3 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 45
+45 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 6
+| 24 || 2 || 0 || -34 || -3 || 56 || 45 || 77 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 11
+| 24 || 2 || 0 || -34 || -3 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 12
+| 24 || 56 || 77 || -34 || -3 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Construct a binary tree from postorder and inorder traversals.</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Trees -&gt; Q 05 : Construct a binary tree from postorder and inorder traversals.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct Node {
+    int data;
+    struct Node *left, *right;
+};
+
+int postindex = 0;
+
+int search(int inorder[], int start, int end, int value) {
+    for (int i = start; i &lt;= end; i++) {
+        if (inorder[i] == value) {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+
+struct Node* build_tree(int postorder[], int inorder[], int start, int end) {
+
+    if (start &gt; end) {
+        return NULL;
+    }
+
+    struct Node *new_node = (struct Node*)malloc(sizeof(struct Node));
+
+    new_node-&gt;data = postorder[postindex--];
+
+    int pos = search(inorder, start, end, new_node-&gt;data);
+
+    new_node-&gt;right = build_tree(postorder, inorder, pos + 1, end);
+    new_node-&gt;left = build_tree(postorder, inorder, start, pos - 1);
+
+    return new_node;
+}
+
+
+void display(struct Node *root) {
+    if (root == NULL) {
+        return;
+    }
+
+    // inorder display 
+    display(root-&gt;left);
+    printf(&quot;%d &quot;, root-&gt;data);
+    display(root-&gt;right);
+}
+
+int main(){
+
+    int n, postorder[100], inorder[100];
+
+    printf(&quot;Enter number of nodes -&gt; &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    printf(&quot;Enter postorder -&gt; &quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;postorder[i]);
+    }
+
+    printf(&quot;Enter inorder -&gt; &quot;);
+    for (int i = 0; i &lt; n; i++) {
+        scanf(&quot;%d&quot;, &amp;inorder[i]);
+    }
+
+    postindex = n-1;
+    struct Node *root = build_tree(postorder, inorder, 0, n - 1);
+    printf(&quot;Constructed tree -&gt; &quot;);
+    display(root);
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>Enter number of nodes -&gt; 7
+Enter postorder -&gt; 4 5 2 6 7 3 1 
+Enter inorder -&gt; 4 2 5 1 6 3 7 
+Constructed tree -&gt; 4 2 5 1 6 3 7 </code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Find the maximum depth of a binary tree.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Trees -&gt; Q 06 : Find the maximum depth of a binary tree.
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+// 11. MAX DEPTH 
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+// 11. MAX DEPTH  
+
+
+int max_depth(struct node * root){
+    if (root == NULL){ return -1;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    int level = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        level++;
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return level;
+
+}
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;11 : max depth\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 11:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            out = max_depth(root);
+            if (out==-1){
+                printf(&quot;empty\n&quot;);
+            }
+            else{
+                printf(&quot;The Max depth is -&gt; %d\n&quot;,out);
+            }
+            break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 34
+34 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 4
+4 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -3
+-3 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 0
+0 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 46
+46 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 89
+89 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 90
+90 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 20
+20 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -20
+-20 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 6
+| 34 || 4 || -3 || -20 || 0 || 20 || 46 || 89 || 90 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 10
+| 34 || 4 || 46 || -3 || 20 || 89 || -20 || 0 || 90 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 11
+The Max depth is -&gt; 9
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : max depth
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. Create a binary search tree dynamically and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>// Trees -&gt; Q 08 : Create a binary search tree dynamically and implement insert, delete, search, preorder, inorder, postorder, and minimum element operations.
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+// 11. LEFT VIEW
+// 12. RIGTH VIEW
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+// 11 . LEFT VIEW 
+
+void leftview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    leftview(root-&gt;left, level + 1, max_level);
+    leftview(root-&gt;right, level + 1, max_level);
+}
+
+// 12. RIGHT VIEW
+
+void rightview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    rightview(root-&gt;right, level + 1, max_level);
+    rightview(root-&gt;left, level + 1, max_level);
+}
+
+// 13. MAX DEPTH 
+
+int max_depth(struct node * root){
+    if (root == NULL){ return -1;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    int level = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        level++;
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return level;
+
+}
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;11 : left view\n&quot;);
+        printf(&quot;12 : right view\n&quot;);
+        printf(&quot;13 : Max depth\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 11: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                leftview(root, 0, &amp;max_level);
+                break;
+            }
+
+            case 12: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                rightview(root, 0, &amp;max_level);
+                break;
+            }
+            
+            case 13:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            out = max_depth(root);
+            if (out==-1){
+                printf(&quot;empty\n&quot;);
+            }
+            else{
+                printf(&quot;The Max depth is -&gt; %d\n&quot;,out);
+            }
+            break;
+
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 8:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 23
+23 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 45
+45 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 0
+0 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -34
+-34 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -6
+-6 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -7
+-7 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 34
+34 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 78
+78 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -4
+-4 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 45
+cant insert same value again 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 43
+43 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 90
+90 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 6
+| 23 || 0 || -34 || -6 || -7 || -4 || 45 || 34 || 43 || 78 || 90 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 7
+| -34 || -7 || -6 || -4 || 0 || 23 || 34 || 43 || 45 || 78 || 90 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 8
+| -7 || -4 || -6 || -34 || 0 || 43 || 34 || 90 || 78 || 45 || 23 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 9
+not Empty 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 10
+| 23 || 0 || 45 || -34 || 34 || 78 || -6 || 43 || 90 || -7 || -4 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 11
+| 23 || 0 || -34 || -6 || -7 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 12
+| 23 || 45 || 78 || 90 || -4 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 13
+The Max depth is -&gt; 11
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 4
+Min value : -34 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 5
+Max value : 90 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 2
+Enter the number to SEARCH in tree : 0
+found at level : 1 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 2
+Enter the number to SEARCH in tree : 34
+found at level : 2 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 3
+Enter the number to DELETE in tree : 34
+Deleted ryt value
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 6
+| 23 || 0 || -34 || -6 || -7 || -4 || 45 || 43 || 78 || 90 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q20">
+<h3>20. Count the number of nodes in a dynamically constructed binary search tree.</h3>
+<div class="answer-box">
+<h4>Answer 20:</h4>
+<pre><code>// Trees -&gt; Q 20 : Count the number of nodes in a dynamically constructed binary search tree.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. LEVEL ORDER
+// 11. LEFT VIEW
+// 12. RIGTH VIEW
+ 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+int count = 0;
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+// 10. LEVEL ORDER 
+
+
+int levelorder(struct node * root){
+    if (root == NULL){ return 0;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        printf(&quot;| %d |&quot;, temp-&gt;data);
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return 1;
+
+}
+
+// 11 . LEFT VIEW 
+
+void leftview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    leftview(root-&gt;left, level + 1, max_level);
+    leftview(root-&gt;right, level + 1, max_level);
+}
+
+// 12. RIGHT VIEW
+
+void rightview(struct node *root, int level, int *max_level) {
+
+    if (root == NULL) {
+        return;
+    }
+
+    if (level &gt; *max_level) {
+        printf(&quot;| %d |&quot;, root-&gt;data);
+        *max_level = level;
+    }
+
+    rightview(root-&gt;right, level + 1, max_level);
+    rightview(root-&gt;left, level + 1, max_level);
+}
+
+// 13. MAX DEPTH 
+
+int max_depth(struct node * root){
+    if (root == NULL){ return -1;}
+
+    struct node *queue[100];
+    int front = 0, rear = 0;
+
+    int level = 0;
+
+    queue[rear++] = root;
+
+    while (front &lt; rear) {
+
+        struct node *temp = queue[front++];
+        level++;
+        if (temp-&gt;left != NULL) {
+            queue[rear++] = temp-&gt;left;
+        }
+        if (temp-&gt;right != NULL) {
+            queue[rear++] = temp-&gt;right;
+        }
+    }
+
+    return level;
+
+}
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;10 : level order\n&quot;);
+        printf(&quot;11 : left view\n&quot;);
+        printf(&quot;12 : right view\n&quot;);
+        printf(&quot;13 : Max depth\n&quot;);
+        printf(&quot;14 : No of nodes\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1) {
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+                count++;}
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2){
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+                count++;}
+            else if (out == 3){
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+                count++;}
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) {
+                printf(&quot;Tree Reset \n&quot;);
+                count = 0;}
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) {
+                printf(&quot;Leaf node deleted \n&quot;);
+                count--;}
+            else if(out == -4) {
+                printf(&quot;Deleted ryt value\n&quot;);
+                count--;}
+            else if(out == -5) {
+                printf(&quot;Deleted lft value\n&quot;);
+                count--;}
+            else if(out == -6) {
+                printf(&quot;Node deleted \n&quot;);
+                count--;}
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+            out = is_empty(root);
+            if (out==1){
+                printf(&quot;empty\n&quot;);
+            }
+            else
+            printf(&quot;not Empty \n&quot;);
+            break;
+            
+            case 10:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                levelorder(root);
+            break;
+
+            case 11: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                leftview(root, 0, &amp;max_level);
+                break;
+            }
+
+            case 12: {
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                int max_level = -1;
+                rightview(root, 0, &amp;max_level);
+                break;
+            }
+            
+            case 13:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            out = max_depth(root);
+            if (out==-1){
+                printf(&quot;empty\n&quot;);
+            }
+            else{
+                printf(&quot;The Max depth is -&gt; %d\n&quot;,out);
+            }
+            break;
+
+            case 14:{
+                printf(&quot;The no of nodes -&gt; %d&quot;,count);
+                break;
+            }
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 20:</h4>
+<pre><code>
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 23
+23 inserted as root
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 46
+46 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 85
+85 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 
+0
+0 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 
+1
+Enter the number to insert in tree : 34
+34 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -44
+-44 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -64
+-64 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : -5
+-5 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 32
+32 inserted as left
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 1
+Enter the number to insert in tree : 45
+45 inserted as right
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 4
+Min value : -64 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 5
+Max value : 85 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 6
+| 23 || 0 || -44 || -64 || -5 || 46 || 34 || 32 || 45 || 85 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 7
+| -64 || -44 || -5 || 0 || 23 || 32 || 34 || 45 || 46 || 85 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 8
+| -64 || -5 || -44 || 0 || 32 || 45 || 34 || 85 || 46 || 23 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 9
+not Empty 
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 10
+| 23 || 0 || 46 || -44 || 34 || 85 || -64 || -5 || 32 || 45 |
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 13
+The Max depth is -&gt; 10
+
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 14
+The no of nodes -&gt; 10
+Enter the choice :
+1 : insert 
+2 : search 
+3 : delete 
+4 : min 
+5 : max 
+6 : preorder
+7 : inorder
+8 : postorder
+9 : is empty
+10 : level order
+11 : left view
+12 : right view
+13 : Max depth
+14 : No of nodes
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

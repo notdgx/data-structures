@@ -1,0 +1,2454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SORTING ALGORITHMS - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>SORTING ALGORITHMS</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Enter an integer array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q2">2. Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q3">3. Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q4">4. Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q5">5. Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q6">6. Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q7">7. Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q8">8. Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q9">9. Enter an integer array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q10">10. Enter an integer array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q11">11. Enter a string array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q12">12. Enter a string array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q13">13. Enter a string array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q14">14. Enter a string array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q15">15. Enter a string array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q16">16. Enter a string array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q17">17. Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q18">18. Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q19">19. Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.</a></li>
+                    <li><a href="#q20">20. Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Enter an integer array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 01 : Enter an integer array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void selection_sort(int arr[], int n, long long *comparisons){
+
+    int min, temp;
+
+    for (int i = 0; i &lt; n - 1; i++){
+        
+        min = i;
+        for (int j = i + 1; j &lt; n; j++){
+            (*comparisons)++;
+            if (arr[j] &lt; arr[min]){
+                min = j;
+            }
+        }
+
+        if (min != i){
+            temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        }
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    selection_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 02 : Enter an integer array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void selection_sort(int arr[], int n, int index, long long *comparisons){
+
+    if (index &gt;= n - 1){return;}
+
+    int min = index, temp;
+
+    for (int j = index + 1; j &lt; n; j++){
+        (*comparisons)++;
+        if (arr[j] &lt; arr[min]){
+            min = j;
+        }
+    }
+
+    if (min != index){
+        temp = arr[index];
+        arr[index] = arr[min];
+        arr[min] = temp;
+    }
+
+    selection_sort(arr, n, index + 1, comparisons);
+}
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    selection_sort(arr,n,0, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 03 : Enter an integer array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void bubble_sort(int arr[], int n, long long *comparisons){
+
+    int temp;
+
+    for (int i = 0; i &lt; n - 1; i++){
+        for (int j = 0; j &lt; n - i - 1; j++){
+            (*comparisons)++;
+
+            if (arr[j] &gt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    bubble_sort(arr,n,&amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 04 : Enter an integer array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void bubble_sort(int arr[], int n, long long *comparisons){
+
+    if (n &lt;= 1){ return;}
+
+    int temp;
+    for (int j = 0; j &lt; n - 1; j++){
+        (*comparisons)++;
+
+        if (arr[j] &gt; arr[j + 1]){
+            temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+        }
+    }
+
+    bubble_sort(arr, n - 1, comparisons);
+}
+
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    bubble_sort(arr, n,&amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 05 : Enter an integer array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void insertion_sort(int arr[], int n, long long *comparisons){
+
+    int key, j;
+    for (int i = 1; i &lt; n; i++){
+        key = arr[i];
+        j = i - 1;
+
+        while (j &gt;= 0){
+            (*comparisons)++;
+            if (arr[j] &gt; key){
+                arr[j + 1] = arr[j];
+                j--;}
+            
+            else{break;}
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Best-case comparisons -&gt; %d\n&quot;, n - 1);
+    printf(&quot;Worst-case comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 29
+Best-case comparisons -&gt; 9
+Worst-case comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 06 : Enter an integer array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void insertion_sort(int arr[], int n, long long *comparisons){
+
+    if (n &lt;= 1){ return;}
+
+    insertion_sort(arr, n - 1, comparisons);
+
+    int key = arr[n - 1];
+    int j = n - 2;
+
+    while (j &gt;= 0){
+        (*comparisons)++;
+        if (arr[j] &gt; key){
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        else{break;}
+    }
+
+    arr[j + 1] = key;
+}
+
+
+int main(){
+
+    int arr[SIZE], n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Best-case comparisons -&gt; %d\n&quot;, n - 1);
+    printf(&quot;Worst-case comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 29
+Best-case comparisons -&gt; 9
+Worst-case comparisons -&gt; 45
+Execution time -&gt; 0.000001000 seconds
+
+Best-case time complexity -&gt; O(n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q7">
+<h3>7. Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 7:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 07 : Enter an integer array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void merge_sort(int arr[], int n, long long *comparisons){
+    int temp[SIZE];
+
+    for (int width = 1; width &lt; n; width *= 2){
+        for (int left = 0; left &lt; n - 1; left += 2 * width){
+            int mid = left + width - 1;
+            int right = left + 2 * width - 1;
+
+            if (mid &gt;= n - 1){continue;}
+
+            if (right &gt;= n){
+                right = n - 1;}
+
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+
+            while (i &lt;= mid &amp;&amp; j &lt;= right){
+                (*comparisons)++;
+                if (arr[i] &lt;= arr[j]){
+                    temp[k++] = arr[i++];
+                }
+                else{
+                    temp[k++] = arr[j++];
+                }
+            }
+
+            while (i &lt;= mid){ temp[k++] = arr[i++]; }
+            while (j &lt;= right){ temp[k++] = arr[j++]; }
+
+            for (int p = left; p &lt;= right; p++){
+                arr[p] = temp[p];
+            }
+        }
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    
+
+    start = clock();
+    merge_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.6f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n log n)\n&quot;);
+    
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 7:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 25
+Execution time -&gt; 0.000002 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n log n)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 08 : Enter an integer array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void merge(int arr[], int temp[], int left,int mid, int right,long long *comparisons){
+
+    int i = left;
+    int j = mid + 1;
+    int k = left;
+
+    while (i &lt;= mid &amp;&amp; j &lt;= right){
+        (*comparisons)++;
+        if (arr[i] &lt;= arr[j]){
+            temp[k++] = arr[i++];
+        }
+        else{
+            temp[k++] = arr[j++];
+        }
+    }
+
+    while (i &lt;= mid){temp[k++] = arr[i++]; }
+
+    while (j &lt;= right){temp[k++] = arr[j++]; }
+
+    for (int p = left; p &lt;= right; p++){
+        arr[p] = temp[p];
+    }
+}
+
+void merge_sort(int arr[], int temp[], int left, int right,long long *comparisons){
+
+    if (left &gt;= right){ return;}
+
+    int mid = left + (right - left) / 2;
+
+    merge_sort(arr, temp, left, mid, comparisons);
+    merge_sort(arr, temp, mid + 1, right, comparisons);
+
+    merge(arr, temp, left, mid, right, comparisons);
+}
+
+int main(){
+
+    int arr[SIZE], temp[SIZE], n;
+    long long comparisons = 0;
+
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    start = clock();
+    merge_sort(arr, temp, 0, n - 1, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n log n)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 8:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 24
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n log n)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q9">
+<h3>9. Enter an integer array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 9:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 09 : Enter an integer array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+int partition(int arr[], int low, int high, long long *comparisons){
+    int pivot = arr[high];
+    int i = low - 1;
+    int temp;
+
+    for (int j = low; j &lt; high; j++){
+        (*comparisons)++;
+
+        if (arr[j] &lt;= pivot){
+            i++;
+
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+}
+
+void quick_sort(int arr[], int n, long long *comparisons){
+
+    int stack[SIZE];
+    int top = -1;
+    int low, high, pivot;
+
+    stack[++top] = 0;
+    stack[++top] = n - 1;
+
+    while (top &gt;= 0){
+        high = stack[top--];
+        low = stack[top--];
+
+        pivot = partition(arr, low, high, comparisons);
+
+        if (pivot - 1 &gt; low){
+            stack[++top] = low;
+            stack[++top] = pivot - 1;
+        }
+
+        if (pivot + 1 &lt; high){
+            stack[++top] = pivot + 1;
+            stack[++top] = high;
+        }
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+    long long comparisons = 0;
+    
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    start = clock();
+    quick_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+    
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 9:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 29
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q10">
+<h3>10. Enter an integer array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 10:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 10 : Enter an integer array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+int partition(int arr[], int low, int high, long long *comparisons){
+    int pivot = arr[high];
+    int i = low - 1;
+    int temp;
+
+    for (int j = low; j &lt; high; j++){
+        (*comparisons)++;
+
+        if (arr[j] &lt;= pivot){
+            i++;
+
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+}
+
+void quick_sort(int arr[], int low, int high, long long *comparisons){
+    if (low &lt; high){
+        int pivot = partition(arr, low, high, comparisons);
+
+        quick_sort(arr, low, pivot - 1, comparisons);
+        quick_sort(arr, pivot + 1, high, comparisons);
+    }
+}
+
+int main(){
+
+    int arr[SIZE], n;
+    long long comparisons = 0;
+    
+    clock_t start, end;
+    double elapsed;
+
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    start = clock();
+    quick_sort(arr, 0, n-1, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 10:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; 23
+Enter element number 2 -&gt; -23
+Enter element number 3 -&gt; 56
+Enter element number 4 -&gt; 73
+Enter element number 5 -&gt; 0
+Enter element number 6 -&gt; 452
+Enter element number 7 -&gt; 46
+Enter element number 8 -&gt; 24
+Enter element number 9 -&gt; 56
+Enter element number 10 -&gt; -323
+
+Array -&gt; [23, -23, 56, 73, 0, 452, 46, 24, 56, -323, ]
+
+Sorted array -&gt; [-323, -23, 0, 23, 24, 46, 56, 56, 73, 452, ]
+
+Total comparisons -&gt; 29
+Execution time -&gt; 0.000003000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q11">
+<h3>11. Enter a string array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 11:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 11 : Enter a string array from the user and perform selection sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void selection_sort(char arr[], int n, long long *comparisons){
+
+    int min, temp;
+
+    for (int i = 0; i &lt; n - 1; i++){
+        
+        min = i;
+        for (int j = i + 1; j &lt; n; j++){
+            (*comparisons)++;
+            if (arr[j] &lt; arr[min]){
+                min = j;
+            }
+        }
+
+        if (min != i){
+            temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        }
+    }
+}
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    selection_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 11:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000001000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q12">
+<h3>12. Enter a string array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 12:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 12 : Enter a string array from the user and perform selection sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void selection_sort(char arr[], int n, int index, long long *comparisons){
+
+    if (index &gt;= n - 1){return;}
+
+    int min = index, temp;
+
+    for (int j = index + 1; j &lt; n; j++){
+        (*comparisons)++;
+        if (arr[j] &lt; arr[min]){
+            min = j;
+        }
+    }
+
+    if (min != index){
+        temp = arr[index];
+        arr[index] = arr[min];
+        arr[min] = temp;
+    }
+
+    selection_sort(arr, n, index + 1, comparisons);
+}
+
+int main(){
+
+    char arr[SIZE]; 
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    selection_sort(arr,n,0, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 12:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q13">
+<h3>13. Enter a string array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 13:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 13 : Enter a string array from the user and perform bubble sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void bubble_sort(char arr[], int n, long long *comparisons){
+
+    int temp;
+
+    for (int i = 0; i &lt; n - 1; i++){
+        for (int j = 0; j &lt; n - i - 1; j++){
+            (*comparisons)++;
+
+            if (arr[j] &gt; arr[j + 1]){
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    bubble_sort(arr,n,&amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 13:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q14">
+<h3>14. Enter a string array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 14:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 14 : Enter a string array from the user and perform bubble sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void bubble_sort(char arr[], int n, long long *comparisons){
+
+    if (n &lt;= 1){ return;}
+
+    int temp;
+    for (int j = 0; j &lt; n - 1; j++){
+        (*comparisons)++;
+
+        if (arr[j] &gt; arr[j + 1]){
+            temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+        }
+    }
+
+    bubble_sort(arr, n - 1, comparisons);
+}
+
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    bubble_sort(arr, n,&amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    printf(&quot;Exact comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n^2)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 14:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 45
+Exact comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n^2)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q15">
+<h3>15. Enter a string array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 15:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 15 : Enter a string array from the user and perform insertion sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void insertion_sort(char arr[], int n, long long *comparisons){
+
+    int key, j;
+    for (int i = 1; i &lt; n; i++){
+        key = arr[i];
+        j = i - 1;
+
+        while (j &gt;= 0){
+            (*comparisons)++;
+            if (arr[j] &gt; key){
+                arr[j + 1] = arr[j];
+                j--;}
+            
+            else{break;}
+        }
+        arr[j + 1] = key;
+    }
+}
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Best-case comparisons -&gt; %d\n&quot;, n - 1);
+    printf(&quot;Worst-case comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 15:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 36
+Best-case comparisons -&gt; 9
+Worst-case comparisons -&gt; 45
+Execution time -&gt; 0.000002000 seconds
+
+Best-case time complexity -&gt; O(n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q16">
+<h3>16. Enter a string array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 16:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 16 : Enter a string array from the user and perform insertion sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void insertion_sort(char arr[], int n, long long *comparisons){
+
+    if (n &lt;= 1){ return;}
+
+    insertion_sort(arr, n - 1, comparisons);
+
+    int key = arr[n - 1];
+    int j = n - 2;
+
+    while (j &gt;= 0){
+        (*comparisons)++;
+        if (arr[j] &gt; key){
+            arr[j + 1] = arr[j];
+            j--;
+        }
+        else{break;}
+    }
+
+    arr[j + 1] = key;
+}
+
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i+1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    start = clock();
+    insertion_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Best-case comparisons -&gt; %d\n&quot;, n - 1);
+    printf(&quot;Worst-case comparisons -&gt; %lld\n&quot;,(long long)n * (n - 1) / 2);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;\nBest-case time complexity -&gt; O(n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 16:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 36
+Best-case comparisons -&gt; 9
+Worst-case comparisons -&gt; 45
+Execution time -&gt; 0.000001000 seconds
+
+Best-case time complexity -&gt; O(n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q17">
+<h3>17. Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 17:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 17 : Enter a string array from the user and perform merge sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void merge_sort(char arr[], int n, long long *comparisons){
+    char temp[SIZE];
+
+    for (int width = 1; width &lt; n; width *= 2){
+        for (int left = 0; left &lt; n - 1; left += 2 * width){
+            int mid = left + width - 1;
+            int right = left + 2 * width - 1;
+
+            if (mid &gt;= n - 1){continue;}
+
+            if (right &gt;= n){
+                right = n - 1;}
+
+            int i = left;
+            int j = mid + 1;
+            int k = left;
+
+            while (i &lt;= mid &amp;&amp; j &lt;= right){
+                (*comparisons)++;
+                if (arr[i] &lt;= arr[j]){
+                    temp[k++] = arr[i++];
+                }
+                else{
+                    temp[k++] = arr[j++];
+                }
+            }
+
+            while (i &lt;= mid){ temp[k++] = arr[i++]; }
+            while (j &lt;= right){ temp[k++] = arr[j++]; }
+
+            for (int p = left; p &lt;= right; p++){
+                arr[p] = temp[p];
+            }
+        }
+    }
+}
+
+int main(){
+
+    char arr[SIZE];
+    int  n;
+    long long comparisons = 0;
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    
+
+    start = clock();
+    merge_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n log n)\n&quot;);
+    
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 17:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; c
+Enter element number 4 -&gt; f
+Enter element number 5 -&gt; h
+Enter element number 6 -&gt; t
+Enter element number 7 -&gt; a
+Enter element number 8 -&gt; j
+Enter element number 9 -&gt; y
+Enter element number 10 -&gt; b
+
+Array -&gt; [z, x, c, f, h, t, a, j, y, b, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 25
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n log n)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q18">
+<h3>18. Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 18:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 18 : Enter a string array from the user and perform merge sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+void merge(char arr[], char temp[], int left,int mid, int right,long long *comparisons){
+
+    int i = left;
+    int j = mid + 1;
+    int k = left;
+
+    while (i &lt;= mid &amp;&amp; j &lt;= right){
+        (*comparisons)++;
+        if (arr[i] &lt;= arr[j]){
+            temp[k++] = arr[i++];
+        }
+        else{
+            temp[k++] = arr[j++];
+        }
+    }
+
+    while (i &lt;= mid){temp[k++] = arr[i++]; }
+
+    while (j &lt;= right){temp[k++] = arr[j++]; }
+
+    for (int p = left; p &lt;= right; p++){
+        arr[p] = temp[p];
+    }
+}
+
+void merge_sort(char arr[], char temp[], int left, int right,long long *comparisons){
+
+    if (left &gt;= right){ return;}
+
+    int mid = left + (right - left) / 2;
+
+    merge_sort(arr, temp, left, mid, comparisons);
+    merge_sort(arr, temp, mid + 1, right, comparisons);
+
+    merge(arr, temp, left, mid, right, comparisons);
+}
+
+int main(){
+
+    char arr[SIZE], temp[SIZE];
+    int n;
+    long long comparisons = 0;
+
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    start = clock();
+    merge_sort(arr, temp, 0, n - 1, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n log n)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 18:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 22
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n log n)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q19">
+<h3>19. Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 19:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 19 : Enter a string array from the user and perform quick sort using iteration. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+int partition(char arr[], int low, int high, long long *comparisons){
+    char pivot = arr[high];
+    int i = low - 1;
+    char temp;
+
+    for (int j = low; j &lt; high; j++){
+        (*comparisons)++;
+
+        if (arr[j] &lt;= pivot){
+            i++;
+
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+}
+
+void quick_sort(char arr[], int n, long long *comparisons){
+
+    int stack[SIZE];
+    int top = -1;
+    int low, high, pivot;
+
+    stack[++top] = 0;
+    stack[++top] = n - 1;
+
+    while (top &gt;= 0){
+        high = stack[top--];
+        low = stack[top--];
+
+        pivot = partition(arr, low, high, comparisons);
+
+        if (pivot - 1 &gt; low){
+            stack[++top] = low;
+            stack[++top] = pivot - 1;
+        }
+
+        if (pivot + 1 &lt; high){
+            stack[++top] = pivot + 1;
+            stack[++top] = high;
+        }
+    }
+}
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+    long long comparisons = 0;
+    
+    clock_t start, end;
+    double elapsed;
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    start = clock();
+    quick_sort(arr, n, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+    
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+    
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 19:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 28
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q20">
+<h3>20. Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.</h3>
+<div class="answer-box">
+<h4>Answer 20:</h4>
+<pre><code>// Sorting Algorithms -&gt; Q 20 : Enter a string array from the user and perform quick sort using recursion. Also calculate the best and worst time complexity with exact time.
+
+#include &lt;stdio.h&gt;
+#include &lt;time.h&gt;
+
+#define SIZE 100
+
+int partition(char arr[], int low, int high, long long *comparisons){
+    char pivot = arr[high];
+    int i = low - 1;
+    char temp;
+
+    for (int j = low; j &lt; high; j++){
+        (*comparisons)++;
+
+        if (arr[j] &lt;= pivot){
+            i++;
+
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+    }
+
+    temp = arr[i + 1];
+    arr[i + 1] = arr[high];
+    arr[high] = temp;
+
+    return i + 1;
+}
+
+void quick_sort(char arr[], int low, int high, long long *comparisons){
+    if (low &lt; high){
+        int pivot = partition(arr, low, high, comparisons);
+
+        quick_sort(arr, low, pivot - 1, comparisons);
+        quick_sort(arr, pivot + 1, high, comparisons);
+    }
+}
+
+int main(){
+
+    char arr[SIZE];
+    int n;
+    long long comparisons = 0;
+    
+    clock_t start, end;
+    double elapsed;
+
+
+    printf(&quot;Enter the size of the array: &quot;);
+    scanf(&quot;%d&quot;, &amp;n);
+
+    if (n &lt;= 0 || n &gt; SIZE){
+        printf(&quot;Invalid array size\n&quot;);
+        return 1;
+    }
+
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;Enter element number %d -&gt; &quot;, i + 1);
+        scanf(&quot; %c&quot;, &amp;arr[i]);
+    }
+
+    printf(&quot;\nArray -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    start = clock();
+    quick_sort(arr, 0, n-1, &amp;comparisons);
+    end = clock();
+
+    elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+
+    printf(&quot;\nSorted array -&gt; [&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%c, &quot;, arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nTotal comparisons -&gt; %lld\n&quot;, comparisons);
+
+    printf(&quot;Execution time -&gt; %.9f seconds\n&quot;, elapsed);
+
+    printf(&quot;Best-case time complexity -&gt; O(n log n)\n&quot;);
+    printf(&quot;Worst-case time complexity -&gt; O(n^2)\n&quot;);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 20:</h4>
+<pre><code>Enter the size of the array: 10
+Enter element number 1 -&gt; z
+Enter element number 2 -&gt; x
+Enter element number 3 -&gt; f
+Enter element number 4 -&gt; h
+Enter element number 5 -&gt; t
+Enter element number 6 -&gt; a
+Enter element number 7 -&gt; j
+Enter element number 8 -&gt; y
+Enter element number 9 -&gt; b
+Enter element number 10 -&gt; c
+
+Array -&gt; [z, x, f, h, t, a, j, y, b, c, ]
+
+Sorted array -&gt; [a, b, c, f, h, j, t, x, y, z, ]
+
+Total comparisons -&gt; 28
+Execution time -&gt; 0.000002000 seconds
+Best-case time complexity -&gt; O(n log n)
+Worst-case time complexity -&gt; O(n^2)
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

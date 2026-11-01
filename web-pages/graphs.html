@@ -1,0 +1,4000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRAPHS - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>GRAPHS</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.</a></li>
+                    <li><a href="#q2">2. Create a graph using an adjacency list with insertion and deletion operations.</a></li>
+                    <li><a href="#q3">3. Traverse an adjacency matrix using Depth-First Search (DFS).</a></li>
+                    <li><a href="#q5">5. Traverse an adjacency matrix using Breadth-First Search (BFS).</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Graphs -&gt; Q 01 : Enter the vertices and edges, represent the graph using an adjacency matrix, and print it.
+
+
+#include &lt;stdio.h&gt;
+
+// IT IS DIRECTED GRAPH , USING ADJACENT MATICS AND FIXED SIZED 
+
+// 1. Show vertices + show count
+// 2. Show graph + connections + show count 
+// 3. Add vertice (10 max)
+// 4. Remove last vertice 
+// 5. Connect two verices (ie print the current graph)
+// 6. Remove two verices connection (ie print the current graph)
+// 7. Print neighbours + degree
+
+
+//      0  1  2  3  4  5  6  7  8  9
+//    +------------------------------
+//  0 | 0  0  0  0  0  0  0  0  0  0
+//  1 | 0  0  0  0  0  0  0  0  0  0
+//  2 | 0  0  0  0  0  0  0  0  0  0
+//  3 | 0  0  0  0  0  0  0  0  0  0
+//  4 | 0  0  0  0  0  0  0  0  0  0
+//  5 | 0  0  0  0  0  0  0  0  0  0
+//  6 | 0  0  0  0  0  0  0  0  0  0
+//  7 | 0  0  0  0  0  0  0  0  0  0
+//  8 | 0  0  0  0  0  0  0  0  0  0
+//  9 | 0  0  0  0  0  0  0  0  0  0
+
+
+
+struct graph{
+    int graph_vertices[10];
+    int graph_edges[10][10];
+    int size_am;
+};
+
+
+// 3. ADD VERTICES 
+
+int add_vertice(struct graph * g,int data){
+
+    if (g-&gt;size_am == 10){return -2;}
+    
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt;= 0)){
+        int index = g-&gt;size_am;
+
+        for(int i = 0; i&lt;index ; i++){
+            if (g-&gt;graph_vertices[i] == data){
+                return -1;
+            }
+        }
+
+        g-&gt;graph_vertices[index] = data;
+        g-&gt;size_am++;
+        return 1;
+    }
+
+}
+
+// 4. REMOVE LAST VERTICE 
+
+int remove_last_vertice(struct graph * g){
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt; 0)){
+        g-&gt;graph_vertices[g-&gt;size_am -1] = 0;
+
+        // clearing connections 
+
+        int temp = g-&gt;size_am-1;
+        for (int i = 0; i &lt; g-&gt;size_am; i++){
+            g-&gt;graph_edges[temp][i] = 0;
+            g-&gt;graph_edges[i][temp] = 0;
+        }
+
+        g-&gt;size_am--;
+        return 1;
+    }
+
+    return 0;
+}
+
+
+// 1. SHOW VERTICES + COUNT 
+
+void show_vertice(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value |\n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |\n&quot;,i,g-&gt;graph_vertices[i]);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 2. SHOW EDGES + COUNT
+
+void show_graph(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |&quot;,i,g-&gt;graph_vertices[i]);
+            printf(&quot; ---&gt; &quot;);
+            int deg = 0;
+            for(int j = 0; j &lt;g-&gt;size_am; j++){
+                if (g-&gt;graph_edges[i][j] == 1){
+                    printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[j]);
+                    deg++;
+                }
+            }
+            printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 5. CONNECT TWO VERTICE
+
+int connect_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 1){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 1;
+        return 1;
+
+    }
+}
+
+
+// 6. REMOVE TWO VERTICE CONNECTION
+
+int remove_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 0){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 0;
+        return 1;
+
+    }
+}
+
+
+// 7. PRINT NEIGHBOURS OF A VERTICE 
+
+void show_neighbours(struct graph * g,int index){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    printf(&quot;+-------+-------+\n&quot;);
+    printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+    printf(&quot;|  %3d  |  %3d  |&quot;,index,g-&gt;graph_vertices[index]);
+    printf(&quot;---&gt; &quot;);
+    int deg = 0;
+    for (int i = 0; i &lt;g-&gt;size_am ; i++){
+        if (g-&gt;graph_edges[index][i] == 1){
+            printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[i]);
+            deg++;
+        }
+    }
+    printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+    printf(&quot;+-------+-------+\n&quot;);
+    return;
+}
+
+// 8.  BFS
+
+void bfs_traverse(struct graph * g){
+    
+}
+
+
+// 9. DFS 
+
+void dfs_traverse(struct graph * g){
+
+
+}
+
+
+
+int main(){
+
+    struct graph g = {0};
+    int choice,input_val,input_val_2,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : Show vertices\n&quot;);
+        printf(&quot;2 : Show edges\n&quot;);
+        printf(&quot;3 : Add vertices\n&quot;);
+        printf(&quot;4 : Remove last vertice\n&quot;);
+        printf(&quot;5 : Connect Vertices\n&quot;);
+        printf(&quot;6 : Disonnect Vertices\n&quot;);
+        printf(&quot;7 : Show Neighbours and Degree\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            show_vertice(&amp;g);
+            break;
+
+        case 2:
+            show_graph(&amp;g);
+            break;
+
+        case 3:
+            printf(&quot;Enter the data of vertice to add : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = add_vertice(&amp;g,input_val);
+            if (out == -1)
+                printf(&quot;Already Exist, Cannot add data\n&quot;);
+            else if (out == -2)
+                printf(&quot;Size if Full \n&quot;);
+            else
+                printf(&quot;%d Added\n&quot;,input_val);
+            break;
+
+        case 4:
+            out = remove_last_vertice(&amp;g);
+            if (out == 1)
+                printf(&quot;Removed\n&quot;);
+            else
+                printf(&quot;Cannot Remove\n&quot;);
+            break;
+
+        case 5:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = connect_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Already Connected \n&quot;);
+            else
+                printf(&quot;Connected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+
+        case 6:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = remove_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Not Connected \n&quot;);
+            else
+                printf(&quot;Disconnected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+            
+        case 7:
+            printf(&quot;\nEnter the index of vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            show_neighbours(&amp;g,input_val);
+            break;
+            
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
+NO DATA
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+NO DATA
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 12
+12 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 14
+14 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 50
+50 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+40 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 80
+80 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+Already Exist, Cannot add data
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 67
+67 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
++-------+-------+
+| index | value |
+|    0  |   12  |
+|    1  |   14  |
+|    2  |   50  |
+|    3  |   40  |
+|    4  |   80  |
+|    5  |   67  |
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   67  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 1
+Connected the (12 (0))---&gt;(14 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 2
+Connected the (12 (0))---&gt;(50 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 3
+Connected the (12 (0))---&gt;(40 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 4
+Enter the index of 2nd vertice (dest) : 3
+Connected the (80 (4))---&gt;(40 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 3
+Connected the (50 (2))---&gt;(40 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 4
+Connected the (50 (2))---&gt;(80 (4))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 34
+34 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 20
+20 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    5  |   34  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    6  |   20  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   7
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 1
+Connected the (40 (3))---&gt;(14 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+Already Exist, Cannot add data
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 6
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (40)  (80)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 3
+Disconnected the (50 (2))---&gt;(40 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 4
+4 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (80)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    5  |    4  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 4
+4 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (80)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 6
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (50)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (80)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 2
+Disconnected the (12 (0))---&gt;(50 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt; (80)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   80  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 34
+34 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  | ---&gt; (14)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   14  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   40  | ---&gt; (14)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   34  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   5
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 7
+
+Enter the index of vertice : 0
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   12  |---&gt; (14)  (40)   :&gt;&gt; (degree -&gt; 2)
++-------+-------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Create a graph using an adjacency list with insertion and deletion operations.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Graphs -&gt; Q 02 : Create a graph using an adjacency list with insertion and deletion operations.
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct edge;
+
+struct vertice{
+    int data;
+    struct vertice * other_vertice;
+    struct edge * edge_connection; 
+};
+
+struct edge{
+    struct vertice * dest;
+    struct edge * next_edge;
+};
+
+
+// 1. ADD VERTICE 
+
+// ~ 0 -&gt; malloc failed 
+// ~ 1 -&gt; done and initally no vertice
+// ~ 2 -&gt; added a new vertice initially had some vertice 
+// ~ -1 -&gt; the data already exist  
+
+int add_vertice(struct vertice ** head,int data){
+
+    struct vertice * new_vertice = (struct vertice * )(malloc(sizeof(struct vertice)));
+    if (new_vertice == NULL) {return 0;}
+    new_vertice-&gt;data = data;
+    new_vertice-&gt;edge_connection = NULL;
+    new_vertice-&gt;other_vertice = NULL; 
+
+    if ((*head) == NULL) {
+        (*head) = new_vertice;
+        return 1;
+    }
+
+    struct vertice * temp = (*head);
+    struct vertice * pre = (*head);
+    while (temp!=NULL){
+        if (temp-&gt;data == data){
+            free(new_vertice);
+            return -1; // if data doenst esit the mallc will still create extra spce 
+        }
+        pre = temp;
+        temp = temp-&gt;other_vertice;
+    }
+
+    pre-&gt;other_vertice = new_vertice;
+    return 2;
+    
+}
+
+
+// 2. REMOVE VERTICS 
+// ~ 0 -&gt; no data 
+// ~ -1 -&gt; not found 
+// ~ 1 -&gt; found and removed edges and vertice
+
+int remove_vertice(struct vertice ** head,int data){
+    if ((*head) == NULL){
+        return 0;
+    }
+
+    struct vertice * temp = (*head);
+    struct vertice * prev = (*head);
+    int found = 0;
+    while (temp!=NULL)
+    {
+        if (temp-&gt;data == data){
+            found = 1;
+            break;
+        }
+        prev = temp; 
+        temp = temp-&gt;other_vertice;
+
+    }
+
+    if (found == 0){return -1;}
+    if (temp == (*head)){
+        (*head) = temp-&gt;other_vertice;
+    }
+    else{
+        prev-&gt;other_vertice = temp-&gt;other_vertice;
+    }
+
+    // temp has the address of node to be deleted it is free and floating but not deleted yet and incoming edges also connected 
+
+    struct vertice * temp_tra = ((*head));
+
+    while (temp_tra != NULL)
+    {
+        struct edge * curr_edge = temp_tra-&gt;edge_connection;
+        struct edge * prev_edge = temp_tra-&gt;edge_connection;
+
+        if(curr_edge == NULL){
+            temp_tra = temp_tra-&gt;other_vertice;
+            continue;}
+    
+        // if(curr_edge-&gt;dest == temp){
+        //     temp_tra-&gt;edge_connection = curr_edge-&gt;next_edge;
+        //     free(curr_edge);
+        //     curr_edge = NULL;
+        //     temp_tra = temp_tra-&gt;other_vertice;
+        //     continue;
+        // }
+        int found = 0;
+        while (curr_edge != NULL)
+        {
+            if (curr_edge-&gt;dest == temp){
+                found = 1;
+                break;
+            }
+            prev_edge = curr_edge;
+            curr_edge = curr_edge-&gt;next_edge;
+        }
+
+        if (found == 1){
+            if (curr_edge == temp_tra-&gt;edge_connection){
+                temp_tra-&gt;edge_connection = curr_edge-&gt;next_edge;
+            }
+            else{
+                prev_edge-&gt;next_edge = curr_edge-&gt;next_edge;
+            }
+            free(curr_edge);
+
+        }
+
+        temp_tra = temp_tra-&gt;other_vertice;
+
+    }
+
+    struct edge * curr_edge = temp-&gt;edge_connection;
+    struct edge * prev_edge = NULL;
+    while (curr_edge != NULL)
+    {
+        prev_edge = curr_edge;
+        curr_edge = curr_edge-&gt;next_edge;
+        free(prev_edge);
+    }
+
+    
+
+    free(temp);
+    return 1;
+    
+}
+
+
+// 3. SHOW VERTICES 
+
+void show_vertice(struct vertice * head){
+    if (head == NULL){printf(&quot;NO DATA\n&quot;); return;}
+    
+    printf(&quot;\n+------------+\n&quot;);
+    printf(&quot;|  Vertices  |\n&quot;);
+    while(head!=NULL){
+        
+        printf(&quot;|    %4d    |\n&quot;,head-&gt;data);
+        head = head-&gt;other_vertice;
+    }
+    printf(&quot;+------------+\n&quot;);
+    return;
+}
+
+// 4. SHOW VERICES + EDGES 
+
+void show_edges(struct vertice * head){
+    if (head == NULL){printf(&quot;NO DATA\n&quot;); return;}
+    
+    struct edge * edge = NULL;
+
+    printf(&quot;\n+------------+\n&quot;);
+    printf(&quot;|  Vertices  | ---&gt;  (edges)\n&quot;);
+    
+    while(head!=NULL){
+        printf(&quot;|    %4d    | ---&gt;&quot;,head-&gt;data);
+        edge = head-&gt;edge_connection;
+        while(edge!=NULL){
+            printf(&quot;  (%3d)&quot;,edge-&gt;dest-&gt;data);
+            edge = edge-&gt;next_edge;
+        }
+        printf(&quot;\n&quot;);
+        head = head-&gt;other_vertice;
+    }
+    printf(&quot;+------------+\n&quot;);
+    return;
+
+}
+
+
+// 5. CONNECT VERTICE 
+// ~ 0 -&gt; no data
+// ~ -1 -&gt; dest not found
+// ~ -2 -&gt; source not found
+// ~ -3 -&gt; already exist 
+// ~ -4 -&gt; malloc failed 
+// ~ 1 -&gt; done 
+
+int connect_vertice(struct vertice ** head,int source,int dest){
+    if ((*head) == NULL){return 0;}
+
+    struct vertice * temp = (*head);
+    struct vertice * addof_source = NULL;
+    struct vertice * addof_dest = NULL;
+
+
+    while (temp!=NULL)
+    {
+        if (temp-&gt;data == source){
+            addof_source = temp;
+        }
+        else if (temp-&gt;data == dest){
+            addof_dest = temp;
+        }
+
+        temp = temp-&gt;other_vertice;
+    }
+
+    if (addof_dest== NULL){return -1;} 
+    if (addof_source == NULL) {return -2;}
+
+    struct edge * curr_edge = addof_source-&gt;edge_connection;
+    struct edge * pre_edge = addof_source-&gt;edge_connection;
+    while (curr_edge != NULL)
+    {
+        if (curr_edge-&gt;dest-&gt;data == dest){ return -3;}
+        pre_edge = curr_edge;
+        curr_edge = curr_edge-&gt;next_edge;
+    }
+
+    struct edge * new_edge = (struct edge *)(malloc(sizeof(struct edge)));
+    if (new_edge == NULL){return -4;}
+    new_edge-&gt;dest = addof_dest;
+    new_edge-&gt;next_edge = NULL;
+
+    if (addof_source-&gt;edge_connection == NULL){
+        addof_source-&gt;edge_connection = new_edge;
+    }
+    else{
+        pre_edge-&gt;next_edge = new_edge;
+    }
+    
+    return 1;
+    return 1;
+    
+    
+}
+
+// 6. DISCONNECT EDGE 
+// ~ 0 : no data 
+// ~ -1 -&gt; dest not found
+// ~ -2 -&gt; source not found
+// ~ -3 -&gt; connection not found
+// ~ 1 -&gt;  done
+
+int disconnect_vertice(struct vertice ** head,int source, int dest){
+    if ((*head) == NULL){return 0;}
+
+    struct vertice * temp = (*head);
+
+    struct vertice * addof_source = NULL;
+    struct vertice * addof_dest = NULL;
+
+ 
+    while (temp!=NULL)
+    {
+        if (temp-&gt;data == source){
+            addof_source = temp;
+        }
+        else if (temp-&gt;data == dest){
+            addof_dest = temp;
+        }
+
+        temp = temp-&gt;other_vertice;
+    }
+
+    if (addof_dest== NULL){return -1;} 
+    if (addof_source == NULL) {return -2;}
+
+    int is_connected = 0;
+
+    struct edge * curr_edge = addof_source-&gt;edge_connection;
+    struct edge * pre_edge = addof_source-&gt;edge_connection;
+    while (curr_edge != NULL)
+    {
+        if (curr_edge-&gt;dest-&gt;data == dest){ is_connected = 1; break;}
+        pre_edge = curr_edge;
+        curr_edge = curr_edge-&gt;next_edge;
+    }
+
+    if (curr_edge == addof_source-&gt;edge_connection){
+        addof_source-&gt;edge_connection = curr_edge-&gt;next_edge;
+    }
+    else{
+        pre_edge-&gt;next_edge = curr_edge-&gt;next_edge;
+    }
+    free(curr_edge);
+    return 1;
+
+}
+
+
+// 7. SHOW NEIGHBOUR AND DEGREE 
+
+void show_degree(struct vertice * head,int data){
+    if (head == NULL){printf(&quot;NO DATA\n&quot;); return;}
+    
+    struct edge * edge = NULL;
+    
+    while (head!=NULL){
+        if(head-&gt;data == data){
+            break;
+        }
+        head = head-&gt;other_vertice;
+    }
+    
+    if (head == NULL){printf(&quot;Vertice Not Found\n&quot;); return;}
+    
+    printf(&quot;\n+------------+\n&quot;);
+    printf(&quot;|  Vertices  | ---&gt;  (edges)\n&quot;);
+    printf(&quot;|    %4d    | ---&gt;\n&quot;,head-&gt;data);
+    
+    edge = head-&gt;edge_connection;
+    int count = 0;
+    while (edge!=NULL)
+    {
+        count++;
+        printf(&quot;  (%3d)&quot;,edge-&gt;dest-&gt;data);
+        edge = edge-&gt;next_edge;
+    }
+    printf(&quot;\n&quot;);
+    printf(&quot;+------------+\n&quot;);
+    printf(&quot;Degree of Vertice %d is -&gt; %d\n&quot;,head-&gt;data,count);
+    return;
+    
+}
+
+
+
+int main(){
+
+    struct vertice * head = NULL;
+    int choice,input_val,input_val_2,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : Show vertices\n&quot;);
+        printf(&quot;2 : Show edges\n&quot;);
+        printf(&quot;3 : Add vertices\n&quot;);
+        printf(&quot;4 : Remove vertice\n&quot;);
+        printf(&quot;5 : Connect Vertices\n&quot;);
+        printf(&quot;6 : Disonnect Vertices\n&quot;);
+        printf(&quot;7 : Show Neighbours and Degree\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            show_vertice(head);
+            break;
+
+        case 2:
+            show_edges(head);
+            break;
+
+        case 3:
+            printf(&quot;Enter the data of vertice to add : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = add_vertice(&amp;head,input_val);
+            if (out == -1)
+                printf(&quot;Already Exist, Cannot add data\n&quot;);
+            else if (out == 0)
+                printf(&quot;Malloc Failed \n&quot;);
+            else if (out == 1)
+                printf(&quot;Added, no initial vertices was there \n&quot;);
+            else
+                printf(&quot;%d Added\n&quot;,input_val);
+            break;
+
+        case 4:
+            show_vertice(head);
+            printf(&quot;\nEnter the data of vertice to remove : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val); 
+            out = remove_vertice(&amp;head,input_val);
+            if (out == 0)
+                printf(&quot;No data\n&quot;);
+            else if (out == -1)
+                printf(&quot;Vertice not found\n&quot;);
+            else
+                printf(&quot;%d Removed\n&quot;,input_val);
+            break;
+
+        case 5:
+            show_edges(head);
+            printf(&quot;\nEnter the data of source vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the data of dest vertice  : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = connect_vertice(&amp;head,input_val,input_val_2);
+            if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -1)
+                printf(&quot;Dest not found \n&quot;);
+            else if (out == -2)
+                printf(&quot;Source not found \n&quot;);
+            else if (out == -3)
+                printf(&quot;Already Connected \n&quot;);
+            else if (out == -4)
+                printf(&quot;Malloc Failed \n&quot;);
+            else if (out == 1)
+                printf(&quot;Connected the (%d)-----&gt;(%d)\n&quot;,input_val,input_val_2);
+            break;
+
+        case 6:
+            show_edges(head);
+            printf(&quot;\nEnter the data of source vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the data of dest vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = disconnect_vertice(&amp;head,input_val,input_val_2);
+            if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -1)
+                printf(&quot;Dest not found \n&quot;);
+            else if (out == -2)
+                printf(&quot;Source not found \n&quot;);
+            else if (out == -3)
+                printf(&quot;Connection not found \n&quot;);
+            else if (out == 1)
+                printf(&quot;Disconnected the (%d)--x--&gt;(%d)\n&quot;,input_val,input_val_2);
+            break;
+            
+        case 7:
+            show_vertice(head);
+            printf(&quot;\nEnter the data of vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            show_degree(head,input_val);
+            break;
+
+                    
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }   
+    
+    return 0;
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
+NO DATA
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+NO DATA
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 24
+Added, no initial vertices was there 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 45
+45 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 67
+67 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 67
+Already Exist, Cannot add data
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 56
+56 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+40 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
+
++------------+
+|  Vertices  |
+|      24    |
+|      45    |
+|      67    |
+|      56    |
+|      40    |
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;
+|      45    | ---&gt;
+|      67    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 4
+
++------------+
+|  Vertices  |
+|      24    |
+|      45    |
+|      67    |
+|      56    |
+|      40    |
++------------+
+
+Enter the data of vertice to remove : 67
+67 Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
+
++------------+
+|  Vertices  |
+|      24    |
+|      45    |
+|      56    |
+|      40    |
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 24
+Enter the data of dest vertice  : 45
+Connected the (24)-----&gt;(45)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 1
+
++------------+
+|  Vertices  |
+|      24    |
+|      45    |
+|      56    |
+|      40    |
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 24
+Enter the data of dest vertice  : 56
+Connected the (24)-----&gt;(56)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 24
+Invalid choice
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 24
+Enter the data of dest vertice  : 40
+Connected the (24)-----&gt;(40)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;
+|      56    | ---&gt;
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 56
+Enter the data of dest vertice  : 40
+Connected the (56)-----&gt;(40)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 45
+Enter the data of dest vertice  : 40
+Connected the (45)-----&gt;(40)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;  ( 40)
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;
++------------+
+
+Enter the data of source vertice : 40
+Enter the data of dest vertice  : 56
+Connected the (40)-----&gt;(56)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 5
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;  ( 40)
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;  ( 56)
++------------+
+
+Enter the data of source vertice : 40
+Enter the data of dest vertice  : 45
+Connected the (40)-----&gt;(45)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;  ( 40)
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;  ( 56)  ( 45)
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 6
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 56)  ( 40)
+|      45    | ---&gt;  ( 40)
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;  ( 56)  ( 45)
++------------+
+
+Enter the data of source vertice : 24
+Enter the data of dest vertice : 56
+Disconnected the (24)--x--&gt;(56)
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 2
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;  ( 45)  ( 40)
+|      45    | ---&gt;  ( 40)
+|      56    | ---&gt;  ( 40)
+|      40    | ---&gt;  ( 56)  ( 45)
++------------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 7
+
++------------+
+|  Vertices  |
+|      24    |
+|      45    |
+|      56    |
+|      40    |
++------------+
+
+Enter the data of vertice : 24
+
++------------+
+|  Vertices  | ---&gt;  (edges)
+|      24    | ---&gt;
+  ( 45)  ( 40)
++------------+
+Degree of Vertice 24 is -&gt; 2
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Traverse an adjacency matrix using Depth-First Search (DFS).</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Graphs -&gt; Q 03 : Traverse an adjacency matrix using Depth-First Search (DFS).
+
+#include &lt;stdio.h&gt;
+
+// IT IS DIRECTED GRAPH , USING ADJACENT MATICS AND FIXED SIZED 
+
+// 1. Show vertices + show count
+// 2. Show graph + connections + show count 
+// 3. Add vertice (10 max)
+// 4. Remove last vertice 
+// 5. Connect two verices (ie print the current graph)
+// 6. Remove two verices connection (ie print the current graph)
+// 7. Print neighbours + degree
+
+
+//      0  1  2  3  4  5  6  7  8  9
+//    +------------------------------
+//  0 | 0  0  0  0  0  0  0  0  0  0
+//  1 | 0  0  0  0  0  0  0  0  0  0
+//  2 | 0  0  0  0  0  0  0  0  0  0
+//  3 | 0  0  0  0  0  0  0  0  0  0
+//  4 | 0  0  0  0  0  0  0  0  0  0
+//  5 | 0  0  0  0  0  0  0  0  0  0
+//  6 | 0  0  0  0  0  0  0  0  0  0
+//  7 | 0  0  0  0  0  0  0  0  0  0
+//  8 | 0  0  0  0  0  0  0  0  0  0
+//  9 | 0  0  0  0  0  0  0  0  0  0
+
+
+
+struct graph{
+    int graph_vertices[10];
+    int graph_edges[10][10];
+    int size_am;
+};
+
+
+// 3. ADD VERTICES 
+
+int add_vertice(struct graph * g,int data){
+
+    if (g-&gt;size_am == 10){return -2;}
+    
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt;= 0)){
+        int index = g-&gt;size_am;
+
+        for(int i = 0; i&lt;index ; i++){
+            if (g-&gt;graph_vertices[i] == data){
+                return -1;
+            }
+        }
+
+        g-&gt;graph_vertices[index] = data;
+        g-&gt;size_am++;
+        return 1;
+    }
+
+}
+
+// 4. REMOVE LAST VERTICE 
+
+int remove_last_vertice(struct graph * g){
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt; 0)){
+        g-&gt;graph_vertices[g-&gt;size_am -1] = 0;
+
+        // clearing connections 
+
+        int temp = g-&gt;size_am-1;
+        for (int i = 0; i &lt; g-&gt;size_am; i++){
+            g-&gt;graph_edges[temp][i] = 0;
+            g-&gt;graph_edges[i][temp] = 0;
+        }
+
+        g-&gt;size_am--;
+        return 1;
+    }
+
+    return 0;
+}
+
+
+// 1. SHOW VERTICES + COUNT 
+
+void show_vertice(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value |\n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |\n&quot;,i,g-&gt;graph_vertices[i]);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 2. SHOW EDGES + COUNT
+
+void show_graph(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |&quot;,i,g-&gt;graph_vertices[i]);
+            printf(&quot; ---&gt; &quot;);
+            int deg = 0;
+            for(int j = 0; j &lt;g-&gt;size_am; j++){
+                if (g-&gt;graph_edges[i][j] == 1){
+                    printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[j]);
+                    deg++;
+                }
+            }
+            printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 5. CONNECT TWO VERTICE
+
+int connect_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 1){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 1;
+        return 1;
+
+    }
+}
+
+
+// 6. REMOVE TWO VERTICE CONNECTION
+
+int remove_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 0){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 0;
+        return 1;
+
+    }
+}
+
+
+// 7. PRINT NEIGHBOURS OF A VERTICE 
+
+void show_neighbours(struct graph * g,int index){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    printf(&quot;+-------+-------+\n&quot;);
+    printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+    printf(&quot;|  %3d  |  %3d  |&quot;,index,g-&gt;graph_vertices[index]);
+    printf(&quot;---&gt; &quot;);
+    int deg = 0;
+    for (int i = 0; i &lt;g-&gt;size_am ; i++){
+        if (g-&gt;graph_edges[index][i] == 1){
+            printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[i]);
+            deg++;
+        }
+    }
+    printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+    printf(&quot;+-------+-------+\n&quot;);
+    return;
+}
+
+
+
+// 9. DFS 
+
+void dfs(struct graph *g, int index, int visited[]){
+
+    // if (visited[index])
+    //     return;    less perfomtive then hst checking it in the for loop stopping it to creatifng a recursive fn node before 
+        
+    visited[index] = 1;
+    printf(&quot;(%d) &lt;-&gt; &quot;, g-&gt;graph_vertices[index]);
+
+    for (int i = 0; i &lt; g-&gt;size_am; i++){
+        if (g-&gt;graph_edges[index][i] == 1 &amp;&amp; !visited[i]){
+            dfs(g, i, visited);
+        }
+    }
+}
+
+void dfs_traverse(struct graph *g,int start){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    int visited[10] = {0};
+
+    show_vertice(g);
+    if (start &lt; 0 || start &gt;= g-&gt;size_am){
+        printf(&quot;Invalid vertex index\n&quot;);
+        return;
+    }
+    printf(&quot;DFS Traversal -&gt;&gt;  &quot;);
+    dfs(g, start, visited);
+    printf(&quot;\n&quot;);
+}
+
+
+
+int main(){
+
+    struct graph g = {0};
+    int choice,input_val,input_val_2,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : Show vertices\n&quot;);
+        printf(&quot;2 : Show edges\n&quot;);
+        printf(&quot;3 : Add vertices\n&quot;);
+        printf(&quot;4 : Remove last vertice\n&quot;);
+        printf(&quot;5 : Connect Vertices\n&quot;);
+        printf(&quot;6 : Disonnect Vertices\n&quot;);
+        printf(&quot;7 : Show Neighbours and Degree\n&quot;);
+        printf(&quot;8 : DFS Traverse\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            show_vertice(&amp;g);
+            break;
+
+        case 2:
+            show_graph(&amp;g);
+            break;
+
+        case 3:
+            printf(&quot;Enter the data of vertice to add : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = add_vertice(&amp;g,input_val);
+            if (out == -1)
+                printf(&quot;Already Exist, Cannot add data\n&quot;);
+            else if (out == -2)
+                printf(&quot;Size if Full \n&quot;);
+            else
+                printf(&quot;%d Added\n&quot;,input_val);
+            break;
+
+        case 4:
+            out = remove_last_vertice(&amp;g);
+            if (out == 1)
+                printf(&quot;Removed\n&quot;);
+            else
+                printf(&quot;Cannot Remove\n&quot;);
+            break;
+
+        case 5:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = connect_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Already Connected \n&quot;);
+            else
+                printf(&quot;Connected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+
+        case 6:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = remove_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Not Connected \n&quot;);
+            else
+                printf(&quot;Disconnected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+            
+        case 7:
+            printf(&quot;\nEnter the index of vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            show_neighbours(&amp;g,input_val);
+            break;
+
+        
+            
+        case 8:
+            printf(&quot;\nEnter the index of vertice to be used as Source : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            dfs_traverse(&amp;g,input_val);
+            break;
+            
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 
+1
+NO DATA
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 2
+NO DATA
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+40 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 50
+50 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 20
+20 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 46
+46 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 10
+10 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 69
+69 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 45
+45 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   20  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   10  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   20  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   10  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 1
+Enter the index of 2nd vertice (dest) : 2
+Connected the (50 (1))---&gt;(20 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   20  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   10  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 3
+Connected the (20 (2))---&gt;(46 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   20  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   10  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 4
+Connected the (46 (3))---&gt;(10 (4))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   20  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   46  | ---&gt; (10)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   10  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 4
+Enter the index of 2nd vertice (dest) : 5
+Connected the (10 (4))---&gt;(69 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   20  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   46  | ---&gt; (10)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   10  | ---&gt; (69)   :&gt;&gt; (degree -&gt; 1)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 4
+Enter the index of 2nd vertice (dest) : 1
+Connected the (10 (4))---&gt;(50 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   20  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   46  | ---&gt; (10)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 1
+Enter the index of 2nd vertice (dest) : 4
+Connected the (50 (1))---&gt;(10 (4))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    3  |   46  | ---&gt; (10)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 5
+Connected the (20 (2))---&gt;(69 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (10)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 1
+Connected the (46 (3))---&gt;(50 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 5
+Connected the (46 (3))---&gt;(69 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 3
+Connected the (40 (0))---&gt;(46 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 2
+Connected the (40 (0))---&gt;(20 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 04
+Enter the index of 2nd vertice (dest) : 1
+Already Connected 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 4
+Connected the (40 (0))---&gt;(10 (4))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)  (10)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 2
+Already Connected 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)  (10)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 0
+Connected the (69 (5))---&gt;(40 (0))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)  (10)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 2
+Connected the (69 (5))---&gt;(20 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)  (10)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt; (40)  (20)   :&gt;&gt; (degree -&gt; 2)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 1
+Connected the (69 (5))---&gt;(50 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |   40  | ---&gt; (20)  (46)  (10)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   50  | ---&gt; (20)  (10)   :&gt;&gt; (degree -&gt; 2)
+|    2  |   20  | ---&gt; (46)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    3  |   46  | ---&gt; (50)  (10)  (69)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   10  | ---&gt; (50)  (69)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   69  | ---&gt; (40)  (50)  (20)   :&gt;&gt; (degree -&gt; 3)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 8
+
+Enter the index of vertice to be used as Source : 0
++-------+-------+
+| index | value |
+|    0  |   40  |
+|    1  |   50  |
+|    2  |   20  |
+|    3  |   46  |
+|    4  |   10  |
+|    5  |   69  |
++-------+-------+
+Count ---&gt;   6DFS Traversal -&gt;&gt;  (40) &lt;-&gt; (20) &lt;-&gt; (46) &lt;-&gt; (50) &lt;-&gt; (10) &lt;-&gt; (69) &lt;-&gt; 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : DFS Traverse
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Traverse an adjacency matrix using Breadth-First Search (BFS).</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Graphs -&gt; Q 05 : Traverse an adjacency matrix using Breadth-First Search (BFS).
+#include &lt;stdio.h&gt;
+#include &quot;../queue/queue.c&quot;
+// IT IS DIRECTED GRAPH , USING ADJACENT MATICS AND FIXED SIZED 
+
+// 1. Show vertices + show count
+// 2. Show graph + connections + show count 
+// 3. Add vertice (10 max)
+// 4. Remove last vertice 
+// 5. Connect two verices (ie print the current graph)
+// 6. Remove two verices connection (ie print the current graph)
+// 7. Print neighbours + degree
+
+
+//      0  1  2  3  4  5  6  7  8  9
+//    +------------------------------
+//  0 | 0  0  0  0  0  0  0  0  0  0
+//  1 | 0  0  0  0  0  0  0  0  0  0
+//  2 | 0  0  0  0  0  0  0  0  0  0
+//  3 | 0  0  0  0  0  0  0  0  0  0
+//  4 | 0  0  0  0  0  0  0  0  0  0
+//  5 | 0  0  0  0  0  0  0  0  0  0
+//  6 | 0  0  0  0  0  0  0  0  0  0
+//  7 | 0  0  0  0  0  0  0  0  0  0
+//  8 | 0  0  0  0  0  0  0  0  0  0
+//  9 | 0  0  0  0  0  0  0  0  0  0
+
+
+
+struct graph{
+    int graph_vertices[10];
+    int graph_edges[10][10];
+    int size_am;
+};
+
+
+// 3. ADD VERTICES 
+
+int add_vertice(struct graph * g,int data){
+
+    if (g-&gt;size_am == 10){return -2;}
+    
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt;= 0)){
+        int index = g-&gt;size_am;
+
+        for(int i = 0; i&lt;index ; i++){
+            if (g-&gt;graph_vertices[i] == data){
+                return -1;
+            }
+        }
+
+        g-&gt;graph_vertices[index] = data;
+        g-&gt;size_am++;
+        return 1;
+    }
+
+}
+
+// 4. REMOVE LAST VERTICE 
+
+int remove_last_vertice(struct graph * g){
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt; 0)){
+        g-&gt;graph_vertices[g-&gt;size_am -1] = 0;
+
+        // clearing connections 
+
+        int temp = g-&gt;size_am-1;
+        for (int i = 0; i &lt; g-&gt;size_am; i++){
+            g-&gt;graph_edges[temp][i] = 0;
+            g-&gt;graph_edges[i][temp] = 0;
+        }
+
+        g-&gt;size_am--;
+        return 1;
+    }
+
+    return 0;
+}
+
+
+// 1. SHOW VERTICES + COUNT 
+
+void show_vertice(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value |\n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |\n&quot;,i,g-&gt;graph_vertices[i]);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 2. SHOW EDGES + COUNT
+
+void show_graph(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+        for (int i = 0; i&lt;g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |&quot;,i,g-&gt;graph_vertices[i]);
+            printf(&quot; ---&gt; &quot;);
+            int deg = 0;
+            for(int j = 0; j &lt;g-&gt;size_am; j++){
+                if (g-&gt;graph_edges[i][j] == 1){
+                    printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[j]);
+                    deg++;
+                }
+            }
+            printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am);
+}
+
+
+// 5. CONNECT TWO VERTICE
+
+int connect_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 1){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 1;
+        return 1;
+
+    }
+}
+
+
+// 6. REMOVE TWO VERTICE CONNECTION
+
+int remove_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt; g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt; g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 0){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] = 0;
+        return 1;
+
+    }
+}
+
+
+// 7. PRINT NEIGHBOURS OF A VERTICE 
+
+void show_neighbours(struct graph * g,int index){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    printf(&quot;+-------+-------+\n&quot;);
+    printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+    printf(&quot;|  %3d  |  %3d  |&quot;,index,g-&gt;graph_vertices[index]);
+    printf(&quot;---&gt; &quot;);
+    int deg = 0;
+    for (int i = 0; i &lt;g-&gt;size_am ; i++){
+        if (g-&gt;graph_edges[index][i] == 1){
+            printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[i]);
+            deg++;
+        }
+    }
+    printf(&quot; :&gt;&gt; (degree -&gt; %d)\n&quot;,deg);
+    printf(&quot;+-------+-------+\n&quot;);
+    return;
+}
+
+
+
+// 8. BFS 
+
+void bfs(struct graph * g,int start,int * visited){
+    int queue[QUEUE_SIZE] = {0};
+    int front = -1;
+    int rear = -1;
+
+    visited[start] = 1;
+    enqueue(queue,&amp;front,&amp;rear,start);
+    
+    while(!is_empty(queue,front,rear)){
+
+        int index = fn_front(queue,front);
+        dequeue(&amp;front,&amp;rear);
+        printf(&quot;(%d) &lt;-&gt; &quot;, g-&gt;graph_vertices[index]);
+
+        for(int i = 0; i &lt; g-&gt;size_am ; i++){
+
+            if (g-&gt;graph_edges[index][i] == 1 &amp;&amp; !visited[i]){
+                visited[i] = 1;
+                enqueue(queue,&amp;front,&amp;rear, i);
+            }
+
+        }
+
+
+    }
+
+}
+
+
+
+
+void bfs_traverse(struct graph *g,int start){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    int visited[10] = {0};
+
+    show_vertice(g);
+    if (start &lt; 0 || start &gt;= g-&gt;size_am){
+        printf(&quot;\nInvalid vertex index\n&quot;);
+        return;
+    }
+    printf(&quot;\nBFS Traversal -&gt;&gt;  &quot;);
+    bfs(g, start, visited);
+    printf(&quot;\n&quot;);
+}
+
+
+
+int main(){
+
+    struct graph g = {0};
+    int choice,input_val,input_val_2,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : Show vertices\n&quot;);
+        printf(&quot;2 : Show edges\n&quot;);
+        printf(&quot;3 : Add vertices\n&quot;);
+        printf(&quot;4 : Remove last vertice\n&quot;);
+        printf(&quot;5 : Connect Vertices\n&quot;);
+        printf(&quot;6 : Disonnect Vertices\n&quot;);
+        printf(&quot;7 : Show Neighbours and Degree\n&quot;);
+        printf(&quot;8 : BFS Traverse\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            show_vertice(&amp;g);
+            break;
+
+        case 2:
+            show_graph(&amp;g);
+            break;
+
+        case 3:
+            printf(&quot;Enter the data of vertice to add : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = add_vertice(&amp;g,input_val);
+            if (out == -1)
+                printf(&quot;Already Exist, Cannot add data\n&quot;);
+            else if (out == -2)
+                printf(&quot;Size if Full \n&quot;);
+            else
+                printf(&quot;%d Added\n&quot;,input_val);
+            break;
+
+        case 4:
+            out = remove_last_vertice(&amp;g);
+            if (out == 1)
+                printf(&quot;Removed\n&quot;);
+            else
+                printf(&quot;Cannot Remove\n&quot;);
+            break;
+
+        case 5:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = connect_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Already Connected \n&quot;);
+            else
+                printf(&quot;Connected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+
+        case 6:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = remove_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Not Connected \n&quot;);
+            else
+                printf(&quot;Disconnected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+            
+        case 7:
+            printf(&quot;\nEnter the index of vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            show_neighbours(&amp;g,input_val);
+            break;
+
+        
+            
+        case 8:
+            printf(&quot;\nEnter the index of vertice to be used as Source : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            bfs_traverse(&amp;g,input_val);
+            break;
+            
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 1
+NO DATA
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 1
+1 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 46
+46 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 46
+Already Exist, Cannot add data
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 50
+50 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 500
+500 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 59
+59 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 48
+48 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   48  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 4
+Removed
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 3
+Enter the data of vertice to add : 40
+40 Added
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 7
+
+Enter the index of vertice : 0
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  |---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 8
+
+Enter the index of vertice to be used as Source : 0
++-------+-------+
+| index | value |
+|    0  |    1  |
+|    1  |   46  |
+|    2  |   50  |
+|    3  |  500  |
+|    4  |   59  |
+|    5  |   40  |
++-------+-------+
+Count ---&gt;   6
+BFS Traversal -&gt;&gt;  (1) &lt;-&gt; 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 1
+Connected the (1 (0))---&gt;(46 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 2
+Connected the (1 (0))---&gt;(50 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)   :&gt;&gt; (degree -&gt; 2)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 0
+Enter the index of 2nd vertice (dest) : 3
+Connected the (1 (0))---&gt;(500 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 1
+Enter the index of 2nd vertice (dest) : 2
+Connected the (46 (1))---&gt;(50 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 4
+Connected the (500 (3))---&gt;(59 (4))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt; (59)   :&gt;&gt; (degree -&gt; 1)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 5
+Connected the (500 (3))---&gt;(40 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt; (59)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 3
+Enter the index of 2nd vertice (dest) : 1
+Connected the (500 (3))---&gt;(46 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 4
+Enter the index of 2nd vertice (dest) : 5
+Connected the (59 (4))---&gt;(40 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 4
+Enter the index of 2nd vertice (dest) : 2
+Connected the (59 (4))---&gt;(50 (2))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (50)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 2
+Enter the index of 2nd vertice (dest) : 5
+Connected the (50 (2))---&gt;(40 (5))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (50)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   40  | ---&gt;  :&gt;&gt; (degree -&gt; 0)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 1
+Connected the (40 (5))---&gt;(46 (1))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (50)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   40  | ---&gt; (46)   :&gt;&gt; (degree -&gt; 1)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 3
+Connected the (40 (5))---&gt;(500 (3))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 5
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (50)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   40  | ---&gt; (46)  (500)   :&gt;&gt; (degree -&gt; 2)
++-------+-------+
+Count ---&gt;   6
+Enter the index of 1st vertice : 5
+Enter the index of 2nd vertice (dest) : 0
+Connected the (40 (5))---&gt;(1 (0))
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 2
++-------+-------+
+| index | value | ---&gt; Connections 
+|    0  |    1  | ---&gt; (46)  (50)  (500)   :&gt;&gt; (degree -&gt; 3)
+|    1  |   46  | ---&gt; (50)   :&gt;&gt; (degree -&gt; 1)
+|    2  |   50  | ---&gt; (40)   :&gt;&gt; (degree -&gt; 1)
+|    3  |  500  | ---&gt; (46)  (59)  (40)   :&gt;&gt; (degree -&gt; 3)
+|    4  |   59  | ---&gt; (50)  (40)   :&gt;&gt; (degree -&gt; 2)
+|    5  |   40  | ---&gt; (1)  (46)  (500)   :&gt;&gt; (degree -&gt; 3)
++-------+-------+
+Count ---&gt;   6
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 8
+
+Enter the index of vertice to be used as Source : 0
++-------+-------+
+| index | value |
+|    0  |    1  |
+|    1  |   46  |
+|    2  |   50  |
+|    3  |  500  |
+|    4  |   59  |
+|    5  |   40  |
++-------+-------+
+Count ---&gt;   6
+BFS Traversal -&gt;&gt;  (1) &lt;-&gt; (46) &lt;-&gt; (50) &lt;-&gt; (500) &lt;-&gt; (40) &lt;-&gt; (59) &lt;-&gt; 
+
+Enter the choice :
+1 : Show vertices
+2 : Show edges
+3 : Add vertices
+4 : Remove last vertice
+5 : Connect Vertices
+6 : Disonnect Vertices
+7 : Show Neighbours and Degree
+8 : BFS Traverse
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

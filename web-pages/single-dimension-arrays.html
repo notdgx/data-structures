@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SINGLE-DIMENSIONAL ARRAYS - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>SINGLE-DIMENSIONAL ARRAYS</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Enter an array from the user and display all its values.</a></li>
+                    <li><a href="#q2">2. Enter an array from the user and print it in reverse order.</a></li>
+                    <li><a href="#q3">3. Enter an array from the user and copy it into a second array.</a></li>
+                    <li><a href="#q4">4. Enter an array from the user and copy it into another array in reverse order.</a></li>
+                    <li><a href="#q5">5. Enter an array from the user and print all even numbers.</a></li>
+                    <li><a href="#q6">6. Enter an array from the user and print all positive numbers.</a></li>
+                    <li><a href="#q7">7. Enter an array from the user and square all its values.</a></li>
+                    <li><a href="#q8">8. Enter an array from the user and find the maximum and minimum values.</a></li>
+                    <li><a href="#q9">9. Enter an array from the user and find the k-th smallest value.</a></li>
+                    <li><a href="#q10">10. Enter an array from the user and find the sum of all its values.</a></li>
+                    <li><a href="#q11">11. Enter an array from the user and find the duplicate values.</a></li>
+                    <li><a href="#q12">12. Enter an array from the user, remove duplicate values, and replace them with zeros.</a></li>
+                    <li><a href="#q13">13. Enter an array from the user and count the duplicate values.</a></li>
+                    <li><a href="#q14">14. Enter an array from the user and print all possible combinations of its elements.</a></li>
+                    <li><a href="#q15">15. Enter an array from the user and print all palindrome numbers.</a></li>
+                    <li><a href="#q16">16. Enter two arrays from the user and check whether they are identical.</a></li>
+                    <li><a href="#q17">17. Merge two sorted arrays into a single sorted array.</a></li>
+                    <li><a href="#q18">18. Find the local minima in an array.</a></li>
+                    <li><a href="#q19">19. Find the local maxima in an array.</a></li>
+                    <li><a href="#q20">20. **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Enter an array from the user and display all its values.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 01 : Enter an array from the user and display all its values.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;The element number %d is -&gt; %d \n&quot;,i+1,arr[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 2
+Enter the element 3 -&gt; 3
+Enter the element 4 -&gt; 4232
+Enter the element 5 -&gt; 53
+Enter the element 6 -&gt; -32
+Enter the element 7 -&gt; 3
+Enter the element 8 -&gt; 32
+Enter the element 9 -&gt; 0
+Enter the element 10 -&gt; 41
+The element number 1 is -&gt; 1 
+The element number 2 is -&gt; 2 
+The element number 3 is -&gt; 3 
+The element number 4 is -&gt; 4232 
+The element number 5 is -&gt; 53 
+The element number 6 is -&gt; -32 
+The element number 7 is -&gt; 3 
+The element number 8 is -&gt; 32 
+The element number 9 is -&gt; 0 
+The element number 10 is -&gt; 41 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Enter an array from the user and print it in reverse order.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 02 : Enter an array from the user and print it in reverse order.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;Reverse Order :\n&quot;);
+    for (int i = s-1; i &gt;=0 ; i-- ){
+        printf(&quot;The element number %d is -&gt; %d \n&quot;,i+1,arr[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 3
+Enter the element 3 -&gt; 4
+Enter the element 4 -&gt; 3
+Enter the element 5 -&gt; 32
+Enter the element 6 -&gt; 32
+Enter the element 7 -&gt; 33
+Enter the element 8 -&gt; 2556
+Enter the element 9 -&gt; -23
+Enter the element 10 -&gt; 3
+Reverse Order :
+The element number 10 is -&gt; 3 
+The element number 9 is -&gt; -23 
+The element number 8 is -&gt; 2556 
+The element number 7 is -&gt; 33 
+The element number 6 is -&gt; 32 
+The element number 5 is -&gt; 32 
+The element number 4 is -&gt; 3 
+The element number 3 is -&gt; 4 
+The element number 2 is -&gt; 3 
+The element number 1 is -&gt; 1 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Enter an array from the user and copy it into a second array.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 03 : Enter an array from the user and copy it into a second array.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10],arr2[10];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;Copping array :\n&quot;);
+    
+    for (int i = 0; i&lt; s ; i++ ){
+        arr2[i]=arr[i];
+    }
+    
+    printf(&quot;Coppied array elemnts :\n&quot;);
+    for (int i = 0; i &lt;s ; i++ ){
+        printf(&quot;The element number %d is -&gt; %d \n&quot;,i+1,arr2[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>Enter the element 1 -&gt; 3
+Enter the element 2 -&gt; 24
+Enter the element 3 -&gt; 53
+Enter the element 4 -&gt; 
+6
+Enter the element 5 -&gt; 664
+Enter the element 6 -&gt; 54
+Enter the element 7 -&gt; 3
+Enter the element 8 -&gt; 3
+Enter the element 9 -&gt; 22
+Enter the element 10 -&gt; 1
+Copping array :
+Coppied array elemnts :
+The element number 1 is -&gt; 3 
+The element number 2 is -&gt; 24 
+The element number 3 is -&gt; 53 
+The element number 4 is -&gt; 6 
+The element number 5 is -&gt; 664 
+The element number 6 is -&gt; 54 
+The element number 7 is -&gt; 3 
+The element number 8 is -&gt; 3 
+The element number 9 is -&gt; 22 
+The element number 10 is -&gt; 1 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Enter an array from the user and copy it into another array in reverse order.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 04 : Enter an array from the user and copy it into another array in reverse order.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10],arr2[10];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;Copping array :\n&quot;);
+    
+    for (int i = 0; i&lt; s ; i++ ){
+        arr2[s-i-1]=arr[i];
+    }
+    
+    printf(&quot;Coppied array elemnts (initial array reverse):\n&quot;);
+    for (int i = 0; i &lt;s ; i++ ){
+        printf(&quot;The element number %d is -&gt; %d \n&quot;,i+1,arr2[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>Enter the element 1 -&gt; 3
+Enter the element 2 -&gt; 2
+Enter the element 3 -&gt; 3
+Enter the element 4 -&gt; -1
+Enter the element 5 -&gt; 32
+Enter the element 6 -&gt; -22
+Enter the element 7 -&gt; 3
+Enter the element 8 -&gt; 4
+Enter the element 9 -&gt; 7664
+Enter the element 10 -&gt; 3
+Copping array :
+Coppied array elemnts (initial array reverse):
+The element number 1 is -&gt; 3 
+The element number 2 is -&gt; 7664 
+The element number 3 is -&gt; 4 
+The element number 4 is -&gt; 3 
+The element number 5 is -&gt; -22 
+The element number 6 is -&gt; 32 
+The element number 7 is -&gt; -1 
+The element number 8 is -&gt; 3 
+The element number 9 is -&gt; 2 
+The element number 10 is -&gt; 3 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. Enter an array from the user and print all even numbers.</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 05 : Enter an array from the user and print all even numbers.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        if (arr[i] % 2 == 0 )
+        printf(&quot;The even element is -&gt; %d \n&quot;,arr[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 5:</h4>
+<pre><code>Enter the element 1 -&gt; 3
+Enter the element 2 -&gt; 322
+Enter the element 3 -&gt; 32
+Enter the element 4 -&gt; 3
+Enter the element 5 -&gt; 75
+Enter the element 6 -&gt; -22
+Enter the element 7 -&gt; 33
+Enter the element 8 -&gt; 43
+Enter the element 9 -&gt; 4
+Enter the element 10 -&gt; 5
+The even element is -&gt; 322 
+The even element is -&gt; 32 
+The even element is -&gt; -22 
+The even element is -&gt; 4 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Enter an array from the user and print all positive numbers.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 06 : Enter an array from the user and print all positive numbers.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        if (arr[i] &gt; 0 )
+        printf(&quot;The +ve element is -&gt; %d \n&quot;,arr[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>Enter the element 1 -&gt; 2
+Enter the element 2 -&gt; 3233
+Enter the element 3 -&gt; 32
+Enter the element 4 -&gt; 4
+Enter the element 5 -&gt; 5
+The +ve element is -&gt; 2 
+The +ve element is -&gt; 3233 
+The +ve element is -&gt; 32 
+The +ve element is -&gt; 4 
+The +ve element is -&gt; 5 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q7">
+<h3>7. Enter an array from the user and square all its values.</h3>
+<div class="answer-box">
+<h4>Answer 7:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 07 : Enter an array from the user and square all its values.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;The element sq is -&gt; %d \n&quot;,arr[i] * arr[i]);
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 7:</h4>
+<pre><code>Enter the element 1 -&gt; 4
+Enter the element 2 -&gt; 232
+Enter the element 3 -&gt; 3
+Enter the element 4 -&gt; 2
+Enter the element 5 -&gt; -65
+The element sq is -&gt; 16 
+The element sq is -&gt; 53824 
+The element sq is -&gt; 9 
+The element sq is -&gt; 4 
+The element sq is -&gt; 4225 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. Enter an array from the user and find the maximum and minimum values.</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 08 : Enter an array from the user and find the maximum and minimum values.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    int min = 99999, max = -99999;
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        if (arr[i] &gt; max){
+            max = arr[i];
+        }
+        else if (arr[i] &lt; min){
+            min = arr[i];
+        }
+    }
+
+    printf(&quot;Minimun value is  -&gt; %d \n&quot;,min);
+    printf(&quot;Maximum value is  -&gt; %d &quot;,max);
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 8:</h4>
+<pre><code>Enter the element 1 -&gt; 4
+Enter the element 2 -&gt; 0
+Enter the element 3 -&gt; -22
+Enter the element 4 -&gt; 4344
+Enter the element 5 -&gt; 4
+Minimun value is  -&gt; -22 
+Maximum value is  -&gt; 4344 </code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q9">
+<h3>9. Enter an array from the user and find the k-th smallest value.</h3>
+<div class="answer-box">
+<h4>Answer 9:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 09 : Enter an array from the user and find the k-th smallest value.
+
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10] , k ;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+        
+    }
+
+    for (int i = 0; i &lt; s - 1; i++) {
+        for (int j = i + 1; j &lt; s; j++) {
+            if (arr[i] &lt; arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+
+
+    printf(&quot;Enter the k th Position -&gt; &quot;);
+    scanf(&quot;%d&quot;,&amp;k);
+    printf(&quot;The k th Position Element is -&gt; %d &quot;,arr[k-1]);
+
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 9:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 24
+Enter the element 3 -&gt; 1
+Enter the element 4 -&gt; 434
+Enter the element 5 -&gt; 34
+Enter the element 6 -&gt; 2
+Enter the element 7 -&gt; 3
+Enter the element 8 -&gt; 23
+Enter the element 9 -&gt; 53
+Enter the element 10 -&gt; 43
+Enter the k th Position -&gt; 5
+The k th Position Element is -&gt; 24 </code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q10">
+<h3>10. Enter an array from the user and find the sum of all its values.</h3>
+<div class="answer-box">
+<h4>Answer 10:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 10 : Enter an array from the user and find the sum of all its values.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[5],sum;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+        sum = sum + arr[i];
+    }
+    printf(&quot;The Sum is -&gt; %d \n&quot;,sum);
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 10:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 353
+Enter the element 3 -&gt; 563
+Enter the element 4 -&gt; -90
+Enter the element 5 -&gt; 32
+The Sum is -&gt; 861 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q11">
+<h3>11. Enter an array from the user and find the duplicate values.</h3>
+<div class="answer-box">
+<h4>Answer 11:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 11 : Enter an array from the user and find the duplicate values.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10],map[10][11] = {0},found,x=0;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    for (int i = 0; i&lt; s ; i++ ){
+
+        found = 0;
+        for (int k = 0; k &lt; x; k++){
+            if (arr[i] == map[k][0]){
+                found = 1;
+                break;
+            }
+        }
+        
+        if (found == 0){
+            map[x][0] = arr[i];
+            
+            for (int j = 0; j&lt; s ; j++ ){
+                if (arr[i] == arr[j]){
+                    map[x][j+1] = 1;
+                }
+            }
+            
+            x++;
+
+        }
+
+
+    }
+
+    for(int i = 0;i &lt; x; i++){
+    printf(&quot;\nValue %d found at index positoins - &gt; &quot;,map[i][0]);
+        for (int j = 0; j&lt; s ; j++ ){
+            if (map[i][j+1] == 1)
+            printf(&quot;%d,&quot;,j);
+        }
+
+    }
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 11:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 1
+Enter the element 3 -&gt; 1
+Enter the element 4 -&gt; 1
+Enter the element 5 -&gt; 13
+Enter the element 6 -&gt; 13
+Enter the element 7 -&gt; 13
+Enter the element 8 -&gt; 5
+Enter the element 9 -&gt; 13
+Enter the element 10 -&gt; 1
+
+Value 1 found at index positoins - &gt; 0,1,2,3,9,
+Value 13 found at index positoins - &gt; 4,5,6,8,
+Value 5 found at index positoins - &gt; 7,</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q12">
+<h3>12. Enter an array from the user, remove duplicate values, and replace them with zeros.</h3>
+<div class="answer-box">
+<h4>Answer 12:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 12 : Enter an array from the user, remove duplicate values, and replace them with zeros.
+
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10],map[10][11] = {0},found,x=0;
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray After -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    for (int i = 0; i&lt; s ; i++ ){
+
+        found = 0;
+        for (int k = 0; k &lt; x; k++){
+            if (arr[i] == map[k][0]){
+                found = 1;
+                break;
+            }
+        }
+        
+        if (found == 0){
+            map[x][0] = arr[i];
+            int first = 1;
+            
+            for (int j = 0; j&lt; s ; j++ ){
+
+                if (arr[i] == arr[j]){
+                    if (first) {
+                        map[x][j+1] = 2;
+                        first = 0;
+                        continue;
+                    }
+                    map[x][j+1] = 1;
+                }
+            }
+            
+            x++;
+
+        }
+
+
+    }
+
+    for(int i = 0;i &lt; x; i++){
+        int sum = 0;
+        for (int j = 0; j&lt; s ; j++ ){
+            sum = sum + map[i][j+1];
+        }
+        if (sum != 2){
+            printf(&quot;\nDuplicated value found -&gt; %d , removed duplicates at index positons -&gt; &quot;,map[i][0]);
+            for (int k=0 ; k&lt;s; k++){
+                if (map[i][k+1] == 1){
+                    arr[k] = 0;
+                    printf(&quot;%d, &quot;,k);
+                }
+            }
+        }
+    }
+
+    printf(&quot;\n\nArray After -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 12:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 1
+Enter the element 3 -&gt; 1
+Enter the element 4 -&gt; 1
+Enter the element 5 -&gt; 2
+Enter the element 6 -&gt; 2
+Enter the element 7 -&gt; 2
+Enter the element 8 -&gt; 4
+Enter the element 9 -&gt; 4
+Enter the element 10 -&gt; 5
+
+Array After -&gt; [1, 1, 1, 1, 2, 2, 2, 4, 4, 5, ]
+
+Duplicated value found -&gt; 1 , removed duplicates at index positons -&gt; 1, 2, 3, 
+Duplicated value found -&gt; 2 , removed duplicates at index positons -&gt; 5, 6, 
+Duplicated value found -&gt; 4 , removed duplicates at index positons -&gt; 8, 
+
+Array After -&gt; [1, 0, 0, 0, 2, 0, 0, 4, 0, 5, ]
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q13">
+<h3>13. Enter an array from the user and count the duplicate values.</h3>
+<div class="answer-box">
+<h4>Answer 13:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 13 : Enter an array from the user and count the duplicate values.
+
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10],map[10][11] = {0},found,x=0;
+    int s = sizeof(arr)/sizeof(arr[0]);
+    int count = 0;
+
+
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray Before -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d, &quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    for (int i = 0; i&lt; s ; i++ ){
+
+        found = 0;
+        for (int k = 0; k &lt; x; k++){
+            if (arr[i] == map[k][0]){
+                found = 1;
+                break;
+            }
+        }
+        
+        if (found == 0){
+            map[x][0] = arr[i];
+            int first = 1;
+            
+            for (int j = 0; j&lt; s ; j++ ){
+
+                if (arr[i] == arr[j]){
+                    if (first) {
+                        map[x][j+1] = 2;
+                        first = 0;
+                        continue;
+                    }
+                    map[x][j+1] = 1;
+                }
+            }
+            
+            x++;
+
+        }
+
+
+    }
+
+    for(int i = 0;i &lt; x; i++){
+        int sum = 0;
+        for (int j = 0; j&lt; s ; j++ ){
+            sum = sum + map[i][j+1];
+        }
+        if (sum != 2){
+            count++;
+        }
+    }
+
+
+    printf(&quot;No of duplicated eleemts  is %d &quot;,count);
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 13:</h4>
+<pre><code>Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 1
+Enter the element 3 -&gt; 1
+Enter the element 4 -&gt; 1
+Enter the element 5 -&gt; 2
+Enter the element 6 -&gt; 2
+Enter the element 7 -&gt; 2
+Enter the element 8 -&gt; 4
+Enter the element 9 -&gt; 4
+Enter the element 10 -&gt; 2
+
+Array Before -&gt; [1, 1, 1, 1, 2, 2, 2, 4, 4, 2, ]
+No of duplicated eleemts  is 3 </code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q14">
+<h3>14. Enter an array from the user and print all possible combinations of its elements.</h3>
+<div class="answer-box">
+<h4>Answer 14:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 14 : Enter an array from the user and print all possible combinations of its elements.
+
+#include &lt;stdio.h&gt;
+
+void permute(int arr[], int start, int n) {
+    if (start == n) {
+        for (int i = 0; i &lt; n; i++) {
+            printf(&quot;%d &quot;, arr[i]);
+        }
+        printf(&quot;\n&quot;);
+        return;
+    }
+
+    for (int i = start; i &lt; n; i++) {
+        // swap 
+        int temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+
+        permute(arr, start + 1, n);
+
+        // undo it 
+        temp = arr[start];
+        arr[start] = arr[i];
+        arr[i] = temp;
+    }
+}
+
+int main() {
+    int arr[4];
+    int n =  sizeof(arr)/sizeof(arr[0]);
+
+    for (int i = 0 ; i &lt; n ; i++) {
+        printf(&quot;Enter element %d -&gt;  &quot;, i+1);
+        scanf(&quot;%d&quot;, &amp;arr[i]);
+    }
+
+    permute(arr, 0, n);
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 14:</h4>
+<pre><code>Enter element 1 -&gt;  1
+Enter element 2 -&gt;  2
+Enter element 3 -&gt;  3
+Enter element 4 -&gt;  0
+1 2 3 0 
+1 2 0 3 
+1 3 2 0 
+1 3 0 2 
+1 0 3 2 
+1 0 2 3 
+2 1 3 0 
+2 1 0 3 
+2 3 1 0 
+2 3 0 1 
+2 0 3 1 
+2 0 1 3 
+3 2 1 0 
+3 2 0 1 
+3 1 2 0 
+3 1 0 2 
+3 0 1 2 
+3 0 2 1 
+0 2 3 1 
+0 2 1 3 
+0 3 2 1 
+0 3 1 2 
+0 1 3 2 
+0 1 2 3 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q15">
+<h3>15. Enter an array from the user and print all palindrome numbers.</h3>
+<div class="answer-box">
+<h4>Answer 15:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 15 : Enter an array from the user and print all palindrome numbers.
+
+#include &lt;stdio.h&gt;
+
+int palindrome_check(int n){
+
+    int a = n, rev = 0, d;
+
+        while (n &gt; 0) {
+            d = n % 10;
+            rev = rev* 10 + d;
+            n = n/10;
+        }
+
+        return a == rev;
+    }
+
+
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray      -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nPlaindrome -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        if (palindrome_check(arr[i]) == 1){
+        printf(&quot;%d,&quot;,arr[i]);
+        continue;
+        }
+        printf(&quot; NO  ,&quot;);
+    }
+    printf(&quot;]\n&quot;);
+
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 15:</h4>
+<pre><code>Enter the element 1 -&gt; 12121
+Enter the element 2 -&gt; 50000
+Enter the element 3 -&gt; 33333
+Enter the element 4 -&gt; 55655
+Enter the element 5 -&gt; 23322
+
+Array      -&gt; [12121,50000,33333,55655,23322,]
+
+Plaindrome -&gt; [12121, NO  ,33333,55655, NO  ,]
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q16">
+<h3>16. Enter two arrays from the user and check whether they are identical.</h3>
+<div class="answer-box">
+<h4>Answer 16:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 16 : Enter two arrays from the user and check whether they are identical.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[5],arr2[5];
+    int s1 = sizeof(arr)/sizeof(arr[0]);
+    int s2 = sizeof(arr2)/sizeof(arr2[0]);
+
+
+    printf(&quot;Enter for the Array 1 -&gt;\n\n&quot;);
+    for (int i = 0; i&lt; s1 ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+
+    printf(&quot;\nEnter for the Array 2 -&gt;\n\n&quot;);
+    for (int i = 0; i&lt; s2 ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr2[i]);
+    }
+
+    printf(&quot;\nArray  1   -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s1 ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nArray  2   -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s2 ; i ++){
+        printf(&quot;%d,&quot;,arr2[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    int same = 1;
+    for (int i = 0 ; i &lt; s1 ; i++){
+        if (arr[i] != arr2[i]){
+            same = 0;
+            break;
+        }
+    }
+
+    if (same){
+        printf(&quot;\nArray 1 and 2 have identical elements \n&quot;);
+        return 0;
+    }
+    
+    printf(&quot;\nArray 1 and 2 Dont have identical elements \n&quot;);
+    return 0;
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 16:</h4>
+<pre><code>Enter for the Array 1 -&gt;
+
+Enter the element 1 -&gt; 12
+Enter the element 2 -&gt; 223
+Enter the element 3 -&gt; 43
+Enter the element 4 -&gt; 64
+Enter the element 5 -&gt; 7
+
+Enter for the Array 2 -&gt;
+
+Enter the element 1 -&gt; 12
+Enter the element 2 -&gt; 223
+Enter the element 3 -&gt; 43
+Enter the element 4 -&gt; 64
+Enter the element 5 -&gt; 7
+
+Array  1   -&gt; [12,223,43,64,7,]
+
+Array  2   -&gt; [12,223,43,64,7,]
+
+Array 1 and 2 have identical elements 
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q17">
+<h3>17. Merge two sorted arrays into a single sorted array.</h3>
+<div class="answer-box">
+<h4>Answer 17:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 17 : Merge two sorted arrays into a single sorted array.
+
+#include &lt;stdio.h&gt;
+#define SIZE 7
+
+void mergearr(int arr[], int u, int l)
+{
+    int mid = (u + l + 1) / 2;
+    int newarr[u - l + 1];
+    int k = 0;
+    int j = mid;
+
+    for (int i = l; i &lt; mid; i++){
+        while (j &lt;= u){
+            if (arr[i] &gt; arr[j]){
+                newarr[k] = arr[j];
+                k++;
+                j++;
+            }
+            else{
+                newarr[k] = arr[i];
+                k++;
+                break;
+            }
+        }
+
+        if (j &gt; u){
+            i++;
+            while (i &lt; mid){
+                newarr[k] = arr[i];
+                k++;
+                i++;
+            }
+            break;
+        }
+    }
+
+    while (j &lt;= u){
+        newarr[k] = arr[j];
+        k++;
+        j++;
+    }
+
+    for (int i = 0; i &lt; u - l + 1; i++){
+        arr[l + i] = newarr[i];
+    }
+}
+
+
+void mergesort(int arr[], int l, int u){
+    if (l &gt;= u){
+        return;
+    }
+
+    int mid = (l + u) / 2;
+
+    mergesort(arr, l, mid);
+    mergesort(arr, mid + 1, u);
+
+    mergearr(arr, u, l);
+}
+
+
+int main(){
+
+    int arr[SIZE],arr2[SIZE], arr3[2 * SIZE];
+    int s1 = sizeof(arr)/sizeof(arr[0]);
+    int s2 = sizeof(arr2)/sizeof(arr2[0]);
+    int s3 = sizeof(arr3)/sizeof(arr3[0]);
+
+
+    printf(&quot;Enter for the Array 1 -&gt;\n\n&quot;);
+    for (int i = 0; i&lt; s1 ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+
+    printf(&quot;\nEnter for the Array 2 -&gt;\n\n&quot;);
+    for (int i = 0; i&lt; s2 ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr2[i]);
+    }
+
+    printf(&quot;\nArray  1   -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s1 ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    printf(&quot;\nArray  2   -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s2 ; i ++){
+        printf(&quot;%d,&quot;,arr2[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    for (int i = 0 ; i &lt;s3 ; i++){
+        if (i &lt;s1){
+            arr3[i] = arr[i];
+            continue;
+        }
+        
+        arr3[i] = arr2[i-s2];
+
+    }
+
+    mergesort(arr3,0,s3-1);
+
+    printf(&quot;\nSorted Array -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s3 ; i ++){
+        printf(&quot;%d,&quot;,arr3[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    return 0;
+
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 17:</h4>
+<pre><code>Enter for the Array 1 -&gt;
+
+Enter the element 1 -&gt; 1
+Enter the element 2 -&gt; 3
+Enter the element 3 -&gt; 5
+Enter the element 4 -&gt; 7
+Enter the element 5 -&gt; 9
+Enter the element 6 -&gt; 11
+Enter the element 7 -&gt; 13
+
+Enter for the Array 2 -&gt;
+
+Enter the element 1 -&gt; 2
+Enter the element 2 -&gt; 4
+Enter the element 3 -&gt; 6
+Enter the element 4 -&gt; 8
+Enter the element 5 -&gt; 10
+Enter the element 6 -&gt; 12
+Enter the element 7 -&gt; 14
+
+Array  1   -&gt; [1,3,5,7,9,11,13,]
+
+Array  2   -&gt; [2,4,6,8,10,12,14,]
+
+Sorted Array -&gt; [1,2,3,4,5,6,7,8,9,10,11,12,13,14,]
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q18">
+<h3>18. Find the local minima in an array.</h3>
+<div class="answer-box">
+<h4>Answer 18:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 18 : Find the local minima in an array.
+
+#include &lt;stdio.h&gt;
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray      -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    for (int i = 1 ; i &lt;s-1 ; i++){
+        if (arr[i] &lt; arr[i-1] &amp;&amp; arr[i] &lt; arr[i+1]){
+            printf(&quot;%d is local minima&quot;,arr[i]);
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 18:</h4>
+<pre><code>Enter the element 1 -&gt; ^C</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q19">
+<h3>19. Find the local maxima in an array.</h3>
+<div class="answer-box">
+<h4>Answer 19:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 19 : Find the local maxima in an array.
+
+#include &lt;stdio.h&gt;
+int main(){
+
+    int arr[5];
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+
+    for (int i = 0; i&lt; s ; i++ ){
+        printf(&quot;Enter the element %d -&gt; &quot;,i+1);
+        scanf(&quot;%d&quot;,&amp;arr[i]);
+    }
+
+    printf(&quot;\nArray      -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+    for (int i = 1 ; i &lt;s-1 ; i++){
+        if (arr[i] &gt; arr[i-1] &amp;&amp; arr[i] &gt; arr[i+1]){
+            printf(&quot;%d is local Maxima\n&quot;,arr[i]);
+        }
+    }
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 19:</h4>
+<pre><code>Enter the element 1 -&gt; 13
+Enter the element 2 -&gt; 324
+Enter the element 3 -&gt; 42
+Enter the element 4 -&gt; 3232
+Enter the element 5 -&gt; 1
+
+Array      -&gt; [13,324,42,3232,1,]
+324 is local Maxima
+3232 is local Maxima
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q20">
+<h3>20. **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.</h3>
+<div class="answer-box">
+<h4>Answer 20:</h4>
+<pre><code>// Single-Dimensional Arrays -&gt; Q 20 : **Trapping Rain Water Problem:** Given an array of non-negative integers representing an elevation map, where each bar has a width of 1, calculate how much water it can trap after raining.
+
+#include &lt;stdio.h&gt;
+
+int main(){
+
+    int arr[10] = {10,3,5,32,3,3,4,53,42,9} ;
+    int s = sizeof(arr)/sizeof(arr[0]);
+    int volume = 0 ;
+
+    printf(&quot;\nArray      -&gt; [&quot;);
+    for (int i = 0 ; i &lt;s ; i ++){
+        printf(&quot;%d,&quot;,arr[i]);
+    }
+    printf(&quot;]\n&quot;);
+
+
+
+    /*
+        FORMULA:
+
+        water[i] = min(lmax, rmax) - arr[i]
+
+        lmax = Maximum height from index 0 to i.
+        rmax = Maximum height from index i to s-1.
+        arr[i] = Height of the current bar.
+
+        We use the smaller maximum because water spills
+        over the shorter boundary.
+
+        Total water = Sum of water[i] for all indices.
+    */
+
+
+    for (int i = 0; i &lt; s; i++) {
+        int lmax = arr[0];
+        int rmax = arr[s - 1];
+
+        // maximum on the left
+        for (int j = 0; j &lt;= i; j++) {
+            if (arr[j] &gt; lmax) {
+                lmax = arr[j];
+            }
+        }
+
+        // maximum  on the right
+        for (int j = i; j &lt; s; j++) {
+            if (arr[j] &gt; rmax) {
+                rmax = arr[j];
+            }
+        }
+
+        // Water level = minimum of left and right 
+        int water_level = (lmax &lt; rmax) ? lmax : rmax;
+
+        // Water trapped above the current bar
+        int water = water_level - arr[i];
+        volume += water;
+
+        printf(&quot;Index %d | Height: %d | Lmax: %d | Rmax: %d | Water: %d\n&quot;,i, arr[i], lmax, rmax, water);
+    }
+
+    printf(&quot;\nTotal trapped water -&gt; %d \n&quot;, volume);
+
+    return 0;
+}
+</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 20:</h4>
+<pre><code>
+Array      -&gt; [10,3,5,32,3,3,4,53,42,9,]
+Index 0 | Height: 10 | Lmax: 10 | Rmax: 53 | Water: 0
+Index 1 | Height: 3 | Lmax: 10 | Rmax: 53 | Water: 7
+Index 2 | Height: 5 | Lmax: 10 | Rmax: 53 | Water: 5
+Index 3 | Height: 32 | Lmax: 32 | Rmax: 53 | Water: 0
+Index 4 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29
+Index 5 | Height: 3 | Lmax: 32 | Rmax: 53 | Water: 29
+Index 6 | Height: 4 | Lmax: 32 | Rmax: 53 | Water: 28
+Index 7 | Height: 53 | Lmax: 53 | Rmax: 53 | Water: 0
+Index 8 | Height: 42 | Lmax: 53 | Rmax: 42 | Water: 0
+Index 9 | Height: 9 | Lmax: 53 | Rmax: 9 | Water: 0
+
+Total trapped water -&gt; 98 
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,5048 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA STRUCTURES (self) - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>DATA STRUCTURES (self)</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. [Stacks] Stack implementation with array local variable (push, pop, peek, isEmpty, size, show)</a></li>
+                    <li><a href="#q2">2. [Stacks] Bracket matching using fixed-size array stack</a></li>
+                    <li><a href="#q3">3. [Stacks] Bracket matching using linked list stack and queue buffer</a></li>
+                    <li><a href="#q4">4. [Stacks] Stack implementation using linked list (forward next pointer)</a></li>
+                    <li><a href="#q5">5. [Stacks] Stack implementation using linked list (previous pointer &amp; TOP)</a></li>
+                    <li><a href="#q6">6. [Stacks] Polish notation converter and evaluator using linked list stack</a></li>
+                    <li><a href="#q7">7. [Queues] Queue implementation using fixed-size array (enqueue, dequeue, front, rear, isEmpty, size, show, search)</a></li>
+                    <li><a href="#q8">8. [Queues] Dynamic sized linear queue using linked list (enqueue, dequeue, front, rear, isEmpty, size, show, search, clear)</a></li>
+                    <li><a href="#q9">9. [Queues] Dynamic sized circular queue using linked list (enqueue, dequeue, front, rear, isEmpty, size, show, search, clear)</a></li>
+                    <li><a href="#q10">10. [Queues] Simple queue implementation using array</a></li>
+                    <li><a href="#q11">11. [Linked List] Simple Singly Linked List (insert, delete, search, sort, display)</a></li>
+                    <li><a href="#q12">12. [Linked List] Simple Doubly Linked List (insert, delete, search, sort, display)</a></li>
+                    <li><a href="#q13">13. [Linked List] Circular Singly Linked List (insert, delete, search, display)</a></li>
+                    <li><a href="#q14">14. [Linked List] Circular Doubly Linked List (insert, delete, search, display)</a></li>
+                    <li><a href="#q15">15. [Trees] Binary Search Tree (insert, search, delete, min, max, preorder, inorder, postorder, level count)</a></li>
+                    <li><a href="#q16">16. [Graphs] Directed Graph using Adjacency Matrix (add/remove vertices &amp; edges, BFS, DFS)</a></li>
+                    <li><a href="#q17">17. [Sorting Algorithms] Bubble Sort Algorithm</a></li>
+                    <li><a href="#q18">18. [Sorting Algorithms] Insertion Sort Algorithm</a></li>
+                    <li><a href="#q19">19. [Sorting Algorithms] Merge Sort Algorithm</a></li>
+                    <li><a href="#q20">20. [Sorting Algorithms] Merge Sort Algorithm (Alternative Implementation)</a></li>
+                    <li><a href="#q21">21. [Sorting Algorithms] Quick Sort Algorithm</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. [Stacks] Stack implementation with array local variable (push, pop, peek, isEmpty, size, show)</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+
+#define STACK_SIZE 6
+
+int push(int arr[], int *top, int num){
+    if (*top &gt;= STACK_SIZE - 1){return 0;}
+    arr[++(*top)] = num;
+    return 1;
+}
+
+int pop(int arr[], int *top, int *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    (*top)--;
+    return 1;
+}
+
+int peek(int arr[], int *top, int *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    return 1;
+}
+
+int size_st(int *top){
+    return (*top) + 1;
+}
+
+int isempty(int *top){
+    return (*top == -1);
+}
+
+void show_st(int arr[], int *top)
+{
+    if (*top == -1){
+        printf(&quot;Stack is empty\n&quot;);
+        return;
+    }
+
+    printf(&quot;Stack elements :\n\n&quot;);
+      for (int i = 0 ; i &lt; *top ; i++){
+        printf(&quot;|  %3d  |&quot;, arr[i]);
+    }
+    printf(&quot;|&gt; %3d &lt;|\n&quot;, arr[*top]);
+
+}
+
+int main()
+{
+    int arr[STACK_SIZE];
+    int top = -1;
+    int choice;
+    int input_val;
+    int out;
+    int temp;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = push(arr, &amp;top, input_val);
+            if (out == 1)
+                printf(&quot;%d pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Popped value : %d\n&quot;, temp);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = peek(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Top value : %d\n&quot;, temp);
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, size_st(&amp;top));
+            break;
+
+        case 5:
+            if (isempty(&amp;top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_st(arr, &amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. [Stacks] Bracket matching using fixed-size array stack</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#define STACK_SIZE 21
+
+// STACK 
+
+
+int push(char arr[], int *top, char val){
+    if (*top &gt;= STACK_SIZE - 1){return 0;}
+    arr[++(*top)] = val;
+    return 1;
+}
+
+int pop(char arr[], int *top, char *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    (*top)--;
+    return 1;
+}
+
+int peek(char arr[], int *top, char *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    return 1;
+}
+
+int isempty(int *top){
+    return (*top == -1);
+}
+
+
+// CHECKING
+
+// int check(char arr[]){
+//     int i = 0;
+//     while(arr[i] != &#x27;\0&#x27;){
+//         if (arr[i] != &#x27;{&#x27; || arr[i] != &#x27;}&#x27; || arr[i] != &#x27;[&#x27; || arr[i] != &#x27;]&#x27; || arr[i] != &#x27;(&#x27; || arr[i] != &#x27;)&#x27; || arr[i] != &#x27; &#x27;){
+//             return 0;
+//         }
+//         i++;
+//     }
+//     return 1;
+// }
+
+
+int match_pair(char a, char b){
+    if (a==&#x27;{&#x27; &amp;&amp; b ==&#x27;}&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;[&#x27; &amp;&amp; b==&#x27;]&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;(&#x27; &amp;&amp; b==&#x27;)&#x27;){
+        return 1;
+    }
+    return 0;
+
+}
+
+int bracket_match(char arr[],char stack[],int *top){
+
+    int i = 0;
+    char topush,poped,peeped;
+
+    while(arr[i] != &#x27;\0&#x27;){
+
+        if (arr[i] == &#x27;{&#x27; || arr[i] == &#x27;[&#x27; || arr[i] == &#x27;(&#x27;){
+            push(stack,top,arr[i]);}
+        
+        else if (arr[i]==&#x27; &#x27;){}
+
+        else if (arr[i] == &#x27;}&#x27; || arr[i] == &#x27;]&#x27; || arr[i] == &#x27;)&#x27;){
+            int state = peek(stack,top,&amp;peeped);
+            if (state &amp;&amp; match_pair(peeped,arr[i])){
+                pop(stack,top,&amp;poped);   
+            }
+            else{return 0;}
+        }
+        else{return 0;}
+        i++;
+    }
+
+        if (isempty(top))
+            return 1;
+        else
+            return 0;
+
+
+};
+
+
+int main(){
+    int top = -1 ;
+    char stack[STACK_SIZE];
+    char arr[STACK_SIZE]=&quot;{{{{{}}[}(]}}}&quot;;
+    int a = bracket_match(arr,stack,&amp;top);
+    printf(&quot;%d&quot;,a);
+    return 1;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. [Stacks] Bracket matching using linked list stack and queue buffer</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    char data;
+    struct node * ptr;
+};
+
+
+// QUEUES : IT is normal dynamic sized non circular queue with 
+//          linked list with functions `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search`
+
+int enqueue(struct node ** front,struct node ** rear, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;ptr = NULL;
+
+    if (((*front) == NULL) &amp;&amp; ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)-&gt;ptr == NULL){
+        (*rear)-&gt;ptr = new_node;
+        (*rear) = (*rear)-&gt;ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)-&gt;ptr == NULL) &amp;&amp; ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)-&gt;ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+char fn_front(struct node * front){
+    return front-&gt;data;
+}
+
+char fn_rear(struct node * rear){
+    return rear-&gt;data;
+}
+
+
+int is_empty_queue(struct node * front,struct node * rear){
+    if ((front == NULL) &amp;&amp; (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front-&gt;ptr;
+    }
+
+    return i;
+}
+
+
+char get_one_by_one(struct node * front , struct node * rear, struct node ** ptr){
+
+    if ((front == NULL) &amp;&amp; (rear == front) &amp;&amp; (*ptr == NULL)){
+        return &#x27;\0&#x27;;
+    }
+
+    // if ((*ptr) == NULL){
+    //     (*ptr) = front-&gt;ptr;
+    //     return front-&gt;data; 
+    // }
+
+    while((front) != NULL){
+        if (front == *ptr){
+            *ptr = front-&gt;ptr;
+
+            return front-&gt;data;
+        }
+        front=front-&gt;ptr;
+    }
+    return &#x27;\0&#x27;;    
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)-&gt;ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+// STACK 
+
+
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty_stack(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+char peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)-&gt;ptr;
+        free(temp);
+    }
+}
+
+
+
+
+// -----------------------------------
+
+
+// BRACKJET MATCHING FUNCTIONS 
+
+
+int match_pair(char a, char b){
+    if (a==&#x27;{&#x27; &amp;&amp; b ==&#x27;}&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;[&#x27; &amp;&amp; b==&#x27;]&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;(&#x27; &amp;&amp; b==&#x27;)&#x27;){
+        return 1;
+    }
+    return 0;
+
+}
+
+int bracket_match(struct node ** front , struct node ** rear,struct node ** top){
+
+    char front_data_queue;
+
+    while(!is_empty_queue(*front,*rear)){
+
+        front_data_queue = fn_front(*front);
+
+        if (front_data_queue == &#x27;{&#x27; || front_data_queue == &#x27;[&#x27; || front_data_queue == &#x27;(&#x27;){
+            add_node(top,front_data_queue);}
+        
+        else if (front_data_queue==&#x27; &#x27;){}
+
+        else if (front_data_queue == &#x27;}&#x27; || front_data_queue == &#x27;]&#x27; || front_data_queue == &#x27;)&#x27;){
+            int state = is_empty_stack(*top);
+            if (!state &amp;&amp; match_pair(peek_node(*top),front_data_queue)){
+                pop_node(top);
+            }
+            else{return 0;}
+        }
+        else{return 0;}
+        dequeue(front,rear);
+    }
+
+        if (is_empty_stack(*top))
+            return 1;
+        else
+            return 0;
+
+
+};
+
+
+int main(){
+
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    
+    struct node * get_ptr = NULL;
+
+    struct node * top = NULL;
+    char temp;
+
+    while (1){
+        printf(&quot;Enter the brackets : &quot;);
+        while ((temp = getchar()) != &#x27;\n&#x27;){
+            enqueue(&amp;front,&amp;rear,temp);
+        }
+        printf(&quot;\n&quot;);
+        printf(&quot;+-----------+&quot;);
+        printf(&quot;\n&quot;);
+        printf(&quot;Brackets you entered : &quot;);
+
+        get_ptr = front;
+        while((temp = get_one_by_one(front,rear,&amp;get_ptr)) != &#x27;\0&#x27;){
+            printf(&quot;%c&quot;,temp);
+        }
+
+        if (bracket_match(&amp;front,&amp;rear,&amp;top) == 1){
+            printf(&quot;\nMatched\n&quot;);
+        }
+        else {
+            printf(&quot;\nDoesnt Matched\n&quot;);
+            
+        }
+        printf(&quot;\n&quot;);
+        printf(&quot;+-----------+&quot;);
+        printf(&quot;\n&quot;);
+
+        clear_queue(&amp;front,&amp;rear);
+        clear_stack(&amp;top);
+
+        printf(&quot;Do you want to continue ? (Y/N)&quot;);
+        temp = getchar();
+        while (getchar() != &#x27;\n&#x27;);
+        if ((temp == &#x27;N&#x27;) || (temp == &#x27;n&#x27;)){
+            break;
+        }
+        // fflush(stdin);
+    }
+
+    return 0;
+
+
+}
+
+// &gt; fixesdone
+// - clear/reset the nodes
+// - here we have precidence conflict (temp = getchar()) != &#x27;\n&#x27;
+// - increasing the frontn </code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. [Stacks] Stack implementation using linked list (forward next pointer)</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;alloca.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+// FUCNTIONS TO HANDEL NODES AND POINTERS 
+
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+// so what is happening hwerr sis null is not a object pointer 
+// so if we jsut use the pointer with * it will jsut copies the pointer to waht it is ponting to here for 0 nodes it is zero
+// but by ** we are doing to get the address of the pointer so we can diretly modify the adderss stored at that address (pointer&#x27;s)
+// the pass by pointer is actaully a coping of the address itself  
+
+
+int add_node(struct node ** head, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+    
+    if (*head == NULL){
+        *head = new_node;
+        return 1;
+    }
+
+    struct node * temp = *head;
+    while (temp-&gt;nxt_ptr != NULL)
+    {
+        temp = temp-&gt;nxt_ptr;
+    }
+
+    temp-&gt;nxt_ptr = new_node;
+    return 1;
+
+}
+
+
+
+void print_data(struct node * ptr){
+    if (ptr == NULL){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    
+    int i=0;
+
+    while (1){
+        printf(&quot;DATA AT %d NODE : %d\n&quot;,i,ptr-&gt;data);
+        i++;
+        if (ptr-&gt;nxt_ptr == NULL){return;}
+        ptr=ptr-&gt;nxt_ptr;
+    }
+
+}
+
+
+int main(){
+    struct node * head = NULL;
+    add_node(&amp;head,10);
+    add_node(&amp;head,10);
+    add_node(&amp;head,100);
+    add_node(&amp;head,90);
+    add_node(&amp;head,10);
+    print_data(head);
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q5">
+<h3>5. [Stacks] Stack implementation using linked list (previous pointer &amp; TOP)</h3>
+<div class="answer-box">
+<h4>Answer 5:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+int peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    printf(&quot;\n|&gt; %3d &lt;|&quot;, top-&gt;data);
+    top=top-&gt;pre_ptr;
+
+    while (top != NULL){
+
+        printf(&quot;|  %3d  |&quot;, top-&gt;data);
+        top=top-&gt;pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top-&gt;pre_ptr;
+    }
+    return i;
+}
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)-&gt;pre_ptr;
+        free(temp);
+    }
+}
+
+
+
+int main(){
+
+    struct node * top = NULL;
+    int choice,input_val,out;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : clear\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = add_node(&amp;top,input_val);
+            if (out == 1)
+                printf(&quot;%d pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop_node(&amp;top);
+            if (out == 1)
+                printf(&quot;Popped&quot;);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(top);
+            if (out == 0)
+                printf(&quot;Top value : %d\n&quot;, peek_node(top));
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, stack_size(top));
+            break;
+
+        case 5:
+            if (is_empty(top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. [Stacks] Polish notation converter and evaluator using linked list stack</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// ------------------- LINKED LIST STACK WITH PREVIOUS NODE REFERENCING CHAR STACK 
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    char data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+int peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    printf(&quot;\n|&gt; %3c &lt;|&quot;, top-&gt;data);
+    top=top-&gt;pre_ptr;
+
+    while (top != NULL){
+
+        printf(&quot;|  %3c  |&quot;, top-&gt;data);
+        top=top-&gt;pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top-&gt;pre_ptr;
+    }
+    return i;
+}
+
+
+
+
+// ------------------------- 
+
+
+
+
+
+int main(){
+
+    struct node * input = NULL;
+    struct node * converted = NULL;
+
+    int i = 0;
+
+    printf(&quot;Enter the equation :&quot;);
+    while (1){
+
+
+
+    }
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q7">
+<h3>7. [Queues] Queue implementation using fixed-size array (enqueue, dequeue, front, rear, isEmpty, size, show, search)</h3>
+<div class="answer-box">
+<h4>Answer 7:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define QUEUE_SIZE 10
+
+
+int enqueue(int queue[],int * front, int * rear ,int data){
+    if (*front == -1 &amp;&amp; *rear == -1){
+        (*front)++;
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    if (*front &gt; -1 &amp;&amp; *rear &lt; QUEUE_SIZE - 1){
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    return 0;
+
+}
+
+int dequeue(int * front, int * rear){
+    if (*front == -1 &amp;&amp; *rear == -1){
+        return 0;
+    }
+    
+    if ((*front &lt;= *rear ) &amp;&amp; (*front &lt; QUEUE_SIZE)){
+        
+        if ((*front == QUEUE_SIZE -1)){
+            *front = -1;
+            *rear = -1;
+            return -1;
+        }
+
+        if (*front == *rear) {
+            *front = -1;
+            *rear = -1;
+             return 1;
+            }
+        
+        (*front)++;
+        return 1;
+    }
+    return 0;
+}
+
+int fn_front(int queue[],int front){
+    return queue[front];
+}
+
+int fn_rear(int queue[],int rear){
+    return queue[rear];
+}
+
+int is_empty(int queue[],int front, int rear){
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return 1;
+    }
+
+    return 0;
+}
+
+int size(int queue[],int front, int rear){
+
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return 0;
+    }
+    
+    return rear-front+1;
+}
+
+
+void show(int queue[],int front, int rear){
+    
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        printf(&quot;no data&quot;);
+        return;
+    }
+
+    if (front == rear){
+        printf(&quot;||f&gt; %3d &lt;r|&quot;, queue[front]);
+        return;
+    }
+
+    printf(&quot;||f&gt; %3d &lt;|&quot;, queue[front]);
+
+    for (int i = front+1 ; i &lt; rear ; i++){
+        printf(&quot;|  %3d  |&quot;, queue[i]);
+    }
+    printf(&quot;|r&gt; %3d &lt;||\n&quot;, queue[rear]);
+
+}
+
+int search(int queue[],int front, int rear,int data){
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return -1;
+    }
+
+    for (int i = front ; i &lt; rear + 1 ; i++){
+        if (queue[i] == data){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+
+int main(){
+
+    int * queue = (int *)(malloc(sizeof(int) * QUEUE_SIZE));
+    int front = -1;
+    int rear = -1;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : enqueue\n&quot;);
+        printf(&quot;2 : dequeue\n&quot;);
+        printf(&quot;3 : front\n&quot;);
+        printf(&quot;4 : rear\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : size\n&quot;);
+        printf(&quot;8 : search\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to enqueue : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = enqueue(queue,&amp;front,&amp;rear,input_val);
+            if (out == 1)
+                printf(&quot;%d enqueued \n&quot;, input_val);
+            else
+                printf(&quot;cant enqueue\n&quot;);
+            break;
+
+        case 2:
+            out = dequeue(&amp;front,&amp;rear);
+            if (out == 1)
+                printf(&quot;Dequeued value\n&quot;);
+            else if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else
+                printf(&quot;Queue Reset \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf(&quot;Front value : %d\n&quot;, fn_front(queue,front));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+        case 4:
+            out = is_empty(queue,front,rear);
+            if (out == 0)
+                printf(&quot;rear value : %d\n&quot;, fn_rear(queue,rear));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+
+        case 5:
+            if (is_empty(queue,front,rear))
+                printf(&quot;Queue is empty \n&quot;);
+            else
+                printf(&quot;Queue is not empty\n&quot;);
+            break;
+
+        case 6:
+            show(queue,front,rear);
+            break;
+            
+        case 7:
+            printf(&quot;%d is the sixe of Queue &quot;, size(queue,front,rear));
+                break;
+        case 8:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = search(queue,front,rear,input_val);
+            if (out == 1)
+                printf(&quot;Element Found \n&quot;);
+            else if (out == 0)
+                printf(&quot;Element Not Found\n&quot;);
+            else
+                printf(&quot;No data  \n&quot;);
+
+                break;
+
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q8">
+<h3>8. [Queues] Dynamic sized linear queue using linked list (enqueue, dequeue, front, rear, isEmpty, size, show, search, clear)</h3>
+<div class="answer-box">
+<h4>Answer 8:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** front,struct node ** rear, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+
+    if (((*front) == NULL) &amp;&amp; ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)-&gt;nxt_ptr == NULL){
+        (*rear)-&gt;nxt_ptr = new_node;
+        (*rear) = (*rear)-&gt;nxt_ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)-&gt;nxt_ptr == NULL) &amp;&amp; ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)-&gt;nxt_ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+int fn_front(struct node * front){
+    return front-&gt;data;
+}
+
+int fn_rear(struct node * rear){
+    return rear-&gt;data;
+}
+
+
+int is_empty(struct node * front,struct node * rear){
+    if ((front == NULL) &amp;&amp; (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front-&gt;nxt_ptr;
+    }
+
+    return i;
+}
+
+
+
+void show(struct node * front,struct node * rear){
+
+
+    if ((front == NULL) &amp;&amp; (rear == NULL)){
+        printf(&quot;NO DATA\n&quot;);
+        return;    
+    }
+
+    if (front == rear){
+        printf(&quot;||f&gt; %3d &lt;r||&quot;, front-&gt;data);
+        return;
+    }
+
+
+    printf(&quot;||f&gt; %3d &lt;|&quot;, front-&gt;data);
+    front = front-&gt;nxt_ptr;
+    while(front-&gt;nxt_ptr != NULL){
+        printf(&quot;|&gt; %3d &lt;||&quot;, front-&gt;data);
+        front=front-&gt;nxt_ptr;
+    }
+    printf(&quot;|r&gt; %3d &lt;||\n&quot;, rear-&gt;data);
+    return;
+
+}
+
+int search(struct node * front,struct node * rear,int data ){
+     if ((front == NULL) &amp;&amp; (rear == NULL)){
+        return -1;    
+    }
+
+    while(front != NULL){
+        if (front-&gt;data == data){
+            return 1;
+        }
+        front=front-&gt;nxt_ptr;
+    }
+
+    return 0;
+
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)-&gt;nxt_ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+int main(){
+    
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : enqueue\n&quot;);
+        printf(&quot;2 : dequeue\n&quot;);
+        printf(&quot;3 : front\n&quot;);
+        printf(&quot;4 : rear\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : size\n&quot;);
+        printf(&quot;8 : search\n&quot;);
+        printf(&quot;9 : clear\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to enqueue : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = enqueue(&amp;front,&amp;rear,input_val);
+            if (out == 1)
+                printf(&quot;%d enqueued \n&quot;, input_val);
+            else
+                printf(&quot;cant enqueue\n&quot;);
+            break;
+
+        case 2:
+            out = dequeue(&amp;front,&amp;rear);
+            if (out == 1)
+                printf(&quot;Dequeued value\n&quot;);
+            else if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else
+                printf(&quot;Queue Reset \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf(&quot;Front value : %d\n&quot;, fn_front(front));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+        case 4:
+            out = is_empty(front,rear);
+            if (out == 0)
+                printf(&quot;rear value : %d\n&quot;, fn_rear(rear));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+
+        case 5:
+            if (is_empty(front,rear))
+                printf(&quot;Queue is empty \n&quot;);
+            else
+                printf(&quot;Queue is not empty\n&quot;);
+            break;
+
+        case 6:
+            show(front,rear);
+            break;
+            
+            case 7:
+            printf(&quot;%d is the sixe of Queue &quot;, fn_size(front));
+            break;
+            
+            case 8:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = search(front,rear,input_val);
+            if (out == 1)
+            printf(&quot;Element Found \n&quot;);
+            else if (out == 0)
+            printf(&quot;Element Not Found\n&quot;);
+            else
+            printf(&quot;No data  \n&quot;);
+            
+            break;
+            
+            case 9:
+                clear_queue(&amp;front,&amp;rear);
+                break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q9">
+<h3>9. [Queues] Dynamic sized circular queue using linked list (enqueue, dequeue, front, rear, isEmpty, size, show, search, clear)</h3>
+<div class="answer-box">
+<h4>Answer 9:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+int enqueue(struct node ** rear, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+
+    if ((*rear) == NULL){
+        *rear = new_node;
+        (*rear)-&gt;nxt_ptr = new_node;
+        return 1;
+    }
+    
+    // if ((*rear)-&gt;nxt_ptr == *rear){
+        struct node * front = (*rear)-&gt;nxt_ptr;
+        (*rear)-&gt;nxt_ptr = new_node;
+        (*rear) = new_node;
+        (*rear)-&gt;nxt_ptr = front;
+        return 1;
+    // } 
+    
+    // if ((*rear)-&gt;nxt_ptr != *rear){
+    //     struct node * temp = (*rear)-&gt;nxt_ptr;
+    //     (*rear)-&gt;nxt_ptr = new_node;
+    //     (*rear) = (*rear)-&gt;nxt_ptr;
+    //     (*rear)-&gt;nxt_ptr = temp;
+    //     return 1;
+    // } 
+
+    // return 0;
+}
+
+
+int dequeue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+
+    if (((*rear) == (*rear)-&gt;nxt_ptr)){
+        free(*rear);
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * front = (*rear)-&gt;nxt_ptr;
+    (*rear)-&gt;nxt_ptr = front-&gt;nxt_ptr;
+    free(front);
+    return 1;
+}
+
+
+int fn_front(struct node * rear){
+    return ((rear)-&gt;nxt_ptr)-&gt;data;
+}
+
+int fn_rear(struct node * rear){
+    return rear-&gt;data;
+}
+
+
+int is_empty(struct node * rear){
+    if (rear == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * rear){
+    if (rear == NULL){return 0;}
+
+    struct node * front = rear-&gt;nxt_ptr;
+    int i = 0;
+
+    do{
+    i++;
+    front=front-&gt;nxt_ptr;
+    }while(front != rear-&gt;nxt_ptr);
+
+    return i;
+}
+
+
+void show(struct node ** rear){
+
+
+    if (((*rear) == NULL)){
+        printf(&quot;NO DATA\n&quot;);
+        return;    
+    }
+
+    if ((*rear) == (*rear)-&gt;nxt_ptr){
+        printf(&quot;||f&gt; %3d &lt;r||&quot;, (*rear)-&gt;data);
+        return;
+    }
+
+    struct node * front = (*rear)-&gt;nxt_ptr;
+    printf(&quot;||f&gt; %3d &lt;|&quot;, front-&gt;data);
+    front = front-&gt;nxt_ptr;
+    
+    // while(front-&gt;nxt_ptr != rear-&gt;nxt_ptr){
+    //     printf(&quot;|&gt; %3d &lt;||&quot;, front-&gt;data);
+    //     front=front-&gt;nxt_ptr;
+    // }
+    
+    while(front != (*rear)){
+        printf(&quot;|&gt; %3d &lt;||&quot;, front-&gt;data);
+        front=front-&gt;nxt_ptr;
+    }
+
+    printf(&quot;|r&gt; %3d &lt;||\n&quot;, (*rear)-&gt;data);
+    return;
+    
+}
+
+
+
+int search(struct node * rear,int data ){
+    if ((rear == NULL)){
+        return -1;    
+    }
+    
+    struct node * front = rear-&gt;nxt_ptr;
+    do{
+        if (front-&gt;data == data){
+            return 1;
+        }
+        front=front-&gt;nxt_ptr;
+    }while(front != rear-&gt;nxt_ptr);
+    return 0;
+}
+
+
+int clear_queue(struct node ** rear){
+    if ((*rear) == NULL){
+        return 0;
+    }
+    struct node * temp;
+    struct node * front = (*rear)-&gt;nxt_ptr;
+
+    while (front != (*rear)){
+        temp = front;
+        front = front-&gt;nxt_ptr;
+        free(temp);
+    }
+    free(*rear);
+    (*rear) = NULL;  
+    return 1; 
+}
+
+
+int main(){
+    
+    struct node * rear = NULL;
+    int choice,input_val,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : enqueue\n&quot;);
+        printf(&quot;2 : dequeue\n&quot;);
+        printf(&quot;3 : front\n&quot;);
+        printf(&quot;4 : rear\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : size\n&quot;);
+        printf(&quot;8 : search\n&quot;);
+        printf(&quot;9 : clear\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to enqueue : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = enqueue(&amp;rear,input_val);
+            if (out == 1)
+                printf(&quot;%d enqueued \n&quot;, input_val);
+            else
+                printf(&quot;cant enqueue\n&quot;);
+            break;
+
+        case 2:
+            out = dequeue(&amp;rear);
+            if (out == 1)
+                printf(&quot;Dequeued value\n&quot;);
+            else if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else
+                printf(&quot;Queue Reset \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(rear);
+            if (out == 0)
+                printf(&quot;Front value : %d\n&quot;, fn_front(rear));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+        case 4:
+            out = is_empty(rear);
+            if (out == 0)
+                printf(&quot;rear value : %d\n&quot;, fn_rear(rear));
+            else
+                printf(&quot;Queue is empty \n&quot;);
+            break;
+
+
+        case 5:
+            if (is_empty(rear))
+                printf(&quot;Queue is empty \n&quot;);
+            else
+                printf(&quot;Queue is not empty\n&quot;);
+            break;
+
+        case 6:
+            show(&amp;rear);
+            break;
+            
+            case 7:
+            printf(&quot;%d is the sixe of Queue &quot;, fn_size(rear));
+            break;
+            
+            case 8:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = search(rear,input_val);
+            if (out == 1)
+            printf(&quot;Element Found \n&quot;);
+            else if (out == 0)
+            printf(&quot;Element Not Found\n&quot;);
+            else
+            printf(&quot;No data  \n&quot;);
+            
+            break;
+            
+            case 9:
+                clear_queue(&amp;rear);
+                break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}
+
+
+// | Condition                            | Stop when...                    |             If starting at front |
+// | ------------------------------------ | ------------------------------- | -------------------------------: |
+// | `front != (*rear)-&gt;nxt_ptr`          | `front` reaches **front again** |wont work if 1st isnt skipped then it skips 0 iterations |
+// | `front-&gt;nxt_ptr != (*rear)-&gt;nxt_ptr` | `front` reaches **rear**        |        doest need skipped 1st front    skips rear |
+// | `front != *rear`                     | `front` reaches **rear**        | processes everything before rear |
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q10">
+<h3>10. [Queues] Simple queue implementation using array</h3>
+<div class="answer-box">
+<h4>Answer 10:</h4>
+<pre><code>#define QUEUE_SIZE 10
+
+
+int enqueue(int queue[],int * front, int * rear ,int data){
+    if (*front == -1 &amp;&amp; *rear == -1){
+        (*front)++;
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    if (*front &gt; -1 &amp;&amp; *rear &lt; QUEUE_SIZE - 1){
+        (*rear) ++;
+        queue[*rear] = data;
+        return 1;
+    }
+
+    return 0;
+
+}
+
+int dequeue(int * front, int * rear){
+    if (*front == -1 &amp;&amp; *rear == -1){
+        return 0;
+    }
+    
+    if ((*front &lt;= *rear ) &amp;&amp; (*front &lt; QUEUE_SIZE)){
+        
+        if ((*front == QUEUE_SIZE -1)){
+            *front = -1;
+            *rear = -1;
+            return -1;
+        }
+
+        if (*front == *rear) {
+            *front = -1;
+            *rear = -1;
+             return 1;
+            }
+        
+        (*front)++;
+        return 1;
+    }
+    return 0;
+}
+
+int fn_front(int queue[],int front){
+    return queue[front];
+}
+
+int fn_rear(int queue[],int rear){
+    return queue[rear];
+}
+
+int is_empty(int queue[],int front, int rear){
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return 1;
+    }
+
+    return 0;
+}
+
+int size(int queue[],int front, int rear){
+
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return 0;
+    }
+    
+    return rear-front+1;
+}
+
+
+void show(int queue[],int front, int rear){
+    
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        printf(&quot;no data&quot;);
+        return;
+    }
+
+    if (front == rear){
+        printf(&quot;||f&gt; %3d &lt;r|&quot;, queue[front]);
+        return;
+    }
+
+    printf(&quot;||f&gt; %3d &lt;|&quot;, queue[front]);
+
+    for (int i = front+1 ; i &lt; rear ; i++){
+        printf(&quot;|  %3d  |&quot;, queue[i]);
+    }
+    printf(&quot;|r&gt; %3d &lt;||\n&quot;, queue[rear]);
+
+}
+
+int search(int queue[],int front, int rear,int data){
+    if ((front == -1 &amp;&amp; rear == -1) || (front &gt; rear)){
+        return -1;
+    }
+
+    for (int i = front ; i &lt; rear + 1 ; i++){
+        if (queue[i] == data){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q11">
+<h3>11. [Linked List] Simple Singly Linked List (insert, delete, search, sort, display)</h3>
+<div class="answer-box">
+<h4>Answer 11:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+
+// |b| -&gt; | | -&gt; | | -&gt; | | -&gt; |e|
+//  ^                           ^
+//  |                           |
+// beg                         end
+
+
+int fn_size(struct node * beg,struct node *end);
+
+
+int insert_at_beg(struct node ** beg,struct node ** end,int data){ 
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+
+    if ((*beg) == NULL){
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+    // putting a new node nxy ptr to beg and theb beg = new node
+    new_node-&gt;nxt_ptr = (*beg);
+    (*beg) = new_node;
+    
+    
+    return 1;
+}
+
+
+int insert_at_end(struct node ** end,struct node ** beg,int data){
+    
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+    
+    if (((*end) == NULL) &amp;&amp; ((*beg) == NULL)) {
+    (*beg) = new_node;
+    (*end) = new_node;  
+        return -1;
+    }
+    
+    (*end)-&gt;nxt_ptr = new_node;
+    (*end) = new_node;
+    return 1;
+}
+
+
+
+int insert_at_pos(struct node ** end,struct node ** beg,int data,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end)) ;
+    
+    if (!((pos&gt;=0) &amp;&amp; (pos&lt;=size))){return 0;}
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+    
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*beg) = new_node;
+        (*end) = new_node;
+        return -1;
+    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node-&gt;nxt_ptr = (*beg);
+        (*beg) = new_node;
+        return 1;
+    }
+
+    // if insert at end
+    if (pos == size){
+        (*end)-&gt;nxt_ptr = new_node;
+        (*end) = new_node;
+        return -2;
+    }
+    
+    struct node * temp = (*beg);
+    for (n;n&lt;pos - 1;n++){
+        temp = temp-&gt;nxt_ptr;
+    }
+    new_node-&gt;nxt_ptr = temp-&gt;nxt_ptr;
+    temp-&gt;nxt_ptr = new_node;
+    return 1;
+
+}
+
+
+int delete_at_beg(struct node ** beg,struct node ** end){
+    
+    if ((*beg) == NULL){
+        return 0;
+    }
+
+    if (((*beg) == (*end)) &amp;&amp; ((*beg)-&gt;nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*beg)-&gt;nxt_ptr;
+    free((*beg));
+    (*beg) = temp;
+    return 1;
+}
+
+
+
+int delete_at_end(struct node ** end,struct node ** beg){
+    if ((*end) == NULL){
+        return 0;
+    }
+    if (((*beg) == (*end)) &amp;&amp; ((*beg)-&gt;nxt_ptr == NULL)){
+        free((*beg));
+        (*beg) = NULL;
+        (*end) = NULL;
+        return -1;
+    }
+
+    struct node * pre = (*beg);
+    while(pre-&gt;nxt_ptr!=(*end)){
+        // pre = temp;
+        pre = pre-&gt;nxt_ptr;
+    }
+
+    pre-&gt;nxt_ptr = NULL;
+    free((*end));
+    (*end) = pre;
+    return 1;
+}
+
+//so the thing if if size is 5 the
+// index rtange os 0 - 4 , if i wnart to add at 2 , then i need
+// the temp to hold the ptr of 1st indec becasue it have the next and next ; so i can insert the eleemnt 
+//at that poistion change the address of n-1 index and the new node containing the ttemp-&gt;nxt_ptr ; FOR deletion we 
+//also need the temp to has address of n-1 , temp will have to first get temp-&gt;nxtptr-&gt;nxtprt address and teh copy it to the temp nxtptr 
+
+
+// IMPLEEMTAION
+
+// but in fucntion impleemtion i did something weired insert utpo pre , delete upto the actual value then also trcked the pre 
+
+
+int delete_at_pos(struct node ** end,struct node ** beg,int pos){
+    int n = 0; 
+    int size = fn_size((*beg),(*end));
+    
+    if (!((pos&gt;=0) &amp;&amp; (pos&lt;=size))){return 0;}
+    
+    if ((size ==0)){
+        return 0;
+    }
+    
+    if (pos == 0){
+        return (delete_at_beg(beg, end) == -1) ? -1 : 1;
+    }
+    if (pos == size - 1){
+        return (delete_at_end(beg, end) == -1) ? -1 : 1;
+    }
+    
+    struct node * temp = (*beg);
+    struct node * pre = (*beg);
+    for (n;n&lt;pos;n++){
+        pre=temp;
+        temp=temp-&gt;nxt_ptr;
+    }
+    pre-&gt;nxt_ptr = temp-&gt;nxt_ptr;
+    free(temp);
+    return 1;
+}
+
+
+int search(struct node * end,struct node * beg,int data){
+    if ((beg == NULL) &amp;&amp; (end == beg)){
+        return -2;
+    }
+    int i = 0;
+    while(beg!=NULL){
+        if (beg-&gt;data == data){
+            return i;
+        }
+        i++;
+        beg = beg-&gt;nxt_ptr;
+    }
+    return -1;
+}
+
+
+int sort(struct node **beg,struct node **end){
+
+    int s = fn_size(*beg,*end);
+    if (s==0){return 0;}
+    int * arr = (int *)(malloc(sizeof(int)*s));
+
+    struct node * temp = (*beg);
+    for (int i = 0 ; i &lt;s ; i++){
+        arr[i]=temp-&gt;data;
+        temp = temp-&gt;nxt_ptr;
+    }
+    temp = (*beg);
+    
+    //INSETION SORT 
+    
+    for (int i = 0 ; i &lt; s - 1 ; i ++ ){
+        for (int j = i+1 ; j &gt; 0 ; j--){
+            if (arr[j]&lt;arr[j-1]){
+                arr[j]=arr[j]+arr[j-1];
+				arr[j-1]=arr[j]-arr[j-1];
+				arr[j]=arr[j]-arr[j-1];
+			}
+            else{break;}
+        }
+    }
+    
+    for (int i = 0 ; i &lt;s ; i++){
+        temp-&gt;data=arr[i];
+        temp = temp-&gt;nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+}
+
+
+void show(struct node * beg,struct node * end){
+    if ((end==NULL) &amp;&amp; (end == beg)){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    
+    if ((end == beg) &amp;&amp; (end-&gt;nxt_ptr == NULL)){
+        printf(&quot;|b&gt;  %3d  &lt;e|&quot;,beg-&gt;data);
+        return;
+    }
+    
+    int i = 0;
+    
+    printf(&quot;|b&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    beg=beg-&gt;nxt_ptr;
+    i++;
+    while(beg-&gt;nxt_ptr!=NULL){
+        printf(&quot;| &gt;   %3d   &lt;%d|&quot;, beg-&gt;data,i);
+        beg = beg-&gt;nxt_ptr;
+        i++;
+    }
+    printf(&quot;|e&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    return;
+}
+
+
+int fn_size(struct node * beg,struct node * end){
+    int i = 0;
+    if ((end==NULL) &amp;&amp; (end == beg)){
+        return i;
+    }
+    while(beg!=NULL){
+        i++;
+        beg = beg-&gt;nxt_ptr;
+    }
+    return i;
+}
+
+
+int is_empty(struct node * beg,struct node * end){
+    if (fn_size(beg,end) == 0){return 1;}
+    return 0;
+}
+
+
+int clear_ll(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) &amp;&amp; ((*beg) == (*end))){
+        return 0;
+    }
+
+    struct node * temp ;
+    while((*beg)!= NULL){
+        temp = (*beg);
+        (*beg) = (*beg)-&gt;nxt_ptr;
+        free(temp);
+    }
+    (*beg) = NULL;
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * beg = NULL;
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert at beg\n&quot;);
+        printf(&quot;2 : insert at end\n&quot;);
+        printf(&quot;3 : delete at beg\n&quot;);
+        printf(&quot;4 : delete at end\n&quot;);
+        printf(&quot;5 : insert at pos\n&quot;);
+        printf(&quot;6 : delete at pos\n&quot;);
+        printf(&quot;7 : isempty\n&quot;);
+        printf(&quot;8 : show\n&quot;);
+        printf(&quot;9 : size\n&quot;);
+        printf(&quot;10 : search\n&quot;);
+        printf(&quot;11 : clear\n&quot;);
+        printf(&quot;12 : sort\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number insert at beg : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_beg(&amp;beg,&amp;end,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+        case 2:
+            printf(&quot;Enter the number insert at end : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_end(&amp;end,&amp;beg,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+            
+
+        case 3:
+            out = delete_at_beg(&amp;beg,&amp;end);
+            if (out == 1)
+                printf(&quot;Deleted value\n&quot;);
+            else if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else
+                printf(&quot;Linked List Reset \n&quot;);
+            break;
+        case 4:
+            out = delete_at_end(&amp;end,&amp;beg);
+            if (out == 1)
+                printf(&quot;Deleted value\n&quot;);
+            else if (out == 0)
+                printf(&quot;No Data \n&quot;);
+            else
+                printf(&quot;Linked List Reset \n&quot;);
+            break;
+
+        case 5:
+            printf(&quot;Enter the number insert : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the position to insert  : &quot;);
+            scanf(&quot;%d&quot;, &amp;pos);
+
+            out = insert_at_pos(&amp;end,&amp;beg,input_val,pos);
+            if (out == 1)
+                printf(&quot;%d inserted at %d\n&quot;, input_val,pos);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else if (out == -2)
+                printf(&quot;%d inserted at end \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 6:
+            show(beg,end);
+            printf(&quot;\nEnter the position to delete : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = delete_at_pos(&amp;end,&amp;beg,input_val);
+            if (out == 1)
+                printf(&quot;%d Deleted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d deleted the last position \n&quot;, input_val);
+            else if (out == -2)
+                printf(&quot;deleted the beg eleement \n&quot;);
+            else
+                printf(&quot;Empty \n&quot;);
+            break;
+
+        case 7:
+            out = is_empty(beg,end);
+            if (out == 1)
+                printf(&quot;Empty\n&quot;);
+            else
+                printf(&quot;Not empty \n&quot;);
+            break;
+
+
+
+        case 8:
+            show(beg,end);
+            break;
+            
+            case 9:
+            printf(&quot;%d is the size of Linked List &quot;, fn_size(beg,end));
+            break;
+            
+            case 10:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = search(end,beg,input_val);
+            if (out == -2)
+            printf(&quot;No data  \n&quot;);
+            else if (out == -1)
+            printf(&quot;Element Not Found\n&quot;);
+            else
+            printf(&quot;Element Found at %d \n&quot;,out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&amp;beg,&amp;end);
+            if (out == 1)
+                printf(&quot;Cleared \n&quot;);
+            else
+                printf(&quot;Cant Clear \n&quot;);
+            break;
+
+                
+                case 12:
+                if (is_empty(beg,end) != 1){show(beg,end);}
+                    out = sort(&amp;beg,&amp;end);
+                if (out == 1){
+                    printf(&quot;Sorted\n&quot;);
+                    show(beg,end);}
+                else
+                    printf(&quot;Cant Sort \n&quot;);
+                break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q12">
+<h3>12. [Linked List] Simple Doubly Linked List (insert, delete, search, sort, display)</h3>
+<div class="answer-box">
+<h4>Answer 12:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+    struct node * nxt_ptr;
+}; // doubly linked list node 
+
+// |beg | -&gt; | | -&gt; | | -&gt; | | -&gt; |NULL|
+// |NULL| &lt;- | | &lt;- | | &lt;- | | &lt;- |end |
+//  ^                           ^
+//  |                           |
+// beg                         end
+
+
+// size fn 
+
+int fn_size(struct node * beg, struct node * end){
+    if ((beg)==NULL &amp;&amp; (end)==NULL){
+        return 0;
+    } // size is zero 
+    int i = 0;
+    while(beg!=NULL){
+        i++;
+        beg=beg-&gt;nxt_ptr;
+    }
+    return i;
+}
+
+
+// things to manage : size = 0,1 ; 
+
+// 1. insert at 0,end when size = 0 ; 
+// 2. insert at 0,end ; 
+// 3. insert at pos ; 
+// 4. insert at pos when s = 0; 
+// 5. is malloc working ; 
+// 6. insert at beg and end when size =! 0 , 1
+
+int  insert_at_pos(struct node ** beg,struct node ** end,int data,int pos){
+ 
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+
+    new_node-&gt;data = data;
+    new_node-&gt;pre_ptr = NULL;
+    new_node-&gt;nxt_ptr = NULL;
+
+    int s = fn_size(*beg,*end);
+
+    if(pos&gt;s){return 0;}
+
+    if ((s == 0) &amp;&amp; ((pos == 0) || (pos !=0))){  // it will manage the size  = 0 , and if size and pos = 0 and whatever pos when size =0 , abd end ie end will be calacuated by the fn_size while passing argunment 
+        // beg 
+        (*beg)=new_node;
+        (*beg)-&gt;pre_ptr = NULL;
+        (*beg)-&gt;nxt_ptr = NULL;
+        
+        //end
+        (*end)=new_node;
+        (*end)-&gt;pre_ptr = NULL;
+        (*end)-&gt;nxt_ptr = NULL;
+
+        return -1;
+    }
+    
+    if (s == 1){ // if hte isze is one both are pointing to a single node with that node nxt and pre = null
+        if (pos == 0){ // if the user want to put bfore the single eleement 
+            (*beg)-&gt;pre_ptr = new_node; 
+            new_node-&gt;nxt_ptr = (*beg); // size 1 and beg
+            (*beg) = new_node;
+            return -2;
+        }
+
+        if (pos == 1){ // if the user want to put afete the single element
+            (*beg)-&gt;nxt_ptr = new_node;
+            (new_node)-&gt;pre_ptr = (*beg); // size 1 and beg
+            (*end) = new_node;
+            return -3;
+        }
+    }
+
+    struct node * temp;
+
+    // if the user want to add at beg and end if size not =! 0 , 1
+    if ((s!=0)&amp;&amp;(s!=1)) {
+        if (pos==0){
+            new_node-&gt;nxt_ptr = (*beg);
+            (*beg)-&gt;pre_ptr = new_node;
+            (*beg) = new_node ;
+            return -4;
+        }
+        else if (pos == s){
+            (new_node)-&gt;pre_ptr  = (*end);
+            (*end)-&gt;nxt_ptr = (new_node);
+            (*end) = new_node;
+            return -7;
+        }
+    }
+
+
+
+    // INSERT at pos when size != 0 
+
+    if (pos &lt; s/2){ // traverse form the beg
+        temp = (*beg);
+        for (int i = 0; i&lt;pos-1; i++){
+            temp = temp-&gt;nxt_ptr;
+        }
+
+        // position:   0       1       2       3
+        //    [10] → [20] → [30] → [40]
+        //              ↑       ↑
+        //            temp     wanted that is why we need -1 
+        new_node-&gt;nxt_ptr = temp-&gt;nxt_ptr;
+        new_node-&gt;pre_ptr = temp;
+        temp-&gt;nxt_ptr-&gt;pre_ptr = new_node;
+        temp-&gt;nxt_ptr = new_node; 
+        return -5;
+
+    }
+    else { //  traverse form the end
+        temp = (*end);
+        for(int i = 0; i&lt;s-1-pos; i++){
+            temp=temp-&gt;pre_ptr;
+        }
+        new_node-&gt;pre_ptr = temp-&gt;pre_ptr;
+        new_node-&gt;nxt_ptr = temp;
+        temp-&gt;pre_ptr-&gt;nxt_ptr = new_node;
+        temp-&gt;pre_ptr = new_node; 
+        return -6;
+    }
+
+
+    return 0;
+
+}
+
+
+
+//  DELETE 
+
+// case to handel : empty ; 
+
+// 1. empty &amp; pos 0,end or N ;
+// 2. s = 1 , pos is x , 0 ,end ;  
+// 3. s &gt; 1 , 0 , end ; 
+// 4. s &gt; 1 , pos ;
+
+
+int delete_at_pos(struct node ** beg,struct node ** end,int pos){
+
+    int s = fn_size((*beg),(*end));
+    
+    if ((pos &lt; 0) || (pos &gt;= s &amp;&amp; !(s == 1 &amp;&amp; pos == 1))){ // 1. size is 0 and size = 1 or pos &gt;1 ( 1. &amp; 2. ) 
+        return 0;
+    }
+
+    if ((s==1) &amp;&amp; (((pos == 0) || (pos==1)))){ //  2. if size = 1 ,ans pos is the beg 
+        free((*beg));
+        (*beg)=NULL;
+        (*end)=NULL;
+        return 1;
+    } 
+
+    
+    struct node * temp;
+
+    // 3. size is != 0,1 and pos is 0,end
+
+    if (pos == 0){
+        temp= (*beg)-&gt;nxt_ptr;
+        temp-&gt;pre_ptr = NULL;
+        free((*beg));
+        (*beg)= temp;
+        return -1;
+    }
+    else if (pos == s-1){
+        temp = (*end)-&gt;pre_ptr;
+        temp-&gt;nxt_ptr = NULL;
+        free((*end));
+        (*end) = temp;
+        return -5 ;
+    }
+
+
+
+    // 4. if the size != 0,1 and pos n
+
+    if (pos &lt; s/2) { // traverse from beg
+        temp = (*beg);
+        for (int i = 0 ; i &lt; pos ; i++ ){
+            temp=temp-&gt;nxt_ptr; 
+        }
+    temp-&gt;pre_ptr-&gt;nxt_ptr = temp-&gt;nxt_ptr;
+    temp-&gt;nxt_ptr-&gt;pre_ptr = temp-&gt;pre_ptr;
+        free(temp);
+        return -2;
+    }
+    else { // traverse from end
+        temp = (*end);
+        for (int i = 0 ; i &lt; s - 1 - pos ; i++ ){
+                temp=temp-&gt;pre_ptr; 
+        }
+        temp-&gt;pre_ptr-&gt;nxt_ptr = temp-&gt;nxt_ptr; 
+        temp-&gt;nxt_ptr-&gt;pre_ptr = temp-&gt;pre_ptr;
+        free(temp);
+        return -3;
+    }
+
+    return -4;
+
+}
+
+
+
+
+// SEARCH 
+
+// 1. if empty -&gt; -1
+// 2. if found then index 
+// 3. if not found then -2
+
+
+int search(struct node * beg,int data){ 
+    if (beg ==  NULL){
+        return -1;
+    }
+    int i = 0;
+    while(beg!=NULL){
+        if (beg-&gt;data == data){break; return i;}
+        i++;
+        beg = beg-&gt;nxt_ptr;
+    }
+    return -2;
+}
+
+// SORT 
+
+// 1. if done then 1
+// 2. if empty then 0 or malloc fail
+
+
+int sort(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) &amp;&amp; ((*end) == NULL)){ // EMPTY
+        return 0;
+    }
+
+    int s = fn_size(*beg,*end);
+    int * arr = (int *)(malloc(sizeof(int) *s)); 
+    if (arr == NULL){return 0;}
+
+    // copting form the ll too arr 
+    struct node * temp = (*beg);
+    for (int i = 0; i &lt; s; i++){
+        arr[i] = (temp)-&gt;data;
+        (temp) = temp-&gt;nxt_ptr;
+    }
+    temp = (*beg); // RESET IT FOr FURTENR SORTED COPY 
+
+    // INSERTION SORT 
+
+        for (int i = 0; i &lt; s - 1; i++) {
+        for (int j = i + 1; j &gt; 0; j--) {   
+            if (arr[j] &lt; arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }}
+
+    // COPY THEM BACK 
+    for(int i =0;i&lt;s;i++){
+        temp-&gt;data = arr[i];
+        temp=temp-&gt;nxt_ptr;
+    }
+    free(arr);
+    return 1;
+}
+
+// SHOW 
+
+// 1. if no data : no data 
+// if one element : then special prient 
+// if n &gt; 1 ; while loop ; 
+
+void show(struct node * beg,struct node * end){
+    if (beg == NULL){
+        printf(&quot;No DATA&quot;);
+        return ;
+    }
+
+    if ((end == beg) &amp;&amp; (end-&gt;pre_ptr == NULL) &amp;&amp; (beg-&gt;nxt_ptr== NULL)){
+        printf(&quot;|b&gt;  %3d  &lt;e|&quot;,beg-&gt;data);
+        return;
+    }
+    
+    int i = 0;
+    printf(&quot;|b&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    beg=beg-&gt;nxt_ptr;
+    i++;
+    while(beg-&gt;nxt_ptr!=NULL){
+        printf(&quot;| &gt;   %3d   &lt;%d|&quot;, beg-&gt;data,i);
+        beg = beg-&gt;nxt_ptr;
+        i++;
+    }
+    printf(&quot;|e&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    return;
+}
+
+
+
+int is_empty(struct node * beg,struct node * end){
+    if (fn_size(beg,end) == 0){return 1;}
+    return 0;
+}
+
+// CLEAR THE LL 
+
+int clear_ll(struct node ** beg,struct node ** end){
+    if (((*beg) == NULL) &amp;&amp; ((*beg) == (*end))){
+        return 0;
+    }
+
+    struct node * temp ;
+    while((*beg)!= NULL){
+        temp = (*beg);
+        (*beg) = (*beg)-&gt;nxt_ptr;
+        free(temp);
+    }
+    (*beg) = NULL;
+    (*end) = NULL;
+    return 1;
+}
+
+
+int main(){
+
+    struct node * beg = NULL;
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert at beg\n&quot;);
+        printf(&quot;2 : insert at end\n&quot;);
+        printf(&quot;3 : delete at beg\n&quot;);
+        printf(&quot;4 : delete at end\n&quot;);
+        printf(&quot;5 : insert at pos\n&quot;);
+        printf(&quot;6 : delete at pos\n&quot;);
+        printf(&quot;7 : isempty\n&quot;);
+        printf(&quot;8 : show\n&quot;);
+        printf(&quot;9 : size\n&quot;);
+        printf(&quot;10 : search\n&quot;);
+        printf(&quot;11 : clear\n&quot;);
+        printf(&quot;12 : sort\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+
+        printf(&quot;Enter choice : &quot;);
+        scanf(&quot;%d&quot;, &amp;choice);
+
+
+        switch (choice)
+        {
+
+        case 1:
+
+         /// INSERT AT BEG 
+
+            printf(&quot;Enter the number insert at beg : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;beg,&amp;end,input_val,0);
+
+            if (out == -1)
+                printf(&quot;%d inserted and init a new linked list size is 1 \n&quot;,input_val);
+
+            else if (out == -2)
+                printf(&quot;inserted %d at beg and size of linked list size is 2\n&quot;,input_val);
+            else if (out == -4)
+                printf(&quot;inserted %d at beg\n&quot;,input_val);
+            else // zero 
+                printf(&quot;cant insert\n&quot;);
+
+            break;
+
+
+        case 2:
+
+        /// INSERT AT END 
+
+            printf(&quot;Enter the number insert at end : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;end,&amp;beg,input_val,fn_size(beg,end));
+
+            if (out == -1)
+                printf(&quot;%d inserted and init a new linked list size is 1 \n&quot;,input_val);
+            else if (out == -3)
+                printf(&quot;%d inserted at end and linked list size is 2 \n&quot;,input_val);
+            else if (out == -7)
+                printf(&quot;%d inserted at end \n&quot;,input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+
+            break;
+
+
+        case 3:
+
+        // DEELTE AT BEG
+
+            out = delete_at_pos(&amp;beg,&amp;end,0);
+
+            if (out == -1)
+                printf(&quot;Deleted value\n&quot;);
+            else if (out == 1)
+                printf(&quot;Linked List Reset \n&quot;);
+                
+            else if (out == 0)
+                printf(&quot;cant delete \n&quot;);
+
+            break;
+
+
+        case 4:
+
+         /// DELETE AT END
+
+            out = delete_at_pos(&amp;end,&amp;beg,fn_size(beg,end));
+
+            if (out == -5)
+                printf(&quot;Deleted value\n&quot;);
+            else if (out == 1)
+                printf(&quot;Linked List Reset \n&quot;);
+                
+            else if (out == 0)
+                printf(&quot;cant delete \n&quot;);
+
+            break;
+
+
+        case 5:
+
+            printf(&quot;Enter the number insert : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            printf(&quot;Enter the position to insert : &quot;);
+            scanf(&quot;%d&quot;, &amp;pos);
+
+            out = insert_at_pos(&amp;beg,&amp;end,input_val,pos);
+
+            if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;,input_val);
+
+            else if (out == -2)
+                printf(&quot;%d inserted before the single element \n&quot;,input_val);
+
+            else if (out == -3)
+                printf(&quot;%d inserted after the single element \n&quot;,input_val);
+
+            else if (out == -4)
+                printf(&quot;%d inserted at beg \n&quot;,input_val);
+            else if (out == -7)
+                printf(&quot;%d inserted at end \n&quot;,input_val);
+
+            else if (out == -5)
+                printf(&quot;%d inserted at position (b-&gt;e) %d \n&quot;,input_val,pos);
+
+            else if (out == -6)
+                printf(&quot;%d inserted at position (b&lt;-e) %d \n&quot;,input_val,pos);
+            else
+                printf(&quot;cant insert\n&quot;);
+
+            break;
+
+
+        case 6:
+
+            show(beg,end);
+
+            printf(&quot;\nEnter the position to delete : &quot;);
+            scanf(&quot;%d&quot;, &amp;pos);
+
+            out = delete_at_pos(&amp;beg,&amp;end,pos);
+
+            if (out == 1)
+                printf(&quot;Linked List %d\n&quot;,pos);
+
+            else if (out == -1)
+                printf(&quot;%d deleted the first position \n&quot;,pos);
+            else if (out == -5)
+                printf(&quot;%d deleted the last position \n&quot;,pos);
+
+            else if (out == -2)
+                printf(&quot;deleted the element (b-&gt;e)\n&quot;);
+            else if (out == -3)
+                printf(&quot;deleted the element (b&lt;-e) \n&quot;);
+            else
+                printf(&quot;Cant Delete\n&quot;); // zero or unvalid pos
+
+            break;
+
+
+        case 7:
+
+            out = is_empty(beg,end);
+
+            if (out == 1)
+                printf(&quot;Empty\n&quot;);
+
+            else
+                printf(&quot;Not empty \n&quot;);
+
+            break;
+
+
+        case 8:
+
+            show(beg,end);
+            break;
+
+
+        case 9:
+
+            printf(&quot;%d is the size of Linked List &quot;,fn_size(beg,end));
+            break;
+
+
+        case 10:
+
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = search(beg,input_val);
+
+            if (out == -1)
+                printf(&quot;No data  \n&quot;);
+
+            else if (out == -2)
+                printf(&quot;Element Not Found\n&quot;);
+
+            else
+                printf(&quot;Element Found at %d \n&quot;,out);
+
+            break;
+
+
+        case 11:
+
+            out = clear_ll(&amp;beg,&amp;end);
+
+            if (out == 1)
+                printf(&quot;Cleared \n&quot;);
+
+            else
+                printf(&quot;Cant Clear \n&quot;);
+
+            break;
+
+
+        case 12:
+
+            if (is_empty(beg,end) != 1)
+                show(beg,end);
+
+            out = sort(&amp;beg,&amp;end);
+
+            if (out == 1){
+                printf(&quot;\nSorted\n&quot;);
+                show(beg,end);
+            }
+            else
+                printf(&quot;Cant Sort \n&quot;);
+
+            break;
+
+
+        case 0:
+
+            printf(&quot;exitting ...\n&quot;);
+
+            if (beg != NULL)
+                clear_ll(&amp;beg,&amp;end);
+
+            return 0;
+
+
+        default:
+
+            printf(&quot;Invalid choice\n&quot;);
+
+        }
+    }
+
+
+    return 0;
+}
+
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q13">
+<h3>13. [Linked List] Circular Singly Linked List (insert, delete, search, display)</h3>
+<div class="answer-box">
+<h4>Answer 13:</h4>
+<pre><code>// CIRCULAR AND SIMPLEY LINEKLD LIST 
+
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    int data;
+    struct node * nxt_ptr;
+};
+
+//
+// | | -&gt; | | -&gt; | | -&gt; | | -&gt; |e|
+//  ^                           ^
+//  | &lt;----------------------- |
+// beg                        end
+//
+
+int fn_size(struct node *end);
+
+int insert_at_pos(struct node ** end,int data,int pos){
+
+    int size = fn_size((*end));
+    if (!((pos&gt;=0) &amp;&amp; (pos&lt;=size))){return 0;}
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+
+    // if the ll is empty and adding at beg
+    if (size == 0){                
+        (*end) = new_node;
+        (*end)-&gt;nxt_ptr = new_node;
+        return -1;    }
+
+    //if the insert at beg
+    if (pos == 0){
+        new_node-&gt;nxt_ptr = (*end)-&gt;nxt_ptr;
+        (*end)-&gt;nxt_ptr = new_node;
+        return -2;
+    }
+
+    // if insert at end
+    if (pos == size){
+        new_node-&gt;nxt_ptr = (*end)-&gt;nxt_ptr; // adding the beg to new node
+        (*end)-&gt;nxt_ptr = new_node;
+        (*end) = new_node; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)-&gt;nxt_ptr;
+    for (int n= 0;n&lt;pos-1;n++){ // we are doing ti because we havin temp hs nxtptr so like if we want to insert at 3 , 
+        // we need to have the the temp ahving the address or 2nd pos 
+        // because 2nd will have the addfress of 3rd pos waht er want to modify ,  
+        // it will run for 0,1 
+        // after 0 the temp = 1 , temp-&gt;nxt_ptr = 2
+        // after 0 the temp = 2 , temp-&gt;nxt_ptr = 3
+        // so we have to loop it pos -2 times as we are doing by -1 and &lt;
+
+        temp = temp-&gt;nxt_ptr;
+    }
+    new_node-&gt;nxt_ptr= temp-&gt;nxt_ptr; // so we are making new node nxt ptr to the prev3 pos node
+    temp-&gt;nxt_ptr = new_node; // and then updating it 
+    return 1;
+}
+
+
+int delete_at_pos(struct node ** end,int pos){
+
+    int size = fn_size((*end));
+    if (size == 0){return -1;} //if empty
+    if (!((pos&gt;=0) &amp;&amp; (pos&lt;size))){return 0;} // not valid pos
+
+    if(size == 1){ //if one eleemnt only reset
+        free((*end));
+        (*end) =NULL;
+        return -4;
+    }
+
+    if (pos==0){ //deleted beg
+        struct node * temp = (*end)-&gt;nxt_ptr; // beg
+        (*end)-&gt;nxt_ptr = temp-&gt;nxt_ptr; // updating the new beg
+        free(temp); //delete the beg
+        return -2;
+    }
+
+
+    if (pos==size-1){//delete at end
+        struct node * temp = (*end)-&gt;nxt_ptr; //beg
+        while(temp-&gt;nxt_ptr!=(*end)){ //traverse upto end - 1 node 
+            temp=temp-&gt;nxt_ptr;
+        }
+        temp-&gt;nxt_ptr = (*end)-&gt;nxt_ptr; // end - 1 node -&gt;nxt_ptr = beg 
+        free((*end)); //free end
+        (*end) = temp; // new end
+        return -3;
+    }
+
+    struct node * temp = (*end)-&gt;nxt_ptr; // beg
+    for(int i=0;i&lt;pos-1;i++){ // upto pos -2 so  temp has ptr to pos node -1 and its nxtptr has the posptr  
+        temp=temp-&gt;nxt_ptr;
+    }
+    // temp-&gt;nxt_ptr = temp-&gt;nxt_ptr-&gt;nxt_ptr ; we cant do this what if we had a while loop because we cant determin whetehr the nxt prt has a valid node or not
+    //but beacuse of the size -1 conndtion it is granteed that temp-nt ptr has a node 
+    struct node * temp2 = temp-&gt;nxt_ptr;
+    temp-&gt;nxt_ptr = temp-&gt;nxt_ptr-&gt;nxt_ptr;
+    free(temp2);
+    return 1;
+
+}
+
+
+int fn_size(struct node *end){
+    if (end == NULL){return 0;}
+    int i = 0;
+    struct node * temp = end-&gt;nxt_ptr;
+
+    do {
+        i++;
+        temp=temp-&gt;nxt_ptr;
+    }
+    while(temp!=end-&gt;nxt_ptr);
+    return i;
+}
+
+
+int search(struct node * end,int data){
+    if (end == NULL){
+        return -2;
+    }
+    int i=0;
+    struct node * temp = end-&gt;nxt_ptr;
+    // if (temp-&gt;data == data){ // we cna have do while here 
+    //         return i;
+    //     }
+    // temp=temp-&gt;nxt_ptr;
+    // i++;
+    // while(temp != (end-&gt;nxt_ptr)){
+    //     if (temp-&gt;data == data){
+    //         return i;
+    //     }
+    //     i++;
+    //     temp=temp-&gt;nxt_ptr;
+    // }
+
+
+    do {
+        if (temp-&gt;data == data) {
+            return i;
+        }
+
+        temp = temp-&gt;nxt_ptr;
+        i++;
+
+    } while (temp != end-&gt;nxt_ptr);
+
+    return -1;
+
+}
+
+
+int sort(struct node **end){
+
+    int s = fn_size(*end);
+    if (s == 0){return 0;}// if size == 0
+    int * arr = (int *)(malloc(sizeof(int)*s));
+    if (arr == NULL){return 0;} // if malloc faisl
+
+    struct node * temp = (*end)-&gt;nxt_ptr;
+    for (int i = 0; i&lt;s ; i++){
+        arr[i]=temp-&gt;data;
+        temp=temp-&gt;nxt_ptr;
+    }
+    temp=(*end)-&gt;nxt_ptr; //for reenter the sorted values in same ll
+
+    for (int i = 0; i &lt; s - 1; i++) {
+        for (int j = i + 1; j &gt; 0; j--) {   
+            if (arr[j] &lt; arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }}
+
+    for(int i =0;i&lt;s;i++){ //updating sorted value in the same ll
+        temp-&gt;data = arr[i];
+        temp=temp-&gt;nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+}
+
+void show(struct node * end){
+    if ((end==NULL)){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    
+    struct node * beg = end-&gt;nxt_ptr;
+    if ((end == beg)){
+        printf(&quot;|b&gt;  %3d  &lt;e|&quot;,beg-&gt;data);
+        return;
+    }
+    
+    int i = 0;
+    printf(&quot;|b&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i); // first node 
+    beg=beg-&gt;nxt_ptr;
+    i++;
+    while(beg-&gt;nxt_ptr!=end-&gt;nxt_ptr){ // will work last node - 1
+        printf(&quot;| &gt;   %3d   &lt;%d|&quot;, beg-&gt;data,i);
+        beg = beg-&gt;nxt_ptr;
+        i++;
+    }
+    printf(&quot;|e&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i); // last node 
+    return;
+}
+
+
+int is_empty(struct node * end){
+    if (fn_size(end) == 0){return 1;}
+    return 0;
+}
+
+int clear_ll(struct node ** end){
+    if ((*end) == NULL){return 0;}
+    struct node * stop = (*end);        
+    struct node * curr = stop-&gt;nxt_ptr; 
+    struct node * temp;
+
+    while (curr != stop){               
+        temp = curr;
+        curr = curr-&gt;nxt_ptr;
+        free(temp);
+    }
+    free(stop);                         
+    (*end) = NULL;
+    return 1;
+}
+
+
+
+int main (){
+   
+    struct node * end = NULL;
+    int choice,input_val,out,pos;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert at beg\n&quot;);
+        printf(&quot;2 : insert at end\n&quot;);
+        printf(&quot;3 : delete at beg\n&quot;);
+        printf(&quot;4 : delete at end\n&quot;);
+        printf(&quot;5 : insert at pos\n&quot;);
+        printf(&quot;6 : delete at pos\n&quot;);
+        printf(&quot;7 : isempty\n&quot;);
+        printf(&quot;8 : show\n&quot;);
+        printf(&quot;9 : size\n&quot;);
+        printf(&quot;10 : search\n&quot;);
+        printf(&quot;11 : clear\n&quot;);
+        printf(&quot;12 : sort\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number insert at beg : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;end,input_val,0); //inser at beg
+            if (out == -2)
+                printf(&quot;%d inserted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+        case 2:
+            printf(&quot;Enter the number insert at end : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;end,input_val,fn_size(end)); //insert at end
+            if (out == -3)
+                printf(&quot;%d inserted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+            
+
+        case 3:
+            out = delete_at_pos(&amp;end,0); //deelte at beg
+            if (out == 1) // sucess
+                printf(&quot;Deleted value at beg\n&quot;);
+            else if (out == -1) // no data
+                printf(&quot;No Data \n&quot;);
+            else if(out == -4) // reset the ll if one eleemt only
+                printf(&quot;Linked List Reset \n&quot;);
+            break;
+
+
+        case 4:
+            out = delete_at_pos(&amp;end,fn_size(end));//delete at end
+            if (out == -3) //sucess
+                printf(&quot;Deleted value at end\n&quot;);
+            else if (out == -1) //no data 
+                printf(&quot;No Data \n&quot;);
+            else if (out == -4)//reset if only one eleement
+                printf(&quot;Linked List Reset \n&quot;);
+            break;
+
+        case 5:
+            printf(&quot;Enter the number insert : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the position to insert  : &quot;);
+            scanf(&quot;%d&quot;, &amp;pos);
+
+            out = insert_at_pos(&amp;end,input_val,pos);
+            if (out == 1)
+                printf(&quot;%d inserted at %d\n&quot;, input_val,pos);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else if (out == -2)
+                printf(&quot;%d inserted at beg \n&quot;, input_val);
+            else if (out == -3)
+                printf(&quot;%d inserted at end \n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 6:
+            show(end);
+            out=is_empty(end);
+            if (out == 1){break;}
+            printf(&quot;\nEnter the position to delete : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = delete_at_pos(&amp;end,input_val);
+            if (out == 1)
+                printf(&quot;%d Deleted \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;no data \n&quot;);//if no data
+            else if (out == -2)
+                printf(&quot;%d deleted the beg \n&quot;, input_val);
+            else if (out == -3)
+                printf(&quot;deleted the end \n&quot;);
+            else if (out == -4)
+                printf(&quot;Resseted the ll\n&quot;); // if onlu one eleemt
+            else
+                printf(&quot;Empty \n&quot;);
+            break;
+
+        case 7:
+            out = is_empty(end);
+            if (out == 1)
+                printf(&quot;Empty\n&quot;);
+            else
+                printf(&quot;Not empty \n&quot;);
+            break;
+
+
+        case 8:
+            show(end);
+            break;
+            
+            case 9:
+            printf(&quot;%d is the size of Linked List &quot;, fn_size(end));
+            break;
+            
+            case 10:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = search(end,input_val);
+            if (out == -2)
+            printf(&quot;No data  \n&quot;);
+            else if (out == -1)
+            printf(&quot;Element Not Found\n&quot;);
+            else
+            printf(&quot;Element Found at %d \n&quot;,out);
+            
+            break;
+            
+            case 11:
+                out = clear_ll(&amp;end);
+            if (out == 1)
+                printf(&quot;Cleared \n&quot;);
+            else
+                printf(&quot;Already empty \n&quot;);
+            break;
+
+                
+                case 12:
+                if (is_empty(end) != 1){show(end);}
+
+                out = sort(&amp;end);
+
+                if (out == 1){
+                    printf(&quot;\nSorted\n&quot;);
+                    show(end);}
+                else
+                    printf(&quot;Cant Sort \n&quot;);
+                break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q14">
+<h3>14. [Linked List] Circular Doubly Linked List (insert, delete, search, display)</h3>
+<div class="answer-box">
+<h4>Answer 14:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+    struct node * nxt_ptr;
+}; // doubly linked list node 
+
+// |beg | -&gt; | | -&gt; | | -&gt; | | -&gt; |beg|
+// |end| &lt;- | | &lt;- | | &lt;- | | &lt;- |end |
+//                                 ^
+//                                 |
+//                                end
+
+// 1. FN_SIZE 
+
+int fn_size(struct node * end){
+    // if the size is 0
+    if(end==NULL){
+        return 0;
+    } 
+    int i = 0;
+    struct node * temp = end-&gt;nxt_ptr;
+    // beacuse temp==end at 1st
+    do{
+        temp=temp-&gt;nxt_ptr;
+        i++;
+    }
+    while(temp!=end);
+    return i;
+}
+
+
+
+// 6. IS EMPTY
+
+int is_empty(struct node * end){
+    // empty
+    if(end==NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+
+// 4. SEARCH 
+
+int search(struct node * end,int data){
+    // Empty
+    if (end == NULL){
+        return -1; 
+    }
+
+    // TRAVERSE AND COMPARE
+    struct node * temp = end-&gt;nxt_ptr;
+    struct node *beg = temp;
+    int i = 0;
+    do{
+        if(temp-&gt;data == data){
+            return i;
+        }
+        i++;
+        temp = temp-&gt;nxt_ptr;
+    }while(temp!=beg);
+
+    // not found
+    return -2;
+}
+
+
+// 5. SHOW
+
+void show(struct node * end){
+    // empty
+    if (end == NULL){
+        printf(&quot;No DATA\n&quot;);
+        return;
+    }
+
+    // 1 elements
+    if ((end-&gt;nxt_ptr == end)){
+        printf(&quot;|b&gt;  %3d  &lt;e|&quot;,end-&gt;data);
+        return;
+    }
+
+    // N elements
+    int i = 0;
+    struct node * beg = end-&gt;nxt_ptr;
+    
+    // print beg with tag
+    printf(&quot;|b&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    i++;
+    beg=beg-&gt;nxt_ptr;
+    
+    // internal elements
+    while(beg-&gt;nxt_ptr!=end){
+        printf(&quot;| &gt;   %3d   &lt;%d|&quot;, beg-&gt;data,i);
+        beg = beg-&gt;nxt_ptr;
+        i++;
+    }
+
+    // print end with tag
+    printf(&quot;|e&gt;   %3d   &lt;%d|&quot;,beg-&gt;data,i);
+    return;
+
+}
+
+
+// 7. CLEAR LL 
+
+int clear_ll(struct node **end){
+    //empty
+    if (*end == NULL)
+        return 0;
+
+    struct node *beg = (*end)-&gt;nxt_ptr;
+    struct node *temp;
+
+
+    while (beg != (*end)){
+        temp = beg;
+        beg = beg-&gt;nxt_ptr;
+        free(temp);
+    }
+
+    free((*end));
+    (*end) = NULL;
+
+    return 1;
+
+
+    //     do {
+    //     temp = beg;
+    //     beg = beg-&gt;nxt_ptr;
+    //     free(temp);
+    // } while (beg != *end);
+
+    // free(*end);
+    // *end = NULL;
+
+    // we can t do this one becasue it will do good for ll the cases except 1 becassue it will then free it twice
+}
+
+
+// 2. INSERT AT POS 
+
+int insert_at_pos(struct node ** end,int data, int pos){
+    // emtpy &amp;&amp; pos is &gt; 0
+    if (((*end) == NULL) &amp;&amp; (pos &gt; 0)){
+        return 0; 
+    }
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;nxt_ptr = NULL;
+    new_node-&gt;pre_ptr = NULL;
+
+
+    // if empty and init new ll
+    if ((((*end) == NULL) &amp;&amp; (pos == 0))){
+        (*end) = new_node;
+        new_node-&gt;nxt_ptr = new_node;
+        new_node-&gt;pre_ptr = new_node;
+        return -1;
+    }
+
+    int s = fn_size((*end)); // it can t be empty as per now
+    struct node * beg = (*end)-&gt;nxt_ptr;
+
+    if ((s == 1) &amp;&amp; (pos &gt; 1)){
+        return -2; // not valid
+    }
+    else if ((s == 1) &amp;&amp; (pos == 0)){
+            // add at the beg of the single node 
+            (*end)-&gt;pre_ptr = new_node;
+            new_node-&gt;pre_ptr = (*end);
+            new_node-&gt;nxt_ptr = (*end);
+            (*end)-&gt;nxt_ptr = new_node; // beg 
+            return -3;
+        }
+    else if ((s == 1) &amp;&amp; (pos == 1)){
+            // // add at end of single node
+            // (*end)-&gt;nxt_ptr = new_node; // current single node
+            // new_node-&gt;pre_ptr = (*end); // current single node  address ie beg
+            // new_node-&gt;nxt_ptr = (*end);
+            // (*end) = new_node ; // update the new node
+            
+            struct node *old_end = *end;
+            
+            old_end-&gt;nxt_ptr = new_node;
+            old_end-&gt;pre_ptr = new_node;
+            new_node-&gt;pre_ptr = old_end;
+            new_node-&gt;nxt_ptr = old_end;
+            
+            *end = new_node;
+            return -4;
+    }
+
+    // non empyt and non size == 1
+
+    // add at beg of size n ll
+    if (pos==0){
+        struct node * beg = (*end)-&gt;nxt_ptr;
+        beg-&gt;pre_ptr = new_node;
+        new_node-&gt;nxt_ptr = beg;
+        new_node-&gt;pre_ptr = (*end);
+        (*end)-&gt;nxt_ptr = new_node;
+        return -5;
+    }
+    // insert at end
+    else if (pos==s){
+        new_node-&gt;nxt_ptr = (*end)-&gt;nxt_ptr;
+        new_node-&gt;pre_ptr = (*end);
+        (*end)-&gt;nxt_ptr = new_node;
+        (*end) = new_node; // add at the end
+        return -6;
+    }
+    else if (pos &lt; (s/2)){ 
+        // traverse from beg
+        struct node * beg = (*end)-&gt;nxt_ptr;
+        for (int i = 0 ; i &lt; pos -1 ; i++){
+            beg=beg-&gt;nxt_ptr;   
+        }
+        new_node-&gt;nxt_ptr = beg-&gt;nxt_ptr;
+        beg-&gt;nxt_ptr-&gt;pre_ptr = new_node;
+        beg-&gt;nxt_ptr = new_node;
+        new_node-&gt;pre_ptr = beg;
+        return -7;
+    }
+    else if (pos &gt;= (s/2)){
+        // traverse from end
+        struct node * temp = (*end);
+        for (int i = 0 ; i &lt; s - pos - 1 ; i++){
+            temp= temp-&gt;pre_ptr;   
+        }
+        new_node-&gt;pre_ptr = temp-&gt;pre_ptr;
+        temp-&gt;pre_ptr-&gt;nxt_ptr = new_node;
+        new_node-&gt;nxt_ptr = temp;
+        temp-&gt;pre_ptr = new_node;
+        return -8;
+    }
+
+    return -9;
+    
+}
+
+
+// 3. DELETE AT POS 
+
+int delete_at_pos(struct node ** end,int pos){
+    int s = fn_size((*end));
+    // if empty and pso &gt; size
+    if (((*end) == NULL) || (pos&gt;=s) ){
+        return 0;
+    }
+
+    if ((s == 1) &amp;&amp; (pos &gt; 1)){
+        return -1;
+    }
+    else if ((s == 1) &amp;&amp; ((pos == 0) || (pos == 1))){
+        free(*end);
+        (*end) = NULL; //RESET 
+        return -2;
+    }
+
+    if ((s&gt;1) &amp;&amp; (pos==0)){
+        struct node * beg = (*end)-&gt;nxt_ptr;
+        (*end)-&gt;nxt_ptr = beg-&gt;pre_ptr;
+        beg-&gt;pre_ptr-&gt;pre_ptr = (*end);
+        free(beg);
+        // remove from the beg
+        return -3;
+    }
+    else if ((s&gt;1) &amp;&amp; (pos==1)){
+        struct node * temp = (*end);
+        (*end)-&gt;nxt_ptr-&gt;pre_ptr = (*end)-&gt;pre_ptr;
+        (*end)-&gt;pre_ptr-&gt;nxt_ptr = (*end)-&gt;nxt_ptr;
+        (*end)=(*end)-&gt;pre_ptr;
+        free(temp);
+        // return form the end
+        return -4;
+    }
+
+    // pos in bw 
+
+    if (pos &lt; s/2){
+        struct node * beg = (*end)-&gt;nxt_ptr;
+        for(int i = 0; i &lt; pos  ; i++){ // not using -1 now the pos lie in the beg after the loop not beg-&gt;nxtptr
+            beg = beg-&gt;nxt_ptr;
+        }
+        beg-&gt;pre_ptr-&gt;nxt_ptr = beg-&gt;nxt_ptr;
+        beg-&gt;nxt_ptr-&gt;pre_ptr = beg-&gt;pre_ptr;
+        free(beg);
+        return -5; // from b-&gt; pos 
+    }
+    else if (pos &gt; s/2){
+        struct node * temp = (*end);
+        for(int i = 0; i &lt; s - pos; i++){ 
+            temp=temp-&gt;pre_ptr;
+        }
+        temp-&gt;pre_ptr-&gt;nxt_ptr = temp-&gt;nxt_ptr;
+        temp-&gt;nxt_ptr-&gt;pre_ptr = temp-&gt;pre_ptr;
+        free(temp); return -6;
+    }
+
+    return -7;
+}
+
+
+// 8. SORT 
+
+int sort(struct node ** end){
+    if ((*end) == NULL){
+        return 0;
+    }
+    int s = fn_size((*end));
+    int * arr = (int *)(malloc(sizeof(int)*s));
+    if (arr == NULL){return 0;} // if malloc fails
+
+    struct node * temp = (*end)-&gt;nxt_ptr;
+    for (int i = 0; i&lt;s ; i++){
+        arr[i]=temp-&gt;data;
+        temp=temp-&gt;nxt_ptr;
+    }
+    temp=(*end)-&gt;nxt_ptr; //for renter the sorted values in same ll
+
+   // insertion sort
+    for (int i = 0; i &lt; s - 1; i++) {
+        for (int j = i + 1; j &gt; 0; j--) {   
+            if (arr[j] &lt; arr[j - 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j - 1];
+                arr[j - 1] = temp;
+            }
+            else {break;}
+        }
+    }
+
+    for(int i =0;i&lt;s;i++){ //updating sorted value in the same ll
+        temp-&gt;data = arr[i];
+        temp=temp-&gt;nxt_ptr;
+    }
+    free(arr);
+    return 1;
+
+
+}
+
+
+
+int main (){
+
+    struct node * end = NULL;
+
+    int choice,input_val,out,pos;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert at beg\n&quot;);
+        printf(&quot;2 : insert at end\n&quot;);
+        printf(&quot;3 : delete at beg\n&quot;);
+        printf(&quot;4 : delete at end\n&quot;);
+        printf(&quot;5 : insert at pos\n&quot;);
+        printf(&quot;6 : delete at pos\n&quot;);
+        printf(&quot;7 : isempty\n&quot;);
+        printf(&quot;8 : show\n&quot;);
+        printf(&quot;9 : size\n&quot;);
+        printf(&quot;10 : search\n&quot;);
+        printf(&quot;11 : clear\n&quot;);
+        printf(&quot;12 : sort\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+
+        // INSERT AT BEG
+            printf(&quot;Enter the number insert at beg : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;end,input_val,0);
+            if (out == -3)
+                printf(&quot;%d inserted at beg of the linked lis of size 1 \n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else if (out == -5)
+                printf(&quot;%d inserted at beg \n&quot;, input_val);
+            else if (out == -2)
+                printf(&quot;not valid \n&quot;);
+            else // 0 
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+
+        // INSERT AT END
+            printf(&quot;Enter the number insert at end : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert_at_pos(&amp;end,input_val,fn_size(end));
+            if (out == -4)
+                printf(&quot;%d inserted at the end of linked list of size 1\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else if (out == -6)
+                printf(&quot;%d inserted at end \n&quot;, input_val);
+            else if (out == -2)
+                printf(&quot;not valid \n&quot;);
+            else // 0 
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 3:
+
+        // DELETE AT BEG
+            out = delete_at_pos(&amp;end,0);
+
+            if (out == -3)
+                printf(&quot;Deleted value at beg\n&quot;);
+            else if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2 )
+                printf(&quot;Linked List Reset \n&quot;);
+            else if (out == -1 )
+                printf(&quot;Invalid \n&quot;);
+                else // 0 
+                printf(&quot;cant delete \n&quot;); 
+            break;
+
+        case 4:
+        // DELTE AT END
+            out = delete_at_pos(&amp;end,fn_size(end)-1);
+
+            if (out == -4)
+                printf(&quot;Deleted value at end\n&quot;);
+            else if (out == -2 )
+                printf(&quot;Linked List Reset \n&quot;);
+            else if (out == -1 )
+                printf(&quot;Invalid \n&quot;);
+            else // 0  
+                printf(&quot;cant delete \n&quot;);
+            break;
+
+        case 5:
+
+
+        // INSERT AT POS 
+            printf(&quot;Enter the number insert : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            printf(&quot;Enter the position to insert  : &quot;);
+            scanf(&quot;%d&quot;, &amp;pos);
+
+            out = insert_at_pos(&amp;end,input_val,pos);
+
+            if (out == -7)
+                printf(&quot;%d inserted at %d (b-&gt;pos) \n&quot;, input_val,pos);
+            else if (out == -8)
+                printf(&quot;%d inserted at %d (pos&lt;-e) \n&quot;, input_val,pos);
+            else if (out == -1)
+                printf(&quot;%d inserted and new linked list created \n&quot;, input_val);
+            else if (out == -5)
+                printf(&quot;%d inserted at beg \n&quot;, input_val);
+            else if (out == -6)
+                printf(&quot;%d inserted at end \n&quot;, input_val);
+            else if (out == -3)
+                printf(&quot;%d inserted at beg of sigle node\n&quot;, input_val);
+            else if (out == -4)
+                printf(&quot;%d inserted at end of sigle node\n&quot;, input_val);
+            else if (out == -2) // 
+                printf(&quot;not valid \n&quot;);
+            else // 0 
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+            
+        case 6:
+            // DELETE AT POS 
+
+            show(end);
+
+            out = is_empty(end);
+
+            if (out == 1){
+                break;
+            }
+
+            printf(&quot;\nEnter the position to delete : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = delete_at_pos(&amp;end,input_val);
+
+            if (out == -5)
+                printf(&quot;%d Deleted (b-&gt;pos) \n&quot;, input_val);
+            else if (out == -6)
+                printf(&quot;%d Deleted (pos&lt;-end) \n&quot;, input_val);
+            else if (out == -3)
+                printf(&quot;%d deleted the beg \n&quot;, input_val);
+            else if (out == -4)
+                printf(&quot;deleted the end \n&quot;);
+            else if (out == -2)
+                printf(&quot;Resseted the ll\n&quot;);
+            else if (out == -1 )
+                printf(&quot;Invalid \n&quot;);
+            else // 0 
+                printf(&quot;Empty \n&quot;);
+            break;
+
+        case 7:
+            out = is_empty(end);
+
+            if (out == 1)
+                printf(&quot;Empty\n&quot;);
+            else
+                printf(&quot;Not empty \n&quot;);
+            break;
+
+        case 8:
+            show(end);
+            break;
+
+        case 9:
+            printf(&quot;%d is the size of Linked List &quot;, fn_size(end));
+            break;
+
+        case 10:
+            printf(&quot;Enter the element to search : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = search(end,input_val);
+
+            if (out == -1)
+                printf(&quot;No data  \n&quot;);
+            else if (out == -2)
+                printf(&quot;Element Not Found\n&quot;);
+            else
+                printf(&quot;Element Found at %d \n&quot;,out);
+
+            break;
+
+        case 11:
+            out = clear_ll(&amp;end);
+
+            if (out == 1)
+                printf(&quot;Cleared \n&quot;);
+            else
+                printf(&quot;Already empty \n&quot;);
+
+            break;
+
+        case 12:
+            if (is_empty(end) != 1){
+                show(end);
+            }
+
+            out = sort(&amp;end);
+
+            if (out == 1){
+                printf(&quot;\nSorted\n&quot;);
+                show(end);
+            }
+            else
+                printf(&quot;Cant Sort \n&quot;);
+
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            clear_ll(&amp;end);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q15">
+<h3>15. [Trees] Binary Search Tree (insert, search, delete, min, max, preorder, inorder, postorder, level count)</h3>
+<div class="answer-box">
+<h4>Answer 15:</h4>
+<pre><code>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+
+// 1. INSERT 
+// 2. SEARCH 
+// 3. DELETE
+// 4. MIN 
+// 5. MAX 
+// 6. PREORDER 
+// 7. iNORDER 
+// 8. POSTORDER 
+// 9. IS EMPTY
+// 10. no of LEVEL 
+
+
+struct node{
+    int data;
+    struct node * left; 
+    struct node * right; 
+};
+
+
+// 1. INSERT 
+
+// - new node not created
+// - is empty
+// - if exist already 
+// - add node 
+
+
+int insert(struct node ** root,int data){
+
+    struct node * new_node = (struct node *)(malloc(sizeof(struct node)));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;left = NULL;
+    new_node-&gt;right = NULL;
+
+    
+    if ((*root) == NULL){
+        (*root) = new_node;
+        return 1;
+    }
+
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    while (temp!=NULL){
+        if (data == temp-&gt;data){
+            return -1;
+        }
+        else if (data &lt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;left;
+        }
+        else if (data &gt; temp-&gt;data){
+            pre = temp;
+            temp = temp-&gt;right;
+        }
+    }
+
+    if (data &lt; pre-&gt;data){
+        pre-&gt;left = new_node;
+        return 2;
+    }
+    else if (data &gt; pre-&gt;data){
+        pre-&gt;right = new_node;
+        return 3;
+    }
+
+    return -2;
+
+}
+
+
+
+// 2. SEARCH 
+
+// - is empty                   -1
+// - find level if found         N
+// - not found                  -2
+
+int fn_search(struct node * root, int data){
+    if (root == NULL){
+        return -1;
+    }
+
+    int level = 0;
+    while (root != NULL){
+        if (data == root-&gt;data){
+            return level;
+        }
+        else if (data &lt; root-&gt;data){
+            root = root-&gt;left;
+            level++;
+        }
+        else if (data &gt; root-&gt;data){
+            root = root-&gt;right;
+            level++;
+        }
+    }
+
+    return -2;
+
+}
+
+
+// 3. DELETE
+
+// - is empty
+// - only root , reset
+// - leaf delete
+// - parent node delete habing one child
+// - parent node delete habing two child
+        // - inorder successor : right samllest
+        // - inorder predecessor : largest samllest
+// - delted root (having childs) , no reset but relpacemets by the childs
+ 
+int fn_delete(struct node ** root,int data){
+    // empty
+    if ((*root) == NULL){
+        return 0;
+    }
+
+    // only root , reset
+    if (((*root)-&gt;left == NULL) &amp;&amp; ((*root)-&gt;right == NULL) &amp;&amp; ((*root)-&gt;data == data)){
+        free((*root));
+        (*root) = NULL;
+        return -1;
+    }
+
+    //traverse 
+    struct node * temp = (*root);
+    struct node * pre = (*root);
+    int flag = 0;
+    while (temp!=NULL){
+
+        if (temp-&gt;data &lt; data){
+            pre = temp;
+            temp=temp-&gt;right;
+        }
+        else if (temp-&gt;data &gt; data){
+            pre = temp;
+            temp=temp-&gt;left;
+        }
+        
+     else {
+        flag = 1;
+        break;
+    }
+        
+    }
+    
+    if (flag == 0){return -2;} // not found
+    
+    // leaf 
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right==NULL)){
+        if (temp-&gt;data &lt; pre-&gt;data){
+            pre-&gt;left = NULL;
+        }
+        else{
+            pre-&gt;right = NULL;
+        }
+        free(temp);
+        return -3; 
+    }
+
+
+    // node with either NULL 
+    // right has value
+    if ((temp-&gt;left==NULL) &amp;&amp; (temp-&gt;right!=NULL)){ //right has value
+        temp-&gt;data = temp-&gt;right-&gt;data;
+        struct node * ryt = temp-&gt;right;
+        temp-&gt;right = NULL;
+        free(ryt);
+        return -4 ; 
+    }
+    // left has value
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right==NULL)){ //left has value
+        temp-&gt;data = temp-&gt;left-&gt;data;
+        struct node * lft = temp-&gt;left;
+        temp-&gt;left = NULL;
+        free(lft);
+        return -5 ; 
+    }
+
+    // node with none of them null 
+    if ((temp-&gt;left!=NULL) &amp;&amp; (temp-&gt;right!=NULL)){
+        //finfing the inorder successor 
+        pre = temp;
+        struct node * successor = temp-&gt;right; 
+        while (successor-&gt;left!=NULL){
+            pre=successor;
+            successor = successor-&gt;left;
+        }
+
+        temp-&gt;data = successor-&gt;data;
+
+        if (pre-&gt;left == successor) {
+            pre-&gt;left = successor-&gt;right;   
+        }
+        else {
+            pre-&gt;right = successor-&gt;right;
+        }
+
+        free(successor);
+        return -6;
+    }
+}
+
+
+// 4. MIN 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_min(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;left;
+    }
+
+    return pre-&gt;data;
+}
+
+
+
+// 5. MAX 
+
+// - is empty : check befor calling the fn 
+// - only root
+// - go as far as in left
+
+int fn_max(struct node * root){
+    struct node * pre = root;
+
+    while (root != NULL){
+        pre = root;
+        root = root-&gt;right;
+    }
+    
+    return pre-&gt;data;
+}
+
+
+// 6. PREORDER
+
+// (root) --&gt; (left) --&gt; (Right)
+
+void preorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    preorder(root-&gt;left);        // left
+    preorder(root-&gt;right);       // right
+}
+
+
+
+// 7. IN-ORDER
+
+// (Left) --&gt; (root) --&gt; (Right)
+
+void inorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    inorder(root-&gt;left);        // left
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+    inorder(root-&gt;right);       // right
+}
+
+
+
+// 8. POST-ORDER
+
+// (Left) --&gt; (Right) --&gt; (root)
+
+void postorder(struct node * root) {
+    if (root == NULL){
+        return;
+    }
+
+    postorder(root-&gt;left);        // left
+    postorder(root-&gt;right);       // right
+    printf(&quot;| %d |&quot;, root-&gt;data);   // root
+}
+
+
+// 9 .IS EMPTY 
+
+int is_empty(struct node * root){
+    if (root == NULL){
+        return 1;
+    }
+    return 0;
+}
+
+
+
+int main(){
+    
+    struct node * root = NULL;
+    int choice,input_val,out;
+
+
+    while (1){
+
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : insert \n&quot;);
+        printf(&quot;2 : search \n&quot;);
+        printf(&quot;3 : delete \n&quot;);
+        printf(&quot;4 : min \n&quot;);
+        printf(&quot;5 : max \n&quot;);
+        printf(&quot;6 : preorder\n&quot;);
+        printf(&quot;7 : inorder\n&quot;);
+        printf(&quot;8 : postorder\n&quot;);
+        printf(&quot;9 : is empty\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to insert in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = insert(&amp;root,input_val);
+            if (out == 1)
+                printf(&quot;%d inserted as root\n&quot;, input_val);
+            else if (out == -1)
+                printf(&quot;cant insert same value again \n&quot;);
+            else if (out == 2)
+                printf(&quot;%d inserted as left\n&quot;, input_val);
+            else if (out == 3)
+                printf(&quot;%d inserted as right\n&quot;, input_val);
+            else
+                printf(&quot;cant insert\n&quot;);
+            break;
+
+        case 2:
+            printf(&quot;Enter the number to SEARCH in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = fn_search(root,input_val);
+            
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else 
+                printf(&quot;found at level : %d \n&quot;,out);
+            break;
+
+
+        case 3:
+            printf(&quot;Enter the number to DELETE in tree : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            
+            out = fn_delete(&amp;root,input_val);
+            if (out == 0)
+                printf(&quot;NOT DATA&quot;);
+            else if(out == -1) 
+                printf(&quot;Tree Reset \n&quot;);
+            else if(out == -2) 
+                printf(&quot;Not found \n&quot;);
+            else if(out == -3) 
+                printf(&quot;Leaf node deleted \n&quot;);
+            else if(out == -4) 
+                printf(&quot;Deleted ryt value\n&quot;);
+            else if(out == -5) 
+                printf(&quot;Deleted lft value\n&quot;);
+            else if(out == -6) 
+                printf(&quot;Node deleted \n&quot;);
+                else
+                printf(&quot; \n&quot;);
+            break;
+
+
+        case 4:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_min(root);
+                printf(&quot;Min value : %d \n&quot;,out);}
+    
+            break;
+
+        case 5:
+             if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+            else{
+                out = fn_max(root);
+                printf(&quot;Max value : %d \n&quot;,out);}
+                
+            break;
+            
+            case 6:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                preorder(root);
+            break;
+
+            case 7:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                inorder(root);
+            break;
+
+
+            case 8:
+            if (is_empty(root) == 1){printf(&quot;no data&quot;);break;}
+                postorder(root);
+            break;
+            
+            case 9:
+                out = is_empty(root);
+                if (out==1){
+                    printf(&quot;empty\n&quot;);
+                }
+                else
+                printf(&quot;not Empty \n&quot;);
+                break;
+
+            case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q16">
+<h3>16. [Graphs] Directed Graph using Adjacency Matrix (add/remove vertices &amp; edges, BFS, DFS)</h3>
+<div class="answer-box">
+<h4>Answer 16:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+
+// IT IS DIRECTED GRAPH , USING ADJACENT MATICS AND FIXED SIZED 
+
+// 1. Show vertices + show count
+// 2. Show graph + connections + show count 
+// 3. Add vertice (10 max)
+// 4. Remove last vertice 
+// 5. Connect two verices (ie print the current graph)
+// 6. Remove two verices connection (ie print the current graph)
+// 7. Print neighbours + degree
+// 8. BFS 
+// 9. DFS
+
+
+//      0  1  2  3  4  5  6  7  8  9
+//    +------------------------------
+//  0 | 0  0  0  0  0  0  0  0  0  0
+//  1 | 0  0  0  0  0  0  0  0  0  0
+//  2 | 0  0  0  0  0  0  0  0  0  0
+//  3 | 0  0  0  0  0  0  0  0  0  0
+//  4 | 0  0  0  0  0  0  0  0  0  0
+//  5 | 0  0  0  0  0  0  0  0  0  0
+//  6 | 0  0  0  0  0  0  0  0  0  0
+//  7 | 0  0  0  0  0  0  0  0  0  0
+//  8 | 0  0  0  0  0  0  0  0  0  0
+//  9 | 0  0  0  0  0  0  0  0  0  0
+
+
+
+struct graph{
+    int graph_vertices[10];
+    int graph_edges[10][10];
+    int size_am;
+};
+
+
+// 3. ADD VERTICES 
+
+int add_vertice(struct graph * g,int data){
+
+    if ((g-&gt;size_am &lt; 9) &amp;&amp; (g-&gt;size_am &gt;= 0)){
+        int index = g-&gt;size_am;
+
+        for(int i = 0; i&lt;=index ; i++){
+            if (g-&gt;graph_vertices[i] == data){
+                return -1;
+            }
+        }
+
+        g-&gt;graph_vertices[index] = data;
+        g-&gt;size_am++;
+        return 1;
+    }
+    if (g-&gt;size_am == 9){return -2;}
+
+}
+
+// 4. REMOVE LAST VERTICE 
+
+int remove_last_vertice(struct graph * g){
+    if ((g-&gt;size_am &lt; 10) &amp;&amp; (g-&gt;size_am &gt; 0)){
+        g-&gt;graph_vertices[g-&gt;size_am] = 0;
+
+        // clearing connections 
+
+        int temp = g-&gt;size_am;
+        for (int i = 0; i &lt;= g-&gt;size_am; i++){
+            g-&gt;graph_edges[temp][i] = 0;
+            g-&gt;graph_edges[i][temp] = 0;
+        }
+
+        g-&gt;size_am--;
+        return 1;
+    }
+
+    return 0;
+}
+
+
+// 1. SHOW VERTICES + COUNT 
+
+void show_vertice(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value |\n&quot;);
+        for (int i = 0; i&lt;=g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |\n&quot;,i,g-&gt;graph_vertices[i]);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am+1);
+}
+
+
+// 2. SHOW EDGES + COUNT
+
+void show_graph(struct graph * g){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+        for (int i = 0; i&lt;=g-&gt;size_am ;i++){
+            printf(&quot;|  %3d  |  %3d  |&quot;,i,g-&gt;graph_vertices[i]);
+            printf(&quot; ---&gt; &quot;);
+            int deg = 0;
+            for(int j = 0; j &lt;=g-&gt;size_am; j++){
+                if (g-&gt;graph_edges[i][j] == 1){
+                    printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[j]);
+                    deg++;
+                }
+            }
+            printf(&quot;  (degree -&gt; %d)\n&quot;,deg);
+        }
+        printf(&quot;+-------+-------+\n&quot;);
+        printf(&quot;Count ---&gt; %3d&quot;,g-&gt;size_am+1);
+}
+
+
+// 5. CONNECT TWO VERTICE
+
+int connect_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt;= g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt;= g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 1){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] == 1;
+        return 1;
+
+    }
+}
+
+
+// 6. REMOVE TWO VERTICE CONNECTION
+
+int remove_two_vertice(struct graph * g,int edge_index,int dest_index){
+    if (g-&gt;size_am == 0){
+        return -1; // no data 
+    }
+    
+    if (((edge_index &gt;=0) &amp;&amp; (edge_index &lt;= g-&gt;size_am)) &amp;&amp; ((dest_index &gt;=0) &amp;&amp; (dest_index &lt;= g-&gt;size_am))){
+
+        if (g-&gt;graph_edges[edge_index][dest_index] == 0){
+            return -2;
+        }
+
+        g-&gt;graph_edges[edge_index][dest_index] == 0;
+        return 1;
+
+    }
+}
+
+
+// 7. PRINT NEIGHBOURS OF A VERTICE 
+
+void show_neighbours(struct graph * g,int index){
+    if (g-&gt;size_am == 0){
+        printf(&quot;NO DATA&quot;);
+        return;
+    }
+    printf(&quot;+-------+-------+\n&quot;);
+    printf(&quot;| index | value | ---&gt; Connections \n&quot;);
+    printf(&quot;|  %3d  |  %3d  |&quot;,index,g-&gt;graph_vertices[index]);
+    printf(&quot;---&gt; &quot;);
+    int deg = 0;
+    for (int i = 0; i &lt;g-&gt;size_am ; i++){
+        if (g-&gt;graph_edges[index][i] == 1){
+            printf(&quot;(%d)  &quot;,g-&gt;graph_vertices[i]);
+            deg++;
+        }
+    }
+    printf(&quot;  (degree -&gt; %d)\n&quot;,deg);
+    printf(&quot;+-------+-------+\n&quot;);
+    return;
+}
+
+// 8.  BFS
+
+void bfs_traverse(struct graph * g){
+    
+}
+
+
+// 9. DFS 
+
+void dfs_traverse(struct graph * g){
+
+
+}
+
+
+
+int main(){
+
+    struct graph g = {0};
+    int choice,input_val,input_val_2,out;
+
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : Show vertices\n&quot;);
+        printf(&quot;2 : Show edges\n&quot;);
+        printf(&quot;3 : Add vertices\n&quot;);
+        printf(&quot;4 : Remove last vertice\n&quot;);
+        printf(&quot;5 : Connect Vertices\n&quot;);
+        printf(&quot;6 : Disonnect Vertices\n&quot;);
+        printf(&quot;7 : Show Neighbours and Degree\n&quot;);
+        printf(&quot;8 : BFS Traverse\n&quot;);
+        printf(&quot;9 : DFS Traverse\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            show_vertice(&amp;g);
+            break;
+
+        case 2:
+            show_graph(&amp;g);
+            break;
+
+        case 3:
+            printf(&quot;Enter the data of vertice to add : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            out = add_vertice(&amp;g,input_val);
+            if (out == -1)
+                printf(&quot;Already Exist, Cannot add data\n&quot;);
+            else if (out == -2)
+                printf(&quot;Size if Full \n&quot;);
+            else
+                printf(&quot;%d Added\n&quot;,input_val);
+            break;
+
+        case 4:
+            out = remove_last_vertice(&amp;g);
+            if (out == 1)
+                printf(&quot;Removed\n&quot;);
+            else
+                printf(&quot;Cannot Remove\n&quot;);
+            break;
+
+        case 5:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = connect_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Already Connected \n&quot;);
+            else
+                printf(&quot;Connected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+
+        case 6:
+            show_graph(&amp;g);
+            printf(&quot;\nEnter the index of 1st vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            printf(&quot;Enter the index of 2nd vertice (dest) : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val_2);
+            out = remove_two_vertice(&amp;g,input_val,input_val_2);
+            if (out == -1)
+                printf(&quot;No Data \n&quot;);
+            else if (out == -2)
+                printf(&quot;Not Connected \n&quot;);
+            else
+                printf(&quot;Disconnected the (%d (%d))---&gt;(%d (%d))\n&quot;,g.graph_vertices[input_val],input_val,g.graph_vertices[input_val_2],input_val_2);
+            break;
+            
+        case 7:
+            printf(&quot;\nEnter the index of vertice : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+            show_neighbours(&amp;g,input_val);
+            break;
+            
+        case 8:
+            bfs_traverse(&amp;g);
+            break;
+            
+        case 9:
+            dfs_traverse(&amp;g);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }    
+
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q17">
+<h3>17. [Sorting Algorithms] Bubble Sort Algorithm</h3>
+<div class="answer-box">
+<h4>Answer 17:</h4>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main(){
+	int arr[] = {2,3,44,5,74,3,5,5,5,8,9,0,-56,-2};
+	int s = sizeof(arr)/sizeof(arr[0]);
+	for (int i = s - 1 ; i &gt; 0 ; i -- ){
+
+		bool isswap = false ;
+
+		for (int j = 0 ; j &lt;  i  ; j ++ ){
+
+			if (arr[j]&gt;arr[j+1]){
+				arr[j]=arr[j]+arr[j+1];
+				arr[j+1]=arr[j]-arr[j+1];
+				arr[j]=arr[j]-arr[j+1];
+				isswap = true;
+			}
+
+		}
+
+	if (!isswap){break;}
+}
+
+	for (int i = 0 ; i &lt;  s ; i++){
+		cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;
+	}
+
+return 0;
+
+}
+
+
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q18">
+<h3>18. [Sorting Algorithms] Insertion Sort Algorithm</h3>
+<div class="answer-box">
+<h4>Answer 18:</h4>
+<pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main(){
+	int arr[] = {2,3,44,5,74,3,5,5,5,8,9,0,-56,-2};
+    int s = sizeof(arr)/sizeof(arr[0]);
+
+        for (int i = 0 ; i &lt; s - 1 ; i ++ ){
+            for (int j = i+1 ; j &gt; 0 ; j--){
+            if (arr[j]&lt;arr[j-1]){
+				arr[j]=arr[j]+arr[j-1];
+				arr[j-1]=arr[j]-arr[j-1];
+				arr[j]=arr[j]-arr[j-1];
+			}
+            else{break;}
+        }}
+
+
+	for (int i = 0 ; i &lt;  sizeof(arr)/sizeof(arr[0]) ; i++){
+		cout&lt;&lt;arr[i]&lt;&lt;&quot; &quot;;
+	}
+
+return 0;
+}
+
+
+
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q19">
+<h3>19. [Sorting Algorithms] Merge Sort Algorithm</h3>
+<div class="answer-box">
+<h4>Answer 19:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+
+//  [ 4] [ 9] [16] [ 0] [ 3] [ 3] [ 7]  -&gt; arr 
+//  0     1    2    3    4    5    6 
+
+//  [ 4] [ 9] [16] [ 0] [ 3] [ 3] [ 7]  -&gt; newarr 
+//  0     1    2    3    4    5    6 
+
+ 
+
+// l  
+// u
+// mid 
+// k 
+
+void fn_merge(int arr[], int l, int u){
+
+    int mid = (l+u+1)/2;
+    int newarr[u+1-l];
+    int k = 0;
+    int i = l;
+    int j = mid;
+
+    while (i &lt; mid &amp;&amp; j &lt;= u){
+        if (arr[i] &lt;= arr[j]) newarr[k++] = arr[i++];
+        else                  newarr[k++] = arr[j++];
+    }
+    while (i &lt; mid) newarr[k++] = arr[i++];   // remaining left half
+    while (j &lt;= u)  newarr[k++] = arr[j++];   // remaining right half
+
+    for (i = 0; i &lt; k; i++)
+        arr[l + i] = newarr[i];               
+
+    for (i = l; i &lt;= u; i++)
+        printf(&quot;%d   &quot;, arr[i]);
+}
+
+void merge_sort(int arr[], int l, int u){
+    if (l &gt;= u){
+        return;
+    }
+
+    int mid = (l + u + 1) / 2;
+
+    merge_sort(arr, l, mid - 1);
+    merge_sort(arr, mid, u);
+
+    fn_merge(arr, l, u);
+}
+
+int main(){
+    int arr[] = {4,9,16,0,3,3,7};
+
+    merge_sort(arr, 0, 6);
+
+    printf(&quot;sorted array : \n&quot;);
+    for(int i = 0; i &lt; 7; i++) {
+        printf(&quot;%d  &quot;, arr[i]);
+    }
+
+
+    return 0;
+}</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q20">
+<h3>20. [Sorting Algorithms] Merge Sort Algorithm (Alternative Implementation)</h3>
+<div class="answer-box">
+<h4>Answer 20:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+
+void mergearr(int arr[], int u, int l)
+{
+    int mid = (u + l + 1) / 2;
+    int newarr[u - l + 1];
+    int k = 0;
+    int j = mid;
+
+    for (int i = l; i &lt; mid; i++){
+        while (j &lt;= u){
+            if (arr[i] &gt; arr[j]){
+                newarr[k] = arr[j];
+                k++;
+                j++;
+            }
+            else{
+                newarr[k] = arr[i];
+                k++;
+                break;
+            }
+        }
+
+        if (j &gt; u){
+            i++;
+            while (i &lt; mid){
+                newarr[k] = arr[i];
+                k++;
+                i++;
+            }
+            break;
+        }
+    }
+
+    while (j &lt;= u){
+        newarr[k] = arr[j];
+        k++;
+        j++;
+    }
+
+    for (int i = 0; i &lt; u - l + 1; i++){
+        arr[l + i] = newarr[i];
+    }
+}
+
+
+void mergesort(int arr[], int l, int u){
+    if (l &gt;= u){
+        return;
+    }
+
+    int mid = (l + u) / 2;
+
+    mergesort(arr, l, mid);
+    mergesort(arr, mid + 1, u);
+
+    mergearr(arr, u, l);
+}
+
+
+int main(){
+
+    int arr[] = {0, 8, 9, 10, 9999,0, 1, 2, 2, 3, 10 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf(&quot;Before \n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d   &quot;, arr[i]);
+    }
+
+    printf(&quot;\n\n&quot;);
+
+    mergesort(arr, 0, n - 1);
+
+    printf(&quot;After \n&quot;);
+    for (int i = 0; i &lt; n; i++){
+        printf(&quot;%d  &quot;, arr[i]);
+    }
+
+    return 0;
+}
+</code></pre>
+</div>
+
+</div>
+
+<div class="question-section" id="q21">
+<h3>21. [Sorting Algorithms] Quick Sort Algorithm</h3>
+<div class="answer-box">
+<h4>Answer 21:</h4>
+<pre><code>#include &lt;stdio.h&gt;
+
+int returnpivot(int arr[], int l, int u) {
+    int pivot = l;
+    int temp;
+    int flag = 0;
+
+    while (1) {
+
+        if (flag == 0) {
+            int found = 0;
+
+            for (int i = u; i &gt; pivot; i--) {
+                if (arr[i] &lt; arr[pivot]) {
+                    temp = arr[pivot];
+                    arr[pivot] = arr[i];
+                    arr[i] = temp;
+
+                    pivot = i;
+                    found = 1;
+                    flag = 1;
+                    break;
+                }
+            }
+// 
+            if (!found) {
+                return pivot;
+            }
+        }
+
+        else {
+            int found = 0;
+
+            for (int i = l; i &lt; pivot; i++) {
+                if (arr[i] &gt; arr[pivot]) {
+                    temp = arr[pivot];
+                    arr[pivot] = arr[i];
+                    arr[i] = temp;
+
+                    pivot = i;
+                    found = 1;
+                    flag = 0;
+                    break;
+                }
+            }
+
+            if (!found) {
+                return pivot;
+            }
+        }
+    }
+}
+
+void quicksort(int arr[], int l, int u) {
+    if (l &gt;= u) {
+        return;
+    }
+
+    int index = returnpivot(arr, l, u);
+
+    quicksort(arr, l, index - 1);
+    quicksort(arr, index + 1, u);
+}
+
+void printarray(int arr[], int n) {
+    for (int i = 0; i &lt; n; i++) {
+        printf(&quot;%d  &quot;, arr[i]);
+    }
+
+    printf(&quot;\n&quot;);
+}
+
+int main() {
+    int arr[] = {5, 3, 2, -8, 0, 3, 76, 2, -45, 9};
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    printarray(arr, size);
+
+    quicksort(arr, 0, size - 1);
+
+    printarray(arr, size);
+
+    return 0;
+}
+</code></pre>
+</div>
+
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>

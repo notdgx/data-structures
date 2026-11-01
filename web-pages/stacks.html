@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STACKS - BCA 4205/25 Daisy Dhiman</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="simple-nav">
+        <div class="nav-logo"><a href="../index.html">Data Structures Questions</a></div>
+    </nav>
+
+    <div class="container">
+        <a href="../index.html" class="back-link">&larr; Back to Home</a>
+
+        <div class="questions-page">
+            <h1>STACKS</h1>
+
+            <div class="question-index">
+                <h2>Questions List</h2>
+                <ul>
+                    <li><a href="#q1">1. Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.</a></li>
+                    <li><a href="#q2">2. Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.</a></li>
+                    <li><a href="#q3">3. Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.</a></li>
+                    <li><a href="#q4">4. Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.</a></li>
+                    <li><a href="#q6">6. Create a program to match single brackets using a stack.</a></li>
+                </ul>
+            </div>
+
+<div class="question-section" id="q1">
+<h3>1. Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.</h3>
+<div class="answer-box">
+<h4>Answer 1:</h4>
+<pre><code>// Stacks -&gt; Q 01 : Create a stack using an integer array and implement push, pop, peek, isEmpty, and isFull operations.
+
+#include &lt;stdio.h&gt;
+
+#define STACK_SIZE 6
+
+int push(int arr[], int *top, int num){
+    if (*top &gt;= STACK_SIZE - 1){return 0;}
+    arr[++(*top)] = num;
+    return 1;
+}
+
+int pop(int arr[], int *top, int *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    (*top)--;
+    return 1;
+}
+
+int peek(int arr[], int *top, int *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    return 1;
+}
+
+int size_st(int *top){
+    return (*top) + 1;
+}
+
+int isempty(int *top){
+    return (*top == -1);
+}
+
+void show_st(int arr[], int *top)
+{
+    if (*top == -1){
+        printf(&quot;Stack is empty\n&quot;);
+        return;
+    }
+
+    printf(&quot;Stack elements :\n\n&quot;);
+      for (int i = 0 ; i &lt; *top ; i++){
+        printf(&quot;|  %3d  |&quot;, arr[i]);
+    }
+    printf(&quot;|&gt; %3d &lt;|\n&quot;, arr[*top]);
+
+}
+
+int main()
+{
+    int arr[STACK_SIZE];
+    int top = -1;
+    int choice;
+    int input_val;
+    int out;
+    int temp;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = push(arr, &amp;top, input_val);
+            if (out == 1)
+                printf(&quot;%d pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Popped value : %d\n&quot;, temp);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = peek(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Top value : %d\n&quot;, temp);
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, size_st(&amp;top));
+            break;
+
+        case 5:
+            if (isempty(&amp;top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_st(arr, &amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 1:</h4>
+<pre><code>
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack is empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : 24
+24 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : 24
+24 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : 64
+64 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : 45
+45 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 3
+Top value : 45
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 4
+Size of stack : 4
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|   24  ||   24  ||   64  ||&gt;  45 &lt;|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : 45
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|   24  ||   24  ||&gt;  64 &lt;|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q2">
+<h3>2. Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.</h3>
+<div class="answer-box">
+<h4>Answer 2:</h4>
+<pre><code>// Stacks -&gt; Q 02 : Create a stack using a character array and implement push, pop, peek, isEmpty, and isFull operations.
+
+#include &lt;stdio.h&gt;
+
+#define STACK_SIZE 6
+
+int push(char arr[], int *top, char num){
+    if (*top &gt;= STACK_SIZE - 1){return 0;}
+    arr[++(*top)] = num;
+    return 1;
+}
+
+int pop(char arr[], int *top, char *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    (*top)--;
+    return 1;
+}
+
+int peek(char arr[], int *top, char *value){
+    if (*top &lt; 0){return 0;}
+    *value = arr[*top];
+    return 1;
+}
+
+int size_st(int *top){
+    return (*top) + 1;
+}
+
+int isempty(int *top){
+    return (*top == -1);
+}
+
+void show_st(char arr[], int *top)
+{
+    if (*top == -1){
+        printf(&quot;Stack is empty\n&quot;);
+        return;
+    }
+
+    printf(&quot;Stack elements :\n\n&quot;);
+      for (int i = 0 ; i &lt; *top ; i++){
+        printf(&quot;|  %3c  |&quot;, arr[i]);
+    }
+    printf(&quot;|&gt; %c &lt;|\n&quot;, arr[*top]);
+
+}
+
+int main()
+{
+    char arr[STACK_SIZE];
+    int top = -1;
+    int choice;
+    char input_val;
+    int out;
+    char temp;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot; %c&quot;, &amp;input_val);
+
+            out = push(arr, &amp;top, input_val);
+            if (out == 1)
+                printf(&quot;%c pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Popped value : %c\n&quot;, temp);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = peek(arr, &amp;top, &amp;temp);
+            if (out == 1)
+                printf(&quot;Top value : %c\n&quot;, temp);
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, size_st(&amp;top));
+            break;
+
+        case 5:
+            if (isempty(&amp;top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_st(arr, &amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+    return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 2:</h4>
+<pre><code>
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : n
+n pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : b
+b pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 3
+Top value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 4
+Size of stack : 3
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|    n  ||    b  ||&gt; g &lt;|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : b
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack elements :
+
+|&gt; n &lt;|
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 2
+Popped value : n
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 6
+Stack is empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q3">
+<h3>3. Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.</h3>
+<div class="answer-box">
+<h4>Answer 3:</h4>
+<pre><code>// Stacks -&gt; Q 03 : Create a dynamically allocated stack using integer nodes and implement push, pop, peek, isEmpty, and isFull operations.
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    int data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, int data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+int peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    printf(&quot;\n|&gt; %3d &lt;|&quot;, top-&gt;data);
+    top=top-&gt;pre_ptr;
+
+    while (top != NULL){
+
+        printf(&quot;|  %3d  |&quot;, top-&gt;data);
+        top=top-&gt;pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top-&gt;pre_ptr;
+    }
+    return i;
+}
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)-&gt;pre_ptr;
+        free(temp);
+    }
+}
+
+
+
+int main(){
+
+    struct node * top = NULL;
+    int choice,input_val,out;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : clear\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot;%d&quot;, &amp;input_val);
+
+            out = add_node(&amp;top,input_val);
+            if (out == 1)
+                printf(&quot;%d pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop_node(&amp;top);
+            if (out == 1)
+                printf(&quot;Popped&quot;);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(top);
+            if (out == 0)
+                printf(&quot;Top value : %d\n&quot;, peek_node(top));
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, stack_size(top));
+            break;
+
+        case 5:
+            if (is_empty(top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 3:</h4>
+<pre><code>
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 32
+32 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 434
+434 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : 534
+534 pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 3
+Top value : 534
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 4
+Size of stack : 3
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|&gt; 534 &lt;||  434  ||   32  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|&gt; 434 &lt;||   32  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 7
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q4">
+<h3>4. Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.</h3>
+<div class="answer-box">
+<h4>Answer 4:</h4>
+<pre><code>// Stacks -&gt; Q 04 : Create a dynamically allocated stack using character nodes and implement push, pop, peek, isEmpty, and isFull operations.
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+
+struct node{
+    char data;
+    struct node * pre_ptr;
+};
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;pre_ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;pre_ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;pre_ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+char peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+
+
+void show_node(struct node * top){
+    if (top == NULL){
+        printf(&quot;NO DATA\n&quot;);
+        return;
+    }
+
+    printf(&quot;\n|&gt; %c &lt;|&quot;, top-&gt;data);
+    top=top-&gt;pre_ptr;
+
+    while (top != NULL){
+
+        printf(&quot;|  %3c  |&quot;, top-&gt;data);
+        top=top-&gt;pre_ptr;
+    }
+    
+}
+
+int stack_size(struct node * top){
+    int i=0;
+    while (top != NULL){
+        i++;
+        top=top-&gt;pre_ptr;
+    }
+    return i;
+}
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)-&gt;pre_ptr;
+        free(temp);
+    }
+}
+
+
+
+int main(){
+
+    struct node * top = NULL;
+    int choice,out;
+    char input_val;
+
+    while (1)
+    {
+        printf(&quot;\nEnter the choice :\n&quot;);
+        printf(&quot;1 : push\n&quot;);
+        printf(&quot;2 : pop\n&quot;);
+        printf(&quot;3 : peek\n&quot;);
+        printf(&quot;4 : size\n&quot;);
+        printf(&quot;5 : isempty\n&quot;);
+        printf(&quot;6 : show\n&quot;);
+        printf(&quot;7 : clear\n&quot;);
+        printf(&quot;0 : exit\n&quot;);
+        printf(&quot;Enter choice : &quot;);
+
+        scanf(&quot;%d&quot;, &amp;choice);
+
+        switch (choice)
+        {
+
+        case 1:
+            printf(&quot;Enter the number to push : &quot;);
+            scanf(&quot; %c&quot;, &amp;input_val);
+
+            out = add_node(&amp;top,input_val);
+            if (out == 1)
+                printf(&quot;%c pushed to stack\n&quot;, input_val);
+            else
+                printf(&quot;Stack overflow \n&quot;);
+            break;
+
+        case 2:
+            out = pop_node(&amp;top);
+            if (out == 1)
+                printf(&quot;Popped&quot;);
+            else
+                printf(&quot;Stack underflow \n&quot;);
+            break;
+
+        case 3:
+            out = is_empty(top);
+            if (out == 0)
+                printf(&quot;Top value : %c\n&quot;, peek_node(top));
+            else
+                printf(&quot;Stack is empty \n&quot;);
+            break;
+
+        case 4:
+            printf(&quot;Size of stack : %d\n&quot;, stack_size(top));
+            break;
+
+        case 5:
+            if (is_empty(top))
+                printf(&quot;Stack is empty \n&quot;);
+            else
+                printf(&quot;Stack is not empty\n&quot;);
+            break;
+
+        case 6:
+            show_node(top);
+            break;
+
+        case 7:
+            clear_stack(&amp;top);
+            break;
+
+        case 0:
+            printf(&quot;exitting ...\n&quot;);
+            return 0;
+
+        default:
+            printf(&quot;Invalid choice\n&quot;);
+        }
+    }
+
+return 0;
+}</code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 4:</h4>
+<pre><code>
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : h
+h pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : h
+h pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 1
+Enter the number to push : g
+g pushed to stack
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 3
+Top value : g
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 4
+Size of stack : 4
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 5
+Stack is not empty
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|&gt; g &lt;||    h  ||    h  ||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|&gt; h &lt;||    h  ||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 2
+Popped
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+
+|&gt; h &lt;||    g  |
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 7
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 6
+NO DATA
+
+Enter the choice :
+1 : push
+2 : pop
+3 : peek
+4 : size
+5 : isempty
+6 : show
+7 : clear
+0 : exit
+Enter choice : 0
+exitting ...
+</code></pre>
+</div>
+</div>
+
+<div class="question-section" id="q6">
+<h3>6. Create a program to match single brackets using a stack.</h3>
+<div class="answer-box">
+<h4>Answer 6:</h4>
+<pre><code>// Stacks -&gt; Q 06 : Create a program to match single brackets using a stack.
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+struct node{
+    char data;
+    struct node * ptr;
+};
+
+
+// QUEUES : IT is normal dynamic sized non circular queue with 
+//          linked list with functions `enqueue`, `dequeue`, `front`, `rear`, `isempty`, `size`, `show`, `search`
+
+int enqueue(struct node ** front,struct node ** rear, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    new_node-&gt;ptr = NULL;
+
+    if (((*front) == NULL) &amp;&amp; ((*rear) == NULL)){
+        *front = new_node;
+        *rear = *front;
+        return 1;
+    }
+    
+    if ((*rear)-&gt;ptr == NULL){
+        (*rear)-&gt;ptr = new_node;
+        (*rear) = (*rear)-&gt;ptr;
+        return 1;
+    } 
+
+    return 0;
+}
+
+
+int dequeue(struct node ** front,struct node ** rear){
+    if ((*front) == NULL){
+        return 0;
+    }
+
+    if (((*front)-&gt;ptr == NULL) &amp;&amp; ((*front) == (*rear))){
+        free(*front);
+        (*front) = NULL;
+        (*rear) = NULL;
+        return -1;
+    }
+    
+    struct node * temp = (*front)-&gt;ptr;
+    free(*front);
+    (*front)=temp;
+    return 1;
+}
+
+
+char fn_front(struct node * front){
+    return front-&gt;data;
+}
+
+char fn_rear(struct node * rear){
+    return rear-&gt;data;
+}
+
+
+int is_empty_queue(struct node * front,struct node * rear){
+    if ((front == NULL) &amp;&amp; (rear == front)){
+        return 1;
+    }
+    return 0;
+}
+
+
+int fn_size(struct node * front){
+    int i = 0;
+    while(front != NULL){
+        i++;
+        front=front-&gt;ptr;
+    }
+
+    return i;
+}
+
+
+char get_one_by_one(struct node * front , struct node * rear, struct node ** ptr){
+
+    if ((front == NULL) &amp;&amp; (rear == front) &amp;&amp; (*ptr == NULL)){
+        return &#x27;\0&#x27;;
+    }
+
+    // if ((*ptr) == NULL){
+    //     (*ptr) = front-&gt;ptr;
+    //     return front-&gt;data; 
+    // }
+
+    while((front) != NULL){
+        if (front == *ptr){
+            *ptr = front-&gt;ptr;
+
+            return front-&gt;data;
+        }
+        front=front-&gt;ptr;
+    }
+    return &#x27;\0&#x27;;    
+}
+
+
+void clear_queue(struct node ** front, struct node ** rear){
+    struct node * temp;
+    while (*front != NULL){
+        temp = *front;
+        *front = (*front)-&gt;ptr;
+        free(temp);
+    }
+    *rear = NULL;   
+}
+
+
+// STACK 
+
+
+
+int add_node(struct node ** top, char data){
+
+    struct node * new_node = (struct node *)malloc(sizeof(struct node));
+    if (new_node == NULL){return 0;}
+    new_node-&gt;data = data;
+    
+    if (*top == NULL){
+        new_node-&gt;ptr = NULL;
+        *top = new_node;
+        return 1;
+    }
+
+    new_node-&gt;ptr = *top;
+    *top = new_node;
+    return 1;
+}
+
+
+int pop_node(struct node **top)
+{
+    if (*top == NULL)
+        return 0;
+
+    struct node *temp = (*top)-&gt;ptr;
+    free(*top);
+    *top = temp;
+    return 1;
+}
+
+int is_empty_stack(struct node *top){
+    if (top == NULL){
+        return 1;
+    }
+    else  return 0;
+}
+
+
+
+char peek_node(struct node *top){
+        return top-&gt;data;
+}
+
+
+void clear_stack(struct node ** top){
+    struct node * temp;
+    while (*top != NULL){
+        temp = *top;
+        *top = (*top)-&gt;ptr;
+        free(temp);
+    }
+}
+
+
+
+
+// -----------------------------------
+
+
+// BRACKJET MATCHING FUNCTIONS 
+
+
+int match_pair(char a, char b){
+    if (a==&#x27;{&#x27; &amp;&amp; b ==&#x27;}&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;[&#x27; &amp;&amp; b==&#x27;]&#x27;){
+        return 1;
+    }
+    else if (a==&#x27;(&#x27; &amp;&amp; b==&#x27;)&#x27;){
+        return 1;
+    }
+    return 0;
+
+}
+
+int bracket_match(struct node ** front , struct node ** rear,struct node ** top){
+
+    char front_data_queue;
+
+    while(!is_empty_queue(*front,*rear)){
+
+        front_data_queue = fn_front(*front);
+
+        if (front_data_queue == &#x27;{&#x27; || front_data_queue == &#x27;[&#x27; || front_data_queue == &#x27;(&#x27;){
+            add_node(top,front_data_queue);}
+        
+        else if (front_data_queue==&#x27; &#x27;){}
+
+        else if (front_data_queue == &#x27;}&#x27; || front_data_queue == &#x27;]&#x27; || front_data_queue == &#x27;)&#x27;){
+            int state = is_empty_stack(*top);
+            if (!state &amp;&amp; match_pair(peek_node(*top),front_data_queue)){
+                pop_node(top);
+            }
+            else{return 0;}
+        }
+        else{return 0;}
+        dequeue(front,rear);
+    }
+
+        if (is_empty_stack(*top))
+            return 1;
+        else
+            return 0;
+
+
+};
+
+
+int main(){
+
+    struct node * front = NULL;
+    struct node * rear = NULL;
+    
+    struct node * get_ptr = NULL;
+
+    struct node * top = NULL;
+    char temp;
+
+    while (1){
+        printf(&quot;Enter the brackets : &quot;);
+        while ((temp = getchar()) != &#x27;\n&#x27;){
+            enqueue(&amp;front,&amp;rear,temp);
+        }
+        printf(&quot;\n&quot;);
+        printf(&quot;+-----------+&quot;);
+        printf(&quot;\n&quot;);
+        printf(&quot;Brackets you entered : &quot;);
+
+        get_ptr = front;
+        while((temp = get_one_by_one(front,rear,&amp;get_ptr)) != &#x27;\0&#x27;){
+            printf(&quot;%c&quot;,temp);
+        }
+
+        if (bracket_match(&amp;front,&amp;rear,&amp;top) == 1){
+            printf(&quot;\nMatched\n&quot;);
+        }
+        else {
+            printf(&quot;\nDoesnt Matched\n&quot;);
+            
+        }
+        printf(&quot;\n&quot;);
+        printf(&quot;+-----------+&quot;);
+        printf(&quot;\n&quot;);
+
+        clear_queue(&amp;front,&amp;rear);
+        clear_stack(&amp;top);
+
+        printf(&quot;Do you want to continue ? (Y/N)&quot;);
+        temp = getchar();
+        while (getchar() != &#x27;\n&#x27;);
+        if ((temp == &#x27;N&#x27;) || (temp == &#x27;n&#x27;)){
+            break;
+        }
+        // fflush(stdin);
+    }
+
+    return 0;
+
+
+}
+
+// &gt; fixesdone
+// - clear/reset the nodes
+// - here we have precidence conflict (temp = getchar()) != &#x27;\n&#x27;
+// - increasing the frontn </code></pre>
+</div>
+<div class="answer-box">
+<h4>Output 6:</h4>
+<pre><code>Enter the brackets : {}{}{}{}{}}{{][[][]][]][][][][[[][[]]
+
++-----------+
+Brackets you entered : {}{}{}{}{}}{{][[][]][]][][][][[[][[]]
+Doesnt Matched
+
++-----------+
+Do you want to continue ? (Y/N)Y
+Enter the brackets : {{{{{{{{{{{[][][][][]()()[][][][]}}}}}}}}}}
+
++-----------+
+Brackets you entered : {{{{{{{{{{{[][][][][]()()[][][][]}}}}}}}}}}
+Doesnt Matched
+
++-----------+
+Do you want to continue ? (Y/N)N
+</code></pre>
+</div>
+</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>DAISY DHIMAN BCA 4205/25 SEC A</p>
+    </footer>
+</body>
+</html>
